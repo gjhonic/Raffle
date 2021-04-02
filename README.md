@@ -13,7 +13,7 @@
   git clone https://github.com/gjhonic/Raffle-YouTubers.git
 ```
 
-2) Start Docker
+2) Start Project
 ```
-sudo docker-compose up -d
+php artisan serve
 ```
