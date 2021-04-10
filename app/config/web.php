@@ -1,9 +1,9 @@
 <?php
 
-$params = require __DIR__ . '/params.php';
-$db = require __DIR__ . '/db.php';
-
 $_ENV = array_merge($_ENV, require(__DIR__ . '/.env'));
+
+$db = require __DIR__ . '/db.php';
+$params = require __DIR__ . '/params.php';
 
 $basePath =  dirname(__DIR__);
 $webroot = dirname($basePath);
