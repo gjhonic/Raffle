@@ -15,14 +15,9 @@ class m210413_142301_rbac_date extends Migration
     {
         $auth = Yii::$app->authManager;
 
-        //Добавляем роль гостя
-        $questRole = $auth->createRole('quest');
-        $auth->add($questRole);
-
         //Добавляем роль юзера
         $userRole = $auth->createRole('user');
         $auth->add($userRole);
-        $auth->addChild($userRole, $questRole);
 
         //Добавляем роль модератора
         $moderatorRole = $auth->createRole('moderator');
@@ -36,7 +31,7 @@ class m210413_142301_rbac_date extends Migration
 
         //Добавляю рута
         $admin = new User([
-            'username'        => 'root',
+            'username'        => 'admin',
             'name'            => 'Евгений',
             'surname'         => 'Андреев',
             'patronymic'      => 'Андреевич',
