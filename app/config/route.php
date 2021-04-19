@@ -5,8 +5,12 @@ return [
     //URLs на контроллер Auth
     'signin' => 'auth/signin',
     'signup' => 'auth/signup',
-    'logout' => 'auth/logout',
+    'signout' => 'auth/signout',
 
-    //URKs на контроллер Site
-    'profile' => 'site/profile',
+    //URLs на Admin module
+    'admin' => 'admin/main/index',
+    'admin/<action:\w+>' => 'admin/main/<action>',
+
+    //URLs на SiteController
+    '<action:\w+>' => 'site/<action>',
 ];
