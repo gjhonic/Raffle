@@ -4,6 +4,7 @@ $_ENV = array_merge($_ENV, require(__DIR__ . '/.env'));
 
 $db = require __DIR__ . '/db.php';
 $params = require __DIR__ . '/params.php';
+$route = array_merge(require(__DIR__ . '/route.php'));
 
 $basePath =  dirname(__DIR__);
 $webroot = dirname($basePath);
@@ -23,18 +24,20 @@ $config = [
     ],
     'components' => [
         'request' => [
-            // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'dfwefdfk34fdldsf243',
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
         'user' => [
-            'identityClass' => 'app\models\User',
+            'identityClass' => 'app\models\auth\UserIdentity',
             'enableAutoLogin' => true,
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
+        ],
+        'authManager' => [
+            'class' => 'yii\rbac\DbManager',
         ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
@@ -56,8 +59,7 @@ $config = [
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-            'rules' => [
-            ],
+            'rules' => $route,
         ],
     ],
     'modules' => [

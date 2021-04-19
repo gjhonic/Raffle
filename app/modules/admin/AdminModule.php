@@ -21,6 +21,8 @@ class AdminModule extends \yii\base\Module
 
         $this->defaultRoute = 'main';
 
+        $this->layout = '../../../../views/layouts/backend';
+
         // custom initialization code goes here
 
 
