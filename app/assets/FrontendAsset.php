@@ -16,18 +16,14 @@ class FrontendAsset extends AssetBundle
 {
     public $sourcePath = '@app/media/frontend';
     public $css = [
-        'css/bootstrap.min.css',
-        'css/font-awesome.min.css',
-        'css/animate.min.css',
-        'css/lightbox.css',
         'css/main.css',
-        'css/responsive.css',
+        'font-awesome/css/font-awesome.css',
     ];
     public $js = [
-        'js/jquery.js',
-        'js/bootstrap.min.js',
-        'js/lightbox.min.js',
-        'js/wow.min.js',
+        'js/jquery.min.js',
+        'js/browser.min.js',
+        'js/breakpoints.min.js',
+        'js/util.js',
         'js/main.js',
     ];
     public $depends = [

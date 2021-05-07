@@ -11,7 +11,6 @@ namespace app\models\db\search;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-//Модели БД
 use app\models\db\User;
 
 
@@ -58,10 +57,9 @@ class UserSearch extends User
             return $dataProvider;
         }
 
-        $query->andFilterWhere(['like', 'username', $this->user_username]);
-        $query->andFilterWhere(['like', 'name', $this->user_name]);
-        $query->andFilterWhere(['like', 'surname', $this->user_surname]);
-        $query->andFilterWhere(['like', 'patronymic', $this->user_patronymic]);
+        $query->andFilterWhere(['like', 'username', $this->username]);
+        $query->andFilterWhere(['like', 'name', $this->name]);
+        $query->andFilterWhere(['like', 'surname', $this->surname]);
 
         return $dataProvider;
     }

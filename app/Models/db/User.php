@@ -1,39 +1,42 @@
 <?php
-/**
- * User
- * Класс для работы с записями пользователей
- * @copyright Copyright (c) 2021 Eugene Andreev
- * @author Eugene Andreev <gjhonic@gmail.com> 
-*/
 
 namespace app\models\db;
 
 use Yii;
-use yii\db\ActiveRecord;
-use yii\base\ErrorException;
-use yii\helpers\ArrayHelper;
-use yii\helpers\Url;
-use yii\base\NotSupportedException;
+use app\models\db\UserRole;
+use yii\behaviors\TimestampBehavior;
 
-
-class User extends ActiveRecord 
+/**
+ * This is the model class for table "user".
+ *
+ * @property int $id
+ * @property string $name
+ * @property string $surname
+ * @property string $username
+ * @property string $email
+ * @property string $email_confirm
+ * @property string $password
+ * @property int $role_id
+ * @property int $status_id
+ * @property string $code
+ * @property string|null $auth_key
+ * @property string|null $access_token
+ * @property string $created_at
+ * @property string $updated_at
+ *
+ * @property Post[] $posts
+ * @property Raffle[] $raffles
+ * @property UserRole $role
+ * @property UserStatus $status
+ * @property UserOtherInfo[] $userOtherInfos
+ */
+class User extends \yii\db\ActiveRecord
 {
-    
     /**
-    * @var id - идентификатор первичный ключ
-    * @var name - имя пользователя
-    * @var surname - фамилия пользователя
-    * @var patronymic - отчество пользователя (необяз)
-    * @var username - логин пользователя
-    * @var user_password - пароль пользователя
-    * @var role - роль пользователя    
-    */   
-   
-    /**
-    * tableName - статическая функция. Возвращает название таблицы
-    */
-    public static function tableName(){
-
+     * {@inheritdoc}
+     */
+    public static function tableName()
+    {
         return 'user';
     }
 
@@ -44,256 +47,135 @@ class User extends ActiveRecord
     const ROLE_GUEST = "?";
 
     /**
-    * rules - метод которые устанавливает правила валидации
-    */
-    public function rules(){
+     * {@inheritdoc}
+     */
+    public function rules()
+    {
         return [
-            [['username', 'name', 'password', 'role', 'surname'], 'required'],
-            [['username'], 'unique'],
-            [['password'], 'myValidatePassword', 'skipOnEmpty'=> true],
-            [['username'], 'myValidateUsername', 'skipOnEmpty'=> true],
+            [['name', 'surname', 'username', 'email', 'password', 'role_id', 'status_id', 'code', 'email_confirm'], 'required'],
+            [['role_id', 'status_id', 'email_confirm'], 'integer'],
+            [['created_at', 'updated_at'], 'safe'],
+            [['name', 'surname', 'email', 'code'], 'string', 'max' => 50],
             [['username', 'password'], 'string', 'max' => 255],
-            [['name', 'surname', 'patronymic', 'role'], 'string', 'max' => 50],
             [['auth_key', 'access_token'], 'string', 'max' => 32],
+            [['username'], 'unique'],
+            [['email'], 'unique'],
+            [['code'], 'unique'],
+            [['role_id'], 'exist', 'skipOnError' => true, 'targetClass' => UserRole::className(), 'targetAttribute' => ['role_id' => 'id']],
+            [['status_id'], 'exist', 'skipOnError' => true, 'targetClass' => UserStatus::className(), 'targetAttribute' => ['status_id' => 'id']],
+        ];
+    }
+
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className(),
         ];
     }
 
     /**
-    * attributeLabels - метод которые устанавливает название атрибутам
-    * @return Object - ассоциативный массив лэйблов
-    */
+     * {@inheritdoc}
+     */
     public function attributeLabels()
     {
         return [
-            'id' => 'id',
+            'id' => 'ID',
             'name' => 'Имя',
             'surname' => 'Фамилия',
-            'patronymic' => 'Отчество',
             'username' => 'Логин',
+            'email' => 'Email',
             'password' => 'Пароль',
-            'role' => 'Роль',
+            'role_id' => 'Роль',
+            'status_id' => 'Статус',
+            'code' => 'Код',
+            'auth_key' => 'Auth Key',
+            'access_token' => 'Access Token',
+            'created_at' => 'Created At',
+            'updated_at' => 'Updated At',
         ];
     }
 
-
-    // - - - Валидаторы - - -> 
-
     /**
-     * validatePassword - метод валидации пароля,
-     * @param $attribute, $params
+     * Gets query for [[Posts]].
+     *
+     * @return \yii\db\ActiveQuery
      */
-    // >> ------------------------------------------------- 
-    public function myValidatePassword($attribute, $params)
+    public function getPosts()
     {
-        if (!$this->hasErrors()) {
-            if(!trim($this->password)){
-                //Notice::set('','Одни пробелы не являются паролем!','danger');
-                $this->addError($attribute, 'Одни пробелы не являются паролем!');
-            }else{
-                if (strlen(trim($this->password)) <= 4 ){
-                    //Notice::set('','Пароль должен быть больше 4 символов!','danger');
-                    $this->addError($attribute, 'Пароль должен быть больше 4 символов!');
-                }
-            }
-        } 
+        return $this->hasMany(Post::className(), ['user_id' => 'id']);
     }
-    // ------------------------------------------------- <<
 
     /**
-     * validatePassword - метод валидации пароля,
-     * @param $attribute, $params
+     * Gets query for [[Raffles]].
+     *
+     * @return \yii\db\ActiveQuery
      */
-    // >> -------------------------------------------------
-    public function myValidateUsername($attribute, $params)
+    public function getRaffles()
     {
-        if (!$this->hasErrors()) {
-            if(!trim($this->username)){
-                //Notice::set('','Одни пробелы не являются логином!','danger');
-                $this->addError($attribute, 'Одни пробелы не являются логином!');
-            }else{
-                if (strlen(trim($this->username)) <= 3 ){
-                    //Notice::set('','Логин должен быть больше 3 символов!','danger');
-                    $this->addError($attribute, 'Логин должен быть больше 3 символов!');
-                }
-            }
-        } 
+        return $this->hasMany(Raffle::className(), ['user_id' => 'id']);
     }
-    // ------------------------------------------------- <<
-    // <- - - 
 
     /**
-     * getUsername - метод возвращает логин  юзера. 
-     * @return string.
+     * Метод возвращает роль пользователя
+     *
+     * @return \yii\db\ActiveQuery
      */
-    // >> -------------------------------------------------
-    public function getUsername(){
-        return $this->username;
+    public function getRole()
+    {
+        return UserRole::findOne($this->role_id);
     }
-    // ------------------------------------------------- <<
 
     /**
-     * getRole - метод возвращает роль пользователя
-     * @return string
+     * Gets query for [[Status]].
+     *
+     * @return \yii\db\ActiveQuery
      */
-    // >> -------------------------------------------------
-    public function getRole(){
-        return $this->role;
+    public function getStatus()
+    {
+        return $this->hasOne(UserStatus::className(), ['id' => 'status_id']);
     }
-    // ------------------------------------------------- <<
 
     /**
-     * findUser - метод возвращает юpера по параметру поиска и возвращает данные без пароля. 
-     * @param valueSearchParameter - Параметр поиска
-     *        searchParameter - Название параметра поиска default = id
-     * @return user - array.
+     * Gets query for [[UserOtherInfos]].
+     *
+     * @return \yii\db\ActiveQuery
      */
-    // >> -------------------------------------------------
-    public static function findUser($valueSearchParameter, $searchParameter='id'){
-        return User::find()->select(['id','name', 'surname', 'username','type', 'patronymic'])->where([$searchParameter => $valueSearchParameter])->one();
+    public function getUserOtherInfos()
+    {
+        return $this->hasMany(UserOtherInfo::className(), ['user_id' => 'id']);
     }
-    // ------------------------------------------------- <<
 
     /**
-     * getUser - метод возвращает юpера по параметру поиска. 
-     * @param valueSearchParameter - Параметр поиска username/id
-     *        searchParameter - Название параметра поиска default = id
-     * @return user - array.
+     * Метод находит пользователя по коду.
+     * @param $code string
+     * @return array|\yii\db\ActiveRecord|null
      */
-    // >> -------------------------------------------------
-    public static function getUser($valueSearchParameter, $searchParameter='id'){
-        return User::find()->where([$searchParameter => $valueSearchParameter])->one();
+    public static function findByCode($code){
+        return self::find()->where(['code' => $code])->one();
     }
-    // ------------------------------------------------- <<
 
     /**
-     * exsistUsername - метод проверяет существует ли пользователь с таким логином 
-     * @param username - string
-     * @return bool
+     * Метод находит пользователя по логину.
+     * @param $username string
+     * @return array|\yii\db\ActiveRecord|null
      */
-    // >> -------------------------------------------------
-    public static function exsistUsername($username){
-        return (User::findUser($username, 'username')!=null) ? true : false;
+    public static function findByUsername($username){
+        return self::find()->where(['username' => $username])->one();
     }
-    // ------------------------------------------------- <<
 
     /**
-     * exsistId - метод проверяет существует ли пользователь с таким id
-     * @param username - string
-     * @return bool
+     * Метод находит пользователя по почте.
+     * @param $email string
+     * @return array|\yii\db\ActiveRecord|null
      */
-    // >> -------------------------------------------------
-    public static function exsistId($id){
-        return (User::findUser($id)!=null) ? true : false;
+    public static function findByEmail($email){
+        return self::find()->where(['email' => $email])->one();
     }
-    // ------------------------------------------------- <<
-
-
-    // - - - Методы сохранения данных - - - 
-    /**
-     * insertUser - Метод добавляет пользователя в систему и назначает RBAC роль
-     */
-    // >> ------------------------------------------------- 
-    public function insertUser(){
-        if($this->validate()){
-
-            $this->password = Yii::$app->getSecurity()->generatePasswordHash($this->password);
-
-            if($this->save()){
-                $auth = Yii::$app->authManager;
-
-                $auth->assign($auth->getRole($this->role), $this->id);
-                //Log::createLog('info', Yii::$app->user->identity->attributes['user_id'], 'Пользователь [id:'.$this->user_id.'] '.$this->user_username.' успешно создан!');
-                return true;
-            }
-            else{
-                //Log::createLog('error', Yii::$app->user->identity->attributes['user_id'], 'Произошла ошибка создания пользователя  '.$this->user_username.' !');
-                return false;
-            } 
-        }
-        
-            
-    }
-    // ------------------------------------------------- <<
 
     /**
-     * updateUser - Метод изменяет данные о пользователе
+     * @return mixed
      */
-    // >> -------------------------------------------------
-    public function updateUser(){
-        if($this->validate()) {
-            if($this->update()){
-                //Log::createLog('info', Yii::$app->user->identity->attributes['user_id'], 'Пользователь [id:'.$this->user_id.'] '.$this->user_username.' успешно обновлен!');
-                return true;
-            }
-            else{
-                //Log::createLog('error', Yii::$app->user->identity->attributes['user_id'], 'Произошла ошибка обновления пользователя  [id:'.$this->user_id.'] '.$this->user_username.'!');
-                return false;
-            } 
-        }
+    public static function currentUser(){
+        return Yii::$app->user->identity;
     }
-    // ------------------------------------------------- <<
-    
-    /**
-     * updatePassword - Метод изменяет пароль пользователя
-     */
-    public function updatePassword(){
-        if($this->validate()){
-
-            $this->password = Yii::$app->getSecurity()->generatePasswordHash($this->password);
-
-            if($this->update()){
-                //Log::createLog('info', Yii::$app->user->identity->attributes['user_id'], 'Пароль пользоватея [id:'.$this->user_id.'] '.$this->user_username.' успешно обновлен!');
-                return true;
-            }
-            else{
-                //Log::createLog('error', Yii::$app->user->identity->attributes['user_id'], 'Произошла ошибка обновления пароля пользователя  [id:'.$this->user_id.'] '.$this->user_username.'!');
-                return false;
-            } 
-        }
-    }
-    // ------------------------------------------------- <<
-
-    /**
-     * updateRole - Метод изменяет роль пользователя
-     */
-    // >> -------------------------------------------------
-    public function updateRole(){
-        if($this->validate()){
-
-            Yii::$app->authManager->revokeAll($this->role);
-            Yii::$app->authManager->assign(Yii::$app->authManager->getRole($this->role), $this->id);
-
-            if($this->update()){
-                //Log::createLog('info', Yii::$app->user->identity->attributes['user_id'], 'Роль пользоватея [id:'.$this->user_id.'] '.$this->user_username.' успешно обновлена!');
-                return true;
-            }
-            else{
-                //Log::createLog('error', Yii::$app->user->identity->attributes['user_id'], 'Произошла ошибка обновления роли пользователя  [id:'.$this->user_id.'] '.$this->user_username.'!');
-                return false;
-            } 
-        }
-    }
-    // ------------------------------------------------- <<
-
-    /**
-     * deleteUser - Метод удаляет пользователя из системы у очищает права
-     */
-    // >> -------------------------------------------------
-    public function deleteUser(){
-        $old_user_id = $this->id;
-        $old_user_username = $this->username;
-
-        if($this->delete()){
-            Yii::$app->authManager->revokeAll($old_user_id);
-            //Log::createLog('info', Yii::$app->user->identity->attributes['user_id'], 'Пользователь [id:'.$old_user_id.'] '.$old_user_username.' успешно удалена!');
-            return true;
-        }
-        else{
-            //Log::createLog('error', Yii::$app->user->identity->attributes['user_id'], 'Произошла ошибка удаления пользователя  [id:'.$this->old_user_id.'] '.$this->old_user_username.'!');
-            return false;
-        } 
-    }
-    // ------------------------------------------------- <<
-
-
 }

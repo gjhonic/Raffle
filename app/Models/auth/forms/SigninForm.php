@@ -90,7 +90,9 @@ class SigninForm extends Model
     {
         return [
             'id' => 'ID',
-            'title' => 'Title',
+            'username' => 'Логин',
+            'password' => 'Пароль',
+            'rememberMe' => 'Запомни меня',
         ];
     }
 }

@@ -18,10 +18,10 @@ class BackendAsset extends AssetBundle
     public $css = [
         'css/bootstrap.min.css',
         'css/dashboard.css',
+        'font-awesome/css/font-awesome.css',
     ];
     public $js = [
-        'js/bootstrap.bundle.min.js',
-        'js/dashboard.js',
+        //'js/dashboard.js',
     ];
     public $depends = [
 

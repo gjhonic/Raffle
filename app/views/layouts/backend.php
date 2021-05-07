@@ -11,10 +11,6 @@ use app\assets\BackendAsset;
 
 $nav = array_merge(require(__DIR__ . '/_nav/backend.php'));
 
-//echo "<pre>";
-//print_r($nav);
-//echo "</pre>";
-//die;
 BackendAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
@@ -48,30 +44,67 @@ BackendAsset::register($this);
     <div class="row">
         <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
             <div class="position-sticky pt-3">
-                <ul class="nav flex-column">
-                    <?php foreach ($nav as $elem){ ?>
 
+
+
+                <ul class="nav flex-column">
+                    <?php foreach ($nav['main'] as $elem){
+                        $isActive = (Yii::$app->controller->id == $elem['controller']) ? 'active' : '';
+                        ?>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="<?php echo $elem['href']; ?>">
-                                <span data-feather="home"></span>
-                                <?php echo $elem['label']; ?>
+                            <a class="nav-link <?=$isActive?>" href="<?=$elem['href']?>"><?=$elem['label']?>
                             </a>
                         </li>
                     <?php } ?>
+
+
+                    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                        <span><i class="fa fa-database"></i> Базы</span>
+
+                    </h6>
+                    <?php foreach ($nav['bases'] as $elem){
+                        $isActive = (Yii::$app->controller->id == $elem['controller']) ? 'active' : '';
+                        ?>
+                        <li class="nav-item">
+                            <a class="nav-link <?=$isActive?>" href="<?=$elem['href']?>"><?=$elem['label']?>
+                            </a>
+                        </li>
+                    <?php } ?>
+
+                    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                        <span><i class="fa fa-database"></i> Модерация</span>
+
+                    </h6>
+                    <?php foreach ($nav['moderations'] as $elem){
+                        $isActive = (Yii::$app->controller->id == $elem['controller']) ? 'active' : '';
+                        ?>
+                        <li class="nav-item">
+                            <a class="nav-link <?=$isActive?>" href="<?=$elem['href']?>"><?=$elem['label']?>
+                            </a>
+                        </li>
+                    <?php } ?>
+
                 </ul>
             </div>
         </nav>
 
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
             <?= Breadcrumbs::widget([
+                'itemTemplate' => "<li class='breadcrumb-item'>{link}</li>\n",
+                'activeItemTemplate' => "<li class='breadcrumb-item active'>{link}</li>\n",
+                'homeLink' => [
+                    'label' => 'Главная ',
+                    'url' => Url::to('/admin/'),
+                    'title' => 'Перейти на главную страницу',
+                ],
                 'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-            ]) ?>
+                'options' => ['class' => 'breadcrumb', 'style' => ''],
+            ]);?>
             <?= Alert::widget() ?>
             <?= $content ?>
         </main>
     </div>
 </div>
-
 
 <?php $this->endBody() ?>
 </body>

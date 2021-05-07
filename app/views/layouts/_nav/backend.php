@@ -3,12 +3,50 @@
 use yii\helpers\Url;
 
 return [
-    [
-        'label' => 'Главная',
-        'href' => URL::to('admin'),
+    'main' => [
+        [
+            'label' => 'Главная',
+            'href' => URL::to('/admin'),
+            'controller' => 'main'
+        ],
+        [
+            'label' => 'На сайт',
+            'href' => URL::to('/'),
+            'controller' => 'site'
+        ],
     ],
-    [
-        'label' => 'Пользователи',
-        'href' => URL::to('admin/user/'),
+    'bases' => [
+        [
+            'label' => 'Пользователи',
+            'href' => URL::to('/admin/user/'),
+            'controller' => 'user'
+        ],
+        [
+            'label' => 'Конкурсы',
+            'href' => URL::to('/admin/raffle/'),
+            'controller' => 'raffle'
+        ],
+        [
+            'label' => 'Теги',
+            'href' => URL::to('/admin/tag/'),
+            'controller' => 'tag'
+        ],
+    ],
+    'moderations' => [
+        [
+            'label' => 'Пользователи',
+            'href' => URL::to('/admin/user-mod/'),
+            'controller' => 'user-mod'
+        ],
+        [
+            'label' => 'Конкурсы',
+            'href' => URL::to('/admin/raffle-mod/'),
+            'controller' => 'raffle-mod'
+        ],
+        [
+            'label' => 'Обращения',
+            'href' => URL::to('/admin/support/'),
+            'controller' => 'support'
+        ],
     ],
 ];
