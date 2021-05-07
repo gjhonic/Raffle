@@ -8,6 +8,7 @@
 namespace app\models\auth\forms;
 
 use yii\base\Model;
+use Yii;
 
 class ConfirmEmailForm extends Model
 {
@@ -33,5 +34,20 @@ class ConfirmEmailForm extends Model
         return [
             'code' => 'Код',
         ];
+    }
+
+    public function checkCode(){
+
+        $session = Yii::$app->session;
+
+        if(isset($session['code_confirm'])){
+            if($this->code == $session['code_confirm']){
+                return true;
+            }else{
+                $this->addError('code', 'Не верный код');
+                $this->code = '';
+                return false;
+            }
+        }
     }
 }

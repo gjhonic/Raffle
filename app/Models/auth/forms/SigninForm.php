@@ -51,22 +51,6 @@ class SigninForm extends Model
     }
     // ------------------------------------------------- <<
 
-    /**
-     * login - метод "залогинивания" юзера в сессию.
-     * @return bool.
-     */
-    // >> -------------------------------------------------
-    public function signin()
-    {
-        if ($this->validate()) {
-            return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600*24*30 : 0);
-        }else{
-            return false;
-        }
-
-    }
-    // ------------------------------------------------- <<
-
 
     /**
      * getUser - метод заполняем свойство _user  обьектом user, если он не заполнен и возвращает его.
