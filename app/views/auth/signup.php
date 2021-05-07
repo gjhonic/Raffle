@@ -25,9 +25,9 @@ $this->title = 'Регистрация';
 
     <?= $form->field($model, 'surname')->textInput() ?>
 
-    <?= $form->field($model, 'patronymic')->textInput() ?>
-
     <?= $form->field($model, 'username')->textInput() ?>
+
+    <?= $form->field($model, 'email')->textInput() ?>
 
     <?= $form->field($model, 'password')->passwordInput() ?>
 

@@ -17,9 +17,7 @@ use yii\helpers\Url;
 use app\models\db\User;
 use app\models\db\search\UserSearch;
 
-/**
- * Default controller for the `admin` module
- */
+
 class UserController extends Controller
 {
     public function behaviors()
@@ -43,8 +41,7 @@ class UserController extends Controller
 
 
     /**
-     * Displays homepage.
-     *
+     * Просмотр список пользователей.
      * @return string
      */
     public function actionIndex()
@@ -55,6 +52,19 @@ class UserController extends Controller
         return $this->render('index', [
             'dataProvider' => $dataProvider,
             'searchModel' => $searchModel,
+        ]);
+    }
+
+    /**
+     * Просмотр пользователя.
+     * @param $id
+     * @return string
+     */
+    public function actionView($id){
+
+        $user = User::findOne($id);
+        return $this->render('view', [
+            'model' => $user,
         ]);
     }
 }

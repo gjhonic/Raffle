@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models;
+namespace app\models\db;
 
 use Yii;
 
@@ -9,6 +9,8 @@ use Yii;
  *
  * @property int $id
  * @property string $title
+ *
+ * @property RaffleTag[] $raffleTags
  */
 class Tag extends \yii\db\ActiveRecord
 {
@@ -28,6 +30,7 @@ class Tag extends \yii\db\ActiveRecord
         return [
             [['title'], 'required'],
             [['title'], 'string', 'max' => 255],
+            [['title'], 'unique'],
         ];
     }
 
@@ -37,8 +40,18 @@ class Tag extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'title' => 'Title',
+            'id' => 'Id',
+            'title' => 'Название',
         ];
+    }
+
+    /**
+     * Gets query for [[RaffleTags]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getRaffleTags()
+    {
+        return $this->hasMany(RaffleTag::className(), ['tag_id' => 'id']);
     }
 }

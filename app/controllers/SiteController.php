@@ -8,8 +8,7 @@ use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\VerbFilter;
-use app\models\LoginForm;
-use app\models\ContactForm;
+use app\models\db\User;
 
 class SiteController extends Controller
 {
@@ -32,19 +31,19 @@ class SiteController extends Controller
                     [
                         'allow' => true,
                         'actions' => ['profile','index', 'about'],
-                        'roles' => ['user','moderator','admin'],
+                        'roles' => [User::ROLE_USER,User::ROLE_MODERATOR,User::ROLE_ADMIN],
                     ],
                     [
                         'allow' => true,
-                        'actions' => ['index'],
-                        'roles' => ['?','user','moderator','admin'],
+                        'actions' => ['index', 'test'],
+                        'roles' => [User::ROLE_GUEST,User::ROLE_USER,User::ROLE_MODERATOR,User::ROLE_ADMIN],
                     ],
                 ],
             ],
         ];
     }
 
-    public $layout = 'default';
+    public $layout = 'frontend';
 
     /**
      * Displays homepage.
@@ -58,14 +57,22 @@ class SiteController extends Controller
 
     /**
      * Login action.
-     *
+     * @param string
      * @return Response|string
      */
-    public function actionProfile()
+    public function actionProfile($code=null)
     {
-        
-        return $this->render('profile', [
+        if($code==null && Yii::$app->user->isGuest){
+            return $this->redirect(['index']);
+        }
+        $user = ($code!=null) ? User::findByCode($code) : User::currentUser();
 
+        if(!$user){
+            return $this->redirect(['index']);
+        }
+
+        return $this->render('profile', [
+            'user' => $user,
         ]);
     }
 
@@ -78,5 +85,15 @@ class SiteController extends Controller
     public function actionAbout()
     {
         return $this->render('about');
+    }
+
+    /**
+     * Displays about page.
+     *
+     * @return string
+     */
+    public function actionTest()
+    {
+
     }
 }

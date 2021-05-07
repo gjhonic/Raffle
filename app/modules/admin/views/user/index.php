@@ -9,6 +9,7 @@ use app\models\db\User;
 
 $this->title = 'Пользователи';
 $this->params['breadcrumbs'][] = $this->title;
+
 ?>
 <div class="user-index">
 
@@ -31,19 +32,24 @@ $this->params['breadcrumbs'][] = $this->title;
                 'username',
                 'surname',
                 'name',
-                'role',
-
-
+                [
+                    'attribute'=>'role_id',
+                    'label'=>'Роль',
+                    'format'=>'text', // Возможные варианты: raw, html
+                    'content'=>function($data){
+                        return Yii::$app->user->identity->getRole()->title;
+                    },
+                ],
                 [
                     'class' => 'yii\grid\ActionColumn',
-                    'template' => "{view} {update}", //"{remove}",
+                    'template' => "{view} {update}",
                     'buttons' => [
                         'view' => function ($url,$model,$key) {
                             return Html::a('Смотреть', $url, ['class' => 'btn btn-outline-success btn-block']);
                         },
 
                         'update' => function ($url,$model,$key) {
-                            return (Yii::$app->user->identity->getRole() !== User::ROLE_MODERATOR) ? Html::a('Изменить', $url, ['class' => 'btn btn-outline-primary btn-block']) : '';
+                            return (Yii::$app->user->identity->getRole()->title !== User::ROLE_MODERATOR) ? Html::a('Изменить', $url, ['class' => 'btn btn-outline-primary btn-block']) : '';
                         },
 
                     ],

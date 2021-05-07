@@ -10,6 +10,7 @@ namespace app\models\auth\forms;
 use Yii;
 use yii\base\Model;
 use app\models\auth\UserIdentity;
+use app\models\db\User;
 
 
 class SignupForm extends Model
@@ -17,10 +18,12 @@ class SignupForm extends Model
 
     public $name;
     public $surname;
-    public $patronymic;
     public $password;
+    public $email;
     public $password_confirm;
     public $username;
+
+    public $user;
 
     /**
      * rules - метод возвращает правила валидации.
@@ -29,42 +32,99 @@ class SignupForm extends Model
     public function rules()
     {
         return [
-            [['name', 'surname', 'username', 'password', 'password_confirm'], 'required'],
+            [['name', 'surname', 'username', 'password', 'password_confirm', 'email'], 'required'],
+            ['username', 'validateUsername'],
+            ['email', 'email'],
+            ['email', 'validateEmail'],
             ['password', 'validatePassword'],
+            ['password_confirm', 'validatePasswordConfirm']
         ];
+    }
+
+    /**
+     * validateUsername - метод валидации логина.
+     * @param $attribute, $params
+     */
+    public function validateUsername($attribute, $params)
+    {
+        if (!$this->hasErrors()) {
+            $user = User::findbyUsername($this->username);
+
+            if ($user) {
+                $this->addError($attribute, 'Данный логин занят');
+            }
+        }
+    }
+
+    /**
+     * validateEmail - метод валидации почты.
+     * @param $attribute, $params
+     */
+    public function validateEmail($attribute, $params)
+    {
+        if (!$this->hasErrors()) {
+            $user = User::findByEmail($this->email);
+
+            if ($user) {
+                $this->addError($attribute, 'Почта занята');
+            }
+        }
     }
 
     /**
      * validatePassword - метод валидации пароля.
      * @param $attribute, $params
      */
-    // >> -------------------------------------------------
     public function validatePassword($attribute, $params)
     {
         if (!$this->hasErrors()) {
-            $user = $this->getUser();
-
-            if (!$user || !$user->validatePassword($this->password)) {
-                $this->addError($attribute, 'Incorrect username or password.');
+            if(strlen(trim($this->password)) <= 5){
+                $this->addError($attribute, 'Пароль долже быть больше 5 символов');
             }
         }
     }
-    // ------------------------------------------------- <<
 
     /**
-     * login - метод "регает" юзера в бд.
-     * @return bool.
+     * public function validatePasswordConfirm - метод валидации сходства паролей.
+     * @param $attribute, $params
      */
-    // >> -------------------------------------------------
-    public function signup()
+    public function validatePasswordConfirm($attribute, $params)
     {
-        if ($this->validate()) {
-            return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600*24*30 : 0);
-        }else{
-            return false;
+        if (!$this->hasErrors()) {
+            if($this->password != $this->password_confirm){
+                $this->addError($attribute, 'Пароли не совпадают');
+            }
         }
     }
-    // ------------------------------------------------- <<
+
+    /**
+     * signup - метод "регает" юзера в бд.
+     * @return bool.
+     */
+    public function signup()
+    {
+        if($this->validate()){
+
+            $user = new User();
+            $user->name = $this->name;
+            $user->surname = $this->surname;
+            $user->username = $this->username;
+            $user->email = $this->email;
+            $user->password = Yii::$app->getSecurity()->generatePasswordHash($this->password);
+            $user->role_id = 3;
+            $user->status_id = 1;
+            $user->code = $this->username;
+            $user->email_confirm = 0;
+
+            if ($user->save()){
+                Yii::$app->authManager->assign(Yii::$app->authManager->getRole(User::ROLE_USER), $user->id);
+                $this->user = $user;
+                return true;
+            }else{
+                return false;
+            }
+        }
+    }
 
     /**
      * {@inheritdoc}
@@ -74,13 +134,11 @@ class SignupForm extends Model
         return [
             'name' => 'Имя',
             'surname' => 'Фамилия',
-            'patronymic' => 'Отчество',
             'username' => 'Логин',
+            'email' => 'Почта',
             'password' => 'Пароль',
             'password_confirm' => 'Подтвердите пароль',
         ];
     }
-
-
 
 }

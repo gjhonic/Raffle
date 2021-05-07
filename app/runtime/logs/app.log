@@ -1,0 +1,469 @@
+2021-04-12 16:44:06 [-][-][-][error][yii\db\Exception] PDOException: SQLSTATE[HY000] [2002] Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
+ in D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\db\Connection.php:712
+Stack trace:
+#0 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\db\Connection.php(712): PDO->__construct('mysql:host=loca...', 'root', '', NULL)
+#1 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\db\Connection.php(631): yii\db\Connection->createPdoInstance()
+#2 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\db\Connection.php(1032): yii\db\Connection->open()
+#3 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\db\Connection.php(1019): yii\db\Connection->getMasterPdo()
+#4 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\db\Command.php(258): yii\db\Connection->getSlavePdo()
+#5 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\db\Command.php(1160): yii\db\Command->prepare(true)
+#6 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\db\Command.php(407): yii\db\Command->queryInternal('fetchAll', NULL)
+#7 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\db\mysql\Schema.php(319): yii\db\Command->queryAll()
+#8 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\db\mysql\Schema.php(125): yii\db\mysql\Schema->findColumns(Object(yii\db\TableSchema))
+#9 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\db\Schema.php(758): yii\db\mysql\Schema->loadTableSchema('migration')
+#10 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\db\Schema.php(194): yii\db\Schema->getTableMetadata('{{%migration}}', 'schema', true)
+#11 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\console\controllers\MigrateController.php(211): yii\db\Schema->getTableSchema('{{%migration}}', true)
+#12 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\console\controllers\BaseMigrateController.php(894): yii\console\controllers\MigrateController->getMigrationHistory(NULL)
+#13 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\console\controllers\BaseMigrateController.php(169): yii\console\controllers\BaseMigrateController->getNewMigrations()
+#14 [internal function]: yii\console\controllers\BaseMigrateController->actionUp(0)
+#15 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#16 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\base\Controller.php(181): yii\base\InlineAction->runWithParams(Array)
+#17 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\console\Controller.php(184): yii\base\Controller->runAction('', Array)
+#18 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\base\Module.php(534): yii\console\Controller->runAction('', Array)
+#19 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\console\Application.php(181): yii\base\Module->runAction('migrate', Array)
+#20 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\console\Application.php(148): yii\console\Application->runAction('migrate', Array)
+#21 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\base\Application.php(392): yii\console\Application->handleRequest(Object(yii\console\Request))
+#22 D:\Projects\Job\Raffle-YouTubers\yii(20): yii\base\Application->run()
+#23 {main}
+
+Next yii\db\Exception: SQLSTATE[HY000] [2002] Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
+ in D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\db\Connection.php:642
+Stack trace:
+#0 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\db\Connection.php(1032): yii\db\Connection->open()
+#1 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\db\Connection.php(1019): yii\db\Connection->getMasterPdo()
+#2 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\db\Command.php(258): yii\db\Connection->getSlavePdo()
+#3 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\db\Command.php(1160): yii\db\Command->prepare(true)
+#4 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\db\Command.php(407): yii\db\Command->queryInternal('fetchAll', NULL)
+#5 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\db\mysql\Schema.php(319): yii\db\Command->queryAll()
+#6 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\db\mysql\Schema.php(125): yii\db\mysql\Schema->findColumns(Object(yii\db\TableSchema))
+#7 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\db\Schema.php(758): yii\db\mysql\Schema->loadTableSchema('migration')
+#8 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\db\Schema.php(194): yii\db\Schema->getTableMetadata('{{%migration}}', 'schema', true)
+#9 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\console\controllers\MigrateController.php(211): yii\db\Schema->getTableSchema('{{%migration}}', true)
+#10 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\console\controllers\BaseMigrateController.php(894): yii\console\controllers\MigrateController->getMigrationHistory(NULL)
+#11 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\console\controllers\BaseMigrateController.php(169): yii\console\controllers\BaseMigrateController->getNewMigrations()
+#12 [internal function]: yii\console\controllers\BaseMigrateController->actionUp(0)
+#13 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#14 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\base\Controller.php(181): yii\base\InlineAction->runWithParams(Array)
+#15 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\console\Controller.php(184): yii\base\Controller->runAction('', Array)
+#16 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\base\Module.php(534): yii\console\Controller->runAction('', Array)
+#17 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\console\Application.php(181): yii\base\Module->runAction('migrate', Array)
+#18 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\console\Application.php(148): yii\console\Application->runAction('migrate', Array)
+#19 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\base\Application.php(392): yii\console\Application->handleRequest(Object(yii\console\Request))
+#20 D:\Projects\Job\Raffle-YouTubers\yii(20): yii\base\Application->run()
+#21 {main}
+Additional Information:
+Array
+(
+    [0] => HY000
+    [1] => 2002
+    [2] => Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
+
+)
+
+2021-04-12 16:44:01 [-][-][-][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'ALLUSERSPROFILE' => 'C:\\ProgramData'
+    'APPDATA' => 'C:\\Users\\gjhon\\AppData\\Roaming'
+    'CHROME_CRASHPAD_PIPE_NAME' => '\\\\.\\pipe\\crashpad_9000_LSEHKGTZUPOOOGIT'
+    'CommonProgramFiles' => 'C:\\Program Files\\Common Files'
+    'CommonProgramFiles(x86)' => 'C:\\Program Files (x86)\\Common Files'
+    'CommonProgramW6432' => 'C:\\Program Files\\Common Files'
+    'COMPUTERNAME' => 'GJHONIC-PC'
+    'ComSpec' => 'C:\\Windows\\system32\\cmd.exe'
+    'DriverData' => 'C:\\Windows\\System32\\Drivers\\DriverData'
+    'FPS_BROWSER_APP_PROFILE_STRING' => 'Internet Explorer'
+    'FPS_BROWSER_USER_PROFILE_STRING' => 'Default'
+    'HOMEDRIVE' => 'C:'
+    'HOMEPATH' => '\\Users\\gjhon'
+    'LOCALAPPDATA' => 'C:\\Users\\gjhon\\AppData\\Local'
+    'LOGONSERVER' => '\\\\GJHONIC-PC'
+    'NUMBER_OF_PROCESSORS' => '12'
+    'OneDrive' => 'C:\\Users\\gjhon\\OneDrive'
+    'OneDriveConsumer' => 'C:\\Users\\gjhon\\OneDrive'
+    'ORIGINAL_XDG_CURRENT_DESKTOP' => 'undefined'
+    'OS' => 'Windows_NT'
+    'Path' => 'C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Windows\\System32\\OpenSSH\\;D:\\Apps\\PuTTY\\;D:\\Apps\\Git\\cmd;D:\\Apps\\Nodejs\\;C:\\xampp\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Users\\gjhon\\AppData\\Local\\Microsoft\\WindowsApps;D:\\Apps\\qemu;D:\\Apps\\Microsoft VS Code\\bin;C:\\Users\\gjhon\\AppData\\Roaming\\npm;C:\\Users\\gjhon\\AppData\\Local\\GitHubDesktop\\bin;C:\\Users\\gjhon\\AppData\\Roaming\\Composer\\vendor\\bin;C:\\mongodb\\bin;D:\\Apps\\PhpStorm 2020.3.3\\bin'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.CPL'
+    'PhpStorm' => 'D:\\Apps\\PhpStorm 2020.3.3\\bin;'
+    'PROCESSOR_ARCHITECTURE' => 'AMD64'
+    'PROCESSOR_IDENTIFIER' => 'AMD64 Family 23 Model 8 Stepping 2, AuthenticAMD'
+    'PROCESSOR_LEVEL' => '23'
+    'PROCESSOR_REVISION' => '0802'
+    'ProgramData' => 'C:\\ProgramData'
+    'ProgramFiles' => 'C:\\Program Files'
+    'ProgramFiles(x86)' => 'C:\\Program Files (x86)'
+    'ProgramW6432' => 'C:\\Program Files'
+    'PSModulePath' => 'C:\\Users\\gjhon\\OneDrive\\„®Єг¬Ґ­вл\\WindowsPowerShell\\Modules;C:\\Program Files\\WindowsPowerShell\\Modules;C:\\Windows\\system32\\WindowsPowerShell\\v1.0\\Modules'
+    'PUBLIC' => 'C:\\Users\\Public'
+    'SESSIONNAME' => 'Console'
+    'SystemDrive' => 'C:'
+    'SystemRoot' => 'C:\\Windows'
+    'TEMP' => 'C:\\Users\\gjhon\\AppData\\Local\\Temp'
+    'TMP' => 'C:\\Users\\gjhon\\AppData\\Local\\Temp'
+    'USERDOMAIN' => 'GJHONIC-PC'
+    'USERDOMAIN_ROAMINGPROFILE' => 'GJHONIC-PC'
+    'USERNAME' => 'gjhon'
+    'USERPROFILE' => 'C:\\Users\\gjhon'
+    'VBOX_MSI_INSTALL_PATH' => 'D:\\Apps\\VirtualBox\\'
+    'windir' => 'C:\\Windows'
+    'TERM_PROGRAM' => 'vscode'
+    'TERM_PROGRAM_VERSION' => '1.55.1'
+    'LANG' => 'ru_RU.UTF-8'
+    'COLORTERM' => 'truecolor'
+    'VSCODE_GIT_IPC_HANDLE' => '\\\\.\\pipe\\vscode-git-fca5334eae-sock'
+    'GIT_ASKPASS' => 'd:\\Apps\\Microsoft VS Code\\resources\\app\\extensions\\git\\dist\\askpass.sh'
+    'VSCODE_GIT_ASKPASS_NODE' => 'D:\\Apps\\Microsoft VS Code\\Code.exe'
+    'VSCODE_GIT_ASKPASS_MAIN' => 'd:\\Apps\\Microsoft VS Code\\resources\\app\\extensions\\git\\dist\\askpass-main.js'
+    'PHP_SELF' => 'yii'
+    'SCRIPT_NAME' => 'yii'
+    'SCRIPT_FILENAME' => 'yii'
+    'PATH_TRANSLATED' => 'yii'
+    'DOCUMENT_ROOT' => ''
+    'REQUEST_TIME_FLOAT' => 1618238640.996
+    'REQUEST_TIME' => 1618238640
+    'argv' => [
+        0 => 'yii'
+        1 => 'migrate'
+        2 => '--migrationPath=@yii/rbac/migrations'
+    ]
+    'argc' => 3
+]
+2021-04-12 16:45:03 [-][-][-][error][yii\db\Exception] PDOException: SQLSTATE[HY000] [2002] Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
+ in D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\db\Connection.php:712
+Stack trace:
+#0 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\db\Connection.php(712): PDO->__construct('mysql:host=loca...', 'root', '', NULL)
+#1 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\db\Connection.php(631): yii\db\Connection->createPdoInstance()
+#2 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\db\Connection.php(1032): yii\db\Connection->open()
+#3 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\db\Connection.php(1019): yii\db\Connection->getMasterPdo()
+#4 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\db\Command.php(258): yii\db\Connection->getSlavePdo()
+#5 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\db\Command.php(1160): yii\db\Command->prepare(true)
+#6 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\db\Command.php(407): yii\db\Command->queryInternal('fetchAll', NULL)
+#7 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\db\mysql\Schema.php(319): yii\db\Command->queryAll()
+#8 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\db\mysql\Schema.php(125): yii\db\mysql\Schema->findColumns(Object(yii\db\TableSchema))
+#9 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\db\Schema.php(758): yii\db\mysql\Schema->loadTableSchema('migration')
+#10 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\db\Schema.php(194): yii\db\Schema->getTableMetadata('{{%migration}}', 'schema', true)
+#11 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\console\controllers\MigrateController.php(211): yii\db\Schema->getTableSchema('{{%migration}}', true)
+#12 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\console\controllers\BaseMigrateController.php(894): yii\console\controllers\MigrateController->getMigrationHistory(NULL)
+#13 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\console\controllers\BaseMigrateController.php(169): yii\console\controllers\BaseMigrateController->getNewMigrations()
+#14 [internal function]: yii\console\controllers\BaseMigrateController->actionUp(0)
+#15 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#16 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\base\Controller.php(181): yii\base\InlineAction->runWithParams(Array)
+#17 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\console\Controller.php(184): yii\base\Controller->runAction('', Array)
+#18 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\base\Module.php(534): yii\console\Controller->runAction('', Array)
+#19 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\console\Application.php(181): yii\base\Module->runAction('migrate', Array)
+#20 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\console\Application.php(148): yii\console\Application->runAction('migrate', Array)
+#21 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\base\Application.php(392): yii\console\Application->handleRequest(Object(yii\console\Request))
+#22 D:\Projects\Job\Raffle-YouTubers\yii(20): yii\base\Application->run()
+#23 {main}
+
+Next yii\db\Exception: SQLSTATE[HY000] [2002] Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
+ in D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\db\Connection.php:642
+Stack trace:
+#0 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\db\Connection.php(1032): yii\db\Connection->open()
+#1 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\db\Connection.php(1019): yii\db\Connection->getMasterPdo()
+#2 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\db\Command.php(258): yii\db\Connection->getSlavePdo()
+#3 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\db\Command.php(1160): yii\db\Command->prepare(true)
+#4 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\db\Command.php(407): yii\db\Command->queryInternal('fetchAll', NULL)
+#5 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\db\mysql\Schema.php(319): yii\db\Command->queryAll()
+#6 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\db\mysql\Schema.php(125): yii\db\mysql\Schema->findColumns(Object(yii\db\TableSchema))
+#7 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\db\Schema.php(758): yii\db\mysql\Schema->loadTableSchema('migration')
+#8 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\db\Schema.php(194): yii\db\Schema->getTableMetadata('{{%migration}}', 'schema', true)
+#9 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\console\controllers\MigrateController.php(211): yii\db\Schema->getTableSchema('{{%migration}}', true)
+#10 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\console\controllers\BaseMigrateController.php(894): yii\console\controllers\MigrateController->getMigrationHistory(NULL)
+#11 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\console\controllers\BaseMigrateController.php(169): yii\console\controllers\BaseMigrateController->getNewMigrations()
+#12 [internal function]: yii\console\controllers\BaseMigrateController->actionUp(0)
+#13 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#14 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\base\Controller.php(181): yii\base\InlineAction->runWithParams(Array)
+#15 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\console\Controller.php(184): yii\base\Controller->runAction('', Array)
+#16 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\base\Module.php(534): yii\console\Controller->runAction('', Array)
+#17 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\console\Application.php(181): yii\base\Module->runAction('migrate', Array)
+#18 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\console\Application.php(148): yii\console\Application->runAction('migrate', Array)
+#19 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\base\Application.php(392): yii\console\Application->handleRequest(Object(yii\console\Request))
+#20 D:\Projects\Job\Raffle-YouTubers\yii(20): yii\base\Application->run()
+#21 {main}
+Additional Information:
+Array
+(
+    [0] => HY000
+    [1] => 2002
+    [2] => Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
+
+)
+
+2021-04-12 16:44:59 [-][-][-][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'ALLUSERSPROFILE' => 'C:\\ProgramData'
+    'APPDATA' => 'C:\\Users\\gjhon\\AppData\\Roaming'
+    'CHROME_CRASHPAD_PIPE_NAME' => '\\\\.\\pipe\\crashpad_9000_LSEHKGTZUPOOOGIT'
+    'CommonProgramFiles' => 'C:\\Program Files\\Common Files'
+    'CommonProgramFiles(x86)' => 'C:\\Program Files (x86)\\Common Files'
+    'CommonProgramW6432' => 'C:\\Program Files\\Common Files'
+    'COMPUTERNAME' => 'GJHONIC-PC'
+    'ComSpec' => 'C:\\Windows\\system32\\cmd.exe'
+    'DriverData' => 'C:\\Windows\\System32\\Drivers\\DriverData'
+    'FPS_BROWSER_APP_PROFILE_STRING' => 'Internet Explorer'
+    'FPS_BROWSER_USER_PROFILE_STRING' => 'Default'
+    'HOMEDRIVE' => 'C:'
+    'HOMEPATH' => '\\Users\\gjhon'
+    'LOCALAPPDATA' => 'C:\\Users\\gjhon\\AppData\\Local'
+    'LOGONSERVER' => '\\\\GJHONIC-PC'
+    'NUMBER_OF_PROCESSORS' => '12'
+    'OneDrive' => 'C:\\Users\\gjhon\\OneDrive'
+    'OneDriveConsumer' => 'C:\\Users\\gjhon\\OneDrive'
+    'ORIGINAL_XDG_CURRENT_DESKTOP' => 'undefined'
+    'OS' => 'Windows_NT'
+    'Path' => 'C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Windows\\System32\\OpenSSH\\;D:\\Apps\\PuTTY\\;D:\\Apps\\Git\\cmd;D:\\Apps\\Nodejs\\;C:\\xampp\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Users\\gjhon\\AppData\\Local\\Microsoft\\WindowsApps;D:\\Apps\\qemu;D:\\Apps\\Microsoft VS Code\\bin;C:\\Users\\gjhon\\AppData\\Roaming\\npm;C:\\Users\\gjhon\\AppData\\Local\\GitHubDesktop\\bin;C:\\Users\\gjhon\\AppData\\Roaming\\Composer\\vendor\\bin;C:\\mongodb\\bin;D:\\Apps\\PhpStorm 2020.3.3\\bin'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.CPL'
+    'PhpStorm' => 'D:\\Apps\\PhpStorm 2020.3.3\\bin;'
+    'PROCESSOR_ARCHITECTURE' => 'AMD64'
+    'PROCESSOR_IDENTIFIER' => 'AMD64 Family 23 Model 8 Stepping 2, AuthenticAMD'
+    'PROCESSOR_LEVEL' => '23'
+    'PROCESSOR_REVISION' => '0802'
+    'ProgramData' => 'C:\\ProgramData'
+    'ProgramFiles' => 'C:\\Program Files'
+    'ProgramFiles(x86)' => 'C:\\Program Files (x86)'
+    'ProgramW6432' => 'C:\\Program Files'
+    'PSModulePath' => 'C:\\Users\\gjhon\\OneDrive\\„®Єг¬Ґ­вл\\WindowsPowerShell\\Modules;C:\\Program Files\\WindowsPowerShell\\Modules;C:\\Windows\\system32\\WindowsPowerShell\\v1.0\\Modules'
+    'PUBLIC' => 'C:\\Users\\Public'
+    'SESSIONNAME' => 'Console'
+    'SystemDrive' => 'C:'
+    'SystemRoot' => 'C:\\Windows'
+    'TEMP' => 'C:\\Users\\gjhon\\AppData\\Local\\Temp'
+    'TMP' => 'C:\\Users\\gjhon\\AppData\\Local\\Temp'
+    'USERDOMAIN' => 'GJHONIC-PC'
+    'USERDOMAIN_ROAMINGPROFILE' => 'GJHONIC-PC'
+    'USERNAME' => 'gjhon'
+    'USERPROFILE' => 'C:\\Users\\gjhon'
+    'VBOX_MSI_INSTALL_PATH' => 'D:\\Apps\\VirtualBox\\'
+    'windir' => 'C:\\Windows'
+    'TERM_PROGRAM' => 'vscode'
+    'TERM_PROGRAM_VERSION' => '1.55.1'
+    'LANG' => 'ru_RU.UTF-8'
+    'COLORTERM' => 'truecolor'
+    'VSCODE_GIT_IPC_HANDLE' => '\\\\.\\pipe\\vscode-git-fca5334eae-sock'
+    'GIT_ASKPASS' => 'd:\\Apps\\Microsoft VS Code\\resources\\app\\extensions\\git\\dist\\askpass.sh'
+    'VSCODE_GIT_ASKPASS_NODE' => 'D:\\Apps\\Microsoft VS Code\\Code.exe'
+    'VSCODE_GIT_ASKPASS_MAIN' => 'd:\\Apps\\Microsoft VS Code\\resources\\app\\extensions\\git\\dist\\askpass-main.js'
+    'PHP_SELF' => 'yii'
+    'SCRIPT_NAME' => 'yii'
+    'SCRIPT_FILENAME' => 'yii'
+    'PATH_TRANSLATED' => 'yii'
+    'DOCUMENT_ROOT' => ''
+    'REQUEST_TIME_FLOAT' => 1618238699.2076
+    'REQUEST_TIME' => 1618238699
+    'argv' => [
+        0 => 'yii'
+        1 => 'migrate'
+        2 => '--migrationPath=@yii/rbac/migrations'
+    ]
+    'argc' => 3
+]
+2021-04-21 07:18:18 [-][-][-][error][yii\console\Exception] yii\console\Exception: Missing required arguments: name in D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\console\Controller.php:243
+Stack trace:
+#0 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\base\InlineAction.php(51): yii\console\Controller->bindActionParams(Object(yii\base\InlineAction), Array)
+#1 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\base\Controller.php(181): yii\base\InlineAction->runWithParams(Array)
+#2 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\console\Controller.php(184): yii\base\Controller->runAction('create', Array)
+#3 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\base\Module.php(534): yii\console\Controller->runAction('create', Array)
+#4 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\console\Application.php(181): yii\base\Module->runAction('migrate/create', Array)
+#5 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\console\Application.php(148): yii\console\Application->runAction('migrate/create', Array)
+#6 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\base\Application.php(392): yii\console\Application->handleRequest(Object(yii\console\Request))
+#7 D:\Projects\Job\Raffle-YouTubers\yii(20): yii\base\Application->run()
+#8 {main}
+2021-04-21 07:18:17 [-][-][-][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'FPS_BROWSER_APP_PROFILE_STRING' => 'Internet Explorer'
+    'CommonProgramFiles' => 'C:\\Program Files\\Common Files'
+    'PROMPT' => '$P$G'
+    'SESSIONNAME' => 'Console'
+    'COMPUTERNAME' => 'GJHONIC-PC'
+    'VBOX_MSI_INSTALL_PATH' => 'D:\\Apps\\VirtualBox\\'
+    'OneDriveConsumer' => 'C:\\Users\\gjhon\\OneDrive'
+    '__INTELLIJ_COMMAND_HISTFILE__' => 'C:\\Users\\gjhon\\AppData\\Roaming\\JetBrains\\PhpStorm2020.3\\terminal\\history\\history-2'
+    'SystemDrive' => 'C:'
+    'NUMBER_OF_PROCESSORS' => '12'
+    'LOGONSERVER' => '\\\\GJHONIC-PC'
+    'TEMP' => 'C:\\Users\\gjhon\\AppData\\Local\\Temp'
+    'TMP' => 'C:\\Users\\gjhon\\AppData\\Local\\Temp'
+    'HOMEPATH' => '\\Users\\gjhon'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'IDEA_INITIAL_DIRECTORY' => 'D:\\Apps\\PhpStorm 2020.3.3\\bin'
+    'USERNAME' => 'gjhon'
+    'ProgramFiles' => 'C:\\Program Files'
+    'USERDOMAIN_ROAMINGPROFILE' => 'GJHONIC-PC'
+    'LOCALAPPDATA' => 'C:\\Users\\gjhon\\AppData\\Local'
+    'TERMINAL_EMULATOR' => 'JetBrains-JediTerm'
+    'PROCESSOR_IDENTIFIER' => 'AMD64 Family 23 Model 8 Stepping 2, AuthenticAMD'
+    'DriverData' => 'C:\\Windows\\System32\\Drivers\\DriverData'
+    'APPDATA' => 'C:\\Users\\gjhon\\AppData\\Roaming'
+    'ALLUSERSPROFILE' => 'C:\\ProgramData'
+    'USERDOMAIN' => 'GJHONIC-PC'
+    'PROCESSOR_LEVEL' => '23'
+    'ProgramData' => 'C:\\ProgramData'
+    'ComSpec' => 'C:\\Windows\\system32\\cmd.exe'
+    'PROCESSOR_ARCHITECTURE' => 'AMD64'
+    'FPS_BROWSER_USER_PROFILE_STRING' => 'Default'
+    'SystemRoot' => 'C:\\Windows'
+    'PhpStorm' => 'D:\\Apps\\PhpStorm 2020.3.3\\bin;'
+    'PROCESSOR_REVISION' => '0802'
+    'OneDrive' => 'C:\\Users\\gjhon\\OneDrive'
+    'PSModulePath' => 'C:\\Program Files\\WindowsPowerShell\\Modules;C:\\Windows\\system32\\WindowsPowerShell\\v1.0\\Modules'
+    'Path' => 'C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Windows\\System32\\OpenSSH\\;D:\\Apps\\PuTTY\\;D:\\Apps\\Git\\cmd;D:\\Apps\\Nodejs\\;C:\\xampp\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Users\\gjhon\\AppData\\Local\\Microsoft\\WindowsApps;D:\\Apps\\qemu;D:\\Apps\\Microsoft VS Code\\bin;C:\\Users\\gjhon\\AppData\\Roaming\\npm;C:\\Users\\gjhon\\AppData\\Local\\GitHubDesktop\\bin;C:\\Users\\gjhon\\AppData\\Roaming\\Composer\\vendor\\bin;C:\\mongodb\\bin;D:\\Apps\\PhpStorm 2020.3.3\\bin'
+    'ProgramFiles(x86)' => 'C:\\Program Files (x86)'
+    'USERPROFILE' => 'C:\\Users\\gjhon'
+    'windir' => 'C:\\Windows'
+    'ProgramW6432' => 'C:\\Program Files'
+    'OS' => 'Windows_NT'
+    'CommonProgramFiles(x86)' => 'C:\\Program Files (x86)\\Common Files'
+    'PUBLIC' => 'C:\\Users\\Public'
+    'HOMEDRIVE' => 'C:'
+    'CommonProgramW6432' => 'C:\\Program Files\\Common Files'
+    'PHP_SELF' => 'yii'
+    'SCRIPT_NAME' => 'yii'
+    'SCRIPT_FILENAME' => 'yii'
+    'PATH_TRANSLATED' => 'yii'
+    'DOCUMENT_ROOT' => ''
+    'REQUEST_TIME_FLOAT' => 1618982297.9636
+    'REQUEST_TIME' => 1618982297
+    'argv' => [
+        0 => 'yii'
+        1 => 'migrate/create'
+    ]
+    'argc' => 2
+]
+2021-04-22 16:24:58 [-][-][-][error][yii\db\Exception] PDOException: SQLSTATE[42000]: Syntax error or access violation: 1091 Can't DROP INDEX `idx-user_attribute-id`; check that it exists in D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\db\Command.php:1299
+Stack trace:
+#0 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\db\Command.php(1299): PDOStatement->execute()
+#1 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\db\Command.php(1099): yii\db\Command->internalExecute('DROP INDEX `idx...')
+#2 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\db\Migration.php(507): yii\db\Command->execute()
+#3 D:\Projects\Job\Raffle-YouTubers\app\migrations\m210422_052139_create_user_attribute.php(34): yii\db\Migration->dropIndex('idx-user_attrib...', 'user_attribute')
+#4 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\console\controllers\BaseMigrateController.php(772): m210422_052139_create_user_attribute->down()
+#5 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\console\controllers\BaseMigrateController.php(266): yii\console\controllers\BaseMigrateController->migrateDown('m210422_052139_...')
+#6 [internal function]: yii\console\controllers\BaseMigrateController->actionDown(10)
+#7 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#8 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\base\Controller.php(181): yii\base\InlineAction->runWithParams(Array)
+#9 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\console\Controller.php(184): yii\base\Controller->runAction('down', Array)
+#10 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\base\Module.php(534): yii\console\Controller->runAction('down', Array)
+#11 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\console\Application.php(181): yii\base\Module->runAction('migrate/down', Array)
+#12 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\console\Application.php(148): yii\console\Application->runAction('migrate/down', Array)
+#13 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\base\Application.php(392): yii\console\Application->handleRequest(Object(yii\console\Request))
+#14 D:\Projects\Job\Raffle-YouTubers\yii(20): yii\base\Application->run()
+#15 {main}
+
+Next yii\db\Exception: SQLSTATE[42000]: Syntax error or access violation: 1091 Can't DROP INDEX `idx-user_attribute-id`; check that it exists
+The SQL being executed was: DROP INDEX `idx-user_attribute-id` ON `user_attribute` in D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\db\Schema.php:678
+Stack trace:
+#0 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\db\Command.php(1304): yii\db\Schema->convertException(Object(PDOException), 'DROP INDEX `idx...')
+#1 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\db\Command.php(1099): yii\db\Command->internalExecute('DROP INDEX `idx...')
+#2 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\db\Migration.php(507): yii\db\Command->execute()
+#3 D:\Projects\Job\Raffle-YouTubers\app\migrations\m210422_052139_create_user_attribute.php(34): yii\db\Migration->dropIndex('idx-user_attrib...', 'user_attribute')
+#4 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\console\controllers\BaseMigrateController.php(772): m210422_052139_create_user_attribute->down()
+#5 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\console\controllers\BaseMigrateController.php(266): yii\console\controllers\BaseMigrateController->migrateDown('m210422_052139_...')
+#6 [internal function]: yii\console\controllers\BaseMigrateController->actionDown(10)
+#7 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#8 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\base\Controller.php(181): yii\base\InlineAction->runWithParams(Array)
+#9 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\console\Controller.php(184): yii\base\Controller->runAction('down', Array)
+#10 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\base\Module.php(534): yii\console\Controller->runAction('down', Array)
+#11 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\console\Application.php(181): yii\base\Module->runAction('migrate/down', Array)
+#12 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\console\Application.php(148): yii\console\Application->runAction('migrate/down', Array)
+#13 D:\Projects\Job\Raffle-YouTubers\vendor\yiisoft\yii2\base\Application.php(392): yii\console\Application->handleRequest(Object(yii\console\Request))
+#14 D:\Projects\Job\Raffle-YouTubers\yii(20): yii\base\Application->run()
+#15 {main}
+Additional Information:
+Array
+(
+    [0] => 42000
+    [1] => 1091
+    [2] => Can't DROP INDEX `idx-user_attribute-id`; check that it exists
+)
+
+2021-04-22 16:24:55 [-][-][-][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'PROMPT' => '$P$G'
+    '__INTELLIJ_COMMAND_HISTFILE__' => 'C:\\Users\\gjhon\\AppData\\Local\\JetBrains\\PhpStorm2021.1\\terminal\\history\\Raffle-YouTubers-history'
+    'PROCESSOR_IDENTIFIER' => 'AMD64 Family 23 Model 8 Stepping 2, AuthenticAMD'
+    'CommonProgramFiles' => 'C:\\Program Files\\Common Files'
+    'APPDATA' => 'C:\\Users\\gjhon\\AppData\\Roaming'
+    'FPS_BROWSER_USER_PROFILE_STRING' => 'Default'
+    'LOCALAPPDATA' => 'C:\\Users\\gjhon\\AppData\\Local'
+    'ProgramData' => 'C:\\ProgramData'
+    'COMPUTERNAME' => 'GJHONIC-PC'
+    'CommonProgramFiles(x86)' => 'C:\\Program Files (x86)\\Common Files'
+    'SystemDrive' => 'C:'
+    'USERDOMAIN' => 'GJHONIC-PC'
+    'OneDriveConsumer' => 'C:\\Users\\gjhon\\OneDrive'
+    'OneDrive' => 'C:\\Users\\gjhon\\OneDrive'
+    'TMP' => 'C:\\Users\\gjhon\\AppData\\Local\\Temp'
+    'SystemRoot' => 'C:\\Windows'
+    'HOMEPATH' => '\\Users\\gjhon'
+    'TEMP' => 'C:\\Users\\gjhon\\AppData\\Local\\Temp'
+    'TERMINAL_EMULATOR' => 'JetBrains-JediTerm'
+    'PhpStorm' => 'D:\\Apps\\PhpStorm 2020.3.3\\bin;'
+    'VBOX_MSI_INSTALL_PATH' => 'D:\\Apps\\VirtualBox\\'
+    'LOGONSERVER' => '\\\\GJHONIC-PC'
+    'SESSIONNAME' => 'Console'
+    'ProgramFiles' => 'C:\\Program Files'
+    'HOMEDRIVE' => 'C:'
+    'DriverData' => 'C:\\Windows\\System32\\Drivers\\DriverData'
+    'windir' => 'C:\\Windows'
+    'USERDOMAIN_ROAMINGPROFILE' => 'GJHONIC-PC'
+    'PUBLIC' => 'C:\\Users\\Public'
+    'Path' => 'C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Windows\\System32\\OpenSSH\\;D:\\Apps\\PuTTY\\;D:\\Apps\\Git\\cmd;D:\\Apps\\Nodejs\\;C:\\xampp\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Users\\gjhon\\AppData\\Local\\Microsoft\\WindowsApps;D:\\Apps\\qemu;D:\\Apps\\Microsoft VS Code\\bin;C:\\Users\\gjhon\\AppData\\Roaming\\npm;C:\\Users\\gjhon\\AppData\\Local\\GitHubDesktop\\bin;C:\\Users\\gjhon\\AppData\\Roaming\\Composer\\vendor\\bin;C:\\mongodb\\bin;D:\\Apps\\PhpStorm 2020.3.3\\bin'
+    'PROCESSOR_LEVEL' => '23'
+    'FPS_BROWSER_APP_PROFILE_STRING' => 'Internet Explorer'
+    'ComSpec' => 'C:\\Windows\\system32\\cmd.exe'
+    'NUMBER_OF_PROCESSORS' => '12'
+    'IDEA_INITIAL_DIRECTORY' => 'C:\\Program Files\\JetBrains\\PhpStorm 2021.1.1\\bin'
+    'PROCESSOR_ARCHITECTURE' => 'AMD64'
+    'PROCESSOR_REVISION' => '0802'
+    'OS' => 'Windows_NT'
+    'USERPROFILE' => 'C:\\Users\\gjhon'
+    'ALLUSERSPROFILE' => 'C:\\ProgramData'
+    'USERNAME' => 'gjhon'
+    'ProgramW6432' => 'C:\\Program Files'
+    'CommonProgramW6432' => 'C:\\Program Files\\Common Files'
+    'TERM_SESSION_ID' => 'e4a37aaa-19dc-4e14-954e-ad73ff31f227'
+    'ProgramFiles(x86)' => 'C:\\Program Files (x86)'
+    'PSModulePath' => 'C:\\Program Files\\WindowsPowerShell\\Modules;C:\\Windows\\system32\\WindowsPowerShell\\v1.0\\Modules'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'PHP_SELF' => 'yii'
+    'SCRIPT_NAME' => 'yii'
+    'SCRIPT_FILENAME' => 'yii'
+    'PATH_TRANSLATED' => 'yii'
+    'DOCUMENT_ROOT' => ''
+    'REQUEST_TIME_FLOAT' => 1619101495.416
+    'REQUEST_TIME' => 1619101495
+    'argv' => [
+        0 => 'yii'
+        1 => 'migrate/down'
+        2 => '10'
+    ]
+    'argc' => 3
+]
