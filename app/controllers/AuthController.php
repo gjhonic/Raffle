@@ -34,7 +34,7 @@ class AuthController extends Controller
             'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['signin','signup','signout','confirm-email','return-confirm-email'],
+                        'actions' => ['signin','signup','signout','confirm-email','return-confirm-email', 'reset-password'],
                         'roles' => ['?'],
                     ],
                     [
@@ -51,7 +51,7 @@ class AuthController extends Controller
     public $layout = 'auth';
 
     /**
-     * actionLogin - Метод обрабатывает форму аутентификация
+     * Метод обрабатывает форму аутентификация
      * @return string|Response
      */
     public function actionSignin()
@@ -83,7 +83,7 @@ class AuthController extends Controller
     }
 
     /**
-     * actionSignup - Метод обрабатывает форму регистрации
+     * Метод обрабатывает форму регистрации
      * @return string|Response
      */
     public function actionSignup()
@@ -107,7 +107,7 @@ class AuthController extends Controller
     }
 
     /**
-     * actionConfirmEmail - Метод подтверждает почту
+     * Метод подтверждает почту
      * @return string|Response
      */
     public function actionConfirmEmail()
@@ -137,7 +137,7 @@ class AuthController extends Controller
     }
 
     /**
-     * actionReturnConfirmEmail - Метод повторно отправляет письмо подтверждения почты
+     * Метод повторно отправляет письмо подтверждения почты
      * @return string|Response
      */
     public function actionReturnConfirmEmail()
@@ -156,7 +156,26 @@ class AuthController extends Controller
     }
 
     /**
-     * actionLogout - Метод выхода из аккаунта
+     * Метод сброса пароля
+     * @return string|Response
+     */
+    public function actionResetPassword()
+    {
+        if (!Yii::$app->user->isGuest) {
+            return $this->redirect(Url::to('index'));
+        }
+        $session = Yii::$app->session;
+        if(!isset($session['user_registr'])){
+            return $this->redirect(Url::to('index'));
+        }
+
+        $user = User::findOne($session['user_registr']);
+        self::sendMessageConfirmMail($user->email);
+        return $this->redirect('confirm-email');
+    }
+
+    /**
+     * Метод выхода из аккаунта
      * @return Response
      */
     public function actionSignout()
@@ -168,7 +187,7 @@ class AuthController extends Controller
     }
 
     /**
-     * sendMessageConfirmMail - метод отправки письма подтверждения почты
+     * Метод отправки письма подтверждения почты
      * @param $user_mail string
      */
     private static function sendMessageConfirmMail($user_mail)

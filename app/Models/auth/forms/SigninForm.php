@@ -22,7 +22,6 @@ class SigninForm extends Model
 
 
     /**
-     * rules - метод возвращает правила валидации.
      * @return array - правила валидации.
      */
     public function rules()
@@ -35,10 +34,9 @@ class SigninForm extends Model
     }
 
     /**
-     * validatePassword - метод валидации пароля.
+     * Метод валидации пароля.
      * @param $attribute, $params
      */
-    // >> -------------------------------------------------
     public function validatePassword($attribute, $params)
     {
         if (!$this->hasErrors()) {
@@ -49,23 +47,18 @@ class SigninForm extends Model
             }
         }
     }
-    // ------------------------------------------------- <<
-
 
     /**
-     * getUser - метод заполняем свойство _user  обьектом user, если он не заполнен и возвращает его.
+     * Метод заполняем свойство _user  обьектом user, если он не заполнен и возвращает его.
      * @return object - user.
      */
-    // >> -------------------------------------------------
     public function getUser()
     {
         if ($this->_user === false) {
             $this->_user = UserIdentity::findByUsername($this->username);
         }
-
         return $this->_user;
     }
-    // ------------------------------------------------- <<
 
     /**
      * {@inheritdoc}

@@ -29,7 +29,7 @@ FrontendAsset::register($this);
 
     <!-- Header -->
     <header id="header">
-        <h1><a href="index.html"><?php echo Yii::$app->name; ?></a></h1>
+        <h1><a href="<?=Yii::$app->homeUrl?>"><?php echo Yii::$app->name; ?></a></h1>
         <nav class="links">
             <ul>
                 <?php foreach ($nav['main'] as $elem){

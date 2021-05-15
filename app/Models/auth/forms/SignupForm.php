@@ -42,7 +42,7 @@ class SignupForm extends Model
     }
 
     /**
-     * validateUsername - метод валидации логина.
+     * Метод валидации логина.
      * @param $attribute, $params
      */
     public function validateUsername($attribute, $params)
@@ -57,7 +57,7 @@ class SignupForm extends Model
     }
 
     /**
-     * validateEmail - метод валидации почты.
+     * Метод валидации почты.
      * @param $attribute, $params
      */
     public function validateEmail($attribute, $params)
@@ -72,7 +72,7 @@ class SignupForm extends Model
     }
 
     /**
-     * validatePassword - метод валидации пароля.
+     * Метод валидации пароля.
      * @param $attribute, $params
      */
     public function validatePassword($attribute, $params)
@@ -85,7 +85,7 @@ class SignupForm extends Model
     }
 
     /**
-     * public function validatePasswordConfirm - метод валидации сходства паролей.
+     * Метод валидации сходства паролей.
      * @param $attribute, $params
      */
     public function validatePasswordConfirm($attribute, $params)
@@ -98,7 +98,7 @@ class SignupForm extends Model
     }
 
     /**
-     * signup - метод "регает" юзера в бд.
+     * Метод "регает" юзера в бд.
      * @return bool.
      */
     public function signup()

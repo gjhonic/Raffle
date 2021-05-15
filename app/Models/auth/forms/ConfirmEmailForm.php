@@ -15,7 +15,6 @@ class ConfirmEmailForm extends Model
     public $code;
 
     /**
-     * rules - метод возвращает правила валидации.
      * @return array - правила валидации.
      */
     public function rules()
@@ -39,7 +38,6 @@ class ConfirmEmailForm extends Model
     public function checkCode(){
 
         $session = Yii::$app->session;
-
         if(isset($session['code_confirm'])){
             if($this->code == $session['code_confirm']){
                 return true;
