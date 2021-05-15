@@ -7,7 +7,7 @@ return [
     'signup' => 'auth/signup',
     'signout' => 'auth/signout',
     'confirm-email' => 'auth/confirm-email',
-    'mail' => 'auth/mail',
+    'return-confirm-email' => 'auth/return-confirm-email',
 
     //URLs на Admin module
     'admin' => 'admin/main/index',

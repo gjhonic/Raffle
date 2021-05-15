@@ -30,11 +30,32 @@ $this->title = 'Подтврерждение почты';
     <div class="form-group">
         <div class="col-lg-offset-1 col-lg-11">
             <?= Html::submitButton('Подтвердить', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
-            <br>
-            <a href="<?=Url::to('/confirm-email')?>" disabled>Отправить код заново через: <span></span></a>
+            <a href="<?=Url::to('/return-confirm-email')?>" class="btn btn-warning" id="but_return" disabled>Отправить код заново через: <span id="timer_but"> 30 </span> </a>
+
         </div>
     </div>
 
     <?php ActiveForm::end(); ?>
 
 </div>
+
+<script>
+
+    function timer(){
+        let obj=document.getElementById('timer_but');
+        let RealTimer = Number(obj.innerHTML);
+        if (--RealTimer < 0) RealTimer = 0;
+        obj.innerHTML = RealTimer;
+
+        if (RealTimer==0) {
+            let but=document.getElementById('but_return');
+            but.removeAttribute("disabled");
+            but.innerHTML = "Отправить код";
+            return;
+        }
+        else { setTimeout(timer,1000); }
+    }
+    setTimeout(timer,30);
+
+</script>
+
