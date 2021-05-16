@@ -29,6 +29,7 @@ class TagController extends Controller
         ];
     }
 
+
     /**
      * Lists all Tag models.
      * @return mixed

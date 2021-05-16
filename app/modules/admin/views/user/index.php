@@ -34,24 +34,20 @@ $this->params['breadcrumbs'][] = $this->title;
                 'name',
                 [
                     'attribute'=>'role_id',
+                    'filter' => $Roles,
                     'label'=>'Роль',
-                    'format'=>'text', // Возможные варианты: raw, html
-                    'content'=>function($data){
-                        return Yii::$app->user->identity->getRole()->title;
+                    'format'=>'text',
+                    'content'=>function($data,$Roles){
+                        return $data->getRole()->title;
                     },
                 ],
                 [
                     'class' => 'yii\grid\ActionColumn',
                     'template' => "{view} {update}",
                     'buttons' => [
-                        'view' => function ($url,$model,$key) {
+                        'view' => function ($url) {
                             return Html::a('Смотреть', $url, ['class' => 'btn btn-outline-success btn-block']);
                         },
-
-                        'update' => function ($url,$model,$key) {
-                            return (Yii::$app->user->identity->getRole()->title !== User::ROLE_MODERATOR) ? Html::a('Изменить', $url, ['class' => 'btn btn-outline-primary btn-block']) : '';
-                        },
-
                     ],
                 ],
             ],

@@ -42,8 +42,20 @@ $this->params['breadcrumbs'][] = $this->title;
             'username',
             'surname',
             'name',
-            'patronymic',
-            'role_id',
+            [
+                'attribute'=>'role_id',
+                'label' => 'Роль',
+                'format' => 'raw',
+                'value'=> $model->getRole()->title,
+
+            ],
+            [
+                'attribute'=>'status_id',
+                'label' => 'Статус',
+                'format' => 'raw',
+                'value'=> $model->getStatus()->title,
+
+            ],
         ],
     ]) ?>
 

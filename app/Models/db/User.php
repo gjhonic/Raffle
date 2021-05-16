@@ -3,8 +3,8 @@
 namespace app\models\db;
 
 use Yii;
-use app\models\db\UserRole;
 use yii\behaviors\TimestampBehavior;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "user".
@@ -32,6 +32,28 @@ use yii\behaviors\TimestampBehavior;
  */
 class User extends \yii\db\ActiveRecord
 {
+    //Роли системы
+    const ROLE_ADMIN = "admin";
+    const ROLE_ADMIN_ID = 1;
+
+    const ROLE_MODERATOR = "moderator";
+    const ROLE_MODERATOR_ID = 2;
+
+    const ROLE_USER = "user";
+    const ROLE_USER_ID = 1;
+
+    const ROLE_GUEST = "?";
+
+    //Статусы системы
+    const STATUS_ACTIVE = "active";
+    const STATUS_ACTIVE_ID = 1;
+
+    const STATUS_TAG_TO_BAN = "tag to ban";
+    const STATUS_TAG_TO_BAN_ID = 2;
+
+    const STATUS_BAN = "ban";
+    const STATUS_BAN_ID = 3;
+
     /**
      * {@inheritdoc}
      */
@@ -39,12 +61,6 @@ class User extends \yii\db\ActiveRecord
     {
         return 'user';
     }
-
-    //Роли системы
-    const ROLE_ADMIN = "admin";
-    const ROLE_MODERATOR = "moderator";
-    const ROLE_USER = "user";
-    const ROLE_GUEST = "?";
 
     /**
      * {@inheritdoc}
@@ -117,8 +133,7 @@ class User extends \yii\db\ActiveRecord
 
     /**
      * Метод возвращает роль пользователя
-     *
-     * @return \yii\db\ActiveQuery
+     * @return UserRole|null
      */
     public function getRole()
     {
@@ -126,13 +141,12 @@ class User extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[Status]].
-     *
-     * @return \yii\db\ActiveQuery
+     * Метод возвращает статус пользователя
+     * @return UserStatus|null
      */
     public function getStatus()
     {
-        return $this->hasOne(UserStatus::className(), ['id' => 'status_id']);
+        return UserStatus::findOne($this->status_id);
     }
 
     /**
