@@ -22,6 +22,11 @@ if(Yii::$app->user->isGuest){
         return [
             'main' => [
                 [
+                    'label' => 'Профиль',
+                    'href' => URL::to('/profile'),
+                    'controller' => 'site'
+                ],
+                [
                     'label' => 'Конкурсы',
                     'href' => URL::to('/raffle/'),
                     'controller' => 'raffle'
@@ -36,6 +41,11 @@ if(Yii::$app->user->isGuest){
     }else{
         return [
             'main' => [
+                [
+                    'label' => 'Профиль',
+                    'href' => URL::to('/profile'),
+                    'controller' => 'site'
+                ],
                 [
                     'label' => 'Админка',
                     'href' => URL::to('/admin/'),

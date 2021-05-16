@@ -23,7 +23,7 @@ class m210422_052202_create_raffle extends Migration
             'date_begin' => $this->string(20),
             'date_end' => $this->string(20),
             'status_id' => $this->integer()->notNull(),
-            'code' => $this->string(100)->unique()->notNull(),
+            'code' => $this->string(30)->unique()->notNull(),
             'created_at' => $this->integer(),
             'updated_at' => $this->integer(),
         ]);

@@ -3,6 +3,7 @@
 namespace app\models\db;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "raffle".
@@ -27,6 +28,16 @@ use Yii;
  */
 class Raffle extends \yii\db\ActiveRecord
 {
+    //Статусы конкурсов
+    const STATUS_APPROVED = "approved";
+    const STATUS_APPROVED_ID = 1;
+
+    const STATUS_ON_CHECK = "on check";
+    const STATUS_ON_CHECK_ID = 2;
+
+    const STATUS_NOT_APPROVED = "not approved";
+    const STATUS_NOT_APPROVED_ID = 3;
+
     /**
      * {@inheritdoc}
      */
@@ -41,8 +52,9 @@ class Raffle extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'user_id', 'status_id', 'code', 'created_at', 'updated_at'], 'required'],
-            [['short_description', 'description'], 'string'],
+            [['title', 'user_id', 'status_id', 'code'], 'required'],
+            [['short_description'], 'string', 'max' => 1000],
+            [['description'], 'string', 'max' => 5000],
             [['user_id', 'status_id'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['title', 'video_link', 'image_src'], 'string', 'max' => 255],
@@ -51,6 +63,13 @@ class Raffle extends \yii\db\ActiveRecord
             [['code'], 'unique'],
             [['status_id'], 'exist', 'skipOnError' => true, 'targetClass' => RaffleStatus::className(), 'targetAttribute' => ['status_id' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
+        ];
+    }
+
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className(),
         ];
     }
 
@@ -104,5 +123,36 @@ class Raffle extends \yii\db\ActiveRecord
     public function getRaffleTags()
     {
         return $this->hasMany(RaffleTag::className(), ['raffle_id' => 'id']);
+    }
+
+    /**
+     * Метод возвращает все конкурсы пользователя
+     * @param $user_id int
+     * @param $status_id int|null
+     * @return array|\yii\db\ActiveRecord[]
+     */
+    public static function findRaffleByUser($user_id, $status_id=null){
+        if($status_id != null){
+            return self::find()
+                ->where(['user_id' => $user_id, 'status_id' => $status_id])
+                ->orderBy('id DESC')
+                ->limit(10)
+                ->all();
+        }else{
+            return self::find()
+                ->where(['user_id' => $user_id])
+                ->orderBy('id DESC')
+                ->limit(10)
+                ->all();
+        }
+    }
+
+    /**
+     * Метод возвращает конкурс по коду
+     * @param $code
+     * @return array|\yii\db\ActiveRecord|null
+     */
+    public static function findByCode($code){
+        return self::find()->where(['code' => $code])->one();
     }
 }

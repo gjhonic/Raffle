@@ -15,7 +15,10 @@ return [
 
     //URLs на SiteController
     'profile/<code>' => 'site/profile',
+    'show/<code>' => 'raffle/view',
     '<action:\w+>' => 'site/<action>',
+
+
 
 
 ];
