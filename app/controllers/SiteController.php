@@ -45,6 +45,20 @@ class SiteController extends Controller
 
     public $layout = 'frontend';
 
+    public function beforeAction($action)
+    {
+        if(!Yii::$app->user->isGuest){
+            if(Yii::$app->user->identity->status_id == User::STATUS_BAN_ID){
+                Yii::$app->user->logout();
+                if(isset($session))
+                    $session->destroy();
+                echo "<h1>Ты забанен!!!</h1>";
+                die;
+            }
+        }
+        return parent::beforeAction($action);
+    }
+
     /**
      * Displays homepage.
      *

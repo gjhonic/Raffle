@@ -10,12 +10,15 @@
 
 namespace app\modules\admin\controllers;
 
+use app\models\db\UserRole;
 use Yii;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\filters\AccessControl;
 use yii\helpers\Url;
 use app\models\db\User;
 use app\models\db\search\UserSearch;
+
 
 
 class UserController extends Controller
@@ -52,6 +55,7 @@ class UserController extends Controller
         return $this->render('index', [
             'dataProvider' => $dataProvider,
             'searchModel' => $searchModel,
+            'Roles' => ArrayHelper::map(UserRole::find()->all(), 'id', 'title'),
         ]);
     }
 
