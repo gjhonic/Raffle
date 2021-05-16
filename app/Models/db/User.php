@@ -32,7 +32,7 @@ use yii\helpers\ArrayHelper;
  */
 class User extends \yii\db\ActiveRecord
 {
-    //Роли системы
+    //Роли пользователей
     const ROLE_ADMIN = "admin";
     const ROLE_ADMIN_ID = 1;
 
@@ -44,7 +44,7 @@ class User extends \yii\db\ActiveRecord
 
     const ROLE_GUEST = "?";
 
-    //Статусы системы
+    //Статусы пользователей
     const STATUS_ACTIVE = "active";
     const STATUS_ACTIVE_ID = 1;
 

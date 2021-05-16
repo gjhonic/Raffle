@@ -10,8 +10,9 @@ use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\db\User;
+use app\models\db\forms\RaffleForm;
 
-class SiteController extends Controller
+class RaffleController extends Controller
 {
 
     public function behaviors()
@@ -31,13 +32,13 @@ class SiteController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['profile','index', 'about'],
-                        'roles' => [User::ROLE_USER,User::ROLE_MODERATOR,User::ROLE_ADMIN],
+                        'actions' => ['index', 'view'],
+                        'roles' => [User::ROLE_USER,User::ROLE_MODERATOR,User::ROLE_ADMIN,User::ROLE_GUEST],
                     ],
                     [
                         'allow' => true,
-                        'actions' => ['index', 'test'],
-                        'roles' => [User::ROLE_GUEST,User::ROLE_USER,User::ROLE_MODERATOR,User::ROLE_ADMIN],
+                        'actions' => ['create', 'update', 'delete'],
+                        'roles' => [User::ROLE_USER, User::ROLE_MODERATOR, User::ROLE_ADMIN],
                     ],
                 ],
             ],
@@ -61,8 +62,7 @@ class SiteController extends Controller
     }
 
     /**
-     * Displays homepage.
-     *
+     * Список конкурсов
      * @return string
      */
     public function actionIndex()
@@ -71,36 +71,36 @@ class SiteController extends Controller
     }
 
     /**
-     * Login action.
-     * @param string
-     * @return Response|string
+     * Просмотр конкурса
+     * @param $code string
+     * @return string|Response
      */
-    public function actionProfile($code=null)
+    public function actionView($code)
     {
-        if($code==null && Yii::$app->user->isGuest){
-            return $this->redirect(['index']);
-        }
-        $user = ($code!=null) ? User::findByCode($code) : User::currentUser();
-
-        if(!$user){
+        if(($raffle = Raffle::findByCode($code)) == null){
             return $this->redirect(['index']);
         }
 
-        $Raffles = Raffle::findRaffleByUser($user->id, Raffle::STATUS_APPROVED_ID);
-
-        return $this->render('profile', [
-            'user' => $user,
-            'Raffles' => $Raffles,
+        return $this->render('view', [
+            'model' => $raffle,
         ]);
     }
 
     /**
-     * Displays about page.
-     *
-     * @return string
+     * Страница добавления конкурса
+     * @return string|Response
      */
-    public function actionAbout()
+    public function actionCreate()
     {
-        return $this->render('about');
+        $model = new RaffleForm();
+        $model->user_id = Yii::$app->user->identity->id;
+
+        if ($model->load(Yii::$app->request->post()) && $model->saveRaffle()) {
+            return $this->redirect(['index']);
+        }
+
+        return $this->render('create', [
+            'model' => $model,
+        ]);
     }
 }

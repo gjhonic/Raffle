@@ -1,6 +1,7 @@
 <?php
 
 use yii\db\Migration;
+use app\models\db\RaffleStatus;
 
 /**
  * Class m210422_052229_raffle_status
@@ -22,6 +23,18 @@ class m210422_052229_create_raffle_status extends Migration
             'raffle_status',
             'id'
         );
+
+        $approved = new RaffleStatus();
+        $approved->title = "approved";
+        $approved->save();
+
+        $on_check = new RaffleStatus();
+        $on_check->title = "on check";
+        $on_check->save();
+
+        $not_approved = new RaffleStatus();
+        $not_approved = "not approved";
+        $not_approved->save();
     }
 
     /**
