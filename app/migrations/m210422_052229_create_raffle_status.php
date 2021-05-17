@@ -33,7 +33,7 @@ class m210422_052229_create_raffle_status extends Migration
         $on_check->save();
 
         $not_approved = new RaffleStatus();
-        $not_approved = "not approved";
+        $not_approved->title = "not approved";
         $not_approved->save();
     }
 
