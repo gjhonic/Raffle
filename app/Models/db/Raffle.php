@@ -106,13 +106,12 @@ class Raffle extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[User]].
-     *
-     * @return \yii\db\ActiveQuery
+     * Метод возвращает пользователя
+     * @return User|null
      */
     public function getUser()
     {
-        return $this->hasOne(User::className(), ['id' => 'user_id']);
+        return User::findOne($this->user_id);
     }
 
     /**

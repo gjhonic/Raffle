@@ -6,7 +6,7 @@ use app\models\db\UserStatus;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 
-class StatusWidget
+class UserStatusWidget
 {
     public static function statusList(): array
     {

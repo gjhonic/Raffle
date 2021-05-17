@@ -1,8 +1,8 @@
 <?php
 
 /**
- * RaffleController
- * Контроллер модуля admin для работы с конкурсами
+ * RaffleModController
+ * Контроллер модуля admin для модерации пользователей системы
  * @copyright Copyright (c) 2021 Eugene Andreev
  * @author Eugene Andreev <gjhonic@gmail.com>
  *
@@ -10,16 +10,18 @@
 
 namespace app\modules\admin\controllers;
 
+use app\models\db\Raffle;
+use app\models\db\UserRole;
+use app\models\db\UserStatus;
 use Yii;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\filters\AccessControl;
 use yii\helpers\Url;
-use app\models\db\Raffle;
 use app\models\db\User;
 use app\models\db\search\RaffleSearch;
-use yii\web\Response;
 
-class RaffleController extends Controller
+class RaffleModController extends Controller
 {
     public function behaviors()
     {
@@ -27,12 +29,12 @@ class RaffleController extends Controller
             'access' => [
                 'class' => AccessControl::className(),
                 'denyCallback' => function ($rule, $action) {
-                    $this->redirect(Url::to('/signin'));
+                    $this->redirect(Url::to('signin'));
                 },
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['index','view'],
+                        'actions' => ['index', 'ban', 'unban'],
                         'roles' => [User::ROLE_ADMIN, User::ROLE_MODERATOR],
                     ],
                 ],
@@ -56,18 +58,34 @@ class RaffleController extends Controller
     }
 
     /**
-     * Просмотр конкурса.
-     * @param $id integer
-     * @return string|Response
+     * Метод запрещает конкурс
+     * @param $id int
+     * @throws \Throwable
+     * @throws \yii\db\StaleObjectException
      */
-    public function actionView($id)
+    public function actionBan($id)
     {
         $raffle = Raffle::findOne($id);
-        if($raffle === null){
-            return $this->redirect(Url::to('/admin/raffle/'));
+        if($raffle != null){
+            $raffle->status_id = 3;
+            $raffle->update();
         }
-        return $this->render('view', [
-            'model' => $raffle,
-        ]);
+        $this->redirect(Url::to('/admin/raffle-mod/index'));
+    }
+
+    /**
+     * Метод одобряет конкурс
+     * @param $id int
+     * @throws \Throwable
+     * @throws \yii\db\StaleObjectException
+     */
+    public function actionUnban($id)
+    {
+        $raffle = Raffle::findOne($id);
+        if($raffle != null){
+            $raffle->status_id = 1;
+            $raffle->update();
+        }
+        $this->redirect(Url::to('/admin/raffle-mod/index'));
     }
 }

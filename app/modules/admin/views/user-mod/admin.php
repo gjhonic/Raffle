@@ -5,7 +5,7 @@ use yii\grid\GridView;
 use yii\helpers\Url;
 use yii\widgets\Pjax;
 use app\models\db\User;
-use app\modules\admin\widget\StatusWidget;
+use app\modules\admin\widget\UserStatusWidget;
 
 /* @var $dataProvider \yii\db\ActiveRecord */
 /* @var $searchModel \app\models\db\search\UserSearch */
@@ -36,9 +36,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 'name',
                 [
                     'attribute' => 'status_id',
-                    'filter' => StatusWidget::statusList(),
+                    'filter' => UserStatusWidget::statusList(),
                     'value' => function ($data) {
-                        return StatusWidget::statusLabel($data->status_id);
+                        return UserStatusWidget::statusLabel($data->status_id);
                     },
                     'format' => 'raw',
                 ],
@@ -47,7 +47,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'template' => "{view}",
                     'buttons' => [
                         'view' => function ($url,$data) {
-                            return Html::a('Смотреть', Url::to('/admin/user/view')."?id=".$data->id, ['class' => 'btn btn-outline-success']);
+                            return Html::a('Смотреть', Url::to('/admin/user/view')."?id=".$data->id, ['class' => 'btn btn-outline-primary']);
                         },
                     ],
                 ],

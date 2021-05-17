@@ -5,6 +5,7 @@ use yii\grid\GridView;
 use yii\helpers\Url;
 use yii\widgets\Pjax;
 use app\models\db\User;
+use app\modules\admin\widget\RaffleStatusWidget;
 
 
 $this->title = 'Конкурсы';
@@ -24,17 +25,28 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 'title',
                 [
+                    'attribute' => 'status_id',
+                    'filter' => RaffleStatusWidget::statusList(),
+                    'value' => function ($data) {
+                        return RaffleStatusWidget::statusLabel($data->status_id);
+                    },
+                    'format' => 'raw',
+                ],
+                [
+                    'attribute' => 'user_id',
+                    'value' => function ($data) {
+                        $user = $data->getUser();
+                        return "<a href='".URL::to('/admin/user/view')."?id=".$user->id."'>".$user->username."</a>";
+                    },
+                    'format' => 'raw',
+                ],
+                [
                     'class' => 'yii\grid\ActionColumn',
-                    'template' => "{view} {update}",
+                    'template' => "{view}",
                     'buttons' => [
                         'view' => function ($url,$model,$key) {
                             return Html::a('Смотреть', $url, ['class' => 'btn btn-outline-success btn-block']);
                         },
-
-                        'update' => function ($url,$model,$key) {
-                            return (Yii::$app->user->identity->getRole()->title !== User::ROLE_MODERATOR) ? Html::a('Изменить', $url, ['class' => 'btn btn-outline-primary btn-block']) : '';
-                        },
-
                     ],
                 ],
             ],

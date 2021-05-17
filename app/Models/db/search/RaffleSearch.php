@@ -22,6 +22,7 @@ class RaffleSearch extends Raffle
     {
         return [
             [['title'], 'string', 'max' => 255],
+            ['status_id', 'integer']
         ];
     }
 
@@ -56,6 +57,7 @@ class RaffleSearch extends Raffle
         }
 
         $query->andFilterWhere(['like', 'title', $this->title]);
+        $query->andFilterWhere(['=', 'status_id', $this->status_id]);
 
         return $dataProvider;
     }

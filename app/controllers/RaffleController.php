@@ -79,6 +79,8 @@ class RaffleController extends Controller
     {
         if(($raffle = Raffle::findByCode($code)) == null){
             return $this->redirect(['index']);
+        }elseif($raffle->status !== Raffle::STATUS_APPROVED_ID){
+            return $this->redirect(['index']);
         }
 
         return $this->render('view', [
