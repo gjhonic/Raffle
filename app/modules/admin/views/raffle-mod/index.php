@@ -73,8 +73,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                     ]])."</div>";
                             }
                             elseif($data->status_id == 3){
-                                return "<div class='d-grid gap-2'>".Html::a('Запретить', Url::to('/admin/raffle-mod/ban')."?id=".$data->id, ['class' => 'btn btn-outline-danger btn-block', 'data' => [
-                                        'confirm' => 'Вы действительнос хотите запретить конкурс '.$data->title.'?',
+                                return "<div class='d-grid gap-2'>".Html::a('Одобрить', Url::to('/admin/raffle-mod/unban')."?id=".$data->id, ['class' => 'btn btn-outline-success btn-block', 'data' => [
+                                        'confirm' => 'Вы действительнос хотите одобрить конкурс '.$data->title.'?',
                                         'method' => 'post',
                                     ]])."</div>";
                             }

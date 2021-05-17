@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 use app\modules\admin\widget\RaffleStatusWidget;
+use app\models\db\Raffle;
 
 
 $this->title = 'Конкурс: '.$model->title;
@@ -17,9 +18,24 @@ $this->params['breadcrumbs'][] = $this->title;
             <span style="font-size: 28px"><?=RaffleStatusWidget::statusLabel($model->status_id); ?></span>
         </h1>
         <p class="lead"><?=$model->short_description?></p>
-        <p class="lead">
-             <?=Html::a('Автор: '.$model->getUser()->username, URL::to('/admin/user/view').'?id='.$model->user_id, ['class' => 'btn btn-outline-success'])?>
+        <p>
+            Дата создания: <b><?=date('j F, Y H:i:s', $model->created_at)?></b>
+        </p>
+        <p>
+            Дата обновления:<b> <?=date('j F, Y H:i:s', $model->updated_at)?></b>
+        </p>
 
+        <p class="lead">
+            <?=Html::a('Автор: '.$model->getUser()->username, URL::to('/admin/user/view').'?id='.$model->user_id, ['class' => 'btn btn-outline-secondary'])?>
+
+            <?php if($model->status_id == Raffle::STATUS_APPROVED_ID) { ?>
+                <?=Html::a('Запретить', URL::to('/admin/raffle-mod/ban').'?id='.$model->id, ['class' => 'btn btn-outline-danger'])?>
+            <?php }elseif($model->status_id == Raffle::STATUS_ON_CHECK_ID) { ?>
+                <?=Html::a('Одобрить', URL::to('/admin/raffle-mod/unban').'?id='.$model->id, ['class' => 'btn btn-outline-success'])?>
+                <?=Html::a('Запретить', URL::to('/admin/raffle-mod/ban').'?id='.$model->id, ['class' => 'btn btn-outline-danger'])?>
+            <?php }elseif($model->status_id == Raffle::STATUS_NOT_APPROVED_ID) { ?>
+                <?=Html::a('Одобрить', URL::to('/admin/raffle-mod/unban').'?id='.$model->id, ['class' => 'btn btn-outline-success'])?>
+            <?php } ?>
         </p>
         <hr class="my-4">
         <p><?=$model->description?></p>

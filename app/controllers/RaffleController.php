@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\db\Raffle;
+use app\models\db\RaffleStatus;
 use Yii;
 use yii\helpers\Url;
 use yii\filters\AccessControl;
@@ -67,7 +68,10 @@ class RaffleController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $Raffles = Raffle::find()->where(['status_id' => Raffle::STATUS_APPROVED_ID])->orderBy('id DESC')->limit(30)->all();
+        return $this->render('index',[
+            'Raffles' => $Raffles,
+        ]);
     }
 
     /**
@@ -79,7 +83,7 @@ class RaffleController extends Controller
     {
         if(($raffle = Raffle::findByCode($code)) == null){
             return $this->redirect(['index']);
-        }elseif($raffle->status !== Raffle::STATUS_APPROVED_ID){
+        }elseif($raffle->status_id !== Raffle::STATUS_APPROVED_ID){
             return $this->redirect(['index']);
         }
 

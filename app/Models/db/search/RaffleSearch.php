@@ -50,7 +50,7 @@ class RaffleSearch extends Raffle
             'query' => $query,
         ]);
 
-        $dataProvider->sort->defaultOrder = ['title' => SORT_ASC];
+        $dataProvider->sort->defaultOrder = ['id' => SORT_DESC];
 
         if (!($this->load($params) && $this->validate())) {
             return $dataProvider;
