@@ -6,7 +6,7 @@ use yii\helpers\Html;
 
 $this->title = 'Добавление конкурса';
 ?>
-<div class="group-create">
+<div id="main">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -15,4 +15,3 @@ $this->title = 'Добавление конкурса';
         'but_title' => 'Добавить',
     ]) ?>
 
-</div>

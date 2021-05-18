@@ -6,8 +6,6 @@ use yii\widgets\ActiveForm;
 /* @var $model object */
 /* @var $but_title string */
 ?>
-<div class="group-form">
-
     <?php $form = ActiveForm::begin(); ?>
 
     <p>
@@ -31,4 +29,3 @@ use yii\widgets\ActiveForm;
     </div>
 
     <?php ActiveForm::end(); ?>
-</div>

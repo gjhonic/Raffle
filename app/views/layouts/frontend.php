@@ -83,10 +83,7 @@ FrontendAsset::register($this);
 
     </section>
 
-    <!-- Main -->
-    <div id="main">
-        <?= $content ?>
-    </div>
+    <?= $content ?>
 
 </div>
 

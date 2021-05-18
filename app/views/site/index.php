@@ -5,6 +5,6 @@
 $this->title = 'Главная страница';
 use yii\helpers\Html;
 ?>
-<div class="site-index">
+<div id="main">
     <h1><?= Html::encode($this->title) ?></h1>
 </div>
