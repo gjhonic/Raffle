@@ -40,7 +40,7 @@ class User extends \yii\db\ActiveRecord
     const ROLE_MODERATOR_ID = 2;
 
     const ROLE_USER = "user";
-    const ROLE_USER_ID = 1;
+    const ROLE_USER_ID = 3;
 
     const ROLE_GUEST = "?";
 

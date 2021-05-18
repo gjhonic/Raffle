@@ -29,7 +29,7 @@ class UserController extends Controller
             'access' => [
                 'class' => AccessControl::className(),
                 'denyCallback' => function ($rule, $action) {
-                    $this->redirect(Url::to('signin'));
+                    $this->redirect(Url::to('/signin'));
                 },
                 'rules' => [
                     [

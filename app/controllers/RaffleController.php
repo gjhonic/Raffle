@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\models\db\Raffle;
 use app\models\db\RaffleStatus;
 use Yii;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -68,9 +69,11 @@ class RaffleController extends Controller
      */
     public function actionIndex()
     {
+        $Users = ArrayHelper::map(User::find()->all(), 'id', 'username');
         $Raffles = Raffle::find()->where(['status_id' => Raffle::STATUS_APPROVED_ID])->orderBy('id DESC')->limit(30)->all();
         return $this->render('index',[
             'Raffles' => $Raffles,
+            'Users' => $Users,
         ]);
     }
 

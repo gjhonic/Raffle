@@ -18,7 +18,7 @@ if(Yii::$app->user->isGuest){
         ],
     ];
 }else{
-    if(Yii::$app->user->identity->getRole()->title == User::ROLE_USER){
+    if(Yii::$app->user->identity->role_id == User::ROLE_USER_ID){
         return [
             'main' => [
                 [

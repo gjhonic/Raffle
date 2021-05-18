@@ -18,7 +18,7 @@ use yii\helpers\URL;
                 </div>
                 <div class="meta">
                     <time class="published" datetime="2015-11-01"><?=date('j F, Y', $raffle->updated_at)?></time>
-                    <!--<a href="#" class="author"><span class="name">Jane Doe</span><img src="images/avatar.jpg" alt=""></a>-->
+                    <a href="#" class="author"><span class="name"><?=$Users[$raffle->user_id]?></span><img src="images/avatar.jpg" alt=""></a>
                 </div>
             </header>
             <p><?=$raffle->short_description?></p>
