@@ -21,7 +21,6 @@ class BackendAsset extends AssetBundle
         'font-awesome/css/font-awesome.css',
     ];
     public $js = [
-        //'js/dashboard.js',
     ];
     public $depends = [
 

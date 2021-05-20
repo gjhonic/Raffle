@@ -6,12 +6,15 @@ use yii\helpers\Html;
 
 $this->title = 'Добавление конкурса';
 ?>
-<div id="main">
+    <header id="header">
+        <h2><a href="index.html" class="logo"><?= Html::encode($this->title) ?></a></h2>
+    </header>
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <?= $this->render('_form', [
-        'model' => $model,
-        'but_title' => 'Добавить',
-    ]) ?>
-
+    <section id="banner">
+        <div class="content">
+            <?= $this->render('_form', [
+                'model' => $model,
+                'but_title' => 'Добавить',
+            ]) ?>
+        </div>
+    </section>

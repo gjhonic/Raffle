@@ -47,7 +47,7 @@ class AuthController extends Controller
         ];
     }
 
-    public $layout = 'auth';
+    public $layout = 'frontend';
 
     /**
      * Метод обрабатывает форму аутентификация

@@ -192,4 +192,69 @@ class User extends \yii\db\ActiveRecord
     public static function currentUser(){
         return Yii::$app->user->identity;
     }
+
+
+    /**
+     * Метод определяет если аватарка у пользователя
+     * @return false
+     */
+    public function existAva(){
+        return false;
+    }
+
+    /**
+     * Метод возвращает приветственное сообщение
+     * @return string|null
+     */
+    public function getHelloMessage(){
+        return null;
+    }
+
+    /**
+     * Метод возвращает информацию о себе
+     * @return string|null
+     */
+    public function getAboutMessage(){
+        return null;
+    }
+
+    /**
+     * Метод возвращает ссылку на вк
+     * @return string|null
+     */
+    public function getVKLink(){
+        return null;
+    }
+
+    /**
+     * Метод возвращает ссылку на facebook
+     * @return string|null
+     */
+    public function getFaceBookLink(){
+        return null;
+    }
+
+    /**
+     * Метод возвращает ссылку на instagram
+     * @return string|null
+     */
+    public function getInstagramLink(){
+        return null;
+    }
+
+    /**
+     * Метод возвращает ссылку на discord сервер
+     * @return string|null
+     */
+    public function getDiscordLink(){
+        return null;
+    }
+
+    /**
+     * Метод возвращает ссылку на YouTube канал
+     * @return string|null
+     */
+    public function getYouTubeLink(){
+        return null;
+    }
 }

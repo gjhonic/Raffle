@@ -6,14 +6,19 @@ if(Yii::$app->user->isGuest){
     return [
         'main' => [
             [
+                'label' => 'Конкурсы',
+                'href' => URL::to('/raffle/'),
+                'controller' => 'raffle'
+            ],
+            [
                 'label' => 'Войти',
                 'href' => URL::to('/signin'),
                 'controller' => 'auth'
             ],
             [
-                'label' => 'Конкурсы',
-                'href' => URL::to('/raffle/'),
-                'controller' => 'raffle'
+                'label' => 'Зарегистрироваться',
+                'href' => URL::to('/signup'),
+                'controller' => 'auth'
             ],
         ],
     ];
@@ -30,6 +35,16 @@ if(Yii::$app->user->isGuest){
                     'label' => 'Конкурсы',
                     'href' => URL::to('/raffle/'),
                     'controller' => 'raffle'
+                ],
+                [
+                    'label' => 'Добавить конкурс',
+                    'href' => URL::to('/raffle/create'),
+                    'controller' => 'raffle'
+                ],
+                [
+                    'label' => 'Настройки',
+                    'href' => URL::to('/settings/'),
+                    'controller' => 'settings'
                 ],
                 [
                     'label' => 'Выйти',
@@ -55,6 +70,11 @@ if(Yii::$app->user->isGuest){
                     'label' => 'Конкурсы',
                     'href' => URL::to('/raffle/'),
                     'controller' => 'raffle'
+                ],
+                [
+                    'label' => 'Настройки',
+                    'href' => URL::to('/settings/'),
+                    'controller' => 'settings'
                 ],
                 [
                     'label' => 'Выйти',

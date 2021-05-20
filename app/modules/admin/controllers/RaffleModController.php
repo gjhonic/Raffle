@@ -83,7 +83,7 @@ class RaffleModController extends Controller
     {
         $raffle = Raffle::findOne($id);
         if($raffle != null){
-            $raffle->status_id = 2;
+            $raffle->status_id = 1;
             $raffle->update();
         }
         $this->redirect(Url::to('/admin/raffle-mod/index'));
