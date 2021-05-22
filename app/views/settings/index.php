@@ -11,7 +11,7 @@ $this->title = 'Настройка';
 
 ?>
 <header id="header">
-    <a href="#" class="logo">Настройки / Все</a>
+    <a href="" class="logo"><span >Настройки </span>/ Все</a>
 </header>
 
 <section id="banner">
@@ -22,6 +22,12 @@ $this->title = 'Настройка';
             </h1>
             <p></p>
         </header>
+        <p>
+            <?= Html::a('Настройка профиля', URL::to('/settings/account'), ['class' => 'button fit']) ?>
+        </p>
+        <p>
+            <?= Html::a('Настройка пароля', URL::to('/settings/password'), ['class' => 'button fit']) ?>
+        </p>
     </div>
     <span class="image object">
             <?php if($user->existAva()){ ?>
@@ -30,39 +36,4 @@ $this->title = 'Настройка';
                 <a href="" title="Изменить"><img src="/app/media/avatars/default_ava.png" alt="" /></a>
             <?php } ?>
         </span>
-</section>
-
-<section id="banner">
-    <div class="content">
-
-        <?php $form = ActiveForm::begin(); ?>
-
-        <p>
-            <?= $form->field($model, 'name')->textInput() ?>
-        </p>
-
-        <p>
-            <?= $form->field($model, 'surname')->textInput() ?>
-        </p>
-
-        <p>
-            <?= $form->field($model, 'username')->textInput() ?>
-        </p>
-
-        <p>
-            <?= $form->field($model, 'code')->hint('Отображается в адресной строке')->textInput() ?>
-        </p>
-
-        <p>
-            <?= $form->field($model, 'about')->textarea(['rows' => '3']) ?>
-        </p>
-
-        <p>
-            <br>
-            <?= Html::submitButton("Сохранить", ['class' => 'button large fit']) ?>
-        </p>
-
-        <?php ActiveForm::end(); ?>
-
-    </div>
 </section>

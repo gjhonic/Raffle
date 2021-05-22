@@ -5,6 +5,8 @@
 $this->title = 'Главная страница';
 use yii\helpers\Html;
 ?>
-<div id="main">
-    <h1><?= Html::encode($this->title) ?></h1>
-</div>
+<section id="banner">
+    <div class="content">
+        <h2><?= Html::encode($this->title) ?></h2>
+    </div>
+</section>

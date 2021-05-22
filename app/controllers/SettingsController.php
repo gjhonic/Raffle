@@ -11,6 +11,7 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\db\User;
 use app\models\db\forms\SettingForm;
+use app\models\db\forms\SettingPasswordForm;
 
 class SettingsController extends Controller
 {
@@ -32,7 +33,7 @@ class SettingsController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['index'],
+                        'actions' => ['index', 'account', 'password'],
                         'roles' => [User::ROLE_USER,User::ROLE_MODERATOR,User::ROLE_ADMIN],
                     ],
                 ],
@@ -62,11 +63,38 @@ class SettingsController extends Controller
      */
     public function actionIndex()
     {
+        return $this->render('index', [
+            'user' => User::currentUser(),
+        ]);
+    }
+
+    /**
+     * Страница отображения настроек account
+     * @return string
+     */
+    public function actionAccount()
+    {
         $model = new SettingForm();
 
         if ($model->saveSettings()){
         }
-        return $this->render('index', [
+        return $this->render('account', [
+            'user' => User::currentUser(),
+            'model' => $model,
+        ]);
+    }
+
+    /**
+     * Страница отображения настроек password
+     * @return string
+     */
+    public function actionPassword()
+    {
+        $model = new SettingPasswordForm();
+
+        if ($model->saveSettings()){
+        }
+        return $this->render('password', [
             'user' => User::currentUser(),
             'model' => $model,
         ]);

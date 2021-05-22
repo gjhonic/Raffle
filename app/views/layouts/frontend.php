@@ -24,76 +24,53 @@ FrontendAsset::register($this);
 <body>
 <?php $this->beginBody() ?>
 
-<!-- Wrapper -->
 <div id="wrapper">
 
-    <!-- Header -->
-    <header id="header">
-        <h1><a href="<?=Yii::$app->homeUrl?>"><?php echo Yii::$app->name; ?></a></h1>
-        <nav class="links">
-            <ul>
-                <?php foreach ($nav['main'] as $elem){
-                    $isActive = (Yii::$app->controller->id == $elem['controller']) ? 'active' : '';
-                    ?>
-                    <li class="nav-item">
-                        <a class="nav-link <?=$isActive?>" href="<?=$elem['href']?>"><?=$elem['label']?>
-                        </a>
-                    </li>
-                <?php } ?>
-            </ul>
-        </nav>
-        <nav class="main">
-            <ul>
-                <li class="search">
-                    <a class="fa-search" href="#search">Search</a>
-                    <form id="search" method="get" action="#">
-                        <input type="text" name="query" placeholder="Search" />
+    <!-- Main -->
+    <div id="main">
+        <div class="inner">
+            <?=$content?>
+        </div>
+    </div>
+
+    <!-- Sidebar -->
+    <div id="sidebar">
+        <div class="inner">
+
+            <!-- Title -->
+            <section id="search" class="alt">
+                    <h2><a href="<?=Yii::$app->homeUrl?>"><?php echo Yii::$app->name; ?>.ru</a></h2>
+
+                    <form method="post" action="#">
+                        <input type="text" name="query" id="query" placeholder="Поиск" />
                     </form>
-                </li>
-                <li class="menu">
-                    <a class="fa-bars" href="#menu">Menu</a>
-                </li>
-            </ul>
-        </nav>
-    </header>
+            </section>
+            
+            <!-- Menu -->
+            <nav id="menu">
+                <header class="major">
+                    <h2>Меню</h2>
+                </header>
+                <ul>
+                    <?php foreach ($nav['main'] as $elem){
+                        $isActive = (Yii::$app->controller->id == $elem['controller']) ? 'active' : '';
+                        ?>
+                        <li>
+                            <a class="nav-link <?=$isActive?>" href="<?=$elem['href']?>"><?=$elem['label']?></a>
+                        </li>
+                    <?php } ?>
+                </ul>
+            </nav>
 
-    <!-- Menu -->
-    <section id="menu">
+            <!-- Footer -->
+            <footer id="footer">
+                <p class="copyright">&copy; Untitled. All rights reserveda</p>
+            </footer>
 
-        <!-- Search -->
-        <section>
-            <form class="search" method="get" action="#">
-                <input type="text" name="query" placeholder="Search" />
-            </form>
-        </section>
-
-        <!-- Links -->
-        <section>
-            <ul class="links">
-                <?php foreach ($nav['main'] as $elem){
-                    $isActive = (Yii::$app->controller->id == $elem['controller']) ? 'active' : '';
-                    ?>
-                    <li>
-                        <a class="<?=$isActive?>" href="<?=$elem['href']?>"><?=$elem['label']?>
-                        </a>
-                    </li>
-                <?php } ?>
-            </ul>
-        </section>
-
-    </section>
-
-    <?= $content ?>
+        </div>
+    </div>
 
 </div>
-
-<!-- Scripts -->
-<script src="assets/js/jquery.min.js"></script>
-<script src="assets/js/browser.min.js"></script>
-<script src="assets/js/breakpoints.min.js"></script>
-<script src="assets/js/util.js"></script>
-<script src="assets/js/main.js"></script>
-
 
 <?php $this->endBody() ?>
 </body>

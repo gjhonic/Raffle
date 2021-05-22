@@ -1,5 +1,10 @@
 <?php
-
+/**
+ * RaffleController
+ * Контроллер предназначеный для работы с конкурсами
+ * @copyright Copyright (c) 2021 Eugene Andreev
+ * @author Eugene Andreev <gjhonic@gmail.com>
+ */
 namespace app\controllers;
 
 use app\models\db\Raffle;

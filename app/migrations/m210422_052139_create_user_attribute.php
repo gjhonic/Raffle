@@ -17,7 +17,7 @@ class m210422_052139_create_user_attribute extends Migration
             'id' => $this->primaryKey(),
             'title' => $this->string(20)->unique()->notNull(),
             'description' => $this->string(255),
-            'type' => $this->string(10)->notNull(),
+            'type' => $this->string(20)->notNull(),
         ]);
 
         $this->createIndex(
@@ -50,11 +50,13 @@ class m210422_052139_create_user_attribute extends Migration
         $avatar_img = new UserAtribute();
         $avatar_img->title = "ava_img";
         $avatar_img->description = "Изображения профиля";
+        $avatar_img->type = "default";
         $avatar_img->save();
 
         $about = new UserAtribute();
         $about->title = "about";
         $about->description = "Информация о пользователе";
+        $about->type = "default";
         $about->save();
 
         //Соц.сети
