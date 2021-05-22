@@ -1,8 +1,7 @@
 <?php
 /**
- * @link http://www.yiiframework.com/
- * @copyright Copyright (c) 2008 Yii Software LLC
- * @license http://www.yiiframework.com/license/
+ * @copyright Copyright (c) 2021 Eugene Andreev
+ * @author Eugene Andreev <gjhonic@gmail.com>
  */
 
 namespace app\assets;
@@ -17,7 +16,6 @@ class FrontendAsset extends AssetBundle
     public $sourcePath = '@app/media/frontend';
     public $css = [
         'css/main.css',
-        'font-awesome/css/font-awesome.css',
     ];
     public $js = [
         'js/jquery.min.js',

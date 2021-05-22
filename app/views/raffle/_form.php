@@ -6,9 +6,8 @@ use yii\widgets\ActiveForm;
 /* @var $model object */
 /* @var $but_title string */
 ?>
-<div class="group-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+<?php $form = ActiveForm::begin(); ?>
 
     <p>
         <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
@@ -26,9 +25,9 @@ use yii\widgets\ActiveForm;
         <?= $form->field($model, 'code')->hint('Отображается в адресной строке')->textInput(['maxlength' => true]) ?>
     </p>
 
-    <div class="form-group">
-        <?= Html::submitButton($but_title, ['class' => 'btn btn-success']) ?>
-    </div>
+    <p>
+        <br>
+        <?= Html::submitButton($but_title, ['class' => 'button large fit']) ?>
+    </p>
 
-    <?php ActiveForm::end(); ?>
-</div>
+<?php ActiveForm::end(); ?>

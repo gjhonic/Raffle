@@ -6,11 +6,24 @@ $this->title = 'Конкурсы';
 use yii\helpers\Html;
 use yii\helpers\URL;
 ?>
-<div class="site-index">
+
+<header id="header">
+    <a href="#" class="logo">Конкурсы / все</a>
+    <ul class="icons">
+        <li><a href="#" class="icon brands fa-searchengin"><span class="label">Поиск</span></a></li>
+        <li><a href="#" class="icon brands fa-sort"><span class="label">Snapchat</span></a></li>
+        <li><a href="#" class="icon brands fa-discord"><span class="label">Instagram</span></a></li>
+        <li><a href="#" class="icon brands fa-youtube"><span class="label">Medium</span></a></li>
+    </ul>
+</header>
+
+<section id="banner">
+    <div class="content">
+
     <h1><?= Html::encode($this->title) ?></h1>
 
     <?php foreach ($Raffles as $raffle){ ?>
-
+        <div class="box">
         <article class="post">
             <header>
                 <div class="title">
@@ -28,6 +41,9 @@ use yii\helpers\URL;
                 </ul>
             </footer>
         </article>
+        </div>
 
     <?php } ?>
-</div>
+    </div>
+</section>
+

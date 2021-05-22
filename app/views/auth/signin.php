@@ -9,7 +9,9 @@ use yii\bootstrap\ActiveForm;
 
 $this->title = 'Вход';
 ?>
-<div class="site-login">
+<section id="banner">
+    <div class="content">
+
     <h1><?= Html::encode($this->title) ?></h1>
 
     <?php $form = ActiveForm::begin([
@@ -29,13 +31,8 @@ $this->title = 'Вход';
         'template' => "<div class=\"col-lg-offset-1 col-lg-3\">{input} {label}</div>\n<div class=\"col-lg-8\">{error}</div>",
     ]) ?>
 
-    <div class="form-group">
-        <div class="col-lg-offset-1 col-lg-11">
-            <?= Html::submitButton('Войти', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
-            <?= Html::a('Зарегистрироваться', ['signup'], ['class' => 'btn btn-info']) ?>
-        </div>
-    </div>
+    <?= Html::submitButton('Войти', ['class' => 'button fit']) ?>
 
     <?php ActiveForm::end(); ?>
-
-</div>
+    </div>
+</section>

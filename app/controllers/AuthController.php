@@ -4,7 +4,6 @@
  * Контроллер предназначеный для аутентификация
  * @copyright Copyright (c) 2021 Eugene Andreev
  * @author Eugene Andreev <gjhonic@gmail.com>
- *
  */
 namespace app\controllers;
 
@@ -23,8 +22,8 @@ use app\models\db\User;
 
 class AuthController extends Controller
 {
-
-    public function behaviors(){
+    public function behaviors()
+    {
         return [
             'access' => [
             'class' => AccessControl::className(),
@@ -47,7 +46,7 @@ class AuthController extends Controller
         ];
     }
 
-    public $layout = 'auth';
+    public $layout = 'frontend';
 
     /**
      * Метод обрабатывает форму аутентификация

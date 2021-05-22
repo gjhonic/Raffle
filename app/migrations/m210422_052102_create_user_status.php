@@ -23,18 +23,7 @@ class m210422_052102_create_user_status extends Migration
             'user_status',
             'id'
         );
-
-        $active = new UserStatus();
-        $active->title = "active";
-        $active->save();
-
-        $tag_on_ban = new UserStatus();
-        $tag_on_ban->title = "tag on ban";
-        $tag_on_ban->save();
-
-        $ban = new UserStatus();
-        $ban->title = "ban";
-        $ban->save();
+        $this->addDataToDB();
     }
 
     /**
@@ -48,5 +37,23 @@ class m210422_052102_create_user_status extends Migration
         );
 
         $this->dropTable('user_status');
+    }
+
+    /**
+     * Метод добавляет в БД статусы
+     */
+    private function addDataToDB()
+    {
+        $active = new UserStatus();
+        $active->title = "active";
+        $active->save();
+
+        $tag_on_ban = new UserStatus();
+        $tag_on_ban->title = "tag on ban";
+        $tag_on_ban->save();
+
+        $ban = new UserStatus();
+        $ban->title = "ban";
+        $ban->save();
     }
 }

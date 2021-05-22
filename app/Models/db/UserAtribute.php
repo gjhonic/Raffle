@@ -9,11 +9,16 @@ use Yii;
  *
  * @property int $id
  * @property string $title
+ * @property string $description
+ * @property string $type
  *
  * @property UserOtherInfo[] $userOtherInfos
  */
 class UserAtribute extends \yii\db\ActiveRecord
 {
+    const TYPE_COMMON = 'common';
+    const TYPE_SOCIAL_LINK = 'social link';
+
     /**
      * {@inheritdoc}
      */
@@ -28,9 +33,12 @@ class UserAtribute extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title'], 'required'],
-            [['title'], 'string', 'max' => 50],
-            [['title'], 'unique'],
+            [['title', 'type'], 'required'],
+            ['title', 'string', 'max' => 20],
+            ['title', 'unique'],
+            ['description', 'string', 'max' => 255],
+            ['type', 'string', 'max' => 20],
+            ['type', 'default', 'value' => 'common'],
         ];
     }
 
@@ -43,15 +51,5 @@ class UserAtribute extends \yii\db\ActiveRecord
             'id' => 'ID',
             'title' => 'Title',
         ];
-    }
-
-    /**
-     * Gets query for [[UserOtherInfos]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getUserOtherInfos()
-    {
-        return $this->hasMany(UserOtherInfo::className(), ['atr_id' => 'id']);
     }
 }

@@ -13,6 +13,10 @@ return [
     'admin' => 'admin/main/index',
     'admin/<action:\w+>' => 'admin/main/<action>',
 
+    //URLs на Api module
+    'api' => 'api/main/index',
+    'api/<action:\w+>' => 'admin/main/<action>',
+
     //URLs на SiteController
     'profile/<code>' => 'site/profile',
     'show/<code>' => 'raffle/view',

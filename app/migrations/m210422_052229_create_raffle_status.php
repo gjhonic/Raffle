@@ -24,17 +24,7 @@ class m210422_052229_create_raffle_status extends Migration
             'id'
         );
 
-        $approved = new RaffleStatus();
-        $approved->title = "approved";
-        $approved->save();
-
-        $on_check = new RaffleStatus();
-        $on_check->title = "on check";
-        $on_check->save();
-
-        $not_approved = new RaffleStatus();
-        $not_approved->title = "not approved";
-        $not_approved->save();
+        $this->addDataToDB();
     }
 
     /**
@@ -48,5 +38,23 @@ class m210422_052229_create_raffle_status extends Migration
         );
 
         $this->dropTable('raffle_status');
+    }
+
+    /**
+     * Метод добавляет в бд статусы конкурсов
+     */
+    private function addDataToDB()
+    {
+        $approved = new RaffleStatus();
+        $approved->title = "approved";
+        $approved->save();
+
+        $on_check = new RaffleStatus();
+        $on_check->title = "on check";
+        $on_check->save();
+
+        $not_approved = new RaffleStatus();
+        $not_approved->title = "not approved";
+        $not_approved->save();
     }
 }

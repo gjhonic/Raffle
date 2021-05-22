@@ -25,19 +25,7 @@ class m210422_052056_create_user_role extends Migration
             'id'
         );
 
-        //Наполняем стандартными ролями
-        $admin = new UserRole();
-        $admin->title = 'admin';
-        $admin->save();
-
-        $moderator = new UserRole();
-        $moderator->title = 'moderator';
-        $moderator->save();
-
-        $user = new UserRole();
-        $user->title = 'user';
-        $user->save();
-
+        $this->addDataToDB();
     }
 
     /**
@@ -51,5 +39,23 @@ class m210422_052056_create_user_role extends Migration
         );
 
         $this->dropTable('user_role');
+    }
+
+    /**
+     * Метод добавляет в БД роли
+     */
+    private function addDataToDB()
+    {
+        $admin = new UserRole();
+        $admin->title = 'admin';
+        $admin->save();
+
+        $moderator = new UserRole();
+        $moderator->title = 'moderator';
+        $moderator->save();
+
+        $user = new UserRole();
+        $user->title = 'user';
+        $user->save();
     }
 }

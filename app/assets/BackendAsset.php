@@ -1,8 +1,7 @@
 <?php
 /**
- * @link http://www.yiiframework.com/
- * @copyright Copyright (c) 2008 Yii Software LLC
- * @license http://www.yiiframework.com/license/
+ * @copyright Copyright (c) 2021 Eugene Andreev
+ * @author Eugene Andreev <gjhonic@gmail.com>
  */
 
 namespace app\assets;
@@ -10,7 +9,7 @@ namespace app\assets;
 use yii\web\AssetBundle;
 
 /**
- * Backend application asset bundle.
+ * Ассет для админской части
  */
 class BackendAsset extends AssetBundle
 {
@@ -21,7 +20,6 @@ class BackendAsset extends AssetBundle
         'font-awesome/css/font-awesome.css',
     ];
     public $js = [
-        //'js/dashboard.js',
     ];
     public $depends = [
 
