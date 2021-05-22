@@ -93,6 +93,7 @@ class SettingsController extends Controller
         $model = new SettingPasswordForm();
 
         if ($model->saveSettings()){
+            return $this->redirect(['index']);
         }
         return $this->render('password', [
             'user' => User::currentUser(),

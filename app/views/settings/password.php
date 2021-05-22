@@ -27,15 +27,15 @@ $this->title = 'Настройка пароля';
             <?php $form = ActiveForm::begin(); ?>
 
         <p>
-            <?= $form->field($model, 'password_old')->textInput() ?>
+            <?= $form->field($model, 'password_old')->passwordInput() ?>
         </p>
 
         <p>
-            <?= $form->field($model, 'password_new')->textInput() ?>
+            <?= $form->field($model, 'password_new')->passwordInput() ?>
         </p>
 
         <p>
-            <?= $form->field($model, 'password_new_confirm')->textInput() ?>
+            <?= $form->field($model, 'password_new_confirm')->passwordInput() ?>
         </p>
 
         <p>
