@@ -2,7 +2,6 @@
 
 /* @var $this yii\web\View */
 /* @var $form yii\bootstrap\ActiveForm */
-/* @var $model app\models\LoginForm */
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
@@ -30,7 +29,7 @@ $this->title = 'Подтврерждение почты';
     <div class="form-group">
         <div class="col-lg-offset-1 col-lg-11">
             <?= Html::submitButton('Подтвердить', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
-            <a href="<?=Url::to('/return-confirm-email')?>" class="btn btn-warning" id="but_return" disabled>Отправить код заново через: <span id="timer_but"> 30 </span> </a>
+            <a class="button primary" id="but_return">Отправить код заново через: <span id="timer_but"> 30 </span> </a>
 
         </div>
     </div>
@@ -49,7 +48,7 @@ $this->title = 'Подтврерждение почты';
 
         if (RealTimer==0) {
             let but=document.getElementById('but_return');
-            but.removeAttribute("disabled");
+            but.href="<?=Url::to('/return-confirm-email')?>";
             but.innerHTML = "Отправить код";
             return;
         }

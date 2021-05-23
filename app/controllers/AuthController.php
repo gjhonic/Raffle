@@ -87,7 +87,7 @@ class AuthController extends Controller
     public function actionSignup()
     {
         if (!Yii::$app->user->isGuest) {
-            $this->redirect(Url::to('index'));
+            $this->redirect(Url::to('/index'));
         }
 
         $model = new SignupForm();
@@ -111,22 +111,23 @@ class AuthController extends Controller
     public function actionConfirmEmail()
     {
         if (!Yii::$app->user->isGuest) {
-            return $this->redirect(Url::to('index'));
+            return $this->redirect(Url::to('/index'));
         }
         $session = Yii::$app->session;
         if(!isset($session['user_registr'])){
-            return $this->redirect(Url::to('index'));
+            return $this->redirect(Url::to('/index'));
         }
 
         $user = User::findOne($session['user_registr']);
         $model = new ConfirmEmailForm();
 
         if ($model->load(Yii::$app->request->post()) && $model->checkCode()) {
-            $user->email_confirm = 1;
-            $user->update();
             $session->remove('code_confirm');
             $session->remove('user_registr');
+            $user->email_confirm = 1;
+            $user->update();
             Yii::$app->user->login(UserIdentity::findByUsername($user->username), 3600*24*30);
+            return $this->redirect(Url::to('/profile'));
         }
 
         return $this->render('confirm-mail', [
@@ -141,11 +142,11 @@ class AuthController extends Controller
     public function actionReturnConfirmEmail()
     {
         if (!Yii::$app->user->isGuest) {
-            return $this->redirect(Url::to('index'));
+            return $this->redirect(Url::to('/index'));
         }
         $session = Yii::$app->session;
         if(!isset($session['user_registr'])){
-            return $this->redirect(Url::to('index'));
+            return $this->redirect(Url::to('/index'));
         }
 
         $user = User::findOne($session['user_registr']);
@@ -160,11 +161,11 @@ class AuthController extends Controller
     public function actionResetPassword()
     {
         if (!Yii::$app->user->isGuest) {
-            return $this->redirect(Url::to('index'));
+            return $this->redirect(Url::to('/index'));
         }
         $session = Yii::$app->session;
         if(!isset($session['user_registr'])){
-            return $this->redirect(Url::to('index'));
+            return $this->redirect(Url::to('/index'));
         }
 
         $user = User::findOne($session['user_registr']);
