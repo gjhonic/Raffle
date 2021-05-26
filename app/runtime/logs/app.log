@@ -467,3 +467,100 @@ $_SERVER = [
     ]
     'argc' => 3
 ]
+2021-05-26 10:16:53 [-][-][-][error][yii\console\UnknownCommandException] yii\base\InvalidRouteException: Unable to resolve the request "--help". in C:\OSPanel\domains\rafle\vendor\yiisoft\yii2\base\Module.php:543
+Stack trace:
+#0 C:\OSPanel\domains\rafle\vendor\yiisoft\yii2\console\Application.php(181): yii\base\Module->runAction()
+#1 C:\OSPanel\domains\rafle\vendor\yiisoft\yii2\console\Application.php(148): yii\console\Application->runAction()
+#2 C:\OSPanel\domains\rafle\vendor\yiisoft\yii2\base\Application.php(392): yii\console\Application->handleRequest()
+#3 C:\OSPanel\domains\rafle\yii(20): yii\base\Application->run()
+#4 {main}
+
+Next yii\console\UnknownCommandException: Unknown command "--help". in C:\OSPanel\domains\rafle\vendor\yiisoft\yii2\console\Application.php:184
+Stack trace:
+#0 C:\OSPanel\domains\rafle\vendor\yiisoft\yii2\console\Application.php(148): yii\console\Application->runAction()
+#1 C:\OSPanel\domains\rafle\vendor\yiisoft\yii2\base\Application.php(392): yii\console\Application->handleRequest()
+#2 C:\OSPanel\domains\rafle\yii(20): yii\base\Application->run()
+#3 {main}
+2021-05-26 10:16:52 [-][-][-][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'ALLUSERSPROFILE' => 'C:\\ProgramData'
+    'APPDATA' => 'C:\\Users\\i5\\AppData\\Roaming'
+    'CHROME_CRASHPAD_PIPE_NAME' => '\\\\.\\pipe\\crashpad_7028_BFGWTMZJGNLKKIOU'
+    'CommonProgramFiles' => 'C:\\Program Files\\Common Files'
+    'CommonProgramFiles(x86)' => 'C:\\Program Files (x86)\\Common Files'
+    'CommonProgramW6432' => 'C:\\Program Files\\Common Files'
+    'COMPUTERNAME' => 'DESKTOP-SCR8PEI'
+    'ComSpec' => 'C:\\WINDOWS\\system32\\cmd.exe'
+    'DriverData' => 'C:\\Windows\\System32\\Drivers\\DriverData'
+    'FPS_BROWSER_APP_PROFILE_STRING' => 'Internet Explorer'
+    'FPS_BROWSER_USER_PROFILE_STRING' => 'Default'
+    'GOPATH' => 'C:\\Users\\i5\\go'
+    'HOMEDRIVE' => 'C:'
+    'HOMEPATH' => '\\Users\\i5'
+    'LOCALAPPDATA' => 'C:\\Users\\i5\\AppData\\Local'
+    'LOGONSERVER' => '\\\\DESKTOP-SCR8PEI'
+    'NUMBER_OF_PROCESSORS' => '4'
+    'OneDrive' => 'C:\\Users\\i5\\OneDrive'
+    'ORIGINAL_XDG_CURRENT_DESKTOP' => 'undefined'
+    'OS' => 'Windows_NT'
+    'Path' => 'C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\WINDOWS\\System32\\OpenSSH\\;C:\\Program Files\\nodejs\\;C:\\Program Files\\Git\\cmd;C:\\Go\\bin;C:\\Program Files\\Perforce;C:\\Program Files\\Perforce\\;C:\\php7;C:\\ProgramData\\ComposerSetup\\bin;D:\\;C:\\Program Files\\Docker\\Docker\\resources\\bin;C:\\ProgramData\\DockerDesktop\\version-bin;C:\\v\\.bin;D:\\Ruby27-x64\\bin;C:\\Users\\i5\\AppData\\Local\\Programs\\Python\\Python38-32\\Scripts;C:\\Users\\i5\\AppData\\Local\\Programs\\Python\\Python38-32;C:\\Users\\i5\\AppData\\Local\\Microsoft\\WindowsApps;D:\\Microsoft VS Code\\bin;C:\\Users\\i5\\AppData\\Roaming\\npm;C:\\Users\\i5\\go\\bin;C:\\Program Files\\Perforce\\Server;C:\\Users\\i5\\AppData\\Roaming\\Composer\\vendor\\bin;C:\\Apache\\Apache24\\bin'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.RB;.RBW;.CPL'
+    'PHP' => 'C:\\php7'
+    'PHP_PEAR_BIN_DIR' => 'C:\\php7'
+    'PHP_PEAR_DATA_DIR' => 'C:\\php7\\data'
+    'PHP_PEAR_DOC_DIR' => 'C:\\php7\\docs'
+    'PHP_PEAR_INSTALL_DIR' => 'C:\\php7\\pear'
+    'PHP_PEAR_PHP_BIN' => 'C:\\php7\\\\php.exe'
+    'PHP_PEAR_SYSCONF_DIR' => 'C:\\php7'
+    'PHP_PEAR_TEST_DIR' => 'C:\\php7\\tests'
+    'PROCESSOR_ARCHITECTURE' => 'AMD64'
+    'PROCESSOR_IDENTIFIER' => 'Intel64 Family 6 Model 42 Stepping 7, GenuineIntel'
+    'PROCESSOR_LEVEL' => '6'
+    'PROCESSOR_REVISION' => '2a07'
+    'ProgramData' => 'C:\\ProgramData'
+    'ProgramFiles' => 'C:\\Program Files'
+    'ProgramFiles(x86)' => 'C:\\Program Files (x86)'
+    'ProgramW6432' => 'C:\\Program Files'
+    'PSModulePath' => 'C:\\Users\\i5\\Documents\\WindowsPowerShell\\Modules;C:\\Program Files\\WindowsPowerShell\\Modules;C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\Modules'
+    'PUBLIC' => 'C:\\Users\\Public'
+    'RUBYOPT' => '-Eutf-8'
+    'SESSIONNAME' => 'Console'
+    'SystemDrive' => 'C:'
+    'SystemRoot' => 'C:\\WINDOWS'
+    'TEMP' => 'C:\\Users\\i5\\AppData\\Local\\Temp'
+    'TMP' => 'C:\\Users\\i5\\AppData\\Local\\Temp'
+    'USERDOMAIN' => 'DESKTOP-SCR8PEI'
+    'USERDOMAIN_ROAMINGPROFILE' => 'DESKTOP-SCR8PEI'
+    'USERNAME' => 'i5'
+    'USERPROFILE' => 'C:\\Users\\i5'
+    'VBOX_MSI_INSTALL_PATH' => 'C:\\Program Files\\Oracle\\VirtualBox\\'
+    'VK_INSTANCE_LAYERS' => 'VK_MIRILLIS_LAYER'
+    'windir' => 'C:\\WINDOWS'
+    'TERM_PROGRAM' => 'vscode'
+    'TERM_PROGRAM_VERSION' => '1.56.2'
+    'LANG' => 'ru_RU.UTF-8'
+    'COLORTERM' => 'truecolor'
+    'VSCODE_GIT_IPC_HANDLE' => '\\\\.\\pipe\\vscode-git-271fe8928b-sock'
+    'GIT_ASKPASS' => 'd:\\Microsoft VS Code\\resources\\app\\extensions\\git\\dist\\askpass.sh'
+    'VSCODE_GIT_ASKPASS_NODE' => 'D:\\Microsoft VS Code\\Code.exe'
+    'VSCODE_GIT_ASKPASS_MAIN' => 'd:\\Microsoft VS Code\\resources\\app\\extensions\\git\\dist\\askpass-main.js'
+    'PHP_SELF' => 'yii'
+    'SCRIPT_NAME' => 'yii'
+    'SCRIPT_FILENAME' => 'yii'
+    'PATH_TRANSLATED' => 'yii'
+    'DOCUMENT_ROOT' => ''
+    'REQUEST_TIME_FLOAT' => 1622024211.1365
+    'REQUEST_TIME' => 1622024211
+    'argv' => [
+        0 => 'yii'
+        1 => '--help'
+    ]
+    'argc' => 2
+]
