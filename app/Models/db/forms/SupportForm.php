@@ -25,7 +25,7 @@ class SupportForm extends Model
         return [
             [['title', 'description'], 'required'],
             [['description'], 'string', 'max' => 5000],
-            [['title'], 'string', 'max' => 255],
+            [['title'], 'string', 'max' => 100],
         ];
     }
 

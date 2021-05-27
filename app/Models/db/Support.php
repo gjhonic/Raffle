@@ -38,6 +38,7 @@ class Support extends \yii\db\ActiveRecord
             [['description'], 'string'],
             [['user_id', 'status', 'created_at'], 'integer'],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
+            [['title'], 'string', 'max' => 100],
         ];
     }
 
