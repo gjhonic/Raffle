@@ -97,6 +97,7 @@ class RaffleController extends Controller
 
         return $this->render('view', [
             'model' => $raffle,
+            'author' => $raffle->getUser(),
         ]);
     }
 

@@ -1,22 +1,20 @@
 <?php
-
-/* @var $user object */
-
+use yii\helpers\Url;
+/* @var $model object */
+/* @var $author object */
 $this->title = $model->title;
 ?>
-<div class="site-profile">
-        <article class="post">
-            <header>
-                <div class="title">
-                    <h2><a href="single.html"><?=$model->title?></a></h2>
-                </div>
-                <div class="meta">
-                    <time class="published" datetime="2015-11-01"><?=date('j F, Y', $model->updated_at)?></time>
-                    <!--<a href="#" class="author"><span class="name">Jane Doe</span><img src="images/avatar.jpg" alt=""></a>-->
-                </div>
-            </header>
-            <p><?=$model->description?></p>
-            <footer>
-            </footer>
-        </article>
-</div>
+<header id="header">
+    <a href="#" class="logo"><span onclick="window.location.replace('<?=URL::to('/raffle/index')?>');">Конкурсы / </span><?=$model->code?></a>
+    <p class="icons"><?=date('m.d.Y', $model->created_at)?></p>
+</header>
+<section>
+    <header class="main">
+        <h1><?=$model->title?></h1>
+    </header>
+    <span class="image main"><img src="/app/media/src/raffle/pic11.jpg" alt=""></span>
+    <time class="published" datetime="2015-11-01">01.01.21 - 05.01.21</time></br></br>
+    <a href="<?=URL::to('/profile').'/'.$author->code?>" class="button">Автор: <?=$author->username?></span></a>
+    </br></br>
+    <p><?=$model->description?></p>
+</section>
