@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\db\forms\SupportForm;
 use app\models\db\Raffle;
 use Yii;
 use yii\helpers\Url;
@@ -31,7 +32,7 @@ class SiteController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['profile','index', 'about'],
+                        'actions' => ['profile','index', 'about', 'support'],
                         'roles' => [User::ROLE_USER,User::ROLE_MODERATOR,User::ROLE_ADMIN],
                     ],
                     [
@@ -102,5 +103,16 @@ class SiteController extends Controller
     public function actionAbout()
     {
         return $this->render('about');
+    }
+
+    public function actionSupport()
+    {
+        $model = new SupportForm();
+
+        if ($model->load(Yii::$app->request->post()) && $model->sendSupport()) {
+            return $this->redirect(['index']);
+        }
+
+        return $this->render('support', ['model' => $model]);
     }
 }
