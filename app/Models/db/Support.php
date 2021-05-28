@@ -2,9 +2,7 @@
 
 namespace app\models\db;
 
-use app\models\db\User;
 use Yii\db\ActiveRecord;
-use Yii;
 use yii\behaviors\TimestampBehavior;
 
 /**
@@ -21,50 +19,26 @@ use yii\behaviors\TimestampBehavior;
 class Support extends \yii\db\ActiveRecord
 {
     /**
-     * {@inheritdoc}
+     * @return string
      */
-    public static function tableName()
+    public static function tableName(): string
     {
         return 'support';
     }
 
     /**
-     * {@inheritdoc}
+     * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             [['title', 'description', 'user_id', 'status'], 'required'],
-            [['description'], 'string'],
+            [['description', 'title'], 'string'],
             [['user_id', 'status', 'created_at'], 'integer'],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
             [['title'], 'string', 'max' => 100],
+            [['title'], 'string', 'max' => 5000],
         ];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function attributeLabels()
-    {
-        return [
-            'id' => 'ID',
-            'title' => 'title',
-            'description' => 'Description',
-            'user_id' => 'User ID',
-            'status' => 'Status',
-            'created_at' => 'Created At',
-        ];
-    }
-
-    /**
-     * Gets query for [[User]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getUser()
-    {
-        return $this->hasOne(User::className(), ['id' => 'user_id']);
     }
 
     public function behaviors()
@@ -76,9 +50,32 @@ class Support extends \yii\db\ActiveRecord
                     ActiveRecord::EVENT_BEFORE_INSERT => ['created_at'],
                     ActiveRecord::EVENT_BEFORE_UPDATE => [],
                 ],
-                // если вместо метки времени UNIX используется datetime:
-                // 'value' => new Expression('NOW()'),
             ],
         ];
+    }
+
+    /**
+     * @return string[]
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'title' => 'Название',
+            'description' => 'Описание',
+            'user_id' => 'Пользователь',
+            'status' => 'Статус',
+            'created_at' => 'Дата создания',
+        ];
+    }
+
+    /**
+     * Gets query for [[User]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUser()
+    {
+        return $this->hasOne(User::className(), ['id' => 'user_id']);
     }
 }

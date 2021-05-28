@@ -5,7 +5,7 @@ use yii\db\Migration;
 /**
  * Class m210526_095517_create_support
  */
-class m210526_095517_create_support extends Migration
+class m210526_150649_create_support extends Migration
 {
     /**
      * {@inheritdoc}
@@ -40,6 +40,11 @@ class m210526_095517_create_support extends Migration
     {
         $this->dropIndex(
             'idx-support-id',
+            'support'
+        );
+
+        $this->dropForeignKey(
+            'fk-support-user_id',
             'support'
         );
 

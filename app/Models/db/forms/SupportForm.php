@@ -1,7 +1,7 @@
 <?php
 /**
- * RaffleForm
- * Форма добавления конкурса
+ * SupportForm
+ * Форма добавления обращения
  * @copyright Copyright (c) 2021 Eugene Andreev
  * @author Eugene Andreev <gjhonic@gmail.com>
  */
@@ -40,6 +40,10 @@ class SupportForm extends Model
         ];
     }
 
+    /**
+     * Метод создания обращения
+     * @return bool
+     */
     public function sendSupport(){
         if($this->validate()){
             $support = new Support();

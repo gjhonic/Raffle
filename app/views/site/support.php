@@ -4,22 +4,30 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $model object */
-/* @var $but_title string */
+
+$this->title = 'Создание обращения';
 ?>
 
-<?php $form = ActiveForm::begin(); ?>
+<section id="banner">
+    <div class="content">
 
-    <p>
-        <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
-    </p>
+    <h2><?= Html::encode($this->title) ?></h2>
 
-    <p>
-        <?= $form->field($model, 'description')->textarea(['rows' => '6']) ?>
-    </p>
+    <?php $form = ActiveForm::begin(); ?>
 
-    <p>
-        <br>
-        <?= Html::submitButton('Отправить', ['class' => 'button large fit']) ?>
-    </p>
+        <p>
+            <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
+        </p>
 
-<?php ActiveForm::end(); ?>
+        <p>
+            <?= $form->field($model, 'description')->textarea(['rows' => '6']) ?>
+        </p>
+
+        <p>
+            <br>
+            <?= Html::submitButton('Отправить', ['class' => 'button large fit']) ?>
+        </p>
+
+    <?php ActiveForm::end(); ?>
+    </div>
+</section>
