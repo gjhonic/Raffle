@@ -1,22 +1,17 @@
 <?php
-
 /* @var $user object */
-
 $this->title = $model->title;
 ?>
-<div class="site-profile">
-        <article class="post">
-            <header>
-                <div class="title">
-                    <h2><a href="single.html"><?=$model->title?></a></h2>
-                </div>
-                <div class="meta">
-                    <time class="published" datetime="2015-11-01"><?=date('j F, Y', $model->updated_at)?></time>
-                    <!--<a href="#" class="author"><span class="name">Jane Doe</span><img src="images/avatar.jpg" alt=""></a>-->
-                </div>
-            </header>
-            <p><?=$model->description?></p>
-            <footer>
-            </footer>
-        </article>
-</div>
+<header id="header">
+    <a href="index.html" class="logo"><strong>Show/<?=$model->code?></strong></a>
+    <p class="icons"><?=date('m.d.Y', $model->created_at)?></p>
+</header>
+<section>
+    <header class="main">
+        <h1><?=$model->title?></h1>
+    </header>
+    <span class="image main"><img src="/app/media/src/raffle/pic11.jpg" alt=""></span>
+    <time class="published" datetime="2015-11-01">01.01.21 - 05.01.21</time></br></br>
+    <a href="#" class="button"><span class="name">Jane Doe</span></a>
+    </br></br><p><?=$model->description?></p>
+</section>
