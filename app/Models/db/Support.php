@@ -14,8 +14,6 @@ use app\models\db\User;
  * @property int $user_id
  * @property int $status
  * @property int|null $created_at
- *
- * @property User $user
  */
 class Support extends \yii\db\ActiveRecord
 {
@@ -43,7 +41,7 @@ class Support extends \yii\db\ActiveRecord
             [['user_id', 'status', 'created_at'], 'integer'],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
             [['title'], 'string', 'max' => 100],
-            [['title'], 'string', 'max' => 5000],
+            [['description'], 'string', 'max' => 5000],
         ];
     }
 
@@ -76,8 +74,7 @@ class Support extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[User]].
-     *
+     * Метод возвращает пользователя обращения
      * @return \app\models\db\User
      */
     public function getUser()
@@ -88,7 +85,8 @@ class Support extends \yii\db\ActiveRecord
     /**
      * Метод установливает статус просмотрено на обращении
      */
-    public function setViewed(){
+    public function setViewed(): void
+    {
         $this->status = self::STATUS_VIEWED;
         $this->update();
     }
@@ -96,9 +94,9 @@ class Support extends \yii\db\ActiveRecord
     /**
      * Метод установливает статус важно на обращении
      */
-    public function setTag(){
+    public function setTag(): void
+    {
         $this->status = self::STATUS_IMPORTANT;
         $this->update();
     }
-
 }

@@ -39,15 +39,15 @@ class Raffle extends \yii\db\ActiveRecord
     const STATUS_NOT_APPROVED_ID = 3;
 
     /**
-     * {@inheritdoc}
+     * @return string
      */
-    public static function tableName()
+    public static function tableName(): string
     {
         return 'raffle';
     }
 
     /**
-     * {@inheritdoc}
+     * @return array
      */
     public function rules()
     {
@@ -74,7 +74,7 @@ class Raffle extends \yii\db\ActiveRecord
     }
 
     /**
-     * {@inheritdoc}
+     * @return string[]
      */
     public function attributeLabels()
     {
@@ -131,7 +131,7 @@ class Raffle extends \yii\db\ActiveRecord
      * @return array|\yii\db\ActiveRecord[]
      */
     public static function findRaffleByUser($user_id, $status_id=null){
-        if($status_id != null){
+        if($status_id !== null){
             return self::find()
                 ->where(['user_id' => $user_id, 'status_id' => $status_id])
                 ->orderBy('id DESC')

@@ -4,7 +4,6 @@ namespace app\models\db;
 
 use Yii;
 use yii\behaviors\TimestampBehavior;
-use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "user".
@@ -56,7 +55,7 @@ class User extends \yii\db\ActiveRecord
     const STATUS_BAN_ID = 3;
 
     /**
-     * {@inheritdoc}
+     * @return string
      */
     public static function tableName()
     {
@@ -64,7 +63,7 @@ class User extends \yii\db\ActiveRecord
     }
 
     /**
-     * {@inheritdoc}
+     * @return array
      */
     public function rules()
     {
@@ -91,7 +90,7 @@ class User extends \yii\db\ActiveRecord
     }
 
     /**
-     * {@inheritdoc}
+     * @return string[]
      */
     public function attributeLabels()
     {
@@ -165,7 +164,8 @@ class User extends \yii\db\ActiveRecord
      * @param $code string
      * @return array|\yii\db\ActiveRecord|null
      */
-    public static function findByCode($code){
+    public static function findByCode($code)
+    {
         return self::find()->where(['code' => $code])->one();
     }
 
@@ -183,14 +183,16 @@ class User extends \yii\db\ActiveRecord
      * @param $email string
      * @return array|\yii\db\ActiveRecord|null
      */
-    public static function findByEmail($email){
+    public static function findByEmail($email)
+    {
         return self::find()->where(['email' => $email])->one();
     }
 
     /**
      * @return mixed
      */
-    public static function currentUser(){
+    public static function currentUser()
+    {
         return Yii::$app->user->identity;
     }
 
@@ -199,7 +201,8 @@ class User extends \yii\db\ActiveRecord
      * Метод определяет если аватарка у пользователя
      * @return false
      */
-    public function existAva(){
+    public function existAva()
+    {
         return false;
     }
 
@@ -207,7 +210,8 @@ class User extends \yii\db\ActiveRecord
      * Метод возвращает приветственное сообщение
      * @return string|null
      */
-    public function getHelloMessage(){
+    public function getHelloMessage()
+    {
         return null;
     }
 
@@ -215,7 +219,8 @@ class User extends \yii\db\ActiveRecord
      * Метод возвращает информацию о себе
      * @return string|null
      */
-    public function getAboutMessage(){
+    public function getAboutMessage()
+    {
         return null;
     }
 
@@ -223,7 +228,8 @@ class User extends \yii\db\ActiveRecord
      * Метод возвращает ссылку на вк
      * @return string|null
      */
-    public function getVKLink(){
+    public function getVKLink()
+    {
         return null;
     }
 
@@ -231,7 +237,8 @@ class User extends \yii\db\ActiveRecord
      * Метод возвращает ссылку на facebook
      * @return string|null
      */
-    public function getFaceBookLink(){
+    public function getFaceBookLink()
+    {
         return null;
     }
 
@@ -239,7 +246,8 @@ class User extends \yii\db\ActiveRecord
      * Метод возвращает ссылку на instagram
      * @return string|null
      */
-    public function getInstagramLink(){
+    public function getInstagramLink()
+    {
         return null;
     }
 
@@ -247,7 +255,8 @@ class User extends \yii\db\ActiveRecord
      * Метод возвращает ссылку на discord сервер
      * @return string|null
      */
-    public function getDiscordLink(){
+    public function getDiscordLink()
+    {
         return null;
     }
 
@@ -255,7 +264,8 @@ class User extends \yii\db\ActiveRecord
      * Метод возвращает ссылку на YouTube канал
      * @return string|null
      */
-    public function getYouTubeLink(){
+    public function getYouTubeLink()
+    {
         return null;
     }
 }
