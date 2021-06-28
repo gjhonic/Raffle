@@ -14,7 +14,6 @@ use app\models\db\User;
 
 class SiteController extends Controller
 {
-
     public function behaviors()
     {
         return [
@@ -33,12 +32,12 @@ class SiteController extends Controller
                     [
                         'allow' => true,
                         'actions' => ['profile','index', 'about', 'support'],
-                        'roles' => [User::ROLE_USER,User::ROLE_MODERATOR,User::ROLE_ADMIN],
+                        'roles' => [User::ROLE_USER, User::ROLE_MODERATOR, User::ROLE_ADMIN],
                     ],
                     [
                         'allow' => true,
                         'actions' => ['index', 'test'],
-                        'roles' => [User::ROLE_GUEST,User::ROLE_USER,User::ROLE_MODERATOR,User::ROLE_ADMIN],
+                        'roles' => [User::ROLE_GUEST, User::ROLE_USER, User::ROLE_MODERATOR, User::ROLE_ADMIN],
                     ],
                 ],
             ],
@@ -62,8 +61,7 @@ class SiteController extends Controller
     }
 
     /**
-     * Displays homepage.
-     *
+     * Главная страница.
      * @return string
      */
     public function actionIndex()
@@ -72,7 +70,7 @@ class SiteController extends Controller
     }
 
     /**
-     * Login action.
+     * Профиль пользователя.
      * @param string
      * @return Response|string
      */
@@ -96,15 +94,9 @@ class SiteController extends Controller
     }
 
     /**
-     * Displays about page.
-     *
-     * @return string
+     * Страница формы поддержки
+     * @return string|Response
      */
-    public function actionAbout()
-    {
-        return $this->render('about');
-    }
-
     public function actionSupport()
     {
         $model = new SupportForm();

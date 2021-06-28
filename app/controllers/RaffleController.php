@@ -8,7 +8,6 @@
 namespace app\controllers;
 
 use app\models\db\Raffle;
-use app\models\db\RaffleStatus;
 use Yii;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
@@ -21,7 +20,6 @@ use app\models\db\forms\RaffleForm;
 
 class RaffleController extends Controller
 {
-
     public function behaviors()
     {
         return [
@@ -40,7 +38,7 @@ class RaffleController extends Controller
                     [
                         'allow' => true,
                         'actions' => ['index', 'view'],
-                        'roles' => [User::ROLE_USER,User::ROLE_MODERATOR,User::ROLE_ADMIN,User::ROLE_GUEST],
+                        'roles' => [User::ROLE_USER, User::ROLE_MODERATOR, User::ROLE_ADMIN, User::ROLE_GUEST],
                     ],
                     [
                         'allow' => true,

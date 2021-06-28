@@ -2,12 +2,10 @@
 
 namespace app\controllers;
 
-use app\models\db\Raffle;
 use Yii;
 use yii\helpers\Url;
 use yii\filters\AccessControl;
 use yii\web\Controller;
-use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\db\User;
 use app\models\db\forms\SettingForm;
@@ -15,7 +13,6 @@ use app\models\db\forms\SettingPasswordForm;
 
 class SettingsController extends Controller
 {
-
     public function behaviors()
     {
         return [
@@ -34,7 +31,7 @@ class SettingsController extends Controller
                     [
                         'allow' => true,
                         'actions' => ['index', 'account', 'password'],
-                        'roles' => [User::ROLE_USER,User::ROLE_MODERATOR,User::ROLE_ADMIN],
+                        'roles' => [User::ROLE_USER, User::ROLE_MODERATOR, User::ROLE_ADMIN],
                     ],
                 ],
             ],
@@ -75,9 +72,7 @@ class SettingsController extends Controller
     public function actionAccount()
     {
         $model = new SettingForm();
-
-        if ($model->saveSettings()){
-        }
+        $model->saveSettings();
         return $this->render('account', [
             'user' => User::currentUser(),
             'model' => $model,
@@ -86,7 +81,7 @@ class SettingsController extends Controller
 
     /**
      * Страница отображения настроек password
-     * @return string
+     * @return \yii\web\Response|string
      */
     public function actionPassword()
     {

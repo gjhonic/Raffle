@@ -43,6 +43,7 @@ class User extends \yii\db\ActiveRecord
     const ROLE_USER_ID = 3;
 
     const ROLE_GUEST = "?";
+    const ROLE_AUTHORIZED = "@";
 
     //Статусы пользователей
     const STATUS_ACTIVE = "active";

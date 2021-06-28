@@ -1,7 +1,7 @@
 <?php
 /**
  * AuthController
- * Контроллер предназначеный для аутентификация
+ * Контроллер предназначеный для аутентификации и регистрации
  * @copyright Copyright (c) 2021 Eugene Andreev
  * @author Eugene Andreev <gjhonic@gmail.com>
  */
@@ -19,30 +19,29 @@ use app\models\auth\forms\SigninForm;
 use app\models\auth\forms\SignupForm;
 use app\models\db\User;
 
-
 class AuthController extends Controller
 {
     public function behaviors()
     {
         return [
             'access' => [
-            'class' => AccessControl::className(),
-            'denyCallback' => function ($rule, $action) {
-            $this->redirect('signin');
-            },
-            'rules' => [
+                'class' => AccessControl::className(),
+                'denyCallback' => function ($rule, $action) {
+                    $this->redirect('signin');
+                },
+                'rules' => [
                     [
                         'allow' => true,
                         'actions' => ['signin','signup','signout','confirm-email','return-confirm-email', 'reset-password'],
-                        'roles' => ['?'],
+                        'roles' => [User::ROLE_GUEST],
                     ],
                     [
                         'actions' => [],
                         'allow' => true,
-                        'roles' => ['@'],
+                        'roles' => [User::ROLE_AUTHORIZED],
+                    ],
                     ],
                 ],
-            ],
         ];
     }
 
