@@ -1,29 +1,26 @@
 <?php
 /**
- * TagSearch
- * Модель поиска тегов
+ * SupportSearch
+ * Модель поиска обращений
  * @copyright Copyright (c) 2021 Eugene Andreev
  * @author Eugene Andreev <gjhonic@gmail.com>
- *
  */
 namespace app\models\db\search;
 
-use Yii;
-use yii\base\BaseObject;
+use app\models\db\Support;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\db\Tag;
 
-
-class TagSearch extends Tag
+class SupportSearch extends Support
 {
     /**
-     * @inheritdoc
+     * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            [['title'], 'string', 'max' => 255],
+            [['title'], 'string', 'max' => 100],
+            [['status'], 'integer'],
         ];
     }
 
@@ -44,19 +41,20 @@ class TagSearch extends Tag
      */
     public function search($params)
     {
-        $query = Tag::find();
+        $query = Support::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
 
-        $dataProvider->sort->defaultOrder = ['title' => SORT_ASC];
+        $dataProvider->sort->defaultOrder = ['id' => SORT_DESC];
 
         if (!($this->load($params) && $this->validate())) {
             return $dataProvider;
         }
 
         $query->andFilterWhere(['like', 'title', $this->title]);
+        $query->andFilterWhere(['=', 'status', $this->status]);
 
         return $dataProvider;
     }

@@ -4,6 +4,7 @@ namespace app\models\db;
 
 use Yii\db\ActiveRecord;
 use yii\behaviors\TimestampBehavior;
+use app\models\db\User;
 
 /**
  * This is the model class for table "support".
@@ -18,6 +19,11 @@ use yii\behaviors\TimestampBehavior;
  */
 class Support extends \yii\db\ActiveRecord
 {
+    //Статусы обращений
+    const STATUS_NOT_VIEWED = 0;
+    const STATUS_VIEWED = 1;
+    const STATUS_IMPORTANT = 2;
+
     /**
      * @return string
      */
@@ -72,10 +78,27 @@ class Support extends \yii\db\ActiveRecord
     /**
      * Gets query for [[User]].
      *
-     * @return \yii\db\ActiveQuery
+     * @return \app\models\db\User
      */
     public function getUser()
     {
-        return $this->hasOne(User::className(), ['id' => 'user_id']);
+        return User::findOne($this->user_id);
     }
+
+    /**
+     * Метод установливает статус просмотрено на обращении
+     */
+    public function setViewed(){
+        $this->status = self::STATUS_VIEWED;
+        $this->update();
+    }
+
+    /**
+     * Метод установливает статус важно на обращении
+     */
+    public function setTag(){
+        $this->status = self::STATUS_IMPORTANT;
+        $this->update();
+    }
+
 }

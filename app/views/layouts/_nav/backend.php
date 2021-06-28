@@ -45,8 +45,8 @@ return [
         ],
         [
             'label' => 'Обращения',
-            'href' => URL::to('/admin/support/'),
-            'controller' => 'support'
+            'href' => URL::to('/admin/support-mod/'),
+            'controller' => 'support-mod'
         ],
     ],
 ];

@@ -10,7 +10,7 @@ $this->title = 'Конкурс: '.$model->title;
 $this->params['breadcrumbs'][] = ['label' => 'Конкурсы', 'url' => Url::to('/admin/raffle/')];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="user-index">
+<div class="raffle-view">
 
     <div class="jumbotron">
         <h1 class="display-4">
