@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use kartik\datetime\DateTimePicker;
 
 /* @var $model object */
 /* @var $but_title string */
@@ -22,8 +23,13 @@ use yii\widgets\ActiveForm;
     </p>
 
     <p>
-        <?= $form->field($model, 'code')->hint('Отображается в адресной строке')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($model, 'code')->hint('Отображается в адресной строке, оставьте пустым и произойдет автоматическая генерация')->textInput(['maxlength' => true]) ?>
     </p>
+
+    <div class="form-group">
+        <label for="date_begin" class="control-label">Дата начала конкурса</label>
+        <input type="date" class="form-control" id="date_begin" placeholder="" name="RaffleForm[date_begin]" value="<?=date('Y-m-d')?>" min="2021-01-01" max="2050-12-31">
+    </div>
 
     <p>
         <br>

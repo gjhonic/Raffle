@@ -59,7 +59,7 @@ class Raffle extends \yii\db\ActiveRecord
             [['created_at', 'updated_at'], 'safe'],
             [['title', 'video_link', 'image_src'], 'string', 'max' => 255],
             [['date_begin', 'date_end'], 'string', 'max' => 20],
-            [['code'], 'string', 'max' => 100],
+            [['code'], 'string', 'max' => 30],
             [['code'], 'unique'],
             [['status_id'], 'exist', 'skipOnError' => true, 'targetClass' => RaffleStatus::className(), 'targetAttribute' => ['status_id' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
@@ -153,5 +153,19 @@ class Raffle extends \yii\db\ActiveRecord
      */
     public static function findByCode($code){
         return self::find()->where(['code' => $code])->one();
+    }
+
+    /**
+     * Метод генерирует случайный уникальный код конкурса
+     * @return string
+     */
+    public static function codeGenerate(): string
+    {
+        $permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyz';
+        $code = substr(str_shuffle($permitted_chars), 0, 25);
+        while(self::findByCode($code)){
+            $code = substr(str_shuffle($permitted_chars), 0, 25);
+        }
+        return $code;
     }
 }
