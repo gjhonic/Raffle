@@ -13,7 +13,23 @@ $this->title = $model->title;
         <h1><?=$model->title?></h1>
     </header>
     <span class="image main"><img src="/app/media/src/raffle/pic11.jpg" alt=""></span>
-    <time class="published" datetime="2015-11-01">01.01.21 - 05.01.21</time></br></br>
+    <time class="published">
+        <?php
+            if($model->date_begin !== null){
+                echo $model->date_begin;
+            }else{
+                echo "???";
+            }
+        ?>
+            -
+        <?php
+            if($model->date_end !== null){
+                echo $model->date_end;
+            }else{
+                echo "???";
+            }
+        ?>
+    </time></br></br>
     <a href="<?=URL::to('/profile').'/'.$author->code?>" class="button">Автор: <?=$author->username?></span></a>
     </br></br>
     <p><?=$model->description?></p>
