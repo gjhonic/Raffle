@@ -5,6 +5,7 @@ use yii\helpers\Url;
 use app\modules\admin\widget\RaffleStatusWidget;
 use app\models\db\Raffle;
 
+/* @var $model object */
 
 $this->title = 'Конкурс: '.$model->title;
 $this->params['breadcrumbs'][] = ['label' => 'Конкурсы', 'url' => Url::to('/admin/raffle/')];
@@ -23,6 +24,10 @@ $this->params['breadcrumbs'][] = $this->title;
         </p>
         <p>
             Дата обновления:<b> <?=date('j F, Y H:i:s', $model->updated_at)?></b>
+        </p>
+
+        <p>
+            Код:<b> <?=$model->code?></b>
         </p>
 
         <p class="lead">
