@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use kartik\datetime\DateTimePicker;
+use mihaildev\ckeditor\CKEditor;
 
 /* @var $model object */
 /* @var $but_title string */
@@ -19,7 +19,12 @@ use kartik\datetime\DateTimePicker;
     </p>
 
     <p>
-        <?= $form->field($model, 'description')->textarea(['rows' => '6']) ?>
+        <?= $form->field($model, 'description')->widget(CKEditor::className(),[
+            'editorOptions' => [
+                'preset' => 'full', //разработанны стандартные настройки basic, standard, full данную возможность не обязательно использовать
+                'inline' => false, //по умолчанию false
+            ],
+        ]); ?>
     </p>
 
     <p>
@@ -39,9 +44,23 @@ use kartik\datetime\DateTimePicker;
     </div>
     </p>
 
-    <div class="form-group">
-        <label for="date_begin" class="control-label">Дата начала конкурса</label>
-        <input type="date" 0 class="form-control" id="date_begin" placeholder="" name="RaffleForm[date_begin]" value="<?=date('Y-m-d')?>" min="2021-01-01" max="2050-12-31">
+    <div class="row">
+        <div class="col-6 col-12-small">
+            <p>
+            <div class="form-group">
+                <label for="date_begin" class="control-label">Дата начала конкурса</label>
+                <input type="date" class="form-control" id="date_begin" placeholder="" name="RaffleForm[date_begin]" value="<?=date('Y-m-d')?>" min="2021-01-01" max="2050-12-31">
+            </div>
+            </p>
+        </div>
+        <div class="col-6 col-12-small">
+            <p>
+            <div class="form-group">
+                <label for="date_begin" class="control-label">Дата окончания конкурса</label>
+                <input type="date" class="form-control" id="date_begin" placeholder="" name="RaffleForm[date_end]" value="" min="2021-01-01" max="2050-12-31">
+            </div>
+            </p>
+        </div>
     </div>
 
     <p>

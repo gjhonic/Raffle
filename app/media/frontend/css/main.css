@@ -1014,6 +1014,7 @@ label {
   margin: 0 0 1em 0; }
 
 input[type="text"],
+input[type="date"],
 input[type="password"],
 input[type="email"],
 input[type="tel"],
@@ -1036,6 +1037,7 @@ textarea {
   text-decoration: none;
   width: 100%; }
   input[type="text"]:invalid,
+  input[type="date"]:invalid,
   input[type="password"]:invalid,
   input[type="email"]:invalid,
   input[type="tel"]:invalid,
@@ -1045,6 +1047,7 @@ textarea {
   textarea:invalid {
     box-shadow: none; }
   input[type="text"]:focus,
+  input[type="date"]:focus,
   input[type="password"]:focus,
   input[type="email"]:focus,
   input[type="tel"]:focus,
@@ -1072,6 +1075,7 @@ select {
     display: none; }
 
 input[type="text"],
+input[type="date"],
 input[type="password"],
 input[type="email"],
 input[type="tel"],
