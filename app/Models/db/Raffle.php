@@ -55,6 +55,7 @@ class Raffle extends \yii\db\ActiveRecord
             [['title', 'user_id', 'status_id', 'code'], 'required'],
             [['short_description'], 'string', 'max' => 1000],
             [['description'], 'string', 'max' => 5000],
+            [['description'], 'trim'],
             [['user_id', 'status_id'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['title', 'video_link', 'image_src'], 'string', 'max' => 255],

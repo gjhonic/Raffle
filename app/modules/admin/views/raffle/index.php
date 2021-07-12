@@ -7,6 +7,8 @@ use yii\widgets\Pjax;
 use app\models\db\User;
 use app\modules\admin\widget\RaffleStatusWidget;
 
+/* @var $dataProvider \yii\db\ActiveRecord */
+/* @var $searchModel \app\models\db\search\UserSearch */
 
 $this->title = 'Конкурсы';
 $this->params['breadcrumbs'][] = $this->title;

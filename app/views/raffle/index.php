@@ -1,6 +1,8 @@
 <?php
 
 /* @var $this yii\web\View */
+/* @var $Users array */
+/* @var $Raffles array */
 
 $this->title = 'Конкурсы';
 use yii\helpers\Html;
@@ -29,11 +31,13 @@ use yii\helpers\URL;
                 <div class="title">
                     <h2><a href="single.html"><?=$raffle->title?></a></h2>
                 </div>
+
                 <div class="meta">
                     <time class="published" datetime="2015-11-01"><?=date('j F, Y', $raffle->updated_at)?></time>
                     <a href="#" class="author"><span class="name"><?=$Users[$raffle->user_id]?></span><img src="images/avatar.jpg" alt=""></a>
                 </div>
             </header>
+
             <p><?=$raffle->short_description?></p>
             <footer>
                 <ul class="actions">

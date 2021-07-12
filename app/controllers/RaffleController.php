@@ -9,7 +9,9 @@ namespace app\controllers;
 
 use app\models\db\Raffle;
 use Yii;
+use yii\data\ActiveDataProvider;
 use yii\helpers\ArrayHelper;
+use app\models\db\search\RaffleSearch;
 use yii\helpers\Url;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -37,7 +39,7 @@ class RaffleController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['index', 'view'],
+                        'actions' => ['index', 'view', 'list'],
                         'roles' => [User::ROLE_USER, User::ROLE_MODERATOR, User::ROLE_ADMIN, User::ROLE_GUEST],
                     ],
                     [
@@ -81,6 +83,35 @@ class RaffleController extends Controller
     }
 
     /**
+     * Список конкурсов пользователя
+     * @return string
+     */
+    public function actionList($code)
+    {
+        if(($user = User::findByCode($code)) === null){
+            return $this->redirect('/index');
+        }
+
+        if($user->id === Yii::$app->user->identity->getId() || (in_array(Yii::$app->user->identity->role_id, [User::ROLE_ADMIN_ID, User::ROLE_MODERATOR_ID]))){
+            $query = Raffle::find()->where(['user_id' => $user->id]);
+        }else{
+            $query = Raffle::find()->where(['user_id' => $user->id, 'status_id' => Raffle::STATUS_APPROVED_ID]);
+        }
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+            'pagination' => [
+                'pageSize' => 20,
+            ],
+        ]);
+
+        return $this->render('list', [
+            'dataProvider' => $dataProvider,
+            'user' => $user
+        ]);
+    }
+
+    /**
      * Просмотр конкурса
      * @param $code string
      * @return string|Response
@@ -115,5 +146,41 @@ class RaffleController extends Controller
         return $this->render('create', [
             'model' => $model,
         ]);
+    }
+
+    /**
+     * Страница редактирование конкурса
+     * @param $code string
+     * @return string|Response
+     */
+    public function actionUpdate($code)
+    {
+
+        if(($code_old = Yii::$app->request->post('code_old')) == ''){
+            if(($raffle = Raffle::findByCode($code)) == null){
+                return $this->redirect(['index']);
+            }
+            $model = new RaffleForm();
+            $model->setFromRaffle($raffle);
+
+            return $this->render('update', [
+                'model' => $model,
+            ]);
+        }
+
+        $model = new RaffleForm();
+
+        if(($raffle = Raffle::findByCode($code_old)) == null){
+            return $this->redirect(['index']);
+        }
+
+        if ($model->load(Yii::$app->request->post()) && $model->updateRaffle($raffle)) {
+            return $this->redirect(['/show/'.$model->code]);
+        }
+
+        return $this->render('update', [
+            'model' => $model,
+        ]);
+
     }
 }
