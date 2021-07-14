@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\helpers\Url;
 use yii\widgets\Pjax;
+use app\models\db\User;
 use app\modules\admin\widget\RaffleStatusWidget;
 
 /* @var $dataProvider \yii\db\ActiveRecord */
@@ -13,7 +14,7 @@ $this->title = 'Конкурсы от '.$user->username;
 ?>
 <div class="user-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1>Конкурсы от <?=Html::a($user->username, '/profile/' . $user->code, ['class' => '']);?></h1>
 
     <div style="overflow-x: auto;">
         <?php Pjax::begin(); ?>
@@ -24,10 +25,12 @@ $this->title = 'Конкурсы от '.$user->username;
             echo GridView::widget([
                 'dataProvider' => $dataProvider,
                 'columns' => [
-                    ['class' => 'yii\grid\SerialColumn'],
-
-                    'title',
-                    'date_begin',
+                    [
+                        'attribute' => 'title',
+                    ],
+                    [
+                        'attribute' => 'date_begin',
+                    ],
                     [
                         'attribute' => 'status_id',
                         'filter' => RaffleStatusWidget::statusList(),
@@ -41,10 +44,12 @@ $this->title = 'Конкурсы от '.$user->username;
                         'template' => "{view}",
                         'buttons' => [
                             'view' => function ($url, $model, $key) {
-                                return Html::a('Смотреть', '/show/' . $model->code, ['class' => 'btn btn-outline-success btn-block']);
+                                return Html::a('Смотреть', '/show/' . $model->code, ['class' => 'button']);
                             },
                         ],
                     ],
+
+
                 ],
             ]);
         }else{
@@ -60,7 +65,7 @@ $this->title = 'Конкурсы от '.$user->username;
                         'template' => "{view}",
                         'buttons' => [
                             'view' => function ($url, $model, $key) {
-                                return Html::a('Смотреть', '/show/' . $model->code, ['class' => 'btn btn-outline-success btn-block']);
+                                return Html::a('Смотреть', '/show/' . $model->code, ['class' => 'button']);
                             },
                         ],
                     ],

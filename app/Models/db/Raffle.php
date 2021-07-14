@@ -129,20 +129,21 @@ class Raffle extends \yii\db\ActiveRecord
      * Метод возвращает все конкурсы пользователя
      * @param $user_id int
      * @param $status_id int|null
+     * @param $limit int
      * @return array|\yii\db\ActiveRecord[]
      */
-    public static function findRaffleByUser($user_id, $status_id=null){
+    public static function findRaffleByUser($user_id, $status_id=null, $limit=10){
         if($status_id !== null){
             return self::find()
                 ->where(['user_id' => $user_id, 'status_id' => $status_id])
                 ->orderBy('id DESC')
-                ->limit(10)
+                ->limit($limit)
                 ->all();
         }else{
             return self::find()
                 ->where(['user_id' => $user_id])
                 ->orderBy('id DESC')
-                ->limit(10)
+                ->limit($limit)
                 ->all();
         }
     }
