@@ -85,12 +85,23 @@ class SiteController extends Controller
             return $this->redirect(['index']);
         }
 
-        $Raffles = Raffle::findRaffleByUser($user->id, Raffle::STATUS_APPROVED_ID);
+        $RafflesApproved = Raffle::findRaffleByUser($user->id, Raffle::STATUS_APPROVED_ID);
+        if($user->id === Yii::$app->user->identity->getId()){
 
-        return $this->render('profile', [
-            'user' => $user,
-            'Raffles' => $Raffles,
-        ]);
+            $RafflesChecked = Raffle::findRaffleByUser($user->id, Raffle::STATUS_ON_CHECK_ID);
+            $RafflesNotApproved = Raffle::findRaffleByUser($user->id, Raffle::STATUS_NOT_APPROVED_ID);
+            return $this->render('profile', [
+                'user' => $user,
+                'RafflesApproved' => $RafflesApproved,
+                'RafflesChecked' => $RafflesChecked,
+                'RafflesNotApproved' => $RafflesNotApproved
+            ]);
+        }else{
+            return $this->render('profile', [
+                'user' => $user,
+                'RafflesApproved' => $RafflesApproved,
+            ]);
+        }
     }
 
     /**

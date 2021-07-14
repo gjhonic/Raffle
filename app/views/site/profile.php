@@ -1,7 +1,9 @@
 <?php
 
 /* @var $user object */
-/* @var $Raffles \app\models\db\Raffle */
+/* @var $RafflesApproved \app\models\db\Raffle */
+/* @var $RafflesChecked \app\models\db\Raffle */
+/* @var $RafflesNotApproved \app\models\db\Raffle */
 
 use yii\helpers\Html;
 use yii\helpers\URL;
@@ -52,12 +54,14 @@ $this->title = 'Профиль '.$user->username;
 
 <?php if($user->id === Yii::$app->user->identity->getId()) { ?>
     <?= $this->render('raffle_profile/my_raffle', [
-        'Raffles' => $Raffles,
+        'RafflesApproved' => $RafflesApproved,
+        'RafflesChecked' => $RafflesChecked,
+        'RafflesNotApproved' => $RafflesNotApproved,
         'user' => $user
     ]) ?>
 <?php }else{ ?>
     <?= $this->render('raffle_profile/other_raffle', [
-        'Raffles' => $Raffles,
+        'RafflesApproved' => $RafflesApproved,
         'user' => $user
     ]) ?>
 <?php } ?>
