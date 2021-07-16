@@ -170,4 +170,19 @@ class Raffle extends \yii\db\ActiveRecord
         }
         return $code;
     }
+
+    /**
+     * Метод находит конкурсы по совпадению с запросом
+     * @param $query
+     * @return array|\yii\db\ActiveRecord[]
+     */
+    public static function searchRaffles($query)
+    {
+        return self::find()
+            ->where(['like', 'title', $query])
+            ->orWhere(['like', 'short_description', $query])
+            ->orWhere(['like', 'description', $query])
+            ->andWhere(['status_id' => Raffle::STATUS_APPROVED_ID])
+            ->all();
+    }
 }

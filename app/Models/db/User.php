@@ -268,4 +268,19 @@ class User extends \yii\db\ActiveRecord
     {
         return null;
     }
+
+    /**
+     * Метод находит пользователей по совпадению с запросом
+     * @param string $query
+     * @return array|\yii\db\ActiveRecord[]
+     */
+    public static function searchUsers($query)
+    {
+        return self::find()
+            ->where(['like', 'name', $query])
+            ->orWhere(['like', 'surname', $query])
+            ->orWhere(['=', 'username', $query])
+            ->andWhere(['role_id' => User::ROLE_USER_ID])
+            ->all();
+    }
 }

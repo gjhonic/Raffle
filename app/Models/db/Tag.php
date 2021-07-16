@@ -54,4 +54,16 @@ class Tag extends \yii\db\ActiveRecord
     {
         return $this->hasMany(RaffleTag::className(), ['tag_id' => 'id']);
     }
+
+    /**
+     * Метод находит теги по совпадению с запросом
+     * @param $query
+     * @return array|\yii\db\ActiveRecord[]
+     */
+    public static function searchTags($query)
+    {
+        return self::find()
+            ->where(['title' => $query])
+            ->all();
+    }
 }
