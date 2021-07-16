@@ -6,6 +6,7 @@ return [
     'signin' => 'auth/signin',
     'signup' => 'auth/signup',
     'signout' => 'auth/signout',
+    'search' => 'site/search',
     'confirm-email' => 'auth/confirm-email',
     'return-confirm-email' => 'auth/return-confirm-email',
 

@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\db\forms\SupportForm;
 use app\models\db\Raffle;
+use app\models\db\Tag;
 use Yii;
 use yii\helpers\Url;
 use yii\filters\AccessControl;
@@ -17,12 +18,6 @@ class SiteController extends Controller
     public function behaviors()
     {
         return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
             'access' => [
                 'class' => AccessControl::className(),
                 'denyCallback' => function ($rule, $action) {
@@ -36,7 +31,7 @@ class SiteController extends Controller
                     ],
                     [
                         'allow' => true,
-                        'actions' => ['index', 'test'],
+                        'actions' => ['index', 'search'],
                         'roles' => [User::ROLE_GUEST, User::ROLE_USER, User::ROLE_MODERATOR, User::ROLE_ADMIN],
                     ],
                 ],
@@ -117,5 +112,27 @@ class SiteController extends Controller
         }
 
         return $this->render('support', ['model' => $model]);
+    }
+
+    /**
+     * Страница найденного контента
+     * @return string|Response
+     */
+    public function actionSearch($q)
+    {
+        if(($q = trim($q)) === ''){
+            $this->redirect(Yii::$app->request->referrer);
+        }
+
+        $Raffles = Raffle::searchRaffles($q);
+        $Users = User::searchUsers($q);
+        $Tags = Tag::searchTags($q);
+
+        return $this->render('search', [
+            'query' => $q,
+            'Raffles' => $Raffles,
+            'Users' => $Users,
+            'Tags' => $Tags
+        ]);
     }
 }

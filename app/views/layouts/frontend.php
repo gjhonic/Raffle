@@ -4,6 +4,7 @@
 /* @var $content string */
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use app\assets\FrontendAsset;
 
 $nav = array_merge(require(__DIR__ . '/_nav/frontend.php'));
@@ -41,8 +42,12 @@ FrontendAsset::register($this);
             <section id="search" class="alt">
                     <h2><a href="<?=Yii::$app->homeUrl?>"><?php echo Yii::$app->name; ?>.ru</a></h2>
 
-                    <form method="post" action="#">
-                        <input type="text" name="query" id="query" placeholder="Поиск" />
+                    <form method="get" action="<?=Url::to('/search')?>">
+                        <?php if(($current_query = Yii::$app->request->get('q')) !== null){ ?>
+                            <input type="text" name="q" id="query" placeholder="Вы ищите: <?=$current_query?>" />
+                        <?php }else{?>
+                            <input type="text" name="q" id="query" placeholder="Поиск" />
+                        <?php }?>
                     </form>
             </section>
             
@@ -64,7 +69,7 @@ FrontendAsset::register($this);
 
             <!-- Footer -->
             <footer id="footer">
-                <p class="copyright">&copy; Untitled. All rights reserveda</p>
+                <p class="copyright">&copy; gjhonic</p>
             </footer>
 
         </div>
