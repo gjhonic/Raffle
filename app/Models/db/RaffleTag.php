@@ -65,4 +65,18 @@ class RaffleTag extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Tag::className(), ['id' => 'tag_id']);
     }
+
+    /**
+     * Метод связывает конкурс и тег
+     * @param integer $raffle_id
+     * @param integer $tag_id
+     * @return bool
+     */
+    public static function add($raffle_id, $tag_id)
+    {
+        $raffle_tag = new self();
+        $raffle_tag->raffle_id = $raffle_id;
+        $raffle_tag->tag_id = $tag_id;
+        return $raffle_tag->save();
+    }
 }

@@ -16,9 +16,9 @@ use yii\data\ActiveDataProvider;
 class RaffleSearch extends Raffle
 {
     /**
-     * @inheritdoc
+     * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             [['title'], 'string', 'max' => 255],

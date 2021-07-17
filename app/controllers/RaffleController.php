@@ -39,7 +39,7 @@ class RaffleController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['index', 'view', 'list'],
+                        'actions' => ['index', 'view', 'list', 'raffle-by-tag'],
                         'roles' => [User::ROLE_USER, User::ROLE_MODERATOR, User::ROLE_ADMIN, User::ROLE_GUEST],
                     ],
                     [
@@ -77,6 +77,19 @@ class RaffleController extends Controller
         $Raffles = Raffle::getPopularRaffles();
         return $this->render('index',[
             'Raffles' => $Raffles,
+        ]);
+    }
+
+    /**
+     * Список конкурсов
+     * @return string
+     */
+    public function actionRaffleByTag($tag)
+    {
+        $Raffles = Raffle::getRafflesByTag($tag);
+        return $this->render('raffles-by-tag',[
+            'Raffles' => $Raffles,
+            'tag' => $tag
         ]);
     }
 
@@ -122,8 +135,11 @@ class RaffleController extends Controller
             return $this->redirect(['index']);
         }
 
+        $Tags = Raffle::getTags($raffle['raffle_id']);
+
         return $this->render('view', [
             'raffle' => $raffle,
+            'Tags' => $Tags
         ]);
     }
 

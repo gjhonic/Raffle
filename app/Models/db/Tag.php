@@ -28,9 +28,9 @@ class Tag extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title'], 'required'],
-            [['title'], 'string', 'max' => 255],
-            [['title'], 'unique'],
+            ['title', 'required'],
+            ['title', 'string', 'max' => 255],
+            ['title', 'unique'],
         ];
     }
 
@@ -43,6 +43,16 @@ class Tag extends \yii\db\ActiveRecord
             'id' => 'Id',
             'title' => 'Название',
         ];
+    }
+
+    /**
+     * @param bool $insert
+     * @return bool
+     */
+    public function beforeSave($insert)
+    {
+        $this->title = mb_strtolower($this->title);
+        return parent::beforeSave($insert);
     }
 
     /**

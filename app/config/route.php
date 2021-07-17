@@ -7,6 +7,7 @@ return [
     'signup' => 'auth/signup',
     'signout' => 'auth/signout',
     'search' => 'site/search',
+    'raffle-by-tag/<tag>' => 'raffle/raffle-by-tag',
     'confirm-email' => 'auth/confirm-email',
     'return-confirm-email' => 'auth/return-confirm-email',
 

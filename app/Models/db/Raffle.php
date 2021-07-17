@@ -129,6 +129,9 @@ class Raffle extends \yii\db\ActiveRecord
         return $this->hasMany(RaffleTag::className(), ['raffle_id' => 'id']);
     }
 
+    /**
+     * Метод прикрепялет теги к конкурсу
+     */
     public function addTagsFromString()
     {
         $tags_array = explode(" ", $this->tags_string);
@@ -152,9 +155,10 @@ class Raffle extends \yii\db\ActiveRecord
      * @return array|\yii\db\DataReader
      * @throws \yii\db\Exception
      */
-    public static function getPopularRaffles(){
+    public static function getPopularRaffles()
+    {
         $placeholders = [
-            'status_id' => self::STATUS_APPROVED_ID,
+            'status_id' => self::STATUS_APPROVED_ID
         ];
         $sql = "SELECT raffle.title AS raffle_title,
             raffle.short_description AS raffle_short_description,
@@ -167,6 +171,51 @@ class Raffle extends \yii\db\ActiveRecord
          WHERE raffle.status_id = :status_id
          ORDER BY raffle.id DESC
          LIMIT 30";
+        return Yii::$app->db->createCommand($sql, $placeholders)->queryAll();
+    }
+
+    /**
+     * Метод возвращает конкурсы по тегу
+     * @param string $tag
+     * @return array|\yii\db\DataReader
+     * @throws \yii\db\Exception
+     */
+    public static function getRafflesByTag($tag)
+    {
+        $placeholders = [
+            'tag' => $tag
+        ];
+        $sql = "SELECT raffle.title AS raffle_title,
+            raffle.short_description AS raffle_short_description,
+            raffle.created_at AS raffle_created_at,
+            raffle.code AS raffle_code,
+            user.username AS username,
+            user.code AS user_code
+         FROM raffle_tag
+         RIGHT JOIN raffle ON raffle_tag.raffle_id = raffle.id
+         LEFT JOIN user ON raffle.user_id = user.id
+         LEFT JOIN tag ON raffle_tag.tag_id = tag.id
+         WHERE tag.title = :tag
+         ORDER BY raffle.id DESC
+         LIMIT 30";
+        return Yii::$app->db->createCommand($sql, $placeholders)->queryAll();
+    }
+
+    /**
+     * Метод возвращает теги конкурса
+     * @param integer $raffle_id
+     * @return array|\yii\db\DataReader
+     * @throws \yii\db\Exception
+     */
+    public static function getTags($raffle_id)
+    {
+        $placeholders = [
+            'raffle_id' => $raffle_id
+        ];
+        $sql = "SELECT tag.title AS tag_title
+         FROM raffle_tag
+         RIGHT JOIN tag ON raffle_tag.tag_id = tag.id
+         WHERE raffle_tag.raffle_id = :raffle_id";
         return Yii::$app->db->createCommand($sql, $placeholders)->queryAll();
     }
 
@@ -210,9 +259,10 @@ class Raffle extends \yii\db\ActiveRecord
      */
     public static function getRaffleByCode($code){
         $placeholders = [
-            'raffle_code' => $code,
+            'raffle_code' => $code
         ];
-        $sql = "SELECT raffle.title AS raffle_title,
+        $sql = "SELECT raffle.id AS raffle_id,
+            raffle.title AS raffle_title,
             raffle.description AS raffle_description,
             raffle.created_at AS raffle_created_at,
             raffle.date_begin AS raffle_date_begin,

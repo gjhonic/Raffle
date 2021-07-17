@@ -5,6 +5,8 @@ use yii\helpers\Html;
 use app\widgets\RaffleStatusWidget;
 
 /* @var $raffle array */
+/* @var $Tags array */
+
 $this->title = $raffle['raffle_title'];
 ?>
 
@@ -39,6 +41,13 @@ $this->title = $raffle['raffle_title'];
             }
         ?>
     </time>
+
+    <div class="box-tags">
+        <h4>Теги: </h4>
+        <?php foreach ($Tags as $tag) { ?>
+            <a class="button small" href="<?=Url::to('/raffle-by-tag/').$tag['tag_title']?>"><?=$tag['tag_title']?></a>
+        <?php } ?>
+    </div>
 
     <p><?=$raffle['raffle_description']?></p>
 
