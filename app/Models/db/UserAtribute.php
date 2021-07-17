@@ -20,7 +20,7 @@ class UserAtribute extends \yii\db\ActiveRecord
     const TYPE_SOCIAL_LINK = 'social link';
 
     /**
-     * {@inheritdoc}
+     * @return string
      */
     public static function tableName()
     {
