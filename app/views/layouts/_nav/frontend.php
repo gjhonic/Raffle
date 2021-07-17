@@ -37,7 +37,7 @@ if(Yii::$app->user->isGuest){
                     'controller' => 'raffle'
                 ],
                 [
-                    'label' => 'Добавить конкурс',
+                    'label' => 'Создать конкурс',
                     'href' => URL::to('/raffle/create'),
                     'controller' => 'raffle'
                 ],

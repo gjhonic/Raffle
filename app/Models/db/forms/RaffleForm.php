@@ -80,6 +80,7 @@ class RaffleForm extends Model
             $raffle = new Raffle();
             $raffle->title = $this->title;
             $raffle->user_id = $this->user_id;
+            $raffle->tags_string = $this->tags;
             $raffle->status_id = Raffle::STATUS_ON_CHECK_ID;
             if($this->code === ''){
                 $this->code = Raffle::codeGenerate();
@@ -89,8 +90,10 @@ class RaffleForm extends Model
             $raffle->date_end = $this->date_end;
             $raffle->short_description = $this->short_description;
             $raffle->description = $this->description;
-            return $raffle->save();
-
+            if($raffle->save()){
+                $raffle->addTagsFromString();
+            }
+            return true;
         }
     }
 
@@ -102,7 +105,6 @@ class RaffleForm extends Model
     public function updateRaffle(Raffle $raffle)
     {
         if($this->validate()){
-
             $raffle->title = $this->title;
             $raffle->status_id = Raffle::STATUS_ON_CHECK_ID;
             if($this->code === ''){

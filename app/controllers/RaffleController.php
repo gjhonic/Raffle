@@ -137,7 +137,7 @@ class RaffleController extends Controller
         $model->user_id = Yii::$app->user->identity->id;
 
         if ($model->load(Yii::$app->request->post()) && $model->saveRaffle()) {
-            return $this->redirect(['index']);
+            return $this->redirect(['/show/'.$model->code]);
         }
 
         return $this->render('create', [
@@ -152,7 +152,6 @@ class RaffleController extends Controller
      */
     public function actionUpdate($code)
     {
-
         if(($code_old = Yii::$app->request->post('code_old')) == ''){
             if(($raffle = Raffle::findByCode($code)) == null){
                 return $this->redirect(['index']);

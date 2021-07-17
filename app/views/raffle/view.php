@@ -15,8 +15,8 @@ $this->title = $raffle['raffle_title'];
 <section>
     <header class="main">
         <h1>
-            <h1><?= Html::encode($this->title) ?></h1>
-            <?php if(Yii::$app->user->identity->getId() === $raffle['user_id']){ ?>
+            <?= Html::encode($this->title) ?>
+            <?php if(Yii::$app->user->identity->getId() == $raffle['user_id']){ ?>
                 <?=RaffleStatusWidget::getIcon($raffle['raffle_status_id'])?>
             <?php } ?>
         </h1>

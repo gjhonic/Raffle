@@ -27,7 +27,7 @@ use yii\helpers\URL;
             <article class="post">
                 <header>
                     <div class="title">
-                        <h2><a href="single.html"><?=$raffle['raffle_title']?></a></h2>
+                        <h2><a href="<?=URL::to('/show/').$raffle['raffle_code']?>"><?=$raffle['raffle_title']?></a></h2>
                     </div>
 
                     <div class="meta">

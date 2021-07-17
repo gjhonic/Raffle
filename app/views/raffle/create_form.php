@@ -65,7 +65,7 @@ use mihaildev\ckeditor\CKEditor;
 
     <h5>Теги</h5>
     <div class="form-group">
-        <textarea name="RaffleForm[tags]" rows="3" id="textarea-tags" style="font-size: 15px; resize: none;" maxlength="255" disabled></textarea>
+        <textarea name="RaffleForm[tags]" rows="3" id="textarea-tags" style="font-size: 15px; resize: none;" maxlength="255" readonly></textarea>
     </div>
     <p>
     <div class="row">
@@ -105,12 +105,20 @@ use mihaildev\ckeditor\CKEditor;
     function addTag(){
         let tags = $('#textarea-tags').val();
         let tag = $('#input-tag').val();
-        let tags_added = tags+" #"+tag;
-        if(tags_added.length <= 255){
-            $('#textarea-tags').val(tags+" #"+tag);
-            $('#input-tag').val('');
+        tag = tag.trim();
+        let new_tag = tag.split(' ').join('_');
+        let tags_added = tags+" #"+new_tag;
+        if( tag !== ''){
+            if(tags_added.length <= 255){
+                $('#textarea-tags').val(tags_added);
+                $('#input-tag').val('');
+            }else{
+                alert("Слишком много тегов");
+            }
         }else{
-            alert("Слишком много тегов");
+            $('#input-tag').val('');
         }
+
+
     }
 </script>

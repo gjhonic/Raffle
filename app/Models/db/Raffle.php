@@ -40,6 +40,8 @@ class Raffle extends \yii\db\ActiveRecord
     const STATUS_NOT_APPROVED = "not approved";
     const STATUS_NOT_APPROVED_ID = 3;
 
+    public $tags_string = "";
+
     /**
      * @return string
      */
@@ -125,6 +127,24 @@ class Raffle extends \yii\db\ActiveRecord
     public function getRaffleTags(): ActiveQuery
     {
         return $this->hasMany(RaffleTag::className(), ['raffle_id' => 'id']);
+    }
+
+    public function addTagsFromString()
+    {
+        $tags_array = explode(" ", $this->tags_string);
+        foreach($tags_array as $tag){
+            $tag = trim(substr($tag, 1));
+            $tag = mb_strtolower($tag);
+            if($tag == ''){
+                continue;
+            }
+            if(($raffle_tag = Tag::find()->where(['title' => $tag])->one()) === null){
+                $raffle_tag = new Tag();
+                $raffle_tag->title = $tag;
+                $raffle_tag->save();
+            }
+            RaffleTag::add($this->id, $raffle_tag->id);
+        }
     }
 
     /**
