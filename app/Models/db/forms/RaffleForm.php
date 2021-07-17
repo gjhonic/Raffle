@@ -22,6 +22,7 @@ class RaffleForm extends Model
     public $date_end;
     public $code;
     public $code_old;
+    public $tags;
 
     /**
      * @return array
@@ -33,7 +34,7 @@ class RaffleForm extends Model
             [['short_description'], 'string', 'max' => 1000],
             [['description'], 'string', 'max' => 5000],
             [['user_id'], 'integer'],
-            [['title'], 'string', 'max' => 255],
+            [['title', 'tags'], 'string', 'max' => 255],
             [['code'], 'string', 'max' => 30],
             [['date_begin', 'date_end'], 'string', 'max' => 20],
             ['code', 'codeUniqueValidate']
@@ -89,6 +90,7 @@ class RaffleForm extends Model
             $raffle->short_description = $this->short_description;
             $raffle->description = $this->description;
             return $raffle->save();
+
         }
     }
 

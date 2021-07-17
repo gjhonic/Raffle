@@ -74,11 +74,9 @@ class RaffleController extends Controller
      */
     public function actionIndex()
     {
-        $Users = ArrayHelper::map(User::find()->all(), 'id', 'username');
-        $Raffles = Raffle::find()->where(['status_id' => Raffle::STATUS_APPROVED_ID])->orderBy('id DESC')->limit(30)->all();
+        $Raffles = Raffle::getPopularRaffles();
         return $this->render('index',[
             'Raffles' => $Raffles,
-            'Users' => $Users,
         ]);
     }
 

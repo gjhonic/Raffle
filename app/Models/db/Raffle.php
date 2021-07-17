@@ -126,6 +126,30 @@ class Raffle extends \yii\db\ActiveRecord
     }
 
     /**
+     * Метод возвращает список популярных конкурсов
+     * @return array|\yii\db\DataReader
+     * @throws \yii\db\Exception
+     */
+    public function getPopularRaffles(){
+        $placeholders = [
+            'status_id' => self::STATUS_APPROVED_ID,
+        ];
+        $sql = "SELECT raffle.title as raffle_title,
+            raffle.short_description as raffle_short_description,
+            raffle.created_at as raffle_created_at,
+            raffle.code as raffle_code,
+            user.username as username,
+            user.code as user_code
+         FROM raffle
+         LEFT JOIN user ON raffle.user_id = user.id
+         WHERE raffle.status_id = :status_id
+         ORDER BY raffle.id DESC
+         LIMIT 30";
+        return Yii::$app->db->createCommand($sql, $placeholders)->queryAll();
+
+    }
+
+    /**
      * Метод возвращает все конкурсы пользователя
      * @param $user_id int
      * @param $status_id int|null
