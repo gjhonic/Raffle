@@ -5,7 +5,7 @@ use yii\grid\GridView;
 use yii\helpers\Url;
 use yii\widgets\Pjax;
 use app\models\db\User;
-use app\modules\admin\widget\UserStatusWidget;
+use app\modules\admin\widgets\UserStatusWidget;
 
 /* @var $dataProvider \yii\db\ActiveRecord */
 /* @var $searchModel \app\models\db\search\UserSearch */

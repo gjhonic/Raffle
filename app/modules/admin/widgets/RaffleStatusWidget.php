@@ -1,19 +1,16 @@
 <?php
 
-namespace app\modules\admin\widget;
+namespace app\modules\admin\widgets;
 
+use app\models\db\RaffleStatus;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 
-class SuportStatusWidget
+class RaffleStatusWidget
 {
     public static function statusList(): array
     {
-        return [
-            0 => 'Не просмотрено',
-            1 => 'Просмотрено',
-            2 => 'Важно'
-        ];
+        return ArrayHelper::map(RaffleStatus::find()->all(), 'id', 'title');
     }
 
     public static function statusName($status): string
@@ -24,14 +21,14 @@ class SuportStatusWidget
     public static function statusLabel($status): string
     {
         switch ($status) {
-            case 0:
+            case 3:
+                $class = 'badge bg-danger';
+                break;
+            case 2:
                 $class = 'badge bg-warning';
                 break;
             case 1:
                 $class = 'badge bg-success';
-                break;
-            case 2:
-                $class = 'badge bg-danger';
                 break;
         }
 

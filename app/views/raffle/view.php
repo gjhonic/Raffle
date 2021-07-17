@@ -2,6 +2,7 @@
 
 use yii\helpers\Url;
 use yii\helpers\Html;
+use app\widgets\RaffleStatusWidget;
 
 /* @var $model object */
 /* @var $author object */
@@ -14,7 +15,12 @@ $this->title = $model->title;
 </header>
 <section>
     <header class="main">
-        <h1><?=$model->title?></h1>
+        <h1>
+            <?=$model->title?>
+            <?php if(Yii::$app->user->identity->getId() === $model->user_id){ ?>
+                <?=RaffleStatusWidget::getIcon($model->status_id)?>
+            <?php } ?>
+        </h1>
     </header>
     <span class="image main"><img src="/app/media/src/raffle/pic11.jpg" alt=""></span>
     <time class="published">

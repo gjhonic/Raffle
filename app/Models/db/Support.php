@@ -65,7 +65,7 @@ class Support extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'title' => 'Название',
+            'title' => 'Тема',
             'description' => 'Описание',
             'user_id' => 'Пользователь',
             'status' => 'Статус',

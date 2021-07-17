@@ -1,7 +1,7 @@
 <?php
 
 use app\models\db\Support;
-use app\modules\admin\widget\SuportStatusWidget;
+use app\modules\admin\widgets\SuportStatusWidget;
 use yii\helpers\Html;
 use yii\helpers\Url;
 

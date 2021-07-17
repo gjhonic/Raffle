@@ -35,7 +35,7 @@ class SupportForm extends Model
     public function attributeLabels()
     {
         return [
-            'title' => 'Название',
+            'title' => 'Тема',
             'description' => 'Описание',
         ];
     }

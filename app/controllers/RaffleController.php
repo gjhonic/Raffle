@@ -120,7 +120,7 @@ class RaffleController extends Controller
     {
         if(($raffle = Raffle::findByCode($code)) == null){
             return $this->redirect(['index']);
-        }elseif($raffle->status_id !== Raffle::STATUS_APPROVED_ID){
+        }elseif(!(($raffle->status_id === Raffle::STATUS_APPROVED_ID) || (Yii::$app->user->identity->getId() === $raffle->user_id))){
             return $this->redirect(['index']);
         }
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\admin\widget;
+namespace app\modules\admin\widgets;
 
 use app\models\db\UserStatus;
 use yii\helpers\ArrayHelper;

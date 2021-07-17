@@ -2,7 +2,6 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
-use app\components\ModelWindow;
 use yii\helpers\Url;
 
 /* @var $model object */
