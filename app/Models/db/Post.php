@@ -16,7 +16,7 @@ use Yii;
 class Post extends \yii\db\ActiveRecord
 {
     /**
-     * {@inheritdoc}
+     * @return string
      */
     public static function tableName()
     {
@@ -24,7 +24,7 @@ class Post extends \yii\db\ActiveRecord
     }
 
     /**
-     * {@inheritdoc}
+     * @return array
      */
     public function rules()
     {
@@ -37,7 +37,7 @@ class Post extends \yii\db\ActiveRecord
     }
 
     /**
-     * {@inheritdoc}
+     * @return string[]
      */
     public function attributeLabels()
     {

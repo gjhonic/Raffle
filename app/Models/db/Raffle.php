@@ -4,6 +4,8 @@ namespace app\models\db;
 
 use Yii;
 use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveQuery;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "raffle".
@@ -49,7 +51,7 @@ class Raffle extends \yii\db\ActiveRecord
     /**
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             [['title', 'user_id', 'status_id', 'code'], 'required'],
@@ -67,7 +69,7 @@ class Raffle extends \yii\db\ActiveRecord
         ];
     }
 
-    public function behaviors()
+    public function behaviors(): array
     {
         return [
             TimestampBehavior::className(),
@@ -77,7 +79,7 @@ class Raffle extends \yii\db\ActiveRecord
     /**
      * @return string[]
      */
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
             'id' => 'ID',
@@ -99,9 +101,9 @@ class Raffle extends \yii\db\ActiveRecord
     /**
      * Gets query for [[Status]].
      *
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
-    public function getStatus()
+    public function getStatus(): ActiveQuery
     {
         return $this->hasOne(RaffleStatus::className(), ['id' => 'status_id']);
     }
@@ -118,9 +120,9 @@ class Raffle extends \yii\db\ActiveRecord
     /**
      * Gets query for [[RaffleTags]].
      *
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
-    public function getRaffleTags()
+    public function getRaffleTags(): ActiveQuery
     {
         return $this->hasMany(RaffleTag::className(), ['raffle_id' => 'id']);
     }
@@ -153,7 +155,7 @@ class Raffle extends \yii\db\ActiveRecord
      * @param $user_id int
      * @param $status_id int|null
      * @param $limit int
-     * @return array|\yii\db\ActiveRecord[]
+     * @return array|ActiveRecord[]
      */
     public static function findRaffleByUser($user_id, $status_id=null, $limit=10){
         if($status_id !== null){
@@ -174,7 +176,7 @@ class Raffle extends \yii\db\ActiveRecord
     /**
      * Метод возвращает конкурс по коду
      * @param string $code
-     * @return array|\yii\db\ActiveRecord|null
+     * @return array|ActiveRecord|null
      */
     public static function findByCode($code){
         return self::find()->where(['code' => $code])->one();
@@ -183,7 +185,7 @@ class Raffle extends \yii\db\ActiveRecord
     /**
      * Метод возвращает конкурс по коду
      * @param string $code
-     * @return array|\yii\db\ActiveRecord|null
+     * @return array|ActiveRecord|null
      * @throws \yii\db\Exception
      */
     public static function getRaffleByCode($code){
@@ -223,9 +225,9 @@ class Raffle extends \yii\db\ActiveRecord
     /**
      * Метод находит конкурсы по совпадению с запросом
      * @param $query
-     * @return array|\yii\db\ActiveRecord[]
+     * @return array|ActiveRecord[]
      */
-    public static function searchRaffles($query)
+    public static function searchRaffles($query): array
     {
         return self::find()
             ->where(['like', 'title', $query])

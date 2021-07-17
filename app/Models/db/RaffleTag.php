@@ -2,7 +2,7 @@
 
 namespace app\models\db;
 
-use Yii;
+use yii\db\ActiveQuery;
 
 /**
  * This is the model class for table "raffle_tag".
@@ -16,17 +16,17 @@ use Yii;
 class RaffleTag extends \yii\db\ActiveRecord
 {
     /**
-     * {@inheritdoc}
+     * @return string
      */
-    public static function tableName()
+    public static function tableName(): string
     {
         return 'raffle_tag';
     }
 
     /**
-     * {@inheritdoc}
+     * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             [['raffle_id', 'tag_id'], 'integer'],
@@ -36,9 +36,9 @@ class RaffleTag extends \yii\db\ActiveRecord
     }
 
     /**
-     * {@inheritdoc}
+     * @return string[]
      */
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
             'raffle_id' => 'Raffle ID',
@@ -49,7 +49,7 @@ class RaffleTag extends \yii\db\ActiveRecord
     /**
      * Gets query for [[Raffle]].
      *
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
     public function getRaffle()
     {
@@ -59,7 +59,7 @@ class RaffleTag extends \yii\db\ActiveRecord
     /**
      * Gets query for [[Tag]].
      *
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
     public function getTag()
     {

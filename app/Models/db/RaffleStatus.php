@@ -2,7 +2,7 @@
 
 namespace app\models\db;
 
-use Yii;
+use yii\db\ActiveQuery;
 
 /**
  * This is the model class for table "raffle_status".
@@ -15,17 +15,17 @@ use Yii;
 class RaffleStatus extends \yii\db\ActiveRecord
 {
     /**
-     * {@inheritdoc}
+     * @return string
      */
-    public static function tableName()
+    public static function tableName(): string
     {
         return 'raffle_status';
     }
 
     /**
-     * {@inheritdoc}
+     * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             [['title'], 'required'],
@@ -35,9 +35,9 @@ class RaffleStatus extends \yii\db\ActiveRecord
     }
 
     /**
-     * {@inheritdoc}
+     * @return string[]
      */
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
             'id' => 'ID',
@@ -48,7 +48,7 @@ class RaffleStatus extends \yii\db\ActiveRecord
     /**
      * Gets query for [[Raffles]].
      *
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
     public function getRaffles()
     {

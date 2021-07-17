@@ -61,7 +61,7 @@ class Support extends \yii\db\ActiveRecord
     /**
      * @return string[]
      */
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
             'id' => 'ID',
