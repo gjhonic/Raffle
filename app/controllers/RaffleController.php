@@ -116,15 +116,14 @@ class RaffleController extends Controller
      */
     public function actionView($code)
     {
-        if(($raffle = Raffle::findByCode($code)) == null){
+        if(($raffle = Raffle::getRaffleByCode($code)) == null){
             return $this->redirect(['index']);
-        }elseif(!(($raffle->status_id === Raffle::STATUS_APPROVED_ID) || (Yii::$app->user->identity->getId() === $raffle->user_id))){
+        }elseif(!(($raffle['raffle_status_id'] == Raffle::STATUS_APPROVED_ID) || (Yii::$app->user->identity->getId() == $raffle['user_id']))){
             return $this->redirect(['index']);
         }
 
         return $this->render('view', [
-            'model' => $raffle,
-            'author' => $raffle->getUser(),
+            'raffle' => $raffle,
         ]);
     }
 

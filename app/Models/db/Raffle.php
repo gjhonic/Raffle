@@ -130,23 +130,22 @@ class Raffle extends \yii\db\ActiveRecord
      * @return array|\yii\db\DataReader
      * @throws \yii\db\Exception
      */
-    public function getPopularRaffles(){
+    public static function getPopularRaffles(){
         $placeholders = [
             'status_id' => self::STATUS_APPROVED_ID,
         ];
-        $sql = "SELECT raffle.title as raffle_title,
-            raffle.short_description as raffle_short_description,
-            raffle.created_at as raffle_created_at,
-            raffle.code as raffle_code,
-            user.username as username,
-            user.code as user_code
+        $sql = "SELECT raffle.title AS raffle_title,
+            raffle.short_description AS raffle_short_description,
+            raffle.created_at AS raffle_created_at,
+            raffle.code AS raffle_code,
+            user.username AS username,
+            user.code AS user_code
          FROM raffle
          LEFT JOIN user ON raffle.user_id = user.id
          WHERE raffle.status_id = :status_id
          ORDER BY raffle.id DESC
          LIMIT 30";
         return Yii::$app->db->createCommand($sql, $placeholders)->queryAll();
-
     }
 
     /**
@@ -174,11 +173,37 @@ class Raffle extends \yii\db\ActiveRecord
 
     /**
      * Метод возвращает конкурс по коду
-     * @param $code
+     * @param string $code
      * @return array|\yii\db\ActiveRecord|null
      */
     public static function findByCode($code){
         return self::find()->where(['code' => $code])->one();
+    }
+
+    /**
+     * Метод возвращает конкурс по коду
+     * @param string $code
+     * @return array|\yii\db\ActiveRecord|null
+     * @throws \yii\db\Exception
+     */
+    public static function getRaffleByCode($code){
+        $placeholders = [
+            'raffle_code' => $code,
+        ];
+        $sql = "SELECT raffle.title AS raffle_title,
+            raffle.description AS raffle_description,
+            raffle.created_at AS raffle_created_at,
+            raffle.date_begin AS raffle_date_begin,
+            raffle.date_end AS raffle_date_end,
+            raffle.status_id AS raffle_status_id,
+            raffle.code AS raffle_code,
+            user.username AS username,
+            user.id AS user_id,
+            user.code AS user_code
+         FROM raffle
+         LEFT JOIN user ON raffle.user_id = user.id
+         WHERE raffle.code = :raffle_code";
+        return Yii::$app->db->createCommand($sql, $placeholders)->queryOne();
     }
 
     /**

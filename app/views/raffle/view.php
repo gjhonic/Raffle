@@ -4,50 +4,49 @@ use yii\helpers\Url;
 use yii\helpers\Html;
 use app\widgets\RaffleStatusWidget;
 
-/* @var $model object */
-/* @var $author object */
-$this->title = $model->title;
+/* @var $raffle array */
+$this->title = $raffle['raffle_title'];
 ?>
 
 <header id="header">
-    <a href="#" class="logo"><span onclick="window.location.replace('<?=URL::to('/raffle/index')?>');">Конкурсы / </span><?=$model->code?></a>
-    <p class="icons"><?=date('m.d.Y', $model->created_at)?></p>
+    <a href="#" class="logo"><span onclick="window.location.replace('<?=URL::to('/raffle/index')?>');">Конкурсы / </span><?=$raffle['raffle_code']?></a>
+    <p class="icons"><?=date('m.d.Y', $raffle['raffle_created_at'])?></p>
 </header>
 <section>
     <header class="main">
         <h1>
-            <?=$model->title?>
-            <?php if(Yii::$app->user->identity->getId() === $model->user_id){ ?>
-                <?=RaffleStatusWidget::getIcon($model->status_id)?>
+            <h1><?= Html::encode($this->title) ?></h1>
+            <?php if(Yii::$app->user->identity->getId() === $raffle['user_id']){ ?>
+                <?=RaffleStatusWidget::getIcon($raffle['raffle_status_id'])?>
             <?php } ?>
         </h1>
     </header>
     <span class="image main"><img src="/app/media/src/raffle/pic11.jpg" alt=""></span>
     <time class="published">
         <?php
-            if($model->date_begin !== null){
-                echo $model->date_begin;
+            if($raffle['raffle_date_begin']!== null){
+                echo $raffle['raffle_date_begin'];
             }else{
                 echo "???";
             }
         ?>
             -
         <?php
-            if($model->date_end !== null){
-                echo $model->date_end;
+            if($raffle['raffle_date_end']!== null){
+                echo $raffle['raffle_date_end'];
             }else{
                 echo "???";
             }
         ?>
     </time>
 
-    <p><?=$model->description?></p>
+    <p><?=$raffle['raffle_description']?></p>
 
     <p>
-        <?=Html::a('Автор:'.$author->username, URL::to('/profile').'/'.$author->code, ['class' => 'button'])?>
+        <?=Html::a('Автор:'.$raffle['username'], URL::to('/profile').'/'.$raffle['user_code'], ['class' => 'button'])?>
 
-        <?php if($model->user_id == Yii::$app->user->identity->getId()) {
-            echo Html::a('Редактировать', URL::to('/raffle/update/').$model->code, ['class' => 'button']);
+        <?php if($raffle['user_id'] == Yii::$app->user->identity->getId()) {
+            echo Html::a('Редактировать', URL::to('/raffle/update/').$raffle['raffle_code'], ['class' => 'button']);
         } ?>
     </p>
     <br>
