@@ -18,7 +18,6 @@ class FrontendAsset extends AssetBundle
         'css/main.css',
     ];
     public $js = [
-        'js/jquery.min.js',
         'js/browser.min.js',
         'js/breakpoints.min.js',
         'js/util.js',

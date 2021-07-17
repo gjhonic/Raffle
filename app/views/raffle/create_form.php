@@ -63,6 +63,27 @@ use mihaildev\ckeditor\CKEditor;
         </div>
     </div>
 
+    <h5>Теги</h5>
+    <div class="form-group">
+        <textarea name="RaffleForm[tags]" rows="3" id="textarea-tags" style="font-size: 15px; resize: none;" maxlength="255" disabled></textarea>
+    </div>
+    <p>
+    <div class="row">
+        <div class="col-6 col-12-small">
+            <p>
+                <input type="text" id="input-tag" placeholder="Введите новый тег" maxlength='25'>
+            </p>
+        </div>
+        <div class="col-6 col-12-small">
+            <p>
+                <span class="button primary fit" onclick="addTag()">Добавить тег</span>
+            </p>
+        </div>
+        <span>Теги нужны, с ними пользователи смогут быстрее найти ваш конкурс</span>
+    </div>
+    </p>
+
+
     <p>
         <br>
         <?= Html::submitButton($but_title, ['class' => 'button large fit']) ?>
@@ -78,6 +99,18 @@ use mihaildev\ckeditor\CKEditor;
         for ( let i = 0; i < 25; i++ ) {
             result += characters.charAt(Math.floor(Math.random() * charactersLength));
         }
-        document.getElementById('input-code').value = result;
+        $('#input-code').val(result);
+    }
+
+    function addTag(){
+        let tags = $('#textarea-tags').val();
+        let tag = $('#input-tag').val();
+        let tags_added = tags+" #"+tag;
+        if(tags_added.length <= 255){
+            $('#textarea-tags').val(tags+" #"+tag);
+            $('#input-tag').val('');
+        }else{
+            alert("Слишком много тегов");
+        }
     }
 </script>
