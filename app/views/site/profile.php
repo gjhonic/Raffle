@@ -23,33 +23,30 @@ $this->title = 'Профиль '.$user->username;
     </ul>
 </header>
 
-<section id="banner">
-    <div class="content">
-        <header>
-            <h1>
-                <?php if(($hello_message = $user->getHelloMessage()) !== null) { ?>
-                    <?=$hello_message?>
-                <?php }else{ ?>
-                    Привет я, <?=$user->surname." ".$user->name?>
-                <?php } ?>
-            </h1>
-            <p></p>
-        </header>
-        <p>
-            <?php if(($about_message = $user->getAboutMessage()) !== null){ ?>
-                <?=$about_message?>
+<section>
+    <header class="main">
+        <h1>
+            <?php if(($hello_message = $user->getHelloMessage()) !== null) { ?>
+                <?=$hello_message?>
             <?php }else{ ?>
-                Я просто веселый человег!)
-            <?php }?>
-        </p>
-    </div>
-    <span class="image object">
+                Привет я, <?=$user->surname." ".$user->name?>
+            <?php } ?>
+        </h1>
+    </header>
+    <span class="image main">
         <?php if($user->existAva()){ ?>
             <img src="images/pic10.jpg" alt="" />
         <?php }else{ ?>
-            <img src="/app/media/avatars/default_ava.png" alt="" />
+            <img src="/app/media/src/raffle/pic11.jpg" alt="">
         <?php } ?>
     </span>
+    <h3>
+        <?php if(($about_message = $user->getAboutMessage()) !== null){ ?>
+            <?=$about_message?>
+        <?php }else{ ?>
+            Я просто веселый человег!)
+        <?php }?>
+    </h3>
 </section>
 
 <?php if($user->id === Yii::$app->user->identity->getId()) { ?>

@@ -7,7 +7,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\URL;
 
-$this->title = 'Настройка';
+$this->title = 'Настройки';
 
 ?>
 <header id="header">

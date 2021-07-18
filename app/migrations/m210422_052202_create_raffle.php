@@ -17,6 +17,7 @@ class m210422_052202_create_raffle extends Migration
             'title' => $this->string(255)->notNull(),
             'short_description' => $this->text(),
             'description' => $this->text(),
+            'note' => $this->text(),
             'user_id' => $this->integer()->notNull(),
             'video_link' => $this->string(255),
             'image_src' => $this->string(255),

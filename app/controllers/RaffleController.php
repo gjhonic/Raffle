@@ -47,6 +47,12 @@ class RaffleController extends Controller
                         'actions' => ['create', 'update', 'delete'],
                         'roles' => [User::ROLE_USER, User::ROLE_MODERATOR, User::ROLE_ADMIN],
                     ],
+                    //AJAX
+                    [
+                        'allow' => true,
+                        'actions' => ['save-note'],
+                        'roles' => [User::ROLE_USER, User::ROLE_MODERATOR, User::ROLE_ADMIN],
+                    ]
                 ],
             ],
         ];
@@ -65,6 +71,11 @@ class RaffleController extends Controller
                 die;
             }
         }
+        //TODO сделать отправку scrf токена
+        if($action->id == 'save-note'){
+            $this->enableCsrfValidation = false;
+        }
+
         return parent::beforeAction($action);
     }
 
@@ -194,6 +205,33 @@ class RaffleController extends Controller
         return $this->render('update', [
             'model' => $model,
         ]);
+    }
 
+    /**
+     * Метод сохраняет заметку к конкурсу (AJAX)
+     * @param integer $client_id
+     * @return false|string
+     */
+    public function actionSaveNote()
+    {
+        if(!\Yii::$app->request->isAjax){
+            return false;
+        }
+        $note = Yii::$app->request->post('note');
+        $raffle_code = Yii::$app->request->post('raffle_code');
+
+        if(($raffle = Raffle::findByCode($raffle_code)) == null){
+            return false;
+        }
+        if(!$raffle->isAuthor()){
+            return false;
+        }
+
+        if(trim($note) != ''){
+            $raffle->note = trim($note);
+            return $raffle->update();
+        }else{
+            return false;
+        }
     }
 }

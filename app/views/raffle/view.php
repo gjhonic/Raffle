@@ -44,19 +44,79 @@ $this->title = $raffle['raffle_title'];
 
     <div class="box-tags">
         <h4>Теги: </h4>
-        <?php foreach ($Tags as $tag) { ?>
-            <a class="button small" href="<?=Url::to('/raffle-by-tag/').$tag['tag_title']?>"><?=$tag['tag_title']?></a>
-        <?php } ?>
+        <div style="overflow-x: auto; display:flex;">
+            <?php foreach ($Tags as $tag) { ?>
+                <a class="button small" href="<?=Url::to('/raffle-by-tag/').$tag['tag_title']?>" style="margin-right: 10px;"><?=$tag['tag_title']?></a>
+            <?php } ?>
+        </div>
     </div>
 
     <p><?=$raffle['raffle_description']?></p>
 
     <p>
-        <?=Html::a('Автор:'.$raffle['username'], URL::to('/profile').'/'.$raffle['user_code'], ['class' => 'button'])?>
+        <div style="overflow-x: auto; display:flex;">
+            <?=Html::a('Автор:'.$raffle['username'], URL::to('/profile').'/'.$raffle['user_code'], ['class' => 'button', 'style'=>'margin-right: 10px'])?>
 
-        <?php if($raffle['user_id'] == Yii::$app->user->identity->getId()) {
-            echo Html::a('Редактировать', URL::to('/raffle/update/').$raffle['raffle_code'], ['class' => 'button']);
-        } ?>
+            <?php if($raffle['user_id'] == Yii::$app->user->identity->getId()) { ?>
+                <?=Html::a('Редактировать', URL::to('/raffle/update/').$raffle['raffle_code'], ['class' => 'button', 'style'=>'margin-right: 10px'])?>
+                <span class="button" onclick="showNote()">Показать заметку</span>
+            <?php } ?>
+        </div>
+    <p>
+    <p>
+
+        <?php if($raffle['user_id'] == Yii::$app->user->identity->getId()) { ?>
+            <div id="div-input-note">
+                <h3><label for="input-note">
+                        Заметка к конкурсу
+                        <span id="load-save-note" style="color: grey"></span>
+                        <span id="error-save-note" style="color: red"></span>
+                    </label>
+                </h3>
+                <textarea name="" id="input-note" cols="30" rows="10"><?=$raffle['raffle_note']?></textarea><br>
+                <span class="button fit" onclick="saveRaffleNote()">Сохранить</span><br>
+                <span>Эту заметку видит только автор конкурса</span>
+
+            </div>
+
+            <script>
+
+                function showNote(){
+                    $("#div-input-note").show();
+                }
+
+                function saveRaffleNote(){
+                    let note = $("#input-note").val();
+                    $.ajax({
+                        url: '/raffle/save-note',
+                        type: 'POST',
+                        dataType: 'json',
+                        data: {raffle_code: '<?=$raffle['raffle_code']?>', note: note},
+                        success: function(res){
+                            let timerId = setInterval(() => addPointForLoading(), 300);
+                            setTimeout(() => {clearInterval(timerId); clearLoading();}, 1000);
+                        },
+                        error: function(){
+                            let timerId = setInterval(() => addPointForLoading(), 300);
+                            setTimeout(() => {clearInterval(timerId); errorSaveNote();}, 1000);
+                        }
+                    });
+                }
+
+                function addPointForLoading(){
+                    $("#load-save-note").html($("#load-save-note").html()+' .');
+                }
+                function clearLoading(){
+                    $("#load-save-note").html('');
+                }
+                function errorSaveNote(){
+                    $("#error-save-note").html('Ошибка сохранения');
+                }
+
+                $("#div-input-note").hide();
+            </script>
+        <?php } ?>
     </p>
+
     <br>
 </section>

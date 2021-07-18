@@ -14,6 +14,7 @@ use yii\db\ActiveRecord;
  * @property string $title
  * @property string|null $short_description
  * @property string|null $description
+ * @property string|null $note
  * @property int $user_id
  * @property string|null $video_link
  * @property string|null $image_src
@@ -57,9 +58,9 @@ class Raffle extends \yii\db\ActiveRecord
     {
         return [
             [['title', 'user_id', 'status_id', 'code'], 'required'],
-            [['short_description'], 'string', 'max' => 1000],
+            [['short_description', 'note'], 'string', 'max' => 1000],
             [['description'], 'string', 'max' => 5000],
-            [['description', 'short_description', 'title'], 'trim'],
+            [['description', 'short_description', 'title', 'note'], 'trim'],
             [['user_id', 'status_id'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['title', 'video_link', 'image_src'], 'string', 'max' => 255],
@@ -171,6 +172,15 @@ class Raffle extends \yii\db\ActiveRecord
             }
             RaffleTag::add($this->id, $raffle_tag->id);
         }
+    }
+
+    /**
+     * Метод проверяет является ли пользователь автором конкурса
+     * @return bool
+     */
+    public function isAuthor(): bool
+    {
+        return (Yii::$app->user->identity->getId() == $this->user_id);
     }
 
     /**
@@ -291,6 +301,7 @@ class Raffle extends \yii\db\ActiveRecord
             raffle.date_begin AS raffle_date_begin,
             raffle.date_end AS raffle_date_end,
             raffle.status_id AS raffle_status_id,
+            raffle.note AS raffle_note,
             raffle.code AS raffle_code,
             user.username AS username,
             user.id AS user_id,
