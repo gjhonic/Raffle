@@ -33,15 +33,17 @@ use yii\helpers\URL;
                     <div class="meta">
                         <time class="published" datetime="2015-11-01"><?=date('j F, Y', $raffle['raffle_created_at'])?></time>
                     </div>
-                    <div class="meta">
-                        Автор: <a href="<?=URL::to('/profile/').$raffle['user_code']?>" class="author"><?=$raffle['username']?></a>
-                    </div>
                 </header>
 
                 <p><?=$raffle['raffle_short_description']?></p>
                 <footer>
                     <ul class="actions">
-                        <li><a href="<?=URL::to('/show/').$raffle['raffle_code']?>" class="button large">Подробнее...</a></li>
+                        <li>
+                            <a href="<?=URL::to('/show/').$raffle['raffle_code']?>" class="button">Подробнее...</a>
+                        </li>
+                        <li>
+                            <?=Html::a('Автор: '.$raffle['username'], URL::to('/profile').'/'.$raffle['user_code'], ['class' => 'button',])?>
+                        </li>
                     </ul>
                 </footer>
             </article>

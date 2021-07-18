@@ -59,7 +59,8 @@ $this->title = $raffle['raffle_title'];
 
             <?php if($raffle['user_id'] == Yii::$app->user->identity->getId()) { ?>
                 <?=Html::a('Редактировать', URL::to('/raffle/update/').$raffle['raffle_code'], ['class' => 'button', 'style'=>'margin-right: 10px'])?>
-                <span class="button" onclick="showNote()">Показать заметку</span>
+                <span class="button" id="button-show-note" onclick="showNote()">Показать заметку</span>
+                <span class="button" id="button-hide-note" onclick="hideNote()">Скрыть заметку</span>
             <?php } ?>
         </div>
     <p>
@@ -80,9 +81,15 @@ $this->title = $raffle['raffle_title'];
             </div>
 
             <script>
-
                 function showNote(){
                     $("#div-input-note").show();
+                    $("#button-show-note").hide();
+                    $("#button-hide-note").show();
+                }
+                function hideNote(){
+                    $("#div-input-note").hide();
+                    $("#button-show-note").show();
+                    $("#button-hide-note").hide();
                 }
 
                 function saveRaffleNote(){
@@ -114,10 +121,9 @@ $this->title = $raffle['raffle_title'];
                     $("#error-save-note").html('Ошибка сохранения');
                 }
 
-                $("#div-input-note").hide();
+                hideNote();
             </script>
         <?php } ?>
     </p>
-
     <br>
 </section>

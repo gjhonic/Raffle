@@ -1,8 +1,8 @@
 <?php
 
-/* @var $Raffles \app\models\db\Raffle */
-/* @var $Users \app\models\db\User */
-/* @var $Tags \app\models\db\Tag */
+/* @var $Raffles array */
+/* @var $Users array */
+/* @var $Tags array */
 /* @var $query string */
 
 use yii\helpers\Html;
@@ -35,19 +35,33 @@ $this->title = 'Поиск по запросу '.$query;
     </p>
     <div id="content-raffles">
         <?php if($Raffles) { ?>
-            <div class="posts">
-                <?php foreach ($Raffles as $raffle){ ?>
-                    <article>
-                        <a href="#" class="image"><img src="images/pic01.jpg" alt="" /></a>
-                        <div class="image fit"><img src="/app/media/src/raffle/pic11.jpg" alt=""></div>
-                        <h3><?=$raffle->title?></h3>
-                        <p><?=$raffle->short_description?></p>
-                        <ul class="actions">
-                            <li><a href="<?=URL::to('/show/').$raffle->code?>" class="button large">Подробнее...</a></li>
-                        </ul>
+            <?php foreach ($Raffles as $raffle){ ?>
+                <div class="box">
+                    <article class="post">
+                        <header>
+                            <div class="title">
+                                <h2><a href="<?=URL::to('/show/').$raffle['raffle_code']?>"><?=$raffle['raffle_title']?></a></h2>
+                            </div>
+
+                            <div class="meta">
+                                <time class="published" datetime="2015-11-01"><?=date('j F, Y', $raffle['raffle_created_at'])?></time>
+                            </div>
+                        </header>
+
+                        <p><?=$raffle['raffle_short_description']?></p>
+                        <footer>
+                            <ul class="actions">
+                                <li>
+                                    <a href="<?=URL::to('/show/').$raffle['raffle_code']?>" class="button">Подробнее...</a>
+                                </li>
+                                <li>
+                                    <?=Html::a('Автор: '.$raffle['username'], URL::to('/profile').'/'.$raffle['user_code'], ['class' => 'button',])?>
+                                </li>
+                            </ul>
+                        </footer>
                     </article>
-                <?php } ?>
-            </div>
+                </div>
+            <?php } ?>
         <?php }else{ ?>
             <article>
                 <p>Конкурсов не нашел</p>
@@ -62,7 +76,7 @@ $this->title = 'Поиск по запросу '.$query;
                     <article>
                         <a href="#" class="image"><img src="images/pic01.jpg" alt="" /></a>
                         <div class="image fit"><img src="/app/media/src/raffle/pic11.jpg" alt=""></div>
-                        <h3><a href="/profile/<?=$user->code?>"><?=$user->username?></a></h3>
+                        <h3><a href="/profile/<?=$user['code']?>"><?=$user['username']?></a></h3>
                     </article>
                 <?php } ?>
             </div>
@@ -78,7 +92,7 @@ $this->title = 'Поиск по запросу '.$query;
             <div class="posts">
                 <?php foreach ($Tags as $tag){ ?>
                     <article>
-                        <a class="button large" href="<?=Url::to('/raffle-by-tag/').$tag->title?>" title="Показать конкурсы с тегом: <?=$tag->title?>"><?=$tag->title?></a>
+                        <a class="button large" href="<?=Url::to('/raffle-by-tag/').$tag['title']?>" title="Показать конкурсы с тегом: <?=$tag['title']?>"><?=$tag['title']?></a>
                     </article>
                 <?php } ?>
             </div>
@@ -91,6 +105,7 @@ $this->title = 'Поиск по запросу '.$query;
 </div>
 
 <script>
+    //TODO переписать в jquery
     function showRaffles(){
         document.getElementById('head-content').innerHTML = 'Конкурсы';
 

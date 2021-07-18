@@ -5,12 +5,13 @@ use yii\grid\GridView;
 use yii\helpers\Url;
 use yii\widgets\Pjax;
 use app\models\db\User;
-use app\modules\admin\widgets\RaffleStatusWidget;
+use app\widgets\RaffleStatusWidget;
 
 /* @var $dataProvider \yii\db\ActiveRecord */
 /* @var $user \app\models\db\User */
 
 $this->title = 'Конкурсы от '.$user->username;
+//TODO в array columns формировать отдельно
 ?>
 <div class="user-index">
 
@@ -33,9 +34,8 @@ $this->title = 'Конкурсы от '.$user->username;
                     ],
                     [
                         'attribute' => 'status_id',
-                        'filter' => RaffleStatusWidget::statusList(),
                         'value' => function ($data) {
-                            return RaffleStatusWidget::statusLabel($data->status_id);
+                            return RaffleStatusWidget::getLabel($data->status_id);
                         },
                         'format' => 'raw',
                     ],

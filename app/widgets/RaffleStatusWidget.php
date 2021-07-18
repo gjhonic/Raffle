@@ -8,6 +8,11 @@ use yii\helpers\Html;
 
 class RaffleStatusWidget
 {
+    /**
+     * Метод возвращает иконки стотуса конкуса
+     * @param $status_id
+     * @return string
+     */
     public static function getIcon($status_id): string
     {
         $class = "";
@@ -29,4 +34,29 @@ class RaffleStatusWidget
         return '<a class="icon solid '.$class.'" title="'.$title.'"></a>';
     }
 
+    /**
+     * Метод возвразает цветной текстовый статус конкуса
+     * @param $status_id
+     * @return string
+     */
+    public static function getLabel($status_id): string
+    {
+        $color = "";
+        $title = "";
+        switch ($status_id) {
+            case 3:
+                $color = 'red';
+                $title = "Запрещено!";
+                break;
+            case 2:
+                $color = 'orange';
+                $title = "На проверке!";
+                break;
+            case 1:
+                $color = 'green';
+                $title = "Опубликованно!";
+                break;
+        }
+        return "<span style='color:".$color."'>$title</span>";
+    }
 }

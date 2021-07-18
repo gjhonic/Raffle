@@ -72,8 +72,14 @@ class Tag extends \yii\db\ActiveRecord
      */
     public static function searchTags($query)
     {
-        return self::find()
-            ->where(['title' => $query])
-            ->all();
+        $placeholders = [
+            'query' => '%'.$query.'%'
+        ];
+        $sql = "SELECT tag.title
+         FROM tag
+         WHERE (tag.title LIKE :query)
+         ORDER BY tag.id DESC
+         LIMIT 30";
+        return Yii::$app->db->createCommand($sql, $placeholders)->queryAll();
     }
 }
