@@ -29,22 +29,21 @@ use mihaildev\ckeditor\CKEditor;
     <input type="hidden" name="code_old" value="<?=$model->code?>">
 
     <p>
-    <h5>Код</h5>
-    <div class="row">
-        <div class="col-6 col-12-small">
-            <p>
-                <input type="text" id="input-code" name="RaffleForm[code]" maxlength='25' value="<?=$model->code?>">
-            </p>
+        <h5>Код</h5>
+        <div class="row">
+            <div class="col-6 col-12-small">
+                <p>
+                    <input type="text" id="input-code" name="RaffleForm[code]" maxlength='25' value="<?=$model->code?>">
+                </p>
+            </div>
+            <div class="col-6 col-12-small">
+                <p>
+                    <span class="button primary fit" onclick="codeGenerate()">Сгенерировать код</span>
+                </p>
+            </div>
+            <span>Отображается в адресной строке, оставьте пустым и произойдет автоматическая генерация</span>
         </div>
-        <div class="col-6 col-12-small">
-            <p>
-                <span class="button primary fit" onclick="codeGenerate()">Сгенерировать код</span>
-            </p>
-        </div>
-        <span>Отображается в адресной строке, оставьте пустым и произойдет автоматическая генерация</span>
-    </div>
     </p>
-
 
     <div class="row">
         <div class="col-6 col-12-small">
@@ -65,6 +64,26 @@ use mihaildev\ckeditor\CKEditor;
         </div>
     </div>
 
+    <h5>Теги</h5>
+    <div class="form-group">
+        <textarea name="RaffleForm[tags]" rows="3" id="textarea-tags" style="font-size: 15px; resize: none;" maxlength="255" readonly><?=$model->tags?></textarea>
+    </div>
+    <p>
+        <div class="row">
+            <div class="col-6 col-12-small">
+                <p>
+                    <input type="text" id="input-tag" placeholder="Введите новый тег" maxlength='25'>
+                </p>
+            </div>
+            <div class="col-6 col-12-small">
+                <p>
+                    <span class="button primary fit" onclick="addTag()">Добавить тег</span>
+                </p>
+            </div>
+            <span>Теги нужны, с ними пользователи смогут быстрее найти ваш конкурс</span>
+        </div>
+    </p>
+
 
     <p>
         <br>
@@ -81,6 +100,24 @@ use mihaildev\ckeditor\CKEditor;
         for ( let i = 0; i < 25; i++ ) {
             result += characters.charAt(Math.floor(Math.random() * charactersLength));
         }
-        document.getElementById('input-code').value = result;
+        $('#input-code').val(result);
+    }
+
+    function addTag(){
+        let tags = $('#textarea-tags').val();
+        let tag = $('#input-tag').val();
+        tag = tag.trim();
+        let new_tag = tag.split(' ').join('_');
+        let tags_added = tags+" #"+new_tag;
+        if( tag !== ''){
+            if(tags_added.length <= 255){
+                $('#textarea-tags').val(tags_added);
+                $('#input-tag').val('');
+            }else{
+                alert("Слишком много тегов");
+            }
+        }else{
+            $('#input-tag').val('');
+        }
     }
 </script>

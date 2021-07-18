@@ -78,9 +78,7 @@ $this->title = 'Поиск по запросу '.$query;
             <div class="posts">
                 <?php foreach ($Tags as $tag){ ?>
                     <article>
-                        <a href="#" class="image"><img src="images/pic01.jpg" alt="" /></a>
-                        <div class="image fit"><img src="/app/media/src/raffle/pic11.jpg" alt=""></div>
-                        <h3><?=$tag->title?></h3>
+                        <a class="button large" href="<?=Url::to('/raffle-by-tag/').$tag->title?>" title="Показать конкурсы с тегом: <?=$tag->title?>"><?=$tag->title?></a>
                     </article>
                 <?php } ?>
             </div>

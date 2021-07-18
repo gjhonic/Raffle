@@ -28,20 +28,20 @@ use mihaildev\ckeditor\CKEditor;
     </p>
 
     <p>
-    <h5>Код</h5>
-    <div class="row">
-        <div class="col-6 col-12-small">
-            <p>
-                <input type="text" id="input-code" placeholder="Код" name="RaffleForm[code]" maxlength='25'>
-            </p>
+        <h5>Код</h5>
+        <div class="row">
+            <div class="col-6 col-12-small">
+                <p>
+                    <input type="text" id="input-code" placeholder="Код" name="RaffleForm[code]" maxlength='25'>
+                </p>
+            </div>
+            <div class="col-6 col-12-small">
+                <p>
+                    <span class="button primary fit" onclick="codeGenerate()">Сгенерировать код</span>
+                </p>
+            </div>
+            <span>Отображается в адресной строке, оставьте пустым и произойдет автоматическая генерация</span>
         </div>
-        <div class="col-6 col-12-small">
-            <p>
-                <span class="button primary fit" onclick="codeGenerate()">Сгенерировать код</span>
-            </p>
-        </div>
-        <span>Отображается в адресной строке, оставьте пустым и произойдет автоматическая генерация</span>
-    </div>
     </p>
 
     <div class="row">
@@ -68,19 +68,19 @@ use mihaildev\ckeditor\CKEditor;
         <textarea name="RaffleForm[tags]" rows="3" id="textarea-tags" style="font-size: 15px; resize: none;" maxlength="255" readonly></textarea>
     </div>
     <p>
-    <div class="row">
-        <div class="col-6 col-12-small">
-            <p>
-                <input type="text" id="input-tag" placeholder="Введите новый тег" maxlength='25'>
-            </p>
+        <div class="row">
+            <div class="col-6 col-12-small">
+                <p>
+                    <input type="text" id="input-tag" placeholder="Введите новый тег" maxlength='25'>
+                </p>
+            </div>
+            <div class="col-6 col-12-small">
+                <p>
+                    <span class="button primary fit" onclick="addTag()">Добавить тег</span>
+                </p>
+            </div>
+            <span>Теги нужны, с ними пользователи смогут быстрее найти ваш конкурс</span>
         </div>
-        <div class="col-6 col-12-small">
-            <p>
-                <span class="button primary fit" onclick="addTag()">Добавить тег</span>
-            </p>
-        </div>
-        <span>Теги нужны, с ними пользователи смогут быстрее найти ваш конкурс</span>
-    </div>
     </p>
 
 
@@ -118,7 +118,5 @@ use mihaildev\ckeditor\CKEditor;
         }else{
             $('#input-tag').val('');
         }
-
-
     }
 </script>

@@ -181,6 +181,7 @@ class RaffleController extends Controller
         }
 
         $model = new RaffleForm();
+        $model->code_old = $code_old;
 
         if(($raffle = Raffle::findByCode($code_old)) == null){
             return $this->redirect(['index']);

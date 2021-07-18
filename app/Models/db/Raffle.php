@@ -59,7 +59,7 @@ class Raffle extends \yii\db\ActiveRecord
             [['title', 'user_id', 'status_id', 'code'], 'required'],
             [['short_description'], 'string', 'max' => 1000],
             [['description'], 'string', 'max' => 5000],
-            [['description'], 'trim'],
+            [['description', 'short_description', 'title'], 'trim'],
             [['user_id', 'status_id'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['title', 'video_link', 'image_src'], 'string', 'max' => 255],
@@ -101,6 +101,20 @@ class Raffle extends \yii\db\ActiveRecord
     }
 
     /**
+     * @param bool $insert
+     * @return bool
+     */
+    public function afterSave($insert, $changedAttributes)
+    {
+        if(trim($this->tags_string) != ''){
+            $this->clearRaffleTags();
+            $this->addTagsFromString();
+        }
+
+        parent::afterSave($insert, $changedAttributes);
+    }
+
+    /**
      * Gets query for [[Status]].
      *
      * @return ActiveQuery
@@ -127,6 +141,15 @@ class Raffle extends \yii\db\ActiveRecord
     public function getRaffleTags(): ActiveQuery
     {
         return $this->hasMany(RaffleTag::className(), ['raffle_id' => 'id']);
+    }
+
+    public function clearRaffleTags()
+    {
+        $placeholders = [
+            'raffle_id' => $this->id
+        ];
+        $sql = "DELETE FROM raffle_tag WHERE raffle_id = :raffle_id";
+        return Yii::$app->db->createCommand($sql, $placeholders)->queryAll();
     }
 
     /**
