@@ -71,10 +71,6 @@ class RaffleController extends Controller
                 die;
             }
         }
-        //TODO сделать отправку scrf токена
-        if($action->id == 'save-note'){
-            $this->enableCsrfValidation = false;
-        }
 
         return parent::beforeAction($action);
     }

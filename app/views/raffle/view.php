@@ -87,18 +87,19 @@ $this->title = $raffle['raffle_title'];
 
                 function saveRaffleNote(){
                     let note = $("#input-note").val();
+                    let csrfToken = $('meta[name="csrf-token"]').attr("content");
                     $.ajax({
                         url: '/raffle/save-note',
                         type: 'POST',
                         dataType: 'json',
-                        data: {raffle_code: '<?=$raffle['raffle_code']?>', note: note},
+                        data: {raffle_code: '<?=$raffle['raffle_code']?>', note: note, _csrf: csrfToken},
                         success: function(res){
-                            let timerId = setInterval(() => addPointForLoading(), 300);
-                            setTimeout(() => {clearInterval(timerId); clearLoading();}, 1000);
+                            let timerId = setInterval(() => addPointForLoading(), 100);
+                            setTimeout(() => {clearInterval(timerId); clearLoading();}, 400);
                         },
                         error: function(){
-                            let timerId = setInterval(() => addPointForLoading(), 300);
-                            setTimeout(() => {clearInterval(timerId); errorSaveNote();}, 1000);
+                            let timerId = setInterval(() => addPointForLoading(), 100);
+                            setTimeout(() => {clearInterval(timerId); errorSaveNote();}, 400);
                         }
                     });
                 }
