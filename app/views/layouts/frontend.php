@@ -45,9 +45,9 @@ FrontendAsset::register($this);
 
                     <form method="get" action="<?=Url::to('/search')?>">
                         <?php if(($current_query = Yii::$app->request->get('q')) !== null){ ?>
-                            <input type="text" name="q" id="query" placeholder="Вы ищите: <?=$current_query?>" />
+                            <input type="text" name="q" id="input-search-by-site" placeholder="Вы ищите: <?=$current_query?>" />
                         <?php }else{?>
-                            <input type="text" name="q" id="query" placeholder="Поиск" />
+                            <input type="text" name="q" id="input-search-by-site" placeholder="Поиск" />
                         <?php }?>
                     </form>
             </section>

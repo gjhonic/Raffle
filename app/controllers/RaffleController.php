@@ -81,7 +81,18 @@ class RaffleController extends Controller
      */
     public function actionIndex()
     {
-        $Raffles = Raffle::getPopularRaffles();
+        $filter = [];
+        if(Yii::$app->request->get('filter-date') != ''){
+            $filter['filter-date'] = Yii::$app->request->get('filter-date');
+        }
+        if(Yii::$app->request->get('filter-abc') != ''){
+            $filter['filter-abc'] = Yii::$app->request->get('filter-abc');
+        }
+        if(Yii::$app->request->get('filter-group') != ''){
+            $filter['filter-group'] = Yii::$app->request->get('filter-group');
+        }
+
+        $Raffles = Raffle::getPopularRaffles($filter);
         return $this->render('index',[
             'Raffles' => $Raffles,
         ]);

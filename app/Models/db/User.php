@@ -276,11 +276,19 @@ class User extends \yii\db\ActiveRecord
      */
     public static function searchUsers($query)
     {
-        return self::find()
-            ->where(['like', 'name', $query])
-            ->orWhere(['like', 'surname', $query])
-            ->orWhere(['=', 'username', $query])
-            ->andWhere(['role_id' => User::ROLE_USER_ID])
-            ->all();
+        $placeholders = [
+            'query' => '%'.$query.'%',
+            'role_id' => User::ROLE_USER_ID
+        ];
+        $sql = "SELECT user.username,
+            user.code 
+         FROM user
+         WHERE (user.name LIKE :query)
+         OR (user.surname LIKE :query)
+         OR (user.username LIKE :query)
+         AND (user.role_id = :role_id)
+         ORDER BY user.id DESC
+         LIMIT 30";
+        return Yii::$app->db->createCommand($sql, $placeholders)->queryAll();
     }
 }
