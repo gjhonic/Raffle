@@ -50,7 +50,7 @@ class RaffleController extends Controller
                     //AJAX
                     [
                         'allow' => true,
-                        'actions' => ['save-note'],
+                        'actions' => ['save-note', 'get-raffles-json'],
                         'roles' => [User::ROLE_USER, User::ROLE_MODERATOR, User::ROLE_ADMIN],
                     ]
                 ],
@@ -82,17 +82,22 @@ class RaffleController extends Controller
     public function actionIndex()
     {
         $filter = [];
-        if(Yii::$app->request->get('filter-date') != ''){
-            $filter['filter-date'] = Yii::$app->request->get('filter-date');
+        $page = 0;
+        if(Yii::$app->request->get('filter_date') != ''){
+            $filter['filter-date'] = Yii::$app->request->get('filter_date');
         }
-        if(Yii::$app->request->get('filter-abc') != ''){
-            $filter['filter-abc'] = Yii::$app->request->get('filter-abc');
+        if(Yii::$app->request->get('filter_abc') != ''){
+            $filter['filter-abc'] = Yii::$app->request->get('filter_abc');
         }
-        if(Yii::$app->request->get('filter-group') != ''){
-            $filter['filter-group'] = Yii::$app->request->get('filter-group');
+        if(Yii::$app->request->get('filter_group') != ''){
+            $filter['filter-group'] = Yii::$app->request->get('filter_group');
+        }
+        if(Yii::$app->request->get('page') != ''){
+            $page = Yii::$app->request->get('page');
         }
 
-        $Raffles = Raffle::getPopularRaffles($filter);
+
+        $Raffles = Raffle::getPopularRaffles($filter, $page);
         return $this->render('index',[
             'Raffles' => $Raffles,
         ]);
@@ -240,5 +245,30 @@ class RaffleController extends Controller
         }else{
             return false;
         }
+    }
+
+    /**
+     * Возвращает список конкурсов по json
+     * @return false|string
+     * @throws \yii\db\Exception
+     */
+    public function actionGetRafflesJson()
+    {
+        return false;
+        $filter = [];
+        $page = 0;
+        if(Yii::$app->request->get('filter_date') != ''){
+            $filter['filter-date'] = Yii::$app->request->get('filter_date');
+        }
+        if(Yii::$app->request->get('filter_abc') != ''){
+            $filter['filter-abc'] = Yii::$app->request->get('filter_abc');
+        }
+        if(Yii::$app->request->get('filter_group') != ''){
+            $filter['filter-group'] = Yii::$app->request->get('filter_group');
+        }
+        if(Yii::$app->request->get('page') != ''){
+            $page = Yii::$app->request->get('page');
+        }
+        return json_encode(Raffle::getPopularRaffles($filter, $page));
     }
 }
