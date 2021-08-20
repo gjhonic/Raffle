@@ -258,12 +258,12 @@ class Raffle extends \yii\db\ActiveRecord
 
         if($page > 0){
             $count = 5;
-            $offset = 30 + ($page-1) * $count;
+            $offset = 20 + ($page-1) * $count;
             $placeholders['offset'] = $offset;
             $placeholders['count'] = $count;
             $sql .=" LIMIT :offset, :count";
         }else{
-            $sql .=" LIMIT 30";
+            $sql .=" LIMIT 20";
         }
 
         return Yii::$app->db->createCommand($sql, $placeholders)->queryAll();

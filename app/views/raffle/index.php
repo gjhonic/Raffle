@@ -145,8 +145,12 @@ use yii\helpers\URL;
             success: function(res){
                 $('#load-head').html('Загрузка');
                 let timerId = setInterval(() => addPointForLoading(), 200);
-                setTimeout(() => {clearInterval(timerId); clearLoading(); setRaffleFromLoad(res); }, 700);
-                page++;
+                if(res['data'] == false){
+                    setTimeout(() => {clearInterval(timerId); clearLoading(); endRaffles(); }, 700);
+                    page++;
+                }else{
+                    setTimeout(() => {clearInterval(timerId); clearLoading(); setRaffleFromLoad(res['data']); }, 700);
+                }
             },
             error: function(){
                 $('#load-head').html('Загрузка');
@@ -156,16 +160,16 @@ use yii\helpers\URL;
         });
     }
 
-    function setRaffleFromLoad(raffle){
+    function setRaffleFromLoad(raffles){
         for(let i = 0; i<10; i++){
-            let raffle_title = raffle[i].raffle_title;
-            let raffle_code = raffle[i].raffle_code;
-            let raffle_short_description = raffle[i].raffle_short_description;
-            let raffle_created_at = raffle[i].raffle_created_at;
+            let raffle_title = raffles[i].raffle_title;
+            let raffle_code = raffles[i].raffle_code;
+            let raffle_short_description = raffles[i].raffle_short_description;
+            let raffle_created_at = raffles[i].raffle_created_at;
             let d = new Date(raffle_created_at*1000);
             raffle_created_at = d.getDate() + '.' + (d.getMonth()+1) + '.' + d.getFullYear();
-            let username = raffle[i].username;
-            let user_code = raffle[i].user_code;
+            let username = raffles[i].username;
+            let user_code = raffles[i].user_code;
 
             $("#box-raffles").append("<div class='box'><article class='post'>" +
                 "<header> <div class='title'><h2>" +
@@ -178,7 +182,6 @@ use yii\helpers\URL;
         }
     }
 
-
     function addPointForLoading(){
         $("#load-head").html($("#load-head").html()+' .');
     }
@@ -187,6 +190,9 @@ use yii\helpers\URL;
     }
     function errorLoadRaffles(){
         $("#load-head").html('<span style="color:red">Ошибка загрузки</span>');
+    }
+    function endRaffles(){
+        $("#load-head").html('<span style="color:grey">Больше нет конкурсов</span>');
     }
 
 </script>

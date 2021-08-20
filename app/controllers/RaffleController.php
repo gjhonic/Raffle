@@ -254,7 +254,6 @@ class RaffleController extends Controller
      */
     public function actionGetRafflesJson()
     {
-        return false;
         $filter = [];
         $page = 0;
         if(Yii::$app->request->get('filter_date') != ''){
@@ -269,6 +268,10 @@ class RaffleController extends Controller
         if(Yii::$app->request->get('page') != ''){
             $page = Yii::$app->request->get('page');
         }
-        return json_encode(Raffle::getPopularRaffles($filter, $page));
+        if(($raffles = Raffle::getPopularRaffles($filter, $page)) != null){
+            return json_encode(['data' => $raffles]);
+        }else{
+            return json_encode(['data' => false]);
+        }
     }
 }
