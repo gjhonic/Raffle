@@ -16,8 +16,10 @@ return [
     'admin/<action:\w+>' => 'admin/main/<action>',
 
     //URLs на Api module
-    'api' => 'api/main/index',
-    'api/<action:\w+>' => 'admin/main/<action>',
+    'api' => 'api/open/main/index',
+    'api/shut/<action:\w+>' => 'api/shut/main/<action>', // На закрытый api - для системы, бота
+    'api/shut/<controller:\w+>/<action:\w+>' => 'api/shut/<controller>/<action>',
+    'api/<controller:\w+>/<action:\w+>' => 'api/open/<controller>/<action>', // На публичный api
 
     //URLs на SiteController
     'profile/<code>' => 'site/profile',

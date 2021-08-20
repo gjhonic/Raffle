@@ -73,6 +73,14 @@ $config = [
         ],
         'api' => [
             'class' => 'app\modules\api\ApiModule',
+            'modules' => [
+                'open' => [
+                    'class' => 'app\modules\api\modules\open\ApiOpenModule',
+                ],
+                'shut' => [
+                    'class' => 'app\modules\api\modules\shut\ApiShutModule',
+                ],
+            ],
         ],
     ],
     'params' => $params,

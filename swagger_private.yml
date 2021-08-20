@@ -1,0 +1,106 @@
+openapi: 3.0.0
+info:
+  title: Raffle.ru
+  description: "Закрытое API для Администраторов сервиса"
+  version: 1.0
+
+servers:
+  - url: http://raffle.local/api/shut
+    description: ""
+
+################################################################################
+paths:
+  /raffle/view:
+    get:
+      summary: Получить конкурс
+      description: Возвращает конкурс по уникальному коду
+      tags:
+        - Raffle
+      parameters:
+        - name: code
+          in: query
+          required: true
+          description: Код конкурса
+          schema:
+            type: string
+
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Raffle'
+
+  /user/view:
+    get:
+      summary: Получить пользователя
+      description: Возвращает пользователя по уникальному коду
+      tags:
+        - User
+      parameters:
+        - name: code
+          in: query
+          required: true
+          description: Код пользователя
+          schema:
+            type: string
+
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Raffle'
+
+################################################################################
+components:
+  schemas:
+    Raffle:
+      properties:
+        id:
+          type: integer
+          description: Уникальный id конкурса
+        code:
+          type: string
+          description: Уникальный код конкурса
+        title:
+          type: string
+          description: Заголовок конкурса
+        short_description:
+          type: string
+          description: Короткое описание конкурса
+        description:
+          type: string
+          description: Полное описание конкурса
+        created_at:
+          type: string
+          description: Дата создание конкурса
+        date_begin:
+          type: string
+          description: Дата начала конкурса
+        date_end:
+          type: string
+          description: Дата окончания конкурса
+        user_code:
+          type: string
+          description: Код автора конкурса
+    User:
+      properties:
+        code:
+          type: string
+          description: Уникальный код пользователя
+        username:
+          type: string
+          description: Логин пользователя
+        name:
+          type: string
+          description: Имя пользователя
+        surname:
+          type: string
+          description: Фамилия пользователя
