@@ -48,8 +48,6 @@ $this->title = 'Конкурсы от '.$user->username;
                             },
                         ],
                     ],
-
-
                 ],
             ]);
         }else{
@@ -72,7 +70,6 @@ $this->title = 'Конкурсы от '.$user->username;
                 ],
             ]);
         }
-
         ?>
 
         <?php Pjax::end(); ?>

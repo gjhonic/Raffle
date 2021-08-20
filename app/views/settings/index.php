@@ -28,6 +28,13 @@ $this->title = 'Настройки';
         <p>
             <?= Html::a('Настройка пароля', URL::to('/settings/password'), ['class' => 'button fit']) ?>
         </p>
+        <hr>
+        <p>
+            <?= Html::a('Написать в поддержку', URL::to('/support'), ['class' => 'button fit']) ?>
+        </p>
+        <p>
+            <?= Html::a('Публичное API', URL::to('/api'), ['class' => 'button fit']) ?>
+        </p>
     </div>
     <span class="image object">
             <?php if($user->existAva()){ ?>

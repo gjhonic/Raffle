@@ -31,7 +31,7 @@ class RaffleStatusWidget
                 $title = "Опубликованно!";
                 break;
         }
-        return '<a class="icon solid '.$class.'" title="'.$title.'"></a>';
+        return '<a class="icon solid '.$class.'" title="'.$title.'" style="color: #f56a6a"></a>';
     }
 
     /**

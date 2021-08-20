@@ -59,10 +59,10 @@ FrontendAsset::register($this);
                 </header>
                 <ul>
                     <?php foreach ($nav['main'] as $elem){
-                        $isActive = (Yii::$app->controller->id == $elem['controller']) ? 'active' : '';
+                        $isActive = (Yii::$app->controller->id == $elem['controller']) ? 'nav-active' : '';
                         ?>
                         <li>
-                            <a class="nav-link <?=$isActive?>" href="<?=$elem['href']?>"><?=$elem['label']?></a>
+                            <a class="nav-link" id="<?=$isActive?>" href="<?=$elem['href']?>"><?=$elem['label']?></a>
                         </li>
                     <?php } ?>
                 </ul>

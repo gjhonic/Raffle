@@ -18,13 +18,6 @@ class ApiModule extends \yii\base\Module
     public function init()
     {
         parent::init();
-
         $this->defaultRoute = 'main';
-
-        $this->layout = '../../../../views/layouts/backend';
-
-        // custom initialization code goes here
-
-
     }
 }
