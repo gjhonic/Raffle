@@ -49,4 +49,25 @@ class RaffleApi extends \yii\db\ActiveRecord
          AND raffle.status_id = :raffle_status_approved";
         return Yii::$app->db->createCommand($sql, $placeholders)->queryOne();
     }
+
+    /**
+     * Метод теги конкурса
+     * @param string $code - уникальный код конкурса
+     * @param string $field - возвращаемые поля
+     * @return array|ActiveRecord|null
+     * @throws \yii\db\Exception
+     */
+    public static function getTagsRaffle($code){
+        $placeholders = [
+            'raffle_code' => $code,
+            'raffle_status_approved' => Raffle::STATUS_APPROVED_ID
+        ];
+        $sql = "SELECT tag.title
+         FROM raffle
+         LEFT JOIN raffle_tag ON raffle_tag.raffle_id = raffle.id
+         LEFT JOIN tag ON tag.id = raffle_tag.tag_id
+         WHERE raffle.code = :raffle_code
+         AND raffle.status_id = :raffle_status_approved";
+        return Yii::$app->db->createCommand($sql, $placeholders)->queryAll();
+    }
 }

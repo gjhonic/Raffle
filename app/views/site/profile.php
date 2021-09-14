@@ -25,13 +25,20 @@ $this->title = 'Профиль '.$user->username;
 
 <section>
     <header class="main">
-        <h1>
+        <br>
+        <h2>
             <?php if(($hello_message = $user->getHelloMessage()) !== null) { ?>
                 <?=$hello_message?>
             <?php }else{ ?>
-                Привет я, <?=$user->surname." ".$user->name?>
+                <?=$user->surname." ".$user->name?>
             <?php } ?>
-        </h1>
+
+            <?php if($user->id != Yii::$app->user->getId()) { ?>
+                <?php if(!$user->mySubsription()) { ?>
+                    <span class="button extra-small" id="button-subscribe">Подписаться <span class="icon solid fa-check"></span></span>
+                <?php } ?>
+            <?php } ?>
+        </h2>
     </header>
     <span class="image main">
         <?php if($user->existAva()){ ?>
@@ -47,19 +54,87 @@ $this->title = 'Профиль '.$user->username;
             Я просто веселый человег!)
         <?php }?>
     </h3>
+    <div>
+        <a href="" class="button small">Подписчиков: <span id="count-subscribers"></span></a>
+        <a href="" class="button small">Подписок: <span id="count-subscriptions"></span></a>
+    </div>
+    <br>
 </section>
 
-<?php if($user->id === Yii::$app->user->identity->getId()) { ?>
-    <?= $this->render('raffle_profile/my_raffle', [
-        'RafflesApproved' => $RafflesApproved,
-        'RafflesChecked' => $RafflesChecked,
-        'RafflesNotApproved' => $RafflesNotApproved,
-        'user' => $user
-    ]) ?>
-<?php }else{ ?>
-    <?= $this->render('raffle_profile/other_raffle', [
-        'RafflesApproved' => $RafflesApproved,
-        'user' => $user
-    ]) ?>
-<?php } ?>
+<div>
+    <?php if($user->id === Yii::$app->user->identity->getId()) { ?>
+        <?= $this->render('raffle_profile/my_raffle', [
+            'RafflesApproved' => $RafflesApproved,
+            'RafflesChecked' => $RafflesChecked,
+            'RafflesNotApproved' => $RafflesNotApproved,
+            'user' => $user
+        ]) ?>
+    <?php }else{ ?>
+        <?= $this->render('raffle_profile/other_raffle', [
+            'RafflesApproved' => $RafflesApproved,
+            'user' => $user
+        ]) ?>
+    <?php } ?>
+</div>
+
+<script>
+    let user_code = "<?=$user->code?>";
+    $(document).ready(function () {
+        getCountSubscribers();
+        getCountSubscriptions();
+    });
+    function getCountSubscribers(){
+        $.ajax({
+            url: '/api/user/countsubscribers',
+            type: 'GET',
+            dataType: 'json',
+            data: {code: user_code },
+            beforeSend: function () {
+                $("#count-subscribers").html("(загрузка...)")
+            },
+            success: function(res){
+                $("#count-subscribers").html(res);
+            },
+            error: function(){
+                $("#count-subscriptions").html("error");
+            }
+        });
+    }
+
+    function getCountSubscriptions(){
+        $.ajax({
+            url: '/api/user/countsubscriptions',
+            type: 'GET',
+            dataType: 'json',
+            data: {code: user_code},
+            beforeSend: function () {
+                $("#count-subscriptions").html("(загрузка...)")
+            },
+            success: function(res){
+                $("#count-subscriptions").html(res);
+            },
+            error: function(){
+                $("#count-subscriptions").html("error");
+            }
+        });
+    }
+
+    $("#button-subscribe").click(function (){
+        $.ajax({
+            url: '/api/user/countsubscriptions',
+            type: 'POST',
+            dataType: 'json',
+            data: {code: user_code},
+            beforeSend: function () {
+                $("#count-subscriptions").html("(загрузка...)")
+            },
+            success: function(res){
+                $("#count-subscriptions").html(res);
+            },
+            error: function(){
+                $("#count-subscriptions").html("error");
+            }
+        });
+    })
+</script>
 

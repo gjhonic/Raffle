@@ -49,4 +49,16 @@ return [
             'controller' => 'support-mod'
         ],
     ],
+    'other' => [
+        [
+            'label' => 'Private API',
+            'href' => URL::to('/api/shut'),
+            'controller' => 'site'
+        ],
+        [
+            'label' => 'Public API',
+            'href' => URL::to('/api'),
+            'controller' => 'site'
+        ]
+    ]
 ];

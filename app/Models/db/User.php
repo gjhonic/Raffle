@@ -141,6 +141,25 @@ class User extends \yii\db\ActiveRecord
     }
 
     /**
+     * Метод определяет является пользователь в подписчиках Self User
+     * @return bool
+     * @throws \yii\db\Exception
+     */
+    public function mySubsription()
+    {
+        $placeholders = [
+            'user_id' => $this->id,
+            'subscriber_id' => Yii::$app->user->getId()
+        ];
+        $sql = "SELECT COUNT(subscriptions.subscriber_id) AS count
+         FROM subscriptions
+         WHERE subscriptions.user_id = :user_id
+         AND subscriptions.subscriber_id = :subscriber_id";
+        $res = Yii::$app->db->createCommand($sql, $placeholders)->queryOne();
+        return ($res == 1);
+    }
+
+    /**
      * Метод возвращает статус пользователя
      * @return UserStatus|null
      */

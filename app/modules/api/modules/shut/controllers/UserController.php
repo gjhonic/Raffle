@@ -1,24 +1,24 @@
 <?php
 /**
- * RaffleController
- * Контроллер модуля api/open по Конкурсам
+ * UserController
+ * Контроллер модуля api/shut по Пользователям
  * @copyright Copyright (c) 2021 Eugene Andreev
  * @author Eugene Andreev <gjhonic@gmail.com>
  *
  */
-namespace app\modules\api\modules\open\controllers;
+namespace app\modules\api\modules\shut\controllers;
 
 use Yii;
 use yii\web\Controller;
 use yii\filters\AccessControl;
 use yii\helpers\Url;
 use app\models\db\User;
-use app\modules\api\modules\open\models\RaffleOpenApi;
+use app\modules\api\modules\shut\models\UserShutApi;
 
 /**
- * Controller for the `api/open` module
+ * Controller for the `api/shut` module
  */
-class RaffleController extends Controller
+class UserController extends Controller
 {
     public function behaviors(){
         return [
@@ -30,7 +30,7 @@ class RaffleController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['view', 'tags'],
+                        'actions' => ['view', 'count-subscribers', 'count-subscriptions'],
                         'roles' => [User::ROLE_GUEST, User::ROLE_AUTHORIZED],
                     ],
                 ],
@@ -39,24 +39,24 @@ class RaffleController extends Controller
     }
 
     /**
-     * Возвращает конкурс по коду
+     * Возвращает пользователя по коду
      * @param string $code
      * @return false|string
      * @throws \yii\db\Exception
      */
     public function actionView()
     {
-        return json_encode(RaffleOpenApi::findByCode(Yii::$app->request->get('code')));
+        return json_encode(UserShutApi::findByCode(Yii::$app->request->get('code')));
     }
 
     /**
-     * Возвращает теги конкурса
+     * Возвращает количество подписчиков
      * @param string $code
      * @return false|string
      * @throws \yii\db\Exception
      */
-    public function actionTags()
+    public function actionCountSubscribers()
     {
-        return json_encode(RaffleOpenApi::getTagsRaffle(Yii::$app->request->get('code')));
+        return json_encode(UserShutApi::getCountSubscribers(Yii::$app->request->get('code')));
     }
 }

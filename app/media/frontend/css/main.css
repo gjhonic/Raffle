@@ -1540,6 +1540,12 @@ button,
   button.small,
   .button.small {
     font-size: 0.6em; }
+  input[type="submit"].extra-small,
+  input[type="reset"].extra-small,
+  input[type="button"].extra-small,
+  button.extra-small,
+  .button.extra-small {
+    font-size: 0.5em; }
   input[type="submit"].large,
   input[type="reset"].large,
   input[type="button"].large,

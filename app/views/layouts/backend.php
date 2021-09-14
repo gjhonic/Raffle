@@ -63,7 +63,7 @@ BackendAsset::register($this);
                     <?php } ?>
 
                     <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                        <span><i class="fa fa-database"></i> Модерация</span>
+                        <span><i class="fa fa-user"></i> Модерация</span>
 
                     </h6>
                     <?php foreach ($nav['moderations'] as $elem){
@@ -71,6 +71,18 @@ BackendAsset::register($this);
                         ?>
                         <li class="nav-item">
                             <a class="nav-link <?=$isActive?>" href="<?=$elem['href']?>"><?=$elem['label']?>
+                            </a>
+                        </li>
+                    <?php } ?>
+
+                    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                        <span><i class="fa fa-bars"></i> Прочее </span>
+
+                    </h6>
+                    <?php foreach ($nav['other'] as $elem){
+                        ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?=$elem['href']?>"><?=$elem['label']?>
                             </a>
                         </li>
                     <?php } ?>

@@ -33,6 +33,29 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Raffle'
+  /raffle/tags:
+    get:
+      summary: Получить тэги конкурса
+      description: Вернет теги, которые закреплены к конкурсу по уникальному коду
+      tags:
+        - Raffle
+      parameters:
+        - name: code
+          in: query
+          required: true
+          description: Код конкурса
+          schema:
+            type: string
+
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Tag'
   /user/view:
     get:
       summary: Получить пользователя
@@ -57,6 +80,86 @@ paths:
                 items:
                   $ref: '#/components/schemas/User'
 
+  /user/countsubscribers:
+    get:
+      summary: Количество подписчиков
+      description: Возвращает количество подписчиков пользователя
+      tags:
+        - User
+      parameters:
+        - name: code
+          in: query
+          required: true
+          description: Код пользователя
+          schema:
+            type: string
+
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                  description: Количество подписчиков
+
+  /user/countsubscriptions:
+    get:
+      summary: Количество подписок
+      description: Возвращает количество подписок пользователя
+      tags:
+        - User
+      parameters:
+        - name: code
+          in: query
+          required: true
+          description: Код пользователя
+          schema:
+            type: string
+
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                  description: Количество подписок
+
+  /user/subscribe:
+    post:
+      summary: Подписаться
+      description: Подписывается на пользователя
+      tags:
+        - User
+      parameters:
+        - name: token
+          in: path
+          required: true
+          description: токен текущего пользователя
+          schema:
+            type: string
+        - name: user_code
+          in: path
+          required: true
+          description: Код пользователя на которого подписываемся
+          schema:
+            type: string
+
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: boolean
+                  description: Результат запроса
 ################################################################################
 components:
   schemas:
@@ -97,3 +200,8 @@ components:
         surname:
           type: string
           description: Фамилия пользователя
+    Tag:
+      properties:
+        title:
+          type: string
+          description: Название тега

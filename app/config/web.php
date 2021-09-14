@@ -66,6 +66,12 @@ $config = [
             'showScriptName' => false,
             'rules' => $route,
         ],
+        'redis' => [
+            'class' => 'yii\redis\Connection',
+            'hostname' => 'localhost',
+            'port' => 6379,
+            'database' => 0,
+        ],
     ],
     'modules' => [
         'admin' => [
