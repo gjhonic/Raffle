@@ -380,6 +380,7 @@ class Raffle extends \yii\db\ActiveRecord
      */
     public static function codeGenerate(): string
     {
+        //TODO обрати внимание
         $permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyz';
         $code = substr(str_shuffle($permitted_chars), 0, 25);
         while(self::findByCode($code)){

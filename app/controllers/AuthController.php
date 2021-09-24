@@ -190,6 +190,7 @@ class AuthController extends Controller
      */
     private static function sendMessageConfirmMail($user_mail)
     {
+        //TODO Дичь переписать!
         $session = Yii::$app->session;
         $title = "Регистрация на сайте raffle.ru";
         $message = "Вашу почту указали при регистрации на сайте Raffle.ru";

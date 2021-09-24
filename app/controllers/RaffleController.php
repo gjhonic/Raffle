@@ -10,8 +10,6 @@ namespace app\controllers;
 use app\models\db\Raffle;
 use Yii;
 use yii\data\ActiveDataProvider;
-use yii\helpers\ArrayHelper;
-use app\models\db\search\RaffleSearch;
 use yii\helpers\Url;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -219,6 +217,7 @@ class RaffleController extends Controller
         ]);
     }
 
+    //TODO Вынести в controllers/ajax/Raffle
     /**
      * Метод сохраняет заметку к конкурсу (AJAX)
      * @param integer $client_id
