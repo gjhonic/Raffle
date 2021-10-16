@@ -6,7 +6,7 @@
 
 $this->title = 'Конкурсы';
 use yii\helpers\Html;
-use yii\helpers\URL;
+use yii\helpers\Url;
 ?>
 
 <header id="header">
@@ -84,7 +84,7 @@ use yii\helpers\URL;
                     <article class="post">
                         <header>
                             <div class="title">
-                                <h2><a href="<?=URL::to('/show/').$raffle['raffle_code']?>"><?=$raffle['raffle_title']?></a></h2>
+                                <h2><a href="<?=Url::to('/show/').$raffle['raffle_code']?>"><?=$raffle['raffle_title']?></a></h2>
                             </div>
 
                             <div class="meta">
@@ -96,10 +96,10 @@ use yii\helpers\URL;
                         <footer>
                             <ul class="actions">
                                 <li>
-                                    <a href="<?=URL::to('/show/').$raffle['raffle_code']?>" class="button">Подробнее...</a>
+                                    <a href="<?=Url::to('/show/').$raffle['raffle_code']?>" class="button">Подробнее...</a>
                                 </li>
                                 <li>
-                                    <?=Html::a('Автор: '.$raffle['username'], URL::to('/profile').'/'.$raffle['user_code'], ['class' => 'button',])?>
+                                    <?=Html::a('Автор: '.$raffle['username'], Url::to('/profile').'/'.$raffle['user_code'], ['class' => 'button',])?>
                                 </li>
                             </ul>
                         </footer>

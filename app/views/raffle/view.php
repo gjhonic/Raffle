@@ -11,7 +11,7 @@ $this->title = $raffle['raffle_title'];
 ?>
 
 <header id="header">
-    <a href="#" class="logo"><span onclick="window.location.replace('<?=URL::to('/raffle/index')?>');">Конкурсы / </span><?=$raffle['raffle_code']?></a>
+    <a href="#" class="logo"><span onclick="window.location.replace('<?=Url::to('/raffle/index')?>');">Конкурсы / </span><?=$raffle['raffle_code']?></a>
     <p class="icons"><?=date('m.d.Y', $raffle['raffle_created_at'])?></p>
 </header>
 <section>
@@ -58,7 +58,7 @@ $this->title = $raffle['raffle_title'];
             <?=Html::a('Автор:'.$raffle['username'], URL::to('/profile').'/'.$raffle['user_code'], ['class' => 'button', 'style'=>'margin-right: 10px'])?>
 
             <?php if($raffle['user_id'] == Yii::$app->user->identity->getId()) { ?>
-                <?=Html::a('Редактировать', URL::to('/raffle/update/').$raffle['raffle_code'], ['class' => 'button', 'style'=>'margin-right: 10px'])?>
+                <?=Html::a('Редактировать', Url::to('/raffle/update/').$raffle['raffle_code'], ['class' => 'button', 'style'=>'margin-right: 10px'])?>
                 <span class="button" id="button-show-note" onclick="showNote()">Показать заметку</span>
                 <span class="button" id="button-hide-note" onclick="hideNote()">Скрыть заметку</span>
             <?php } ?>

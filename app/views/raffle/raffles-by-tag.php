@@ -5,7 +5,7 @@
 
 $this->title = 'Конкурсы с тегом: '.$tag;
 use yii\helpers\Html;
-use yii\helpers\URL;
+use yii\helpers\Url;
 ?>
 
 <header id="header">

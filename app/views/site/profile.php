@@ -6,7 +6,7 @@
 /* @var $RafflesNotApproved \app\models\db\Raffle */
 
 use yii\helpers\Html;
-use yii\helpers\URL;
+use yii\helpers\Url;
 
 $this->title = 'Профиль '.$user->username;
 
