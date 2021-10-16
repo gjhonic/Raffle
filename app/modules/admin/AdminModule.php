@@ -19,6 +19,6 @@ class AdminModule extends \yii\base\Module
     {
         parent::init();
         $this->defaultRoute = 'main';
-        $this->layout = '../../../../views/layouts/backend';
+        $this->layout = 'backend';
     }
 }
