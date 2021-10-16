@@ -11,15 +11,17 @@ git clone git@github.com:gjhonic/Raffle.git
 ```
 
 2) Create a .env file and copy the contents from .env.sample
+ - /.env
+ - /app/config/.env
 
 
 3) Update Packages
 ```
-compose update
+composer update
 ```
 
 4) Start migration
 ```
 yii migrate --migrationPath=@yii/rbac/migrations
-php yii migration
+php yii migrate
 ```
