@@ -7,17 +7,17 @@ if(Yii::$app->user->isGuest){
         'main' => [
             [
                 'label' => 'Конкурсы',
-                'href' => URL::to('/raffle/'),
+                'href' => Url::to('/raffle/'),
                 'controller' => 'raffle'
             ],
             [
                 'label' => 'Войти',
-                'href' => URL::to('/signin'),
+                'href' => Url::to('/signin'),
                 'controller' => 'auth'
             ],
             [
                 'label' => 'Зарегистрироваться',
-                'href' => URL::to('/signup'),
+                'href' => Url::to('/signup'),
                 'controller' => 'auth'
             ],
         ],
@@ -28,27 +28,27 @@ if(Yii::$app->user->isGuest){
             'main' => [
                 [
                     'label' => 'Профиль',
-                    'href' => URL::to('/profile'),
+                    'href' => Url::to('/profile'),
                     'controller' => 'site'
                 ],
                 [
                     'label' => 'Конкурсы',
-                    'href' => URL::to('/raffle/'),
+                    'href' => Url::to('/raffle/'),
                     'controller' => 'raffle'
                 ],
                 [
                     'label' => 'Создать конкурс',
-                    'href' => URL::to('/raffle/create'),
+                    'href' => Url::to('/raffle/create'),
                     'controller' => 'raffle'
                 ],
                 [
                     'label' => 'Настройки',
-                    'href' => URL::to('/settings/'),
+                    'href' => Url::to('/settings/'),
                     'controller' => 'settings'
                 ],
                 [
                     'label' => 'Выйти',
-                    'href' => URL::to('/signout'),
+                    'href' => Url::to('/signout'),
                     'controller' => 'auth'
                 ],
             ],
@@ -58,27 +58,27 @@ if(Yii::$app->user->isGuest){
             'main' => [
                 [
                     'label' => 'Профиль',
-                    'href' => URL::to('/profile'),
+                    'href' => Url::to('/profile'),
                     'controller' => 'site'
                 ],
                 [
                     'label' => 'Админка',
-                    'href' => URL::to('/admin/'),
+                    'href' => Url::to('/admin/'),
                     'controller' => 'admin'
                 ],
                 [
                     'label' => 'Конкурсы',
-                    'href' => URL::to('/raffle/'),
+                    'href' => Url::to('/raffle/'),
                     'controller' => 'raffle'
                 ],
                 [
                     'label' => 'Настройки',
-                    'href' => URL::to('/settings/'),
+                    'href' => Url::to('/settings/'),
                     'controller' => 'settings'
                 ],
                 [
                     'label' => 'Выйти',
-                    'href' => URL::to('/signout'),
+                    'href' => Url::to('/signout'),
                     'controller' => 'auth'
                 ],
             ],

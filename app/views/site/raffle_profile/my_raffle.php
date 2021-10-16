@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use yii\helpers\URL;
+use yii\helpers\Url;
 
 /* @var $RafflesApproved \app\models\db\Raffle */
 /* @var $RafflesChecked \app\models\db\Raffle */

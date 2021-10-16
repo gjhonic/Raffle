@@ -55,7 +55,7 @@ $this->title = $raffle['raffle_title'];
 
     <p>
         <div style="overflow-x: auto; display:flex;">
-            <?=Html::a('Автор:'.$raffle['username'], URL::to('/profile').'/'.$raffle['user_code'], ['class' => 'button', 'style'=>'margin-right: 10px'])?>
+            <?=Html::a('Автор:'.$raffle['username'], Url::to('/profile').'/'.$raffle['user_code'], ['class' => 'button', 'style'=>'margin-right: 10px'])?>
 
             <?php if($raffle['user_id'] == Yii::$app->user->identity->getId()) { ?>
                 <?=Html::a('Редактировать', Url::to('/raffle/update/').$raffle['raffle_code'], ['class' => 'button', 'style'=>'margin-right: 10px'])?>

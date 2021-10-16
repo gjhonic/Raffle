@@ -26,21 +26,21 @@ use yii\helpers\Url;
                 <article class="post">
                     <header>
                         <div class="title">
-                            <h2><a href="<?=URL::to('/show/').$raffle['raffle_code']?>"><?=$raffle['raffle_title']?></a></h2>
+                            <h2><a href="<?=Url::to('/show/').$raffle['raffle_code']?>"><?=$raffle['raffle_title']?></a></h2>
                         </div>
 
                         <div class="meta">
                             <time class="published" datetime="2015-11-01"><?=date('j F, Y', $raffle['raffle_created_at'])?></time>
                         </div>
                         <div class="meta">
-                            Автор: <a href="<?=URL::to('/profile/').$raffle['user_code']?>" class="author"><?=$raffle['username']?></a>
+                            Автор: <a href="<?=Url::to('/profile/').$raffle['user_code']?>" class="author"><?=$raffle['username']?></a>
                         </div>
                     </header>
 
                     <p><?=$raffle['raffle_short_description']?></p>
                     <footer>
                         <ul class="actions">
-                            <li><a href="<?=URL::to('/show/').$raffle['raffle_code']?>" class="button large">Подробнее...</a></li>
+                            <li><a href="<?=Url::to('/show/').$raffle['raffle_code']?>" class="button large">Подробнее...</a></li>
                         </ul>
                     </footer>
                 </article>

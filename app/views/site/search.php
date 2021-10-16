@@ -6,7 +6,7 @@
 /* @var $query string */
 
 use yii\helpers\Html;
-use yii\helpers\URL;
+use yii\helpers\Url;
 
 $this->title = 'Поиск по запросу '.$query;
 
