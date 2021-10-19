@@ -137,6 +137,7 @@ use yii\helpers\Url;
         let filter_date = '<?=Yii::$app->request->get('filter_date')?>';
         let filter_abc = '<?=Yii::$app->request->get('filter_abc')?>';
         let filter_group = '<?=Yii::$app->request->get('filter_group')?>'
+        //TODO Юзать Fetch
         $.ajax({
             url: '/raffle/get-raffles-json',
             type: 'GET',
