@@ -14,6 +14,7 @@ use yii\web\Controller;
 use yii\filters\AccessControl;
 use yii\helpers\Url;
 use app\models\db\User;
+use yii\web\Response;
 
 /**
  * Default controller for the `api/shut` module
@@ -41,11 +42,11 @@ class RaffleController extends Controller
     /**
      * Возвращает конкурс по коду
      * @param string $code
-     * @return false|string
+     * @return Response
      * @throws \yii\db\Exception
      */
-    public function actionView()
+    public function actionView(): Response
     {
-        return json_encode(RaffleShutApi::findByCode(Yii::$app->request->get('code')));
+        return $this->asJson([RaffleShutApi::findByCode(Yii::$app->request->get('code'))]);
     }
 }

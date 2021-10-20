@@ -14,6 +14,7 @@ use yii\filters\AccessControl;
 use yii\helpers\Url;
 use app\models\db\User;
 use app\modules\api\modules\shut\models\UserShutApi;
+use yii\web\Response;
 
 /**
  * Controller for the `api/shut` module
@@ -41,22 +42,22 @@ class UserController extends Controller
     /**
      * Возвращает пользователя по коду
      * @param string $code
-     * @return false|string
+     * @return Response
      * @throws \yii\db\Exception
      */
     public function actionView()
     {
-        return json_encode(UserShutApi::findByCode(Yii::$app->request->get('code')));
+        return $this->asJson([UserShutApi::findByCode(Yii::$app->request->get('code'))]);
     }
 
     /**
      * Возвращает количество подписчиков
      * @param string $code
-     * @return false|string
+     * @return Response
      * @throws \yii\db\Exception
      */
-    public function actionCountSubscribers()
+    public function actionCountSubscribers(): Response
     {
-        return json_encode(UserShutApi::getCountSubscribers(Yii::$app->request->get('code')));
+        return $this->asJson([UserShutApi::getCountSubscribers(Yii::$app->request->get('code'))]);
     }
 }

@@ -14,6 +14,7 @@ use yii\web\Controller;
 use yii\filters\AccessControl;
 use yii\helpers\Url;
 use app\modules\api\modules\open\models\UserOpenApi;
+use yii\web\Response;
 
 /**
  * Controller for the `api/open` module
@@ -47,34 +48,34 @@ class UserController extends Controller
     /**
      * Возвращает пользователя по коду
      * @param string $code
-     * @return false|string
+     * @return Response
      * @throws \yii\db\Exception
      */
     public function actionView()
     {
-        return json_encode(UserOpenApi::findByCode(Yii::$app->request->get('code')));
+        return $this->asJson([UserOpenApi::findByCode(Yii::$app->request->get('code'))]);
     }
 
     /**
      * Возвращает количество подписчиков
      * @param string $code
-     * @return false|string
+     * @return Response
      * @throws \yii\db\Exception
      */
-    public function actionCountsubscribers()
+    public function actionCountsubscribers(): Response
     {
-        return json_encode(UserOpenApi::getCountSubscribers(Yii::$app->request->get('code'))['count']);
+        return $this->asJson([UserOpenApi::getCountSubscribers(Yii::$app->request->get('code'))['count']]);
     }
 
     /**
      * Возвращает количество подписок
      * @param string $code
-     * @return false|string
+     * @return Response
      * @throws \yii\db\Exception
      */
-    public function actionCountsubscriptions()
+    public function actionCountsubscriptions(): Response
     {
-        return json_encode(UserOpenApi::getCountSubscriptions(Yii::$app->request->get('code'))['count']);
+        return $this->asJson([UserOpenApi::getCountSubscriptions(Yii::$app->request->get('code'))['count']]);
     }
 
     /**
@@ -84,6 +85,7 @@ class UserController extends Controller
      */
     public function actionSubscribe()
     {
+        //TODO дописать
         return Yii::$app->request->post('token');
     }
 }
