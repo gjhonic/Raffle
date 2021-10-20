@@ -72,6 +72,19 @@ $config = [
             'port' => 6379,
             'database' => 0,
         ],
+        'i18n' => [
+            'translations' => [
+                'app' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'basePath' => '@app/messages',
+                    'sourceLanguage' => 'en-US',
+                    'fileMap' => [
+                        'app'       => 'app.php',
+                        'app/note' => 'note.php',
+                    ],
+                ],
+            ],
+        ],
     ],
     'modules' => [
         'admin' => [
