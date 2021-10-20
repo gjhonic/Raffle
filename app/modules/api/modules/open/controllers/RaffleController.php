@@ -14,6 +14,7 @@ use yii\filters\AccessControl;
 use yii\helpers\Url;
 use app\models\db\User;
 use app\modules\api\modules\open\models\RaffleOpenApi;
+use yii\web\Response;
 
 /**
  * Controller for the `api/open` module
@@ -41,22 +42,22 @@ class RaffleController extends Controller
     /**
      * Возвращает конкурс по коду
      * @param string $code
-     * @return false|string
+     * @return Response
      * @throws \yii\db\Exception
      */
-    public function actionView()
+    public function actionView(): Response
     {
-        return json_encode(RaffleOpenApi::findByCode(Yii::$app->request->get('code')));
+        return $this->asJson([RaffleOpenApi::findByCode(Yii::$app->request->get('code'))]);
     }
 
     /**
      * Возвращает теги конкурса
      * @param string $code
-     * @return false|string
+     * @return Response
      * @throws \yii\db\Exception
      */
-    public function actionTags()
+    public function actionTags(): Response
     {
-        return json_encode(RaffleOpenApi::getTagsRaffle(Yii::$app->request->get('code')));
+        return $this->asJson([RaffleOpenApi::getTagsRaffle(Yii::$app->request->get('code'))]);
     }
 }

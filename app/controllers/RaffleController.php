@@ -217,13 +217,13 @@ class RaffleController extends Controller
         ]);
     }
 
-    //TODO Вынести в controllers/ajax/Raffle
     /**
      * Метод сохраняет заметку к конкурсу (AJAX)
-     * @param integer $client_id
-     * @return false|string
+     * @return false|Response
+     * @throws \Throwable
+     * @throws \yii\db\StaleObjectException
      */
-    public function actionSaveNote()
+    public function actionSaveNote(): Response
     {
         if(!\Yii::$app->request->isAjax){
             return false;
@@ -240,19 +240,23 @@ class RaffleController extends Controller
 
         if(trim($note) != ''){
             $raffle->note = trim($note);
-            return $raffle->update();
+            $result = $raffle->update();
+            return $this->asJson([$result]);
         }else{
-            return false;
+            return $this->asJson([false]);
         }
     }
 
     /**
      * Возвращает список конкурсов по json
-     * @return false|string
+     * @return Response|false
      * @throws \yii\db\Exception
      */
-    public function actionGetRafflesJson()
+    public function actionGetRafflesJson(): Response
     {
+        if(!Yii::$app->request->isAjax){
+            return false;
+        }
         $filter = [];
         $page = 0;
         if(Yii::$app->request->get('filter_date') != ''){
@@ -268,9 +272,9 @@ class RaffleController extends Controller
             $page = Yii::$app->request->get('page');
         }
         if(($raffles = Raffle::getPopularRaffles($filter, $page)) != null){
-            return json_encode(['data' => $raffles]);
+            return $this->asJson(['data' => $raffles]);
         }else{
-            return json_encode(['data' => false]);
+            return $this->asJson(['data' => false]);
         }
     }
 }
