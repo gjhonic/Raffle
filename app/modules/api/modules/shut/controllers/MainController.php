@@ -30,7 +30,7 @@ class MainController extends Controller
                     [
                         'allow' => true,
                         'actions' => ['index'],
-                        'roles' => [User::ROLE_GUEST, User::ROLE_AUTHORIZED],
+                        'roles' => [User::ROLE_ADMIN, User::ROLE_MODERATOR],
                     ],
                 ],
             ],
