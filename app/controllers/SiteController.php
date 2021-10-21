@@ -25,7 +25,7 @@ class SiteController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['profile','index', 'about', 'support'],
+                        'actions' => ['profile', 'index', 'about', 'support'],
                         'roles' => [User::ROLE_USER, User::ROLE_MODERATOR, User::ROLE_ADMIN],
                     ],
                     [
@@ -42,10 +42,10 @@ class SiteController extends Controller
 
     public function beforeAction($action)
     {
-        if(!Yii::$app->user->isGuest){
-            if(Yii::$app->user->identity->status_id == User::STATUS_BAN_ID){
+        if (!Yii::$app->user->isGuest) {
+            if (Yii::$app->user->identity->status_id == User::STATUS_BAN_ID) {
                 Yii::$app->user->logout();
-                if(isset($session))
+                if (isset($session))
                     $session->destroy();
                 echo "<h1>Ты забанен!!!</h1>";
                 die;
@@ -68,29 +68,26 @@ class SiteController extends Controller
      * @param string
      * @return Response|string
      */
-    public function actionProfile($code=null)
+    public function actionProfile($code = null)
     {
-        if($code==null && Yii::$app->user->isGuest){
-            return $this->redirect(['index']);
-        }
-        $user = ($code!=null) ? User::findByCode($code) : User::currentUser();
+        $user = ($code != null) ? User::findByCode($code) : User::currentUser();
 
-        if(!$user){
+        if (!$user) {
             return $this->redirect(['index']);
         }
 
-        $RafflesApproved = Raffle::findRaffleByUser($user->id, Raffle::STATUS_APPROVED_ID);
-        if($user->id === Yii::$app->user->identity->getId()){
+        $RafflesApproved = Raffle::findRafflesByUser($user->id, Raffle::STATUS_APPROVED_ID);
+        if ($user->id === Yii::$app->user->identity->getId()) {
 
-            $RafflesChecked = Raffle::findRaffleByUser($user->id, Raffle::STATUS_ON_CHECK_ID);
-            $RafflesNotApproved = Raffle::findRaffleByUser($user->id, Raffle::STATUS_NOT_APPROVED_ID);
+            $RafflesChecked = Raffle::findRafflesByUser($user->id, Raffle::STATUS_ON_CHECK_ID);
+            $RafflesNotApproved = Raffle::findRafflesByUser($user->id, Raffle::STATUS_NOT_APPROVED_ID);
             return $this->render('profile', [
                 'user' => $user,
                 'RafflesApproved' => $RafflesApproved,
                 'RafflesChecked' => $RafflesChecked,
                 'RafflesNotApproved' => $RafflesNotApproved
             ]);
-        }else{
+        } else {
             return $this->render('profile', [
                 'user' => $user,
                 'RafflesApproved' => $RafflesApproved,
@@ -119,7 +116,7 @@ class SiteController extends Controller
      */
     public function actionSearch($q)
     {
-        if(($q = trim($q)) === ''){
+        if (($q = trim($q)) === '') {
             $this->redirect(Yii::$app->request->referrer);
         }
 
