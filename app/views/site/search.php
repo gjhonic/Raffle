@@ -8,7 +8,7 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 
-$this->title = 'Поиск по запросу '.$query;
+$this->title = 'Поиск по запросу'.$query;
 
 ?>
 
@@ -23,11 +23,11 @@ $this->title = 'Поиск по запросу '.$query;
 
 <div>
     <div style="overflow-x: auto; display:flex; justify-content: space-between;">
-        <a class="button" style="display: inline-block; margin-right: 10px; width: 32%; min-width: 220px" onclick="showRaffles()" id="button-raffles">Конкурсы</a>
+        <a class="button" style="display: inline-block; margin-right: 10px; width: 32%; min-width: 220px" onclick="showRaffles()" id="button-raffles"><?=Yii::t('app', 'Raffles')?></a>
 
-        <a class="button" style="display: inline-block; margin-right: 10px; width: 32%; min-width: 180px" onclick="showUsers()" id="button-users">Пользователи</a>
+        <a class="button" style="display: inline-block; margin-right: 10px; width: 32%; min-width: 180px" onclick="showUsers()" id="button-users"><?=Yii::t('app', 'Users')?></a>
 
-        <a class="button" style="display: inline-block; margin-right: 10px; width: 32%; min-width: 150px" onclick="showTags()" id="button-tags">Теги</a>
+        <a class="button" style="display: inline-block; margin-right: 10px; width: 32%; min-width: 150px" onclick="showTags()" id="button-tags"><?=Yii::t('app', 'Tags')?></a>
 
     </div>
     <p>
@@ -105,45 +105,35 @@ $this->title = 'Поиск по запросу '.$query;
 </div>
 
 <script>
-    //TODO переписать в jquery
     function showRaffles(){
-        document.getElementById('head-content').innerHTML = 'Конкурсы';
-
-        document.getElementById('button-raffles').className = 'button primary';
-        document.getElementById('button-users').className = 'button';
-        document.getElementById('button-tags').className = 'button';
-
-        document.getElementById('content-raffles').style.display = "block";
-        document.getElementById('content-users').style.display = "none";
-        document.getElementById('content-tags').style.display = "none";
-
+        $("#head-content").html("<?=Yii::t('app', 'Raffles')?>");
+        $("#button-raffles").removeClass().addClass('button primary');
+        $("#button-users").removeClass().addClass('button');
+        $("#button-tags").removeClass().addClass('button');
+        $("#content-raffles").show();
+        $("#content-users").hide();
+        $("#content-tags").hide();
     }
 
-
     function showUsers(){
-        document.getElementById('head-content').innerHTML = 'Пользователи';
-
-        document.getElementById('button-raffles').className = 'button';
-        document.getElementById('button-users').className = 'button primary';
-        document.getElementById('button-tags').className = 'button';
-
-        document.getElementById('content-raffles').style.display = "none";
-        document.getElementById('content-users').style.display = "block";
-        document.getElementById('content-tags').style.display = "none";
+        $("#head-content").html("<?=Yii::t('app', 'Users')?>");
+        $("#button-raffles").removeClass().addClass('button');
+        $("#button-users").removeClass().addClass('button primary');
+        $("#button-tags").removeClass().addClass('button');
+        $("#content-raffles").hide();
+        $("#content-users").show();
+        $("#content-tags").hide();
     }
 
     function showTags(){
-        document.getElementById('head-content').innerHTML = 'Теги';
-
-        document.getElementById('button-raffles').className = 'button';
-        document.getElementById('button-users').className = 'button';
-        document.getElementById('button-tags').className = 'button primary';
-
-        document.getElementById('content-raffles').style.display = "none";
-        document.getElementById('content-users').style.display = "none";
-        document.getElementById('content-tags').style.display = "block";
+        $("#head-content").html("<?=Yii::t('app', 'Tags')?>");
+        $("#button-raffles").removeClass().addClass('button');
+        $("#button-users").removeClass().addClass('button');
+        $("#button-tags").removeClass().addClass('button primary');
+        $("#content-raffles").hide();
+        $("#content-users").hide();
+        $("#content-tags").show();
     }
-
     showRaffles();
 </script>
 
