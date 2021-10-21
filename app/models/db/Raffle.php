@@ -298,7 +298,7 @@ class Raffle extends \yii\db\ActiveRecord
 
     /**
      * Метод возвращает теги конкурса
-     * @param integer $raffle_id
+     * @param int $raffle_id
      * @return array|\yii\db\DataReader
      * @throws \yii\db\Exception
      */
@@ -316,25 +316,20 @@ class Raffle extends \yii\db\ActiveRecord
 
     /**
      * Метод возвращает все конкурсы пользователя
-     * @param $user_id int
-     * @param $status_id int|null
-     * @param $limit int
+     * @param int $user_id
+     * @param int|null $status_id
+     * @param int $limit
      * @return array|ActiveRecord[]
      */
-    public static function findRaffleByUser($user_id, $status_id=null, $limit=10){
+    public static function findRafflesByUser($user_id, $status_id=null, $limit=10){
+        $raffles = self::find()
+            ->where(['user_id' => $user_id])
+            ->orderBy('id DESC')
+            ->limit($limit);
         if($status_id !== null){
-            return self::find()
-                ->where(['user_id' => $user_id, 'status_id' => $status_id])
-                ->orderBy('id DESC')
-                ->limit($limit)
-                ->all();
-        }else{
-            return self::find()
-                ->where(['user_id' => $user_id])
-                ->orderBy('id DESC')
-                ->limit($limit)
-                ->all();
+            $raffles->andWhere(['status_id' => $status_id]);
         }
+        return $raffles->all();
     }
 
     /**

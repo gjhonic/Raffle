@@ -1,16 +1,14 @@
 <?php
 /**
- * UserIdentity 
+ * UserIdentity
  * Класс для аутентифицированного пользователя
  * @copyright Copyright (c) 2021 Eugene Andreev
- * @author Eugene Andreev <gjhonic@gmail.com> 
-*/
+ * @author Eugene Andreev <gjhonic@gmail.com>
+ */
+
 namespace app\models\auth;
 
 use Yii;
-use yii\base\NotSupportedException;
-use yii\behaviors\TimestampBehavior;
-use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
 use app\models\db\User;
 
@@ -18,82 +16,98 @@ class UserIdentity extends User implements IdentityInterface
 {
 
     /**
-     * findIdentity - метод возвращает юзера по его id. 
-     * @param id - идентификатор первичный ключ юзера.
-     * @return user - полученная модель юзера.
+     * Метод возвращает пользователя по его id
+     * @param int|string $id
+     * @return UserIdentity|IdentityInterface|null
      */
-    public static function findIdentity($id){
+    public static function findIdentity($id)
+    {
         return static::findOne(['id' => $id]);
     }
-    
+
     /**
-     * findIdentityByAccessToken - метод возвращает юзера по его access_token. 
-     * @param $token - access token user.
-     * @return user - полученная модель юзера.
+     * Метод возвращает пользователя по его access_token
+     * @param mixed $token
+     * @param null $type
+     * @return UserIdentity|IdentityInterface|null
      */
-    public static function findIdentityByAccessToken($token, $type = null){
+    public static function findIdentityByAccessToken($token, $type = null)
+    {
         return static::findOne(['access_token' => $token]);
     }
 
     /**
-     * findByUsername - метод возвращает юзера по его username. 
-     * @param $username - логин пользователя.
-     * @return user - полученная модель юзера.
+     * Метод возвращает пользователя по его username
+     * @param string $username
+     * @return UserIdentity|array|\yii\db\ActiveRecord|null
      */
-    public static function findByUsername($username){
+    public static function findByUsername($username)
+    {
         return static::findOne(['username' => $username]);
     }
 
     /**
-     * getId - метод возвращает id юзера. 
-     * @return int - первичный ключ юзера.
+     * Метод возвращает id пользователя
+     * @return int|string
      */
-    public function getId(){
+    public function getId()
+    {
         return $this->id;
     }
 
-     /**
-     * getAuthKey - метод возвращает авторизационный ключ юзера. 
-     * @return _auth_key - авторизационный ключ.
+    /**
+     * Метод возвращает код пользователя
+     * @return string
      */
-    public function getAuthKey(){
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * Метод возвращает авторизационный ключ юзера
+     * @return string|null
+     */
+    public function getAuthKey()
+    {
         return $this->auth_key;
     }
 
     /**
-     * validateAuthKey - метод сопоставляет ключи авторизации.
-     * @param authKey ключ авторизации
-     * @return bool - результат сравнения ключей авторизации.
+     * Метод возвращает авторизационный ключ юзера
+     * @param string $authKey
+     * @return bool
      */
-    public function validateAuthKey($authKey){
+    public function validateAuthKey($authKey)
+    {
         return $this->auth_key === $authKey;
     }
 
     /**
-     * validatePassword - метод валидации паролей.
-     * @param password - пароль из вне(форма).
-     * @return bool - результат сравнения паролей.
+     * Метод валидации паролей
+     * @param $password
+     * @return bool
      */
-    public function validatePassword($password){
+    public function validatePassword($password)
+    {
         return Yii::$app->security->validatePassword($password, $this->password);
     }
 
     /**
-     * currentUser - возвращает текущего пользователя в системе
-     * @return obj.
+     * Метод возвращает текущего пользователя в системе
+     * @return mixed
      */
-    public static function currentUser(){
+    public static function currentUser()
+    {
         return parent::findUser(Yii::$app->user->identity->attributes['id']);
     }
 
     /**
-     * IdCurrentUser - возвращает id текущего пользователя в системе
-     * @return int.
+     * Метод возвращает id текущего пользователя в системе
+     * @return mixed
      */
-    public static function IdCurrentUser(){
+    public static function IdCurrentUser()
+    {
         return Yii::$app->user->identity->attributes['id'];
     }
-    
-    
-
 }

@@ -1,12 +1,12 @@
 <?php
 
+use yii\helpers\Html;
+use yii\helpers\Url;
+
 /* @var $user object */
 /* @var $RafflesApproved \app\models\db\Raffle */
 /* @var $RafflesChecked \app\models\db\Raffle */
 /* @var $RafflesNotApproved \app\models\db\Raffle */
-
-use yii\helpers\Html;
-use yii\helpers\Url;
 
 $this->title = 'Профиль '.$user->username;
 
@@ -63,14 +63,14 @@ $this->title = 'Профиль '.$user->username;
 
 <div>
     <?php if($user->id === Yii::$app->user->identity->getId()) { ?>
-        <?= $this->render('raffle_profile/my_raffle', [
+        <?= $this->render('raffle_profile/raffles_current_user', [
             'RafflesApproved' => $RafflesApproved,
             'RafflesChecked' => $RafflesChecked,
             'RafflesNotApproved' => $RafflesNotApproved,
             'user' => $user
         ]) ?>
     <?php }else{ ?>
-        <?= $this->render('raffle_profile/other_raffle', [
+        <?= $this->render('raffle_profile/raffles_user', [
             'RafflesApproved' => $RafflesApproved,
             'user' => $user
         ]) ?>
@@ -78,6 +78,7 @@ $this->title = 'Профиль '.$user->username;
 </div>
 
 <script>
+    //TODO Переписать на fetch и вынести в скрипты
     let user_code = "<?=$user->code?>";
     $(document).ready(function () {
         getCountSubscribers();
