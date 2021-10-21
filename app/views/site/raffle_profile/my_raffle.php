@@ -1,6 +1,5 @@
 <?php
 
-use yii\helpers\Html;
 use yii\helpers\Url;
 
 /* @var $RafflesApproved \app\models\db\Raffle */
@@ -11,13 +10,21 @@ use yii\helpers\Url;
 ?>
 <div>
     <div style="overflow-x: auto; display:flex; justify-content: space-between;">
-            <a class="button" style="display: inline-block; margin-right: 10px; width: 23%; min-width: 220px" onclick="showApproved()" id="button-approved">Опубликованные</a>
+            <a class="button" style="display: inline-block; margin-right: 10px; width: 23%; min-width: 220px" onclick="showApproved()" id="button-approved">
+                <?=Yii::t('app', 'Published')?>
+            </a>
 
-            <a class="button" style="display: inline-block; margin-right: 10px; width: 23%; min-width: 180px" onclick="showCheked()" id="button-checked">На модерации</a>
+            <a class="button" style="display: inline-block; margin-right: 10px; width: 23%; min-width: 180px" onclick="showCheked()" id="button-checked">
+                <?=Yii::t('app', 'Moderation')?>
+            </a>
 
-            <a class="button" style="display: inline-block; margin-right: 10px; width: 23%; min-width: 150px" onclick="showNotApproved()" id="button-not-approved">Запрещенные</a>
+            <a class="button" style="display: inline-block; margin-right: 10px; width: 23%; min-width: 150px" onclick="showNotApproved()" id="button-not-approved">
+                <?=Yii::t('app', 'Forbidden')?>
+            </a>
 
-            <a class="button" style="display: inline-block; margin-right: 10px; width: 23%; min-width: 180px" href="/raffle/list/<?=$user->code?>">Архив конкурсов</a>
+            <a class="button" style="display: inline-block; margin-right: 10px; width: 23%; min-width: 180px" href="/raffle/list/<?=$user->code?>">
+                <?=Yii::t('app', 'Archive of raffles')?>
+            </a>
     </div>
     <p>
         <h1 id="head-type-raffle"></h1>
@@ -32,17 +39,17 @@ use yii\helpers\Url;
                         <h3><?=$raffle->title?></h3>
                         <p><?=$raffle->short_description?></p>
                         <ul class="actions">
-                            <li><a href="<?=URL::to('/show/').$raffle->code?>" class="button large">Подробнее...</a></li>
+                            <li><a href="<?=URL::to('/show/').$raffle->code?>" class="button large"><?=Yii::t('app', 'More details')?>...</a></li>
                         </ul>
                     </article>
                 <?php } ?>
             </div>
             <div>
-                <h4 align="center"><a class="button" style="display: inline-block; margin-right: 10px; width: 23%; min-width: 180px" href="/raffle/list/<?=$user->code?>">Архив конкурсов</a></h4>
+                <h4 align="center"><a class="button" style="display: inline-block; margin-right: 10px; width: 23%; min-width: 180px" href="/raffle/list/<?=$user->code?>"><?=Yii::t('app', 'Archive of raffles')?></a></h4>
             </div>
             <?php }else{ ?>
                 <article>
-                    <p>Таких конкурсов нет</p>
+                    <p><?=Yii::t('app', 'No raffles')?></p>
                 </article>
             <?php } ?>
     </div>
@@ -57,17 +64,17 @@ use yii\helpers\Url;
                         <h3><?=$raffle->title?></h3>
                         <p><?=$raffle->short_description?></p>
                         <ul class="actions">
-                            <li><a href="<?=URL::to('/show/').$raffle->code?>" class="button large">Подробнее...</a></li>
+                            <li><a href="<?=URL::to('/show/').$raffle->code?>" class="button large"><?=Yii::t('app', 'More details')?>...</a></li>
                         </ul>
                     </article>
                 <?php } ?>
             </div>
             <div>
-                <h4 align="center"><a class="button" style="display: inline-block; margin-right: 10px; width: 23%; min-width: 180px" href="/raffle/list/<?=$user->code?>">Архив конкурсов</a></h4>
+                <h4 align="center"><a class="button" style="display: inline-block; margin-right: 10px; width: 23%; min-width: 180px" href="/raffle/list/<?=$user->code?>"><?=Yii::t('app', 'Archive of raffles')?></a></h4>
             </div>
         <?php }else{ ?>
             <article>
-                <p>Таких конкурсов нет</p>
+                <p><?=Yii::t('app', 'No raffles')?></p>
             </article>
         <?php } ?>
     </div>
@@ -82,17 +89,17 @@ use yii\helpers\Url;
                         <h3><?=$raffle->title?></h3>
                         <p><?=$raffle->short_description?></p>
                         <ul class="actions">
-                            <li><a href="<?=URL::to('/show/').$raffle->code?>" class="button large">Подробнее...</a></li>
+                            <li><a href="<?=URL::to('/show/').$raffle->code?>" class="button large"><?=Yii::t('app', 'More details')?>...</a></li>
                         </ul>
                     </article>
                 <?php } ?>
             </div>
             <div>
-                <h4 align="center"><a class="button" style="display: inline-block; margin-right: 10px; width: 23%; min-width: 180px" href="/raffle/list/<?=$user->code?>">Архив конкурсов</a></h4>
+                <h4 align="center"><a class="button" style="display: inline-block; margin-right: 10px; width: 23%; min-width: 180px" href="/raffle/list/<?=$user->code?>"><?=Yii::t('app', 'Archive of raffles')?></a></h4>
             </div>
         <?php }else{ ?>
             <article>
-                <p>Таких конкурсов нет</p>
+                <p><?=Yii::t('app', 'No raffles')?></p>
             </article>
         <?php } ?>
     </div>
@@ -100,42 +107,33 @@ use yii\helpers\Url;
 
 <script>
     function showApproved(){
-        document.getElementById('head-type-raffle').innerHTML = 'Опубликованные';
-
-        document.getElementById('button-approved').className = 'button primary';
-        document.getElementById('button-checked').className = 'button';
-        document.getElementById('button-not-approved').className = 'button';
-
-        document.getElementById('raffle-approved').style.display = "block";
-        document.getElementById('raffle-checked').style.display = "none";
-        document.getElementById('raffle-not-approved').style.display = "none";
-
+        $("#head-type-raffle").html("<?=Yii::t('app', 'Published')?>");
+        $("#button-approved").removeClass().addClass("button primary");
+        $("#button-checked").removeClass().addClass("button");
+        $("#button-not-approved").removeClass().addClass("button");
+        $("#raffle-approved").show();
+        $("#raffle-checked").hide();
+        $("#raffle-not-approved").hide();
     }
 
-
     function showCheked(){
-        document.getElementById('head-type-raffle').innerHTML = 'На модерации';
-
-        document.getElementById('button-approved').className = 'button';
-        document.getElementById('button-checked').className = 'button primary';
-        document.getElementById('button-not-approved').className = 'button';
-
-        document.getElementById('raffle-approved').style.display = "none";
-        document.getElementById('raffle-checked').style.display = "block";
-        document.getElementById('raffle-not-approved').style.display = "none";
+        $("#head-type-raffle").html("<?=Yii::t('app', 'Moderation')?>");
+        $("#button-approved").removeClass().addClass("button");
+        $("#button-checked").removeClass().addClass("button primary");
+        $("#button-not-approved").removeClass().addClass("button");
+        $("#raffle-approved").hide();
+        $("#raffle-checked").show();
+        $("#raffle-not-approved").hide();
     }
 
     function showNotApproved(){
-        document.getElementById('head-type-raffle').innerHTML = 'Запрещенные';
-
-        document.getElementById('button-approved').className = 'button';
-        document.getElementById('button-checked').className = 'button';
-        document.getElementById('button-not-approved').className = 'button primary';
-
-        document.getElementById('raffle-approved').style.display = "none";
-        document.getElementById('raffle-checked').style.display = "none";
-        document.getElementById('raffle-not-approved').style.display = "block";
+        $("#head-type-raffle").html("<?=Yii::t('app', 'Forbidden')?>");
+        $("#button-approved").removeClass().addClass("button");
+        $("#button-checked").removeClass().addClass("button");
+        $("#button-not-approved").removeClass().addClass("button primary");
+        $("#raffle-approved").hide();
+        $("#raffle-checked").hide();
+        $("#raffle-not-approved").show();
     }
-
     showApproved();
 </script>
