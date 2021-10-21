@@ -1,6 +1,5 @@
 <?php
 
-use yii\helpers\Html;
 use yii\helpers\Url;
 
 /* @var $RafflesApproved \app\models\db\Raffle */
@@ -8,7 +7,7 @@ use yii\helpers\Url;
 
 ?>
 <div>
-    <h1 id="head-type-raffle">Конкурсы</h1>
+    <h1 id="head-type-raffle"><?=Yii::t('app', 'Raffles')?></h1>
 
     <div id="raffle-approved">
         <?php if($RafflesApproved) { ?>
@@ -20,17 +19,17 @@ use yii\helpers\Url;
                         <h3><?=$raffle->title?></h3>
                         <p><?=$raffle->short_description?></p>
                         <ul class="actions">
-                            <li><a href="<?=URL::to('/show/').$raffle->code?>" class="button large">Подробнее...</a></li>
+                            <li><a href="<?=URL::to('/show/').$raffle->code?>" class="button large"><?=Yii::t('app', 'More details')?>...</a></li>
                         </ul>
                     </article>
                 <?php } ?>
             </div>
             <div>
-                <h4 align="center"><a class="button" style="display: inline-block; margin-right: 10px; width: 23%; min-width: 180px" href="/raffle/list/<?=$user->code?>">Архив конкурсов</a></h4>
+                <h4 align="center"><a class="button" style="display: inline-block; margin-right: 10px; width: 23%; min-width: 180px" href="/raffle/list/<?=$user->code?>"><?=Yii::t('app', 'Archive of raffles')?></a></h4>
             </div>
         <?php }else{ ?>
             <article>
-                <p>Таких конкурсов нет</p>
+                <p><?=Yii::t('app', 'No raffles')?></p>
             </article>
         <?php } ?>
     </div>
