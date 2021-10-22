@@ -32,27 +32,32 @@ if(Yii::$app->user->isGuest){
                 [
                     'label' => 'Профиль',
                     'href' => Url::to('/profile'),
-                    'controller' => 'site'
+                    'controller' => 'site',
+                    'action' => 'profile'
                 ],
                 [
                     'label' => 'Конкурсы',
                     'href' => Url::to('/raffle/'),
-                    'controller' => 'raffle'
+                    'controller' => 'raffle',
+                    'action' => 'index'
                 ],
                 [
                     'label' => 'Создать конкурс',
                     'href' => Url::to('/raffle/create'),
-                    'controller' => 'raffle'
+                    'controller' => 'raffle',
+                    'action' => 'create'
                 ],
                 [
                     'label' => 'Настройки',
                     'href' => Url::to('/settings/'),
-                    'controller' => 'settings'
+                    'controller' => 'settings',
+                    'action' => 'index'
                 ],
                 [
                     'label' => 'Выйти',
                     'href' => Url::to('/signout'),
-                    'controller' => 'auth'
+                    'controller' => 'auth',
+                    'action' => 'signout'
                 ],
             ],
         ];
@@ -62,27 +67,32 @@ if(Yii::$app->user->isGuest){
                 [
                     'label' => 'Профиль',
                     'href' => Url::to('/profile'),
-                    'controller' => 'site'
+                    'controller' => 'site',
+                    'action' => 'profile'
                 ],
                 [
                     'label' => 'Админка',
                     'href' => Url::to('/admin/'),
-                    'controller' => 'admin'
+                    'controller' => 'admin',
+                    'action' => 'asfaf'
                 ],
                 [
                     'label' => 'Конкурсы',
                     'href' => Url::to('/raffle/'),
-                    'controller' => 'raffle'
+                    'controller' => 'raffle',
+                    'action' => 'index'
                 ],
                 [
                     'label' => 'Настройки',
                     'href' => Url::to('/settings/'),
-                    'controller' => 'settings'
+                    'controller' => 'settings',
+                    'action' => 'index'
                 ],
                 [
                     'label' => 'Выйти',
                     'href' => Url::to('/signout'),
-                    'controller' => 'auth'
+                    'controller' => 'auth',
+                    'action' => 'signout'
                 ],
             ],
         ];
