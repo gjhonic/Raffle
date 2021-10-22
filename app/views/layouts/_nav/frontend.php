@@ -8,17 +8,20 @@ if(Yii::$app->user->isGuest){
             [
                 'label' => 'Конкурсы',
                 'href' => Url::to('/raffle/'),
-                'controller' => 'raffle'
+                'controller' => 'raffle',
+                'action' => 'index'
             ],
             [
                 'label' => 'Войти',
                 'href' => Url::to('/signin'),
-                'controller' => 'auth'
+                'controller' => 'auth',
+                'action' => 'signin'
             ],
             [
                 'label' => 'Зарегистрироваться',
                 'href' => Url::to('/signup'),
-                'controller' => 'auth'
+                'controller' => 'auth',
+                'action' => 'signup'
             ],
         ],
     ];
