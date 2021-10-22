@@ -15,6 +15,7 @@ $config = [
     'basePath' => $basePath,
     'bootstrap' => ['log'],
     'language' => 'ru-RU',
+    //'language' => 'en-EN',
     'runtimePath' => $webroot . '/runtime',
     'vendorPath' => $webroot . '/vendor',
     'defaultRoute' => '/site/index',

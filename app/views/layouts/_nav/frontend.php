@@ -6,19 +6,19 @@ if(Yii::$app->user->isGuest){
     return [
         'main' => [
             [
-                'label' => 'Конкурсы',
+                'label' => Yii::t('app', 'Contests'),
                 'href' => Url::to('/raffle/'),
                 'controller' => 'raffle',
                 'action' => 'index'
             ],
             [
-                'label' => 'Войти',
+                'label' => Yii::t('app', 'Sign in'),
                 'href' => Url::to('/signin'),
                 'controller' => 'auth',
                 'action' => 'signin'
             ],
             [
-                'label' => 'Зарегистрироваться',
+                'label' => Yii::t('app', 'Sign up'),
                 'href' => Url::to('/signup'),
                 'controller' => 'auth',
                 'action' => 'signup'
@@ -30,31 +30,31 @@ if(Yii::$app->user->isGuest){
         return [
             'main' => [
                 [
-                    'label' => 'Профиль',
+                    'label' => Yii::t('app', 'Profile'),
                     'href' => Url::to('/profile'),
                     'controller' => 'site',
                     'action' => 'profile'
                 ],
                 [
-                    'label' => 'Конкурсы',
+                    'label' => Yii::t('app', 'Contests'),
                     'href' => Url::to('/raffle/'),
                     'controller' => 'raffle',
                     'action' => 'index'
                 ],
                 [
-                    'label' => 'Создать конкурс',
+                    'label' => Yii::t('app', 'Create a contest'),
                     'href' => Url::to('/raffle/create'),
                     'controller' => 'raffle',
                     'action' => 'create'
                 ],
                 [
-                    'label' => 'Настройки',
+                    'label' => Yii::t('app', 'Settings'),
                     'href' => Url::to('/settings/'),
                     'controller' => 'settings',
                     'action' => 'index'
                 ],
                 [
-                    'label' => 'Выйти',
+                    'label' => Yii::t('app', 'Logout'),
                     'href' => Url::to('/signout'),
                     'controller' => 'auth',
                     'action' => 'signout'
@@ -65,31 +65,31 @@ if(Yii::$app->user->isGuest){
         return [
             'main' => [
                 [
-                    'label' => 'Профиль',
+                    'label' => Yii::t('app', 'Profile'),
                     'href' => Url::to('/profile'),
                     'controller' => 'site',
                     'action' => 'profile'
                 ],
                 [
-                    'label' => 'Админка',
+                    'label' => Yii::t('app', 'Admin panel'),
                     'href' => Url::to('/admin/'),
                     'controller' => 'admin',
                     'action' => 'asfaf'
                 ],
                 [
-                    'label' => 'Конкурсы',
+                    'label' => Yii::t('app', 'Contests'),
                     'href' => Url::to('/raffle/'),
                     'controller' => 'raffle',
                     'action' => 'index'
                 ],
                 [
-                    'label' => 'Настройки',
+                    'label' => Yii::t('app', 'Settings'),
                     'href' => Url::to('/settings/'),
                     'controller' => 'settings',
                     'action' => 'index'
                 ],
                 [
-                    'label' => 'Выйти',
+                    'label' => Yii::t('app', 'Logout'),
                     'href' => Url::to('/signout'),
                     'controller' => 'auth',
                     'action' => 'signout'
