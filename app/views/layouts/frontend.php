@@ -8,6 +8,10 @@ use yii\helpers\Url;
 use app\assets\FrontendAsset;
 
 $nav = array_merge(require(__DIR__ . '/_nav/frontend.php'));
+if(!Yii::$app->user->isGuest){
+    echo "<input type='hidden' value='".Yii::$app->user->identity->getCode()."' id='hidden-input-user-code'>";
+    $this->registerJsFile('/app/media/general/js/access_user.js', ['depends' => [FrontendAsset::className()], 'position' => \yii\web\View::POS_END]);
+}
 
 FrontendAsset::register($this);
 ?>
