@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\models\db\forms\SupportForm;
 use app\models\db\Raffle;
 use app\models\db\Tag;
+use app\services\user\StatusService;
 use Yii;
 use yii\helpers\Url;
 use yii\filters\AccessControl;
@@ -25,7 +26,7 @@ class SiteController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['profile', 'index', 'about', 'support'],
+                        'actions' => ['profile', 'index', 'about', 'support', 'banned'],
                         'roles' => [User::ROLE_USER, User::ROLE_MODERATOR, User::ROLE_ADMIN],
                     ],
                     [
@@ -130,5 +131,18 @@ class SiteController extends Controller
             'Users' => $Users,
             'Tags' => $Tags
         ]);
+    }
+
+    /**
+     * Страница заблокированного пользователя
+     * @return string|Response
+     */
+    public function actionBanned()
+    {
+        $user = User::currentUser();
+        if(!StatusService::checkStatusBanUser($user)){
+            return $this->redirect('index');
+        }
+        return $this->render('banned');
     }
 }

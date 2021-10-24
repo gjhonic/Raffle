@@ -21,6 +21,9 @@ return [
     'api/shut/<controller:\w+>/<action:\w+>' => 'api/shut/<controller>/<action>',
     'api/<controller:\w+>/<action:\w+>' => 'api/open/<controller>/<action>', // На публичный api
 
+    //URLs на внутренний ajax
+    'ajax/<controller:\w+>/<action:\w+>' => 'ajax/<controller>/<action>',
+
     //URLs на SiteController
     'profile/<code>' => 'site/profile',
     'show/<code>' => 'raffle/view',
