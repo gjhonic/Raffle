@@ -4,14 +4,13 @@
 /* @var $model object */
 
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
 use yii\helpers\Url;
 
-$this->title = 'Настройки';
+$this->title = Yii::t('app', 'Settings');
 
 ?>
 <header id="header">
-    <a href="" class="logo"><span >Настройки </span>/ Все</a>
+    <a href="" class="logo"><span><?=Yii::t('app', 'Settings')?> </span>/ <?=Yii::t('app', 'All')?></a>
 </header>
 
 <section id="banner">

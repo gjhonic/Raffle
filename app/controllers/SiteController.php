@@ -43,15 +43,12 @@ class SiteController extends Controller
 
     public function beforeAction($action)
     {
-        if (!Yii::$app->user->isGuest) {
-            if (Yii::$app->user->identity->status_id == User::STATUS_BAN_ID) {
-                Yii::$app->user->logout();
-                if (isset($session))
-                    $session->destroy();
-                echo "<h1>Ты забанен!!!</h1>";
-                die;
+        if(!Yii::$app->user->isGuest && $action->id != 'banned'){
+            if(StatusService::checkStatusBanUser(Yii::$app->user->identity)){
+                $this->redirect('/banned');
             }
         }
+
         return parent::beforeAction($action);
     }
 
