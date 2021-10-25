@@ -1,18 +1,20 @@
 <?php
 
+use yii\helpers\Html;
+use yii\helpers\Url;
+
 /* @var $this yii\web\View */
 /* @var $Users array */
 /* @var $Raffles array */
 
-$this->title = 'Конкурсы';
-use yii\helpers\Html;
-use yii\helpers\Url;
+$this->title = Yii::t('app', 'Raffles');
+
 ?>
 
 <header id="header">
-    <a href="#" class="logo">Конкурсы / Все</a>
+    <a href="#" class="logo"><?=Yii::t('app', 'Raffles')?> / <?=Yii::t('app', 'All')?></a>
     <ul class="icons">
-        <li><a class="icon solid fa-search" onclick="showSearchInput()" title="Поиск" style="cursor: pointer"><span class="label">Поиск</span></a></li>
+        <li><a class="icon solid fa-search" onclick="showSearchInput()" title="<?=Yii::t('app', 'Search')?>" style="cursor: pointer"><span class="label"><?=Yii::t('app', 'Search')?></span></a></li>
         <li><a class="icon solid fa-sort" onclick="showFilterInput()" title="Фильтр" style="cursor: pointer"><span class="label">Фильтр</span></a></li>
     </ul>
 </header>
@@ -51,7 +53,7 @@ use yii\helpers\Url;
                     </div>
                     <div class="col-3 col-12-small">
                         <p>
-                            <button class="button primary fit">Применить</button>
+                            <button class="button primary fit"><?=Yii::t('app', 'Apply')?></button>
                         </p>
                     </div>
                 </div>
@@ -96,7 +98,7 @@ use yii\helpers\Url;
                         <footer>
                             <ul class="actions">
                                 <li>
-                                    <a href="<?=Url::to('/show/').$raffle['raffle_code']?>" class="button">Подробнее...</a>
+                                    <a href="<?=Url::to('/show/').$raffle['raffle_code']?>" class="button"><?=Yii::t('app', 'More details')?>...</a>
                                 </li>
                                 <li>
                                     <?=Html::a('Автор: '.$raffle['username'], Url::to('/profile').'/'.$raffle['user_code'], ['class' => 'button',])?>
@@ -113,14 +115,34 @@ use yii\helpers\Url;
 </section>
 
 <script>
+    //TODO сделать плавно
+    let search_pos = 0;
+    let filter_pos = 0;
+
     function showFilterInput(){
-        $("#box-filter").show();
-        $("#box-search").hide();
+        if(filter_pos){
+            showHideInput();
+            filter_pos = 0;
+            search_pos = 0;
+        }else{
+            $("#box-filter").show();
+            $("#box-search").hide();
+            filter_pos = 1;
+            search_pos = 0;
+        }
     }
 
     function showSearchInput(){
-        $("#box-filter").hide();
-        $("#box-search").show();
+        if(search_pos){
+            showHideInput();
+            search_pos = 0;
+            filter_pos = 0;
+        }else{
+            $("#box-filter").hide();
+            $("#box-search").show();
+            search_pos = 1;
+            filter_pos = 0;
+        }
     }
 
     function showHideInput(){
@@ -129,6 +151,7 @@ use yii\helpers\Url;
     }
 
     showHideInput();
+
 
     let page = 1;
 

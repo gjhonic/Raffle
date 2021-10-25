@@ -8,6 +8,7 @@
 namespace app\controllers;
 
 use app\models\db\Raffle;
+use app\services\user\StatusService;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\helpers\Url;
@@ -61,12 +62,8 @@ class RaffleController extends Controller
     public function beforeAction($action)
     {
         if(!Yii::$app->user->isGuest){
-            if(Yii::$app->user->identity->status_id == User::STATUS_BAN_ID){
-                Yii::$app->user->logout();
-                if(isset($session))
-                    $session->destroy();
-                echo "<h1>Ты забанен!!!</h1>";
-                die;
+            if(StatusService::checkStatusBanUser(Yii::$app->user->identity)){
+                $this->redirect('/banned');
             }
         }
 
