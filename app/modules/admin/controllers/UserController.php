@@ -47,7 +47,6 @@ class UserController extends Controller
         ];
     }
 
-
     /**
      * Просмотр список пользователей.
      * @return string
@@ -86,7 +85,6 @@ class UserController extends Controller
         $model = new ModeratorForm();
 
         if ($model->load(Yii::$app->request->post()) && $model->signup()) {
-
             return $this->redirect(Url::to(['/admin/user/view', 'id' => $model->user->id]));
         }
 

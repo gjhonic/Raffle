@@ -1,15 +1,18 @@
 <?php
 
+use yii\helpers\Html;
+use yii\bootstrap\ActiveForm;
+use yii\helpers\Url;
+
 /* @var $this yii\web\View */
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $model app\modeles\admin\models\forms\ModeratorForm */
 
-use yii\helpers\Html;
-use yii\bootstrap\ActiveForm;
-
 $this->title = 'Добавление модератора';
+$this->params['breadcrumbs'][] = ['label' => 'Пользователи', 'url' => Url::to('/admin/user/')];
+$this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="site-login">
+<div class="create-moder">
     <h1><?= Html::encode($this->title) ?></h1>
 
     <?php $form = ActiveForm::begin([
@@ -41,5 +44,4 @@ $this->title = 'Добавление модератора';
     </div>
 
     <?php ActiveForm::end(); ?>
-
 </div>
