@@ -11,6 +11,7 @@
 namespace app\modules\admin\controllers;
 
 use app\models\db\UserRole;
+use app\modules\admin\models\forms\ModeratorForm;
 use Yii;
 use yii\helpers\ArrayHelper;
 use yii\web\Controller;
@@ -18,8 +19,7 @@ use yii\filters\AccessControl;
 use yii\helpers\Url;
 use app\models\db\User;
 use app\models\db\search\UserSearch;
-
-
+use yii\web\Response;
 
 class UserController extends Controller
 {
@@ -37,11 +37,15 @@ class UserController extends Controller
                         'actions' => ['index','view'],
                         'roles' => [User::ROLE_ADMIN, User::ROLE_MODERATOR],
                     ],
+                    [
+                        'allow' => true,
+                        'actions' => ['create'],
+                        'roles' => [User::ROLE_ADMIN],
+                    ],
                 ],
             ],
         ];
     }
-
 
     /**
      * Просмотр список пользователей.
@@ -71,4 +75,22 @@ class UserController extends Controller
             'model' => $user,
         ]);
     }
+
+    /**
+     * Добавление пользователя с ролью 'Модератор'
+     * @return string|Response
+     */
+    public function actionCreate(){
+
+        $model = new ModeratorForm();
+
+        if ($model->load(Yii::$app->request->post()) && $model->signup()) {
+            return $this->redirect(Url::to(['/admin/user/view', 'id' => $model->user->id]));
+        }
+
+        return $this->render('create', [
+            'model' => $model,
+        ]);
+    }
+
 }

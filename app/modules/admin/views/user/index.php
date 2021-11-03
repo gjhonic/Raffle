@@ -1,11 +1,11 @@
 <?php
+/* @var $dataProvider */
+/* @var $searchModel */
+/* @var $Roles \app\models\db\UserRole*/
 
 use yii\helpers\Html;
 use yii\grid\GridView;
-use yii\helpers\Url;
 use yii\widgets\Pjax;
-use app\models\db\User;
-
 
 $this->title = 'Пользователи';
 $this->params['breadcrumbs'][] = $this->title;
@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?php if (Yii::$app->user->identity->getRole() !== 'moderator')  { ?>
-            <?= Html::a('Добавить пользователя', ['create'], ['class' => 'btn btn-success']) ?>
+            <?= Html::a('Добавить модератора', ['create'], ['class' => 'btn btn-success']) ?>
         <?php } ?>
     </p>
 

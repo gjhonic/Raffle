@@ -1,21 +1,18 @@
 <?php
 /**
- * SignupForm
- * Форма регистрации
+ * ModeratorForm
+ * Форма создания пользователя с ролью "Модератор"
  * @copyright Copyright (c) 2021 Eugene Andreev
  * @author Eugene Andreev <gjhonic@gmail.com>
  */
-namespace app\models\auth\forms;
+namespace app\modules\admin\models\forms;
 
+use app\models\db\User;
 use Yii;
 use yii\base\Model;
-use app\models\auth\UserIdentity;
-use app\models\db\User;
 
-
-class SignupForm extends Model
+class ModeratorForm  extends Model
 {
-
     public $name;
     public $surname;
     public $password;
@@ -29,22 +26,21 @@ class SignupForm extends Model
      * rules - метод возвращает правила валидации.
      * @return array - правила валидации.
      */
-    public function rules()
-    {
-        return [
-            [['name', 'surname', 'username', 'password', 'password_confirm', 'email'], 'required'],
-            ['username', 'validateUsername'],
-            ['email', 'email'],
-            ['email', 'validateEmail'],
-            ['password', 'validatePassword'],
-            ['password_confirm', 'validatePasswordConfirm']
-        ];
-    }
-
+   public function rules()
+   {
+       return [
+           [['name', 'surname', 'username', 'password', 'password_confirm', 'email'], 'required'],
+           ['username', 'validateUsername'],
+           ['email', 'email'],
+           ['email', 'validateEmail'],
+           ['password', 'validatePassword'],
+           ['password_confirm', 'validatePasswordConfirm']
+       ];
+   }
     /**
-     * Метод валидации логина.
-     * @param $attribute, $params
-     */
+    * Метод валидации логина.
+    * @param $attribute, $params
+    */
     public function validateUsername($attribute, $params)
     {
         if (!$this->hasErrors()) {
@@ -99,7 +95,8 @@ class SignupForm extends Model
 
     /**
      * Метод "регает" юзера в бд.
-     * @return bool.
+     * @return User|void|null
+     * @throws \yii\base\Exception
      */
     public function signup()
     {
@@ -111,25 +108,25 @@ class SignupForm extends Model
             $user->username = $this->username;
             $user->email = $this->email;
             $user->password = Yii::$app->getSecurity()->generatePasswordHash($this->password);
-            $user->role_id = User::ROLE_USER_ID;
+            $user->role_id = User::ROLE_MODERATOR_ID;
             $user->status_id = User::STATUS_ACTIVE_ID;
             $user->code = $this->username;
-            $user->email_confirm = 0;
+            $user->email_confirm = 1;
 
             if ($user->save()){
                 Yii::$app->authManager->assign(Yii::$app->authManager->getRole(User::ROLE_USER), $user->id);
                 $this->user = $user;
-                return true;
+                return $user;
             }else{
-                return false;
+                return null;
             }
         }
     }
 
     /**
-     * {@inheritdoc}
+     * @return string[]
      */
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
             'name' => 'Имя',
@@ -140,5 +137,4 @@ class SignupForm extends Model
             'password_confirm' => 'Подтвердите пароль',
         ];
     }
-
 }
