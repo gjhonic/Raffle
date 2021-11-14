@@ -102,7 +102,7 @@ class RaffleController extends Controller
      * Список конкурсов
      * @return string
      */
-    public function actionRaffleByTag($tag)
+    public function actionRaffleByTag($tag = null)
     {
         $Raffles = Raffle::getRafflesByTag($tag);
         return $this->render('raffles-by-tag',[
@@ -115,7 +115,7 @@ class RaffleController extends Controller
      * Список конкурсов пользователя
      * @return string
      */
-    public function actionList($code)
+    public function actionList($code = null)
     {
         if(($user = User::findByCode($code)) === null){
             return $this->redirect('/index');
@@ -145,7 +145,7 @@ class RaffleController extends Controller
      * @param $code string
      * @return string|Response
      */
-    public function actionView($code)
+    public function actionView($code = null)
     {
         if(($raffle = Raffle::getRaffleByCode($code)) == null){
             return $this->redirect(['index']);

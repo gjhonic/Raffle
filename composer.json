@@ -19,7 +19,8 @@
         "yiisoft/yii2-bootstrap": "~2.0.0",
         "yiisoft/yii2-swiftmailer": "~2.0.0 || ~2.1.0",
         "mihaildev/yii2-ckeditor": "*",
-        "yiisoft/yii2-redis": "~2.0.0"
+        "yiisoft/yii2-redis": "~2.0.0",
+        "codemix/yii2-localeurls": "^1.7"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

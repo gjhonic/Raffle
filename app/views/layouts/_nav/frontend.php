@@ -7,7 +7,7 @@ if(Yii::$app->user->isGuest){
         'main' => [
             [
                 'label' => Yii::t('app', 'Raffles'),
-                'href' => Url::to('/raffle/'),
+                'href' => Url::to('/raffle/index'),
                 'controller' => 'raffle',
                 'action' => 'index'
             ],
@@ -37,7 +37,7 @@ if(Yii::$app->user->isGuest){
                 ],
                 [
                     'label' => Yii::t('app', 'Raffles'),
-                    'href' => Url::to('/raffle/'),
+                    'href' => Url::to('/raffle/index'),
                     'controller' => 'raffle',
                     'action' => 'index'
                 ],
@@ -49,7 +49,7 @@ if(Yii::$app->user->isGuest){
                 ],
                 [
                     'label' => Yii::t('app', 'Settings'),
-                    'href' => Url::to('/settings/'),
+                    'href' => Url::to('/settings/index'),
                     'controller' => 'settings',
                     'action' => 'index'
                 ],
@@ -78,13 +78,13 @@ if(Yii::$app->user->isGuest){
                 ],
                 [
                     'label' => Yii::t('app', 'Raffles'),
-                    'href' => Url::to('/raffle/'),
+                    'href' => Url::to('/raffle/index'),
                     'controller' => 'raffle',
                     'action' => 'index'
                 ],
                 [
                     'label' => Yii::t('app', 'Settings'),
-                    'href' => Url::to('/settings/'),
+                    'href' => Url::to('/settings/index'),
                     'controller' => 'settings',
                     'action' => 'index'
                 ],
