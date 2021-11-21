@@ -82,13 +82,13 @@ $config = [
         ],
         'i18n' => [
             'translations' => [
-                'app' => [
+                'app*' => [
                     'class' => 'yii\i18n\PhpMessageSource',
                     'basePath' => '@app/messages',
                     'sourceLanguage' => 'en-US',
                     'fileMap' => [
                         'app'       => 'app.php',
-                        'app/note' => 'note.php',
+                        'app/note'  => 'note.php',
                     ],
                 ],
             ],

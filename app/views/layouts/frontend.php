@@ -4,12 +4,11 @@
 /* @var $content string */
 
 use yii\helpers\Html;
-use yii\helpers\Url;
 use app\assets\FrontendAsset;
 
 $nav = array_merge(require(__DIR__ . '/_nav/frontend.php'));
-if(!Yii::$app->user->isGuest){
-    echo "<input type='hidden' value='".Yii::$app->user->identity->getCode()."' id='hidden-input-user-code'>";
+if (!Yii::$app->user->isGuest) {
+    echo "<input type='hidden' value='" . Yii::$app->user->identity->getCode() . "' id='hidden-input-user-code'>";
     $this->registerJsFile('/app/media/general/js/access_user.js', ['depends' => [FrontendAsset::className()], 'position' => \yii\web\View::POS_END]);
 }
 
@@ -35,7 +34,7 @@ FrontendAsset::register($this);
     <!-- Main -->
     <div id="main">
         <div class="inner">
-            <?=$content?>
+            <?= $content ?>
         </div>
     </div>
 
@@ -45,28 +44,23 @@ FrontendAsset::register($this);
 
             <!-- Title -->
             <section id="search" class="alt">
-                    <h2><a href="<?=Yii::$app->homeUrl?>"><?php echo Yii::$app->name; ?>.ru</a></h2>
+                <h2><a href="<?= Yii::$app->homeUrl ?>"><?= Yii::$app->name; ?>.ru</a></h2>
 
-                    <form method="get" action="<?=Url::to('/search')?>">
-                        <?php if(($current_query = Yii::$app->request->get('q')) !== null){ ?>
-                            <input type="text" name="q" id="input-search-by-site" placeholder="Вы ищите: <?=$current_query?>" />
-                        <?php }else{?>
-                            <input type="text" name="q" id="input-search-by-site" placeholder="Поиск" />
-                        <?php }?>
-                    </form>
+                <?= $this->renderFile("@app/views/layouts/components/search.php") ?>
             </section>
-            
+
             <!-- Menu -->
             <nav id="menu">
                 <header class="major">
-                    <h2>Меню</h2>
+                    <h2><?= Yii::t('app', 'Menu') ?></h2>
                 </header>
                 <ul>
-                    <?php foreach ($nav['main'] as $elem){
+                    <?php foreach ($nav['main'] as $elem) {
                         $isActive = (Yii::$app->controller->id == $elem['controller']) && (Yii::$app->controller->action->id == $elem['action']) ? 'nav-active' : '';
                         ?>
                         <li>
-                            <a class="nav-link" id="<?=$isActive?>" href="<?=$elem['href']?>"><?=$elem['label']?></a>
+                            <a class="nav-link" id="<?= $isActive ?>"
+                               href="<?= $elem['href'] ?>"><?= $elem['label'] ?></a>
                         </li>
                     <?php } ?>
                 </ul>
@@ -74,6 +68,8 @@ FrontendAsset::register($this);
 
             <!-- Footer -->
             <footer id="footer">
+                <?= $this->renderFile("@app/views/layouts/components/change-lang.php") ?>
+
                 <p class="copyright">&copy; gjhonic</p>
             </footer>
 

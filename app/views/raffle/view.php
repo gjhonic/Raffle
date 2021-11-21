@@ -11,7 +11,12 @@ $this->title = $raffle['raffle_title'];
 ?>
 
 <header id="header">
-    <a href="#" class="logo"><span onclick="window.location.replace('<?=Url::to('/raffle/index')?>');">Конкурсы / </span><?=$raffle['raffle_code']?></a>
+    <a href="#" class="logo">
+        <span onclick="window.location.replace('<?=Url::to('/raffle/index')?>');">
+            <?=Yii::t("app", "Raffles")?> /
+        </span>
+        <?=$raffle['raffle_code']?>
+    </a>
     <p class="icons"><?=date('m.d.Y', $raffle['raffle_created_at'])?></p>
 </header>
 <section>
@@ -43,7 +48,7 @@ $this->title = $raffle['raffle_title'];
     </time>
 
     <div class="box-tags">
-        <h4>Теги: </h4>
+        <h4><?=Yii::t("app", "Tags")?>: </h4>
         <div style="overflow-x: auto; display:flex;">
             <?php foreach ($Tags as $tag) { ?>
                 <a class="button small" href="<?=Url::to('/raffle-by-tag/').$tag['tag_title']?>" style="margin-right: 10px;"><?=$tag['tag_title']?></a>
@@ -55,7 +60,7 @@ $this->title = $raffle['raffle_title'];
 
     <p>
         <div style="overflow-x: auto; display:flex;">
-            <?=Html::a('Автор:'.$raffle['username'], Url::to('/profile').'/'.$raffle['user_code'], ['class' => 'button', 'style'=>'margin-right: 10px'])?>
+            <?=Html::a(Yii::t("app", "Author") . ':' . $raffle['username'], Url::to('/profile').'/'.$raffle['user_code'], ['class' => 'button', 'style'=>'margin-right: 10px'])?>
 
             <?php if($raffle['user_id'] == Yii::$app->user->identity->getId()) { ?>
                 <?=Html::a('Редактировать', Url::to('/raffle/update/').$raffle['raffle_code'], ['class' => 'button', 'style'=>'margin-right: 10px'])?>
@@ -67,6 +72,9 @@ $this->title = $raffle['raffle_title'];
     <p>
 
         <?php if($raffle['user_id'] == Yii::$app->user->identity->getId()) { ?>
+        <?php
+            //TODO Ajax переписать на fetch и вынести в отдельный файл
+        ?>
             <div id="div-input-note">
                 <h3><label for="input-note">
                         Заметка к конкурсу
