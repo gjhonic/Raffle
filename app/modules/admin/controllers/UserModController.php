@@ -106,7 +106,7 @@ class UserModController extends Controller
             $user->update();
         }
 
-        return $this->redirect(Url::to('/admin/user-mod/index'));
+        return $this->redirect(Yii::$app->request->referrer);
     }
 
     /**
@@ -124,7 +124,7 @@ class UserModController extends Controller
             $user->update();
         }
 
-        return $this->redirect(Url::to('/admin/user-mod/index'));
+        return $this->redirect(Yii::$app->request->referrer);
     }
 
     /**
@@ -142,7 +142,7 @@ class UserModController extends Controller
             $user->update();
         }
 
-        return $this->redirect(Url::to('/admin/user-mod/admin'));
+        return $this->redirect(Yii::$app->request->referrer);
     }
 
     /**
@@ -160,6 +160,6 @@ class UserModController extends Controller
             $user->update();
         }
 
-        return $this->redirect(Url::to('/admin/user-mod/admin'));
+        return $this->redirect(Yii::$app->request->referrer);
     }
 }

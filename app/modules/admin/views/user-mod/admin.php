@@ -4,7 +4,6 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\helpers\Url;
 use yii\widgets\Pjax;
-use app\models\db\User;
 use app\modules\admin\widgets\UserStatusWidget;
 
 /* @var $dataProvider \yii\db\ActiveRecord */

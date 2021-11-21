@@ -2,6 +2,7 @@
 
 namespace app\models\db;
 
+use app\models\behavior\ActiveRecordLogableBehavior;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveQuery;
@@ -86,7 +87,8 @@ class User extends \yii\db\ActiveRecord
     public function behaviors()
     {
         return [
-            TimestampBehavior::className(),
+            TimestampBehavior::class,
+            ActiveRecordLogableBehavior::class,
         ];
     }
 
