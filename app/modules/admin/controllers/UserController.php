@@ -1,5 +1,4 @@
 <?php
-
 /**
  * UserController
  * Контроллер модуля admin для работы с пользователями системы
@@ -68,8 +67,8 @@ class UserController extends Controller
      * @param $id
      * @return string
      */
-    public function actionView($id){
-
+    public function actionView($id)
+    {
         $user = User::findOne($id);
         return $this->render('view', [
             'model' => $user,
@@ -80,8 +79,8 @@ class UserController extends Controller
      * Добавление пользователя с ролью 'Модератор'
      * @return string|Response
      */
-    public function actionCreate(){
-
+    public function actionCreate()
+    {
         $model = new ModeratorForm();
 
         if ($model->load(Yii::$app->request->post()) && $model->signup()) {

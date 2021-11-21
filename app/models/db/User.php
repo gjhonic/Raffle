@@ -4,6 +4,7 @@ namespace app\models\db;
 
 use Yii;
 use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveQuery;
 
 /**
  * This is the model class for table "user".
@@ -132,12 +133,19 @@ class User extends \yii\db\ActiveRecord
     }
 
     /**
-     * Метод возвращает роль пользователя
-     * @return UserRole|null
+     * @return \yii\db\ActiveQuery
      */
-    public function getRole()
+    public function getRole(): ActiveQuery
     {
-        return UserRole::findOne($this->role_id);
+        return $this->hasOne(UserRole::class, ['id' => 'role_id']);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getStatus(): ActiveQuery
+    {
+        return $this->hasOne(UserStatus::class, ['id' => 'status_id']);
     }
 
     /**
@@ -157,15 +165,6 @@ class User extends \yii\db\ActiveRecord
          AND subscriptions.subscriber_id = :subscriber_id";
         $res = Yii::$app->db->createCommand($sql, $placeholders)->queryOne();
         return ($res == 1);
-    }
-
-    /**
-     * Метод возвращает статус пользователя
-     * @return UserStatus|null
-     */
-    public function getStatus()
-    {
-        return UserStatus::findOne($this->status_id);
     }
 
     /**

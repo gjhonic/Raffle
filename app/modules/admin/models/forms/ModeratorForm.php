@@ -23,10 +23,10 @@ class ModeratorForm  extends Model
     public $user;
 
     /**
-     * rules - метод возвращает правила валидации.
-     * @return array - правила валидации.
+     * Метод возвращает правила валидации.
+     * @return array
      */
-   public function rules()
+   public function rules(): array
    {
        return [
            [['name', 'surname', 'username', 'password', 'password_confirm', 'email'], 'required'],
