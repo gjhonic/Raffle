@@ -14,8 +14,16 @@ $this->title = Yii::t('app', 'Raffles');
 <header id="header">
     <a href="#" class="logo"><?=Yii::t('app', 'Raffles')?> / <?=Yii::t('app', 'All')?></a>
     <ul class="icons">
-        <li><a class="icon solid fa-search" onclick="showSearchInput()" title="<?=Yii::t('app', 'Search')?>" style="cursor: pointer"><span class="label"><?=Yii::t('app', 'Search')?></span></a></li>
-        <li><a class="icon solid fa-sort" onclick="showFilterInput()" title="Фильтр" style="cursor: pointer"><span class="label">Фильтр</span></a></li>
+        <li>
+            <a class="icon solid fa-search" onclick="showSearchInput()" title="<?=Yii::t('app', 'Search')?>" style="cursor: pointer">
+                <span class="label"><?=Yii::t('app', 'Search')?></span>
+            </a>
+        </li>
+        <li>
+            <a class="icon solid fa-sort" onclick="showFilterInput()" title="<?=Yii::t('app', 'Filter')?>" style="cursor: pointer">
+                <span class="label">Фильтр</span>
+            </a>
+        </li>
     </ul>
 </header>
 
@@ -65,15 +73,15 @@ $this->title = Yii::t('app', 'Raffles');
                 <div class="row">
                     <div class="col-6 col-12-small">
                         <p>
-                            <input type="text" name="q" id="input-search-by-site" placeholder="Поиск" />
+                            <input type="text" name="q" id="input-search-by-site" placeholder="<?=Yii::t('app', 'Search')?>" />
                         </p>
                     </div>
                     <div class="col-6 col-12-small">
                         <p>
-                            <button class="button primary fit">Искать</button>
+                            <button class="button primary fit"><?=Yii::t("app", "Search")?></button>
                         </p>
                     </div>
-                    <span>Я буду искать совпадения средки конкурсов, пользователей и тегов</span>
+                    <span><?=Yii::t("app/note", "I will search for matches of contest media, users and tags")?></span>
                 </div>
             </form>
         </div>

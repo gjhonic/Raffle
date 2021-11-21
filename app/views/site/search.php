@@ -8,7 +8,7 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 
-$this->title = 'Поиск по запросу'.$query;
+$this->title = Yii::t("app", "Search by request") . ": " . $query;
 
 ?>
 
@@ -16,7 +16,6 @@ $this->title = 'Поиск по запросу'.$query;
     <div class="content">
         <header>
             <h1><?= Html::encode($this->title) ?></h1>
-            <p></p>
         </header>
     </div>
 </section>
@@ -40,7 +39,7 @@ $this->title = 'Поиск по запросу'.$query;
                     <article class="post">
                         <header>
                             <div class="title">
-                                <h2><a href="<?=URL::to('/show/').$raffle['raffle_code']?>"><?=$raffle['raffle_title']?></a></h2>
+                                <h2><a href="<?=Url::to('/show/').$raffle['raffle_code']?>"><?=$raffle['raffle_title']?></a></h2>
                             </div>
 
                             <div class="meta">
@@ -52,10 +51,10 @@ $this->title = 'Поиск по запросу'.$query;
                         <footer>
                             <ul class="actions">
                                 <li>
-                                    <a href="<?=URL::to('/show/').$raffle['raffle_code']?>" class="button">Подробнее...</a>
+                                    <a href="<?=Url::to('/show/').$raffle['raffle_code']?>" class="button"><?=Yii::t("app", "More details")?>...</a>
                                 </li>
                                 <li>
-                                    <?=Html::a('Автор: '.$raffle['username'], URL::to('/profile').'/'.$raffle['user_code'], ['class' => 'button',])?>
+                                    <?=Html::a('Автор: '.$raffle['username'], Url::to('/profile').'/'.$raffle['user_code'], ['class' => 'button',])?>
                                 </li>
                             </ul>
                         </footer>
@@ -64,7 +63,7 @@ $this->title = 'Поиск по запросу'.$query;
             <?php } ?>
         <?php }else{ ?>
             <article>
-                <p>Конкурсов не нашел</p>
+                <p><?=Yii::t("app", "Raffles not found")?></p>
             </article>
         <?php } ?>
     </div>
@@ -82,7 +81,7 @@ $this->title = 'Поиск по запросу'.$query;
             </div>
         <?php }else{ ?>
             <article>
-                <p>Пользователей не нашел</p>
+                <p><?=Yii::t("app", "Users not found")?></p>
             </article>
         <?php } ?>
     </div>
@@ -98,7 +97,7 @@ $this->title = 'Поиск по запросу'.$query;
             </div>
         <?php }else{ ?>
             <article>
-                <p>Таких тегов нет</p>
+                <p><?=Yii::t("app", "Tags not found")?></p>
             </article>
         <?php } ?>
     </div>

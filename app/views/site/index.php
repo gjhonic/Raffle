@@ -2,8 +2,10 @@
 
 /* @var $this yii\web\View */
 
-$this->title = 'Главная страница';
 use yii\helpers\Html;
+
+$this->title = Yii::t("app", "Home page");
+
 ?>
 <section id="banner">
     <div class="content">
