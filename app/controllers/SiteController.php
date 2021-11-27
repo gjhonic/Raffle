@@ -4,7 +4,7 @@ namespace app\controllers;
 
 use app\models\db\forms\SupportForm;
 use app\models\db\Raffle;
-use app\models\db\Tag;
+use app\models\base\Tag;
 use app\services\user\StatusService;
 use Yii;
 use yii\helpers\Url;
@@ -115,7 +115,7 @@ class SiteController extends Controller
     public function actionSearch($q)
     {
         if (($q = trim($q)) === '') {
-            $this->redirect(Yii::$app->request->referrer);
+            return $this->redirect(Yii::$app->request->referrer);
         }
 
         $Raffles = Raffle::searchRaffles($q);
