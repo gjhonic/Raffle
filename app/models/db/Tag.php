@@ -2,6 +2,7 @@
 
 namespace app\models\db;
 
+use app\models\behavior\ActiveRecordLogableBehavior;
 use Yii;
 
 /**
@@ -14,18 +15,19 @@ use Yii;
  */
 class Tag extends \yii\db\ActiveRecord
 {
-    /**
-     * {@inheritdoc}
-     */
-    public static function tableName()
+    public static function tableName(): string
     {
-        return 'tag';
+        return '{{%tag}}';
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function rules()
+    public function behaviors(): array
+    {
+        return [
+            ActiveRecordLogableBehavior::class,
+        ];
+    }
+
+    public function rules(): array
     {
         return [
             ['title', 'required'],
@@ -34,14 +36,11 @@ class Tag extends \yii\db\ActiveRecord
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
             'id' => 'Id',
-            'title' => 'Название',
+            'title' => Yii::t('app', 'Title'),
         ];
     }
 
@@ -56,30 +55,16 @@ class Tag extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[RaffleTags]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getRaffleTags()
-    {
-        return $this->hasMany(RaffleTag::className(), ['tag_id' => 'id']);
-    }
-
-    /**
-     * Метод находит теги по совпадению с запросом
-     * @param $query
+     * Метод находит теги по совпадению с запросом.
+     * @param string $query
      * @return array|\yii\db\ActiveRecord[]
      */
-    public static function searchTags($query)
+    public static function searchTags(string $query): array
     {
-        $placeholders = [
-            'query' => '%'.$query.'%'
-        ];
-        $sql = "SELECT tag.title
-         FROM tag
-         WHERE (tag.title LIKE :query)
-         ORDER BY tag.id DESC
-         LIMIT 30";
-        return Yii::$app->db->createCommand($sql, $placeholders)->queryAll();
+        return self::find()
+            ->where(['LIKE', 'title', $query])
+            ->orderBy('id')
+            ->limit(30)
+            ->all();
     }
 }

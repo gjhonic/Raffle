@@ -60,12 +60,25 @@ class RaffleController extends Controller
      */
     public function actionView(int $id)
     {
-        $raffle = Raffle::findOne($id);
+        $raffle = $this->findModel($id);
         if ($raffle === null) {
             return $this->redirect(Url::to('/admin/raffle/'));
         }
         return $this->render('view', [
             'model' => $raffle,
         ]);
+    }
+
+    /**
+     * @param int $id
+     * @return Raffle|null
+     */
+    protected function findModel(int $id): ?Raffle
+    {
+        if (($model = Raffle::findOne($id)) !== null) {
+            return $model;
+        } else {
+            return null;
+        }
     }
 }

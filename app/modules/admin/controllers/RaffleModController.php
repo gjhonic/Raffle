@@ -9,16 +9,14 @@
 namespace app\modules\admin\controllers;
 
 use app\models\db\Raffle;
-use Throwable;
 use Yii;
-use yii\web\Controller;
 use yii\filters\AccessControl;
 use yii\helpers\Url;
 use app\models\db\User;
 use app\models\db\search\RaffleSearch;
 use yii\web\Response;
 
-class RaffleModController extends Controller
+class RaffleModController extends RaffleController
 {
     public function behaviors(): array
     {
@@ -63,7 +61,7 @@ class RaffleModController extends Controller
      */
     public function actionBan(int $id): Response
     {
-        $raffle = Raffle::findOne($id);
+        $raffle = $this->findModel($id);
         if ($raffle !== null) {
             $raffle->status_id = Raffle::STATUS_NOT_APPROVED_ID;
             $raffle->update();
@@ -80,7 +78,7 @@ class RaffleModController extends Controller
      */
     public function actionUnban(int $id): Response
     {
-        $raffle = Raffle::findOne($id);
+        $raffle = $this->findModel($id);
         if ($raffle != null) {
             $raffle->status_id = Raffle::STATUS_APPROVED_ID;
             $raffle->update();
