@@ -1,5 +1,4 @@
 <?php
-
 /**
  * SupportModController
  * Контроллер модуля admin для модерации обращений
@@ -9,22 +8,21 @@
 
 namespace app\modules\admin\controllers;
 
-use app\models\db\Support;
 use Yii;
-use yii\web\Controller;
 use yii\filters\AccessControl;
 use yii\helpers\Url;
 use app\models\db\User;
 use app\models\db\search\SupportSearch;
+use yii\web\Response;
 
-class SupportModController extends Controller
+class SupportModController extends SupportController
 {
-    public function behaviors()
+    public function behaviors(): array
     {
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'denyCallback' => function ($rule, $action) {
+                'denyCallback' => function () {
                     $this->redirect(Url::to('/signin'));
                 },
                 'rules' => [
@@ -42,7 +40,7 @@ class SupportModController extends Controller
      * Просмотр список обращений.
      * @return string
      */
-    public function actionIndex()
+    public function actionIndex(): string
     {
         $searchModel = new SupportSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
@@ -54,14 +52,14 @@ class SupportModController extends Controller
     }
 
     /**
-     * Метод помечает обращение как "важное"
-     * @param $id int
-     * @throws \Throwable
-     * @throws \yii\db\StaleObjectException
+     * Метод помечает обращение как "важное".
+     * @param int $id
+     * @return Response
      */
-    public function actionTag($id){
-        $support = Support::findOne($id);
-        if($support === null){
+    public function actionTag(int $id): Response
+    {
+        $support = $this->findModel($id);
+        if ($support === null) {
             return $this->redirect(Url::to('/admin/support-mod/index'));
         }
         $support->setTag();
@@ -69,14 +67,14 @@ class SupportModController extends Controller
     }
 
     /**
-     * Метод cнимает метку "важное" на обращении
-     * @param $id int
-     * @throws \Throwable
-     * @throws \yii\db\StaleObjectException
+     * Метод убирает метку "важное" на обращении.
+     * @param int $id
+     * @return Response
      */
-    public function actionUntag($id){
-        $support = Support::findOne($id);
-        if($support === null){
+    public function actionUntag(int $id): Response
+    {
+        $support = $this->findModel($id);
+        if ($support === null) {
             return $this->redirect(Url::to('/admin/support-mod/index'));
         }
         $support->setViewed();

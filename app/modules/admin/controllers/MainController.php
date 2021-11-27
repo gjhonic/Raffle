@@ -4,8 +4,8 @@
  * Главные Контроллер модуля admin
  * @copyright Copyright (c) 2021 Eugene Andreev
  * @author Eugene Andreev <gjhonic@gmail.com>
- *
  */
+
 namespace app\modules\admin\controllers;
 
 use yii\web\Controller;
@@ -18,11 +18,12 @@ use app\models\db\User;
  */
 class MainController extends Controller
 {
-    public function behaviors(){
+    public function behaviors(): array
+    {
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'denyCallback' => function ($rule, $action) {
+                'denyCallback' => function () {
                     $this->redirect(Url::to('/signin'));
                 },
                 'rules' => [
@@ -38,11 +39,10 @@ class MainController extends Controller
 
 
     /**
-     * Displays homepage.
-     *
+     * Displays homepage module admin.
      * @return string
      */
-    public function actionIndex()
+    public function actionIndex(): string
     {
         return $this->render('index');
     }

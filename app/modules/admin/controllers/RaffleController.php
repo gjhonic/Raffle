@@ -1,11 +1,9 @@
 <?php
-
 /**
  * RaffleController
  * Контроллер модуля admin для работы с конкурсами
  * @copyright Copyright (c) 2021 Eugene Andreev
  * @author Eugene Andreev <gjhonic@gmail.com>
- *
  */
 
 namespace app\modules\admin\controllers;
@@ -21,18 +19,18 @@ use yii\web\Response;
 
 class RaffleController extends Controller
 {
-    public function behaviors()
+    public function behaviors(): array
     {
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'denyCallback' => function ($rule, $action) {
+                'denyCallback' => function () {
                     $this->redirect(Url::to('/signin'));
                 },
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['index','view'],
+                        'actions' => ['index', 'view'],
                         'roles' => [User::ROLE_ADMIN, User::ROLE_MODERATOR],
                     ],
                 ],
@@ -44,7 +42,7 @@ class RaffleController extends Controller
      * Просмотр список конкурсов.
      * @return string
      */
-    public function actionIndex()
+    public function actionIndex(): string
     {
         $searchModel = new RaffleSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
@@ -56,18 +54,31 @@ class RaffleController extends Controller
     }
 
     /**
-     * Просмотр конкурса.
-     * @param $id integer
+     * Страница конкурса.
+     * @param int $id
      * @return string|Response
      */
-    public function actionView($id)
+    public function actionView(int $id)
     {
-        $raffle = Raffle::findOne($id);
-        if($raffle === null){
+        $raffle = $this->findModel($id);
+        if ($raffle === null) {
             return $this->redirect(Url::to('/admin/raffle/'));
         }
         return $this->render('view', [
             'model' => $raffle,
         ]);
+    }
+
+    /**
+     * @param int $id
+     * @return Raffle|null
+     */
+    protected function findModel(int $id): ?Raffle
+    {
+        if (($model = Raffle::findOne($id)) !== null) {
+            return $model;
+        } else {
+            return null;
+        }
     }
 }

@@ -38,7 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'label'=>'Роль',
                     'format'=>'text',
                     'content'=>function($data,$Roles){
-                        return $data->getRole()->title;
+                        return $data->role->title;
                     },
                 ],
                 [

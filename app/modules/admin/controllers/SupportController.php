@@ -1,5 +1,4 @@
 <?php
-
 /**
  * SupportController
  * Контроллер модуля admin для работы с обращениями
@@ -14,16 +13,17 @@ use yii\filters\AccessControl;
 use yii\helpers\Url;
 use app\models\db\Support;
 use app\models\db\User;
+use yii\web\NotFoundHttpException;
 use yii\web\Response;
 
 class SupportController extends Controller
 {
-    public function behaviors()
+    public function behaviors(): array
     {
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'denyCallback' => function ($rule, $action) {
+                'denyCallback' => function () {
                     $this->redirect(Url::to('/signin'));
                 },
                 'rules' => [
@@ -39,17 +39,17 @@ class SupportController extends Controller
 
     /**
      * Просмотр обращения.
-     * @param $id integer
+     * @param int $id
      * @return string|Response
      */
-    public function actionView($id)
+    public function actionView(int $id)
     {
-        $support = Support::findOne($id);
+        $support = $this->findModel($id);
 
-        if($support === null){
+        if ($support === null) {
             return $this->redirect(Url::to('/admin/support-mod/index'));
         }
-        if($support->status === Support::STATUS_NOT_VIEWED){
+        if ($support->status === Support::STATUS_NOT_VIEWED) {
             $support->setViewed();
         }
         return $this->render('view', [
@@ -59,16 +59,29 @@ class SupportController extends Controller
 
     /**
      * Удаление обращения.
-     * @param $id integer
+     * @param int $id
      * @return Response
      */
-    public function actionDelete($id)
+    public function actionDelete(int $id): Response
     {
-        $support = Support::findOne($id);
+        $support = $this->findModel($id);
         if ($support->delete()) {
             return $this->redirect(['/admin/support-mod/index']);
-        }else{
+        } else {
             return $this->redirect(['view', 'id' => $support->id]);
+        }
+    }
+
+    /**
+     * @param int $id
+     * @return Support|null
+     */
+    protected function findModel(int $id): ?Support
+    {
+        if (($model = Support::findOne($id)) !== null) {
+            return $model;
+        } else {
+            return null;
         }
     }
 }
