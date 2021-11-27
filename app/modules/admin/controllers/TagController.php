@@ -1,11 +1,9 @@
 <?php
-
 /**
  * TagController
  * Контроллер модуля admin для работы с тегами
  * @copyright Copyright (c) 2021 Eugene Andreev
  * @author Eugene Andreev <gjhonic@gmail.com>
- *
  */
 
 namespace app\modules\admin\controllers;
@@ -17,22 +15,23 @@ use yii\helpers\Url;
 use app\models\db\Tag;
 use app\models\db\User;
 use app\models\db\search\TagSearch;
+use yii\web\Response;
 
 
 class TagController extends Controller
 {
-    public function behaviors()
+    public function behaviors(): array
     {
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'denyCallback' => function ($rule, $action) {
+                'denyCallback' => function () {
                     $this->redirect(Url::to('/signin'));
                 },
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['index','view','create','update','delete'],
+                        'actions' => ['index', 'view', 'create', 'update', 'delete'],
                         'roles' => [User::ROLE_ADMIN, User::ROLE_MODERATOR],
                     ],
                 ],
@@ -40,12 +39,11 @@ class TagController extends Controller
         ];
     }
 
-
     /**
      * Просмотр список тегов.
      * @return string
      */
-    public function actionIndex()
+    public function actionIndex(): string
     {
         $searchModel = new TagSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
@@ -58,20 +56,19 @@ class TagController extends Controller
 
     /**
      * Просмотр тега.
-     * @param $id integer
+     * @param int $id
      * @return string
      */
-    public function actionView($id)
+    public function actionView(int $id): string
     {
-        $tag = Tag::findOne($id);
         return $this->render('view', [
-            'model' => $tag,
+            'model' => $this->findModel($id),
         ]);
     }
 
     /**
      * Добавление тега.
-     * @return string
+     * @return string|Response
      */
     public function actionCreate()
     {
@@ -87,10 +84,10 @@ class TagController extends Controller
 
     /**
      * Изменение тега.
-     * @param $id integer
-     * @return string
+     * @param int $id
+     * @return string|Response
      */
-    public function actionUpdate($id)
+    public function actionUpdate(int $id)
     {
         $tag = Tag::findOne($id);
         if ($tag->load(Yii::$app->request->post()) && $tag->update()) {
@@ -104,17 +101,29 @@ class TagController extends Controller
 
     /**
      * Удаление тега тега.
-     * @param $id integer
-     * @return string
+     * @param int $id
+     * @return Response
      */
-    public function actionDelete($id)
+    public function actionDelete(int $id): Response
     {
-        $tag = Tag::findOne($id);
+        $tag = $this->findModel($id);
         if ($tag->delete()) {
             return $this->redirect(['index']);
-        }else{
+        } else {
             return $this->redirect(['view', 'id' => $tag->id]);
         }
+    }
 
+    /**
+     * @param int $id
+     * @return Tag|null
+     */
+    protected function findModel(int $id): ?Tag
+    {
+        if (($model = Tag::findOne($id)) !== null) {
+            return $model;
+        } else {
+            return null;
+        }
     }
 }

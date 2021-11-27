@@ -1,35 +1,28 @@
 <?php
-
 /**
  * UserModController
  * Контроллер модуля admin для модерации пользователей системы
  * @copyright Copyright (c) 2021 Eugene Andreev
  * @author Eugene Andreev <gjhonic@gmail.com>
- *
  */
 
 namespace app\modules\admin\controllers;
 
-use app\models\db\UserRole;
-use app\models\db\UserStatus;
 use Yii;
-use yii\helpers\ArrayHelper;
-use yii\web\Controller;
 use yii\filters\AccessControl;
 use yii\helpers\Url;
 use app\models\db\User;
 use app\models\db\search\UserSearch;
 use yii\web\Response;
 
-
-class UserModController extends Controller
+class UserModController extends UserController
 {
-    public function behaviors()
+    public function behaviors(): array
     {
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'denyCallback' => function ($rule, $action) {
+                'denyCallback' => function () {
                     $this->redirect(Url::to('/signin'));
                 },
                 'rules' => [
@@ -47,7 +40,6 @@ class UserModController extends Controller
             ],
         ];
     }
-
 
     /**
      * Просмотр список пользователей.
@@ -101,7 +93,7 @@ class UserModController extends Controller
     {
         $user = User::findOne($id);
 
-        if($user->role_id !== User::ROLE_ADMIN_ID && $user->id !== Yii::$app->user->id){
+        if ($user->role_id !== User::ROLE_ADMIN_ID && $user->id !== Yii::$app->user->id) {
             $user->status_id = User::STATUS_TAG_TO_BAN_ID;
             $user->update();
         }
@@ -119,7 +111,7 @@ class UserModController extends Controller
     {
         $user = User::findOne($id);
 
-        if($user->role_id !== User::ROLE_ADMIN_ID && $user->id !== Yii::$app->user->identity->id){
+        if ($user->role_id !== User::ROLE_ADMIN_ID && $user->id !== Yii::$app->user->identity->id) {
             $user->status_id = User::STATUS_ACTIVE_ID;
             $user->update();
         }
@@ -137,7 +129,7 @@ class UserModController extends Controller
     {
         $user = User::findOne($id);
 
-        if($user->role_id !== User::ROLE_ADMIN_ID){
+        if ($user->role_id !== User::ROLE_ADMIN_ID) {
             $user->status_id = User::STATUS_BAN_ID;
             $user->update();
         }
@@ -155,7 +147,7 @@ class UserModController extends Controller
     {
         $user = User::findOne($id);
 
-        if($user->role_id !== User::ROLE_ADMIN_ID){
+        if ($user->role_id !== User::ROLE_ADMIN_ID) {
             $user->status_id = User::STATUS_TAG_TO_BAN_ID;
             $user->update();
         }

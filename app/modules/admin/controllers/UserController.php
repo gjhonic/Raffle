@@ -4,7 +4,6 @@
  * Контроллер модуля admin для работы с пользователями системы
  * @copyright Copyright (c) 2021 Eugene Andreev
  * @author Eugene Andreev <gjhonic@gmail.com>
- *
  */
 
 namespace app\modules\admin\controllers;
@@ -22,18 +21,18 @@ use yii\web\Response;
 
 class UserController extends Controller
 {
-    public function behaviors()
+    public function behaviors(): array
     {
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'denyCallback' => function ($rule, $action) {
+                'denyCallback' => function () {
                     $this->redirect(Url::to('/signin'));
                 },
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['index','view'],
+                        'actions' => ['index', 'view'],
                         'roles' => [User::ROLE_ADMIN, User::ROLE_MODERATOR],
                     ],
                     [
@@ -50,7 +49,7 @@ class UserController extends Controller
      * Просмотр список пользователей.
      * @return string
      */
-    public function actionIndex()
+    public function actionIndex(): string
     {
         $searchModel = new UserSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
@@ -64,10 +63,10 @@ class UserController extends Controller
 
     /**
      * Просмотр пользователя.
-     * @param $id
+     * @param int $id
      * @return string
      */
-    public function actionView($id)
+    public function actionView(int $id)
     {
         $user = User::findOne($id);
         return $this->render('view', [
@@ -76,7 +75,7 @@ class UserController extends Controller
     }
 
     /**
-     * Добавление пользователя с ролью 'Модератор'
+     * Добавление пользователя с ролью 'Модератор'.
      * @return string|Response
      */
     public function actionCreate()
