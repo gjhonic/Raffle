@@ -170,7 +170,7 @@ $this->title = Yii::t('app', 'Raffles');
         let filter_group = '<?=Yii::$app->request->get('filter_group')?>'
         //TODO Юзать Fetch
         $.ajax({
-            url: '/raffle/get-raffles-json',
+            url: '/ajax/raffle/get-raffles-json',
             type: 'GET',
             dataType: 'json',
             data: {filter_date: filter_date, filter_abc: filter_abc, filter_group: filter_group, page: page, _csrf: csrfToken},

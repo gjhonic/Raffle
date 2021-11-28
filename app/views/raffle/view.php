@@ -104,7 +104,7 @@ $this->title = $raffle['raffle_title'];
                     let note = $("#input-note").val();
                     let csrfToken = $('meta[name="csrf-token"]').attr("content");
                     $.ajax({
-                        url: '/raffle/save-note',
+                        url: '/ajax/raffle/save-note',
                         type: 'POST',
                         dataType: 'json',
                         data: {raffle_code: '<?=$raffle['raffle_code']?>', note: note, _csrf: csrfToken},
