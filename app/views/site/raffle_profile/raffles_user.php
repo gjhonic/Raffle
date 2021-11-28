@@ -14,7 +14,6 @@ use yii\helpers\Url;
             <div class="posts">
                 <?php foreach ($RafflesApproved as $raffle){ ?>
                     <article>
-                        <a href="#" class="image"><img src="images/pic01.jpg" alt="" /></a>
                         <div class="image fit"><img src="/app/media/src/raffle/pic11.jpg" alt=""></div>
                         <h3><?=$raffle->title?></h3>
                         <p><?=$raffle->short_description?></p>

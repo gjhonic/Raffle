@@ -2,6 +2,7 @@
 
 namespace app\models\db;
 
+use app\models\base\Tag;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveQuery;
@@ -28,6 +29,7 @@ use yii\db\ActiveRecord;
  * @property RaffleStatus $status
  * @property User $user
  * @property RaffleTag[] $raffleTags
+ * @property Tag $tags
  */
 class Raffle extends \yii\db\ActiveRecord
 {
@@ -79,9 +81,6 @@ class Raffle extends \yii\db\ActiveRecord
         ];
     }
 
-    /**
-     * @return string[]
-     */
     public function attributeLabels(): array
     {
         return [
@@ -101,13 +100,9 @@ class Raffle extends \yii\db\ActiveRecord
         ];
     }
 
-    /**
-     * @param bool $insert
-     * @return bool
-     */
     public function afterSave($insert, $changedAttributes)
     {
-        if(trim($this->tags_string) != ''){
+        if (trim($this->tags_string) != '') {
             $this->clearRaffleTags();
             $this->addTagsFromString();
         }
@@ -159,13 +154,13 @@ class Raffle extends \yii\db\ActiveRecord
     public function addTagsFromString()
     {
         $tags_array = explode(" ", $this->tags_string);
-        foreach($tags_array as $tag){
+        foreach ($tags_array as $tag) {
             $tag = trim(substr($tag, 1));
             $tag = mb_strtolower($tag);
-            if($tag == ''){
+            if ($tag == '') {
                 continue;
             }
-            if(($raffle_tag = Tag::find()->where(['title' => $tag])->one()) === null){
+            if (($raffle_tag = Tag::find()->where(['title' => $tag])->one()) === null) {
                 $raffle_tag = new Tag();
                 $raffle_tag->title = $tag;
                 $raffle_tag->save();
@@ -207,63 +202,63 @@ class Raffle extends \yii\db\ActiveRecord
 
         $was_order = 0;
 
-        if($filter == []){
-            $sql .=" ORDER BY raffle.id DESC";
+        if ($filter == []) {
+            $sql .= " ORDER BY raffle.id DESC";
         }
 
-        if(isset($filter['filter-group'])){
-            if($filter['filter-group'] == 'user'){
-                $sql .=" ORDER BY user.id";
+        if (isset($filter['filter-group'])) {
+            if ($filter['filter-group'] == 'user') {
+                $sql .= " ORDER BY user.id";
                 $was_order = 1;
             }
         }
 
-        if(isset($filter['filter-date'])){
-            if($filter['filter-date'] == 'old'){
-                if($was_order){
-                    $sql .=',';
-                }else{
-                    $sql .=' ORDER BY';
+        if (isset($filter['filter-date'])) {
+            if ($filter['filter-date'] == 'old') {
+                if ($was_order) {
+                    $sql .= ',';
+                } else {
+                    $sql .= ' ORDER BY';
                 }
-                $sql .=" raffle.id ASC";
+                $sql .= " raffle.id ASC";
                 $was_order = 1;
-            }elseif($filter['filter-date'] == 'new'){
-                if($was_order){
-                    $sql .=',';
-                }else{
-                    $sql .=' ORDER BY';
+            } elseif ($filter['filter-date'] == 'new') {
+                if ($was_order) {
+                    $sql .= ',';
+                } else {
+                    $sql .= ' ORDER BY';
                 }
-                $sql .=" raffle.id DESC";
+                $sql .= " raffle.id DESC";
                 $was_order = 1;
             }
         }
 
-        if(isset($filter['filter-abc'])){
-            if($filter['filter-abc'] == 'abc'){
-                if($was_order){
-                    $sql .=',';
-                }else{
-                    $sql .=' ORDER BY';
+        if (isset($filter['filter-abc'])) {
+            if ($filter['filter-abc'] == 'abc') {
+                if ($was_order) {
+                    $sql .= ',';
+                } else {
+                    $sql .= ' ORDER BY';
                 }
-                $sql .=" raffle.title ASC";
-            }elseif($filter['filter-abc'] == 'zyx'){
-                if($was_order){
-                    $sql .=',';
-                }else{
-                    $sql .=' ORDER BY';
+                $sql .= " raffle.title ASC";
+            } elseif ($filter['filter-abc'] == 'zyx') {
+                if ($was_order) {
+                    $sql .= ',';
+                } else {
+                    $sql .= ' ORDER BY';
                 }
-                $sql .=" raffle.title DESC";
+                $sql .= " raffle.title DESC";
             }
         }
 
-        if($page > 0){
+        if ($page > 0) {
             $count = 5;
-            $offset = 20 + ($page-1) * $count;
+            $offset = 20 + ($page - 1) * $count;
             $placeholders['offset'] = $offset;
             $placeholders['count'] = $count;
-            $sql .=" LIMIT :offset, :count";
-        }else{
-            $sql .=" LIMIT 20";
+            $sql .= " LIMIT :offset, :count";
+        } else {
+            $sql .= " LIMIT 20";
         }
 
         return Yii::$app->db->createCommand($sql, $placeholders)->queryAll();
@@ -296,22 +291,15 @@ class Raffle extends \yii\db\ActiveRecord
         return Yii::$app->db->createCommand($sql, $placeholders)->queryAll();
     }
 
+
     /**
-     * Метод возвращает теги конкурса
-     * @param int $raffle_id
-     * @return array|\yii\db\DataReader
-     * @throws \yii\db\Exception
+     * @return ActiveQuery
+     * @throws \yii\base\InvalidConfigException
      */
-    public static function getTags($raffle_id)
+    public function getTags(): ActiveQuery
     {
-        $placeholders = [
-            'raffle_id' => $raffle_id
-        ];
-        $sql = "SELECT tag.title AS tag_title
-         FROM raffle_tag
-         RIGHT JOIN tag ON raffle_tag.tag_id = tag.id
-         WHERE raffle_tag.raffle_id = :raffle_id";
-        return Yii::$app->db->createCommand($sql, $placeholders)->queryAll();
+        return $this->hasMany(Tag::class, ['id' => 'tag_id'])
+            ->viaTable('raffle_tag', ['raffle_id' => 'id']);
     }
 
     /**
@@ -321,12 +309,13 @@ class Raffle extends \yii\db\ActiveRecord
      * @param int $limit
      * @return array|ActiveRecord[]
      */
-    public static function findRafflesByUser($user_id, $status_id=null, $limit=10){
+    public static function findRafflesByUser($user_id, $status_id = null, $limit = 10)
+    {
         $raffles = self::find()
             ->where(['user_id' => $user_id])
             ->orderBy('id DESC')
             ->limit($limit);
-        if($status_id !== null){
+        if ($status_id !== null) {
             $raffles->andWhere(['status_id' => $status_id]);
         }
         return $raffles->all();
@@ -335,10 +324,13 @@ class Raffle extends \yii\db\ActiveRecord
     /**
      * Метод возвращает конкурс по коду
      * @param string $code
-     * @return array|ActiveRecord|null
+     * @return array|Raffle|null
      */
-    public static function findByCode($code){
-        return self::find()->where(['code' => $code])->one();
+    public static function findByCode(string $code)
+    {
+        return self::find()
+            ->where(['code' => $code])
+            ->one();
     }
 
     /**
@@ -347,7 +339,8 @@ class Raffle extends \yii\db\ActiveRecord
      * @return array|ActiveRecord|null
      * @throws \yii\db\Exception
      */
-    public static function getRaffleByCode($code){
+    public static function getRaffleByCode($code)
+    {
         $placeholders = [
             'raffle_code' => $code
         ];
@@ -378,7 +371,7 @@ class Raffle extends \yii\db\ActiveRecord
         //TODO обрати внимание
         $permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyz';
         $code = substr(str_shuffle($permitted_chars), 0, 25);
-        while(self::findByCode($code)){
+        while (self::findByCode($code)) {
             $code = substr(str_shuffle($permitted_chars), 0, 25);
         }
         return $code;
@@ -392,7 +385,7 @@ class Raffle extends \yii\db\ActiveRecord
     public static function searchRaffles($query): array
     {
         $placeholders = [
-            'query' => '%'.$query.'%',
+            'query' => '%' . $query . '%',
             'status_id' => Raffle::STATUS_APPROVED_ID,
         ];
         $sql = "SELECT raffle.title AS raffle_title,

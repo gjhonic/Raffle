@@ -2,7 +2,6 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
-use yii\helpers\Url;
 use yii\widgets\Pjax;
 use app\models\db\User;
 use app\widgets\RaffleStatusWidget;
@@ -10,21 +9,24 @@ use app\widgets\RaffleStatusWidget;
 /* @var $dataProvider \yii\db\ActiveRecord */
 /* @var $user \app\models\db\User */
 
-$this->title = 'Конкурсы от '.$user->username;
-//TODO в array columns формировать отдельно
+$this->title = 'Конкурсы от ' . $user->username;
 ?>
 <div class="user-index">
 
-    <h1>Конкурсы от <?=Html::a($user->username, '/profile/' . $user->code, ['class' => '']);?></h1>
+    <h1>Конкурсы от <?= Html::a($user->username, '/profile/' . $user->code, ['class' => '']); ?></h1>
 
     <div style="overflow-x: auto;">
         <?php Pjax::begin(); ?>
 
         <?php
 
-        if($user->id === Yii::$app->user->identity->getId() || (in_array(Yii::$app->user->identity->role_id, [User::ROLE_ADMIN_ID, User::ROLE_MODERATOR_ID]))){
+        if ($user->id === Yii::$app->user->identity->getId() || (in_array(Yii::$app->user->identity->role_id, [User::ROLE_ADMIN_ID, User::ROLE_MODERATOR_ID]))) {
             echo GridView::widget([
                 'dataProvider' => $dataProvider,
+                'summary' => false,
+                'tableOptions' => [
+                    'class' => 'alt'
+                ],
                 'columns' => [
                     [
                         'attribute' => 'title',
@@ -44,13 +46,13 @@ $this->title = 'Конкурсы от '.$user->username;
                         'template' => "{view}",
                         'buttons' => [
                             'view' => function ($url, $model, $key) {
-                                return Html::a('Смотреть', '/show/' . $model->code, ['class' => 'button']);
+                                return Html::a('Смотреть', '/show/' . $model->code, ['class' => 'button fit']);
                             },
                         ],
                     ],
                 ],
             ]);
-        }else{
+        } else {
             echo GridView::widget([
                 'dataProvider' => $dataProvider,
                 'columns' => [

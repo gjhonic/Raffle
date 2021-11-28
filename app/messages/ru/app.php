@@ -47,10 +47,16 @@ return [
     "Archive of raffles" => "Архив конкурсов",
     "No raffles" => "Конкурсов нет",
     "Raffles not found" => "Конкурсы не найдены",
+    "Show note" => "Показать заметку",
+    "Hide note" => "Скрыть заметку",
+    "Description" => "Описание",
 
     //Пользователи
     "Author" => "Автор",
     "Users not found" => "Пользователи не найдены",
+    'Username' => "Имя пользователя",
+    "Password" => "Пароль",
+    "Remember me" => "Запомни меня",
 
     //Теги
     "Tags not found" => "Теги не найдены",

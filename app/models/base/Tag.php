@@ -43,10 +43,6 @@ class Tag extends \yii\db\ActiveRecord
         ];
     }
 
-    /**
-     * @param bool $insert
-     * @return bool
-     */
     public function beforeSave($insert)
     {
         $this->title = mb_strtolower($this->title);

@@ -11,7 +11,6 @@ use Yii;
 use yii\base\Model;
 use app\models\auth\UserIdentity;
 
-
 class SigninForm extends Model
 {
     public $username;
@@ -20,11 +19,7 @@ class SigninForm extends Model
 
     private $_user = false;
 
-
-    /**
-     * @return array - правила валидации.
-     */
-    public function rules()
+    public function rules(): array
     {
         return [
             [['username', 'password'], 'required'],
@@ -52,7 +47,7 @@ class SigninForm extends Model
      * Метод заполняем свойство _user  обьектом user, если он не заполнен и возвращает его.
      * @return object - user.
      */
-    public function getUser()
+    public function getUser(): object
     {
         if ($this->_user === false) {
             $this->_user = UserIdentity::findByUsername($this->username);
@@ -60,16 +55,13 @@ class SigninForm extends Model
         return $this->_user;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
             'id' => 'ID',
-            'username' => 'Логин',
-            'password' => 'Пароль',
-            'rememberMe' => 'Запомни меня',
+            'username' => Yii::t('app', 'Username'),
+            'password' => Yii::t('app', 'Password'),
+            'rememberMe' => Yii::t('app', 'Remember me'),
         ];
     }
 }
