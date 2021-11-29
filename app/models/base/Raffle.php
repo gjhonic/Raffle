@@ -1,12 +1,15 @@
 <?php
 
-namespace app\models\db;
+namespace app\models\base;
 
-use app\models\base\Tag;
+use app\models\db\RaffleStatus;
+use app\models\db\RaffleTag;
+use app\models\db\User;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
+use yii\db\Query;
 
 /**
  * This is the model class for table "raffle".
@@ -45,17 +48,11 @@ class Raffle extends \yii\db\ActiveRecord
 
     public $tags_string = "";
 
-    /**
-     * @return string
-     */
     public static function tableName(): string
     {
-        return 'raffle';
+        return '{{%raffle}}';
     }
 
-    /**
-     * @return array
-     */
     public function rules(): array
     {
         return [
@@ -85,10 +82,10 @@ class Raffle extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'title' => 'Название',
+            'title' => Yii::t('app', 'Title'),
             'short_description' => 'Короткое описание',
-            'description' => 'Описание',
-            'user_id' => 'Пользователь',
+            'description' => Yii::t('app', 'Description'),
+            'user_id' => Yii::t('app', 'User'),
             'video_link' => 'Видео ресурс',
             'image_src' => 'Изображение',
             'date_begin' => 'Старт конкурса',
@@ -112,7 +109,6 @@ class Raffle extends \yii\db\ActiveRecord
 
     /**
      * Gets query for [[Status]].
-     *
      * @return ActiveQuery
      */
     public function getStatus(): ActiveQuery
@@ -121,12 +117,11 @@ class Raffle extends \yii\db\ActiveRecord
     }
 
     /**
-     * Метод возвращает пользователя
-     * @return User|null
+     * @return ActiveQuery
      */
-    public function getUser()
+    public function getUser(): ActiveQuery
     {
-        return User::findOne($this->user_id);
+        return $this->hasOne(User::className(), ['id' => 'user_id']);
     }
 
     /**
@@ -139,13 +134,12 @@ class Raffle extends \yii\db\ActiveRecord
         return $this->hasMany(RaffleTag::className(), ['raffle_id' => 'id']);
     }
 
-    public function clearRaffleTags()
+    public function clearRaffleTags(): bool
     {
-        $placeholders = [
-            'raffle_id' => $this->id
-        ];
-        $sql = "DELETE FROM raffle_tag WHERE raffle_id = :raffle_id";
-        return Yii::$app->db->createCommand($sql, $placeholders)->queryAll();
+        return (bool)(new Query)
+            ->createCommand()
+            ->delete('raffle_tag', ['raffle_id' => $this->id])
+            ->execute();
     }
 
     /**
@@ -175,7 +169,7 @@ class Raffle extends \yii\db\ActiveRecord
      */
     public function isAuthor(): bool
     {
-        return (Yii::$app->user->identity->getId() == $this->user_id);
+        return (Yii::$app->user->identity->getId() === $this->user_id);
     }
 
     /**
@@ -261,7 +255,7 @@ class Raffle extends \yii\db\ActiveRecord
             $sql .= " LIMIT 20";
         }
 
-        return Yii::$app->db->createCommand($sql, $placeholders)->queryAll();
+        return Yii::$app->db->createCommand($sql)->bindValues($placeholders)->queryAll();
     }
 
     /**
@@ -290,7 +284,6 @@ class Raffle extends \yii\db\ActiveRecord
          LIMIT 30";
         return Yii::$app->db->createCommand($sql, $placeholders)->queryAll();
     }
-
 
     /**
      * @return ActiveQuery

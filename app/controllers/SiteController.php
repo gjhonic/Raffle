@@ -3,7 +3,7 @@
 namespace app\controllers;
 
 use app\models\db\forms\SupportForm;
-use app\models\db\Raffle;
+use app\models\base\Raffle;
 use app\models\base\Tag;
 use app\services\user\StatusService;
 use Yii;

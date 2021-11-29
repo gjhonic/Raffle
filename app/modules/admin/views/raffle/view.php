@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 use app\modules\admin\widgets\RaffleStatusWidget;
-use app\models\db\Raffle;
+use app\models\base\Raffle;
 
 /* @var $model object */
 

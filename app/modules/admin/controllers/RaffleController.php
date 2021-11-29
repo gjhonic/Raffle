@@ -12,7 +12,7 @@ use Yii;
 use yii\web\Controller;
 use yii\filters\AccessControl;
 use yii\helpers\Url;
-use app\models\db\Raffle;
+use app\models\base\Raffle;
 use app\models\db\User;
 use app\models\db\search\RaffleSearch;
 use yii\web\Response;

@@ -8,7 +8,7 @@
 
 namespace app\controllers;
 
-use app\models\db\Raffle;
+use app\models\base\Raffle;
 use app\services\user\StatusService;
 use Yii;
 use yii\data\ActiveDataProvider;

@@ -2,6 +2,7 @@
 
 namespace app\models\db;
 
+use app\models\base\Raffle;
 use app\models\behavior\ActiveRecordLogableBehavior;
 use Yii;
 use yii\behaviors\TimestampBehavior;
@@ -56,18 +57,12 @@ class User extends \yii\db\ActiveRecord
     const STATUS_BAN = "ban";
     const STATUS_BAN_ID = 3;
 
-    /**
-     * @return string
-     */
-    public static function tableName()
+    public static function tableName(): string
     {
         return 'user';
     }
 
-    /**
-     * @return array
-     */
-    public function rules()
+    public function rules(): array
     {
         return [
             [['name', 'surname', 'username', 'email', 'password', 'role_id', 'status_id', 'code', 'email_confirm'], 'required'],
@@ -84,7 +79,7 @@ class User extends \yii\db\ActiveRecord
         ];
     }
 
-    public function behaviors()
+    public function behaviors(): array
     {
         return [
             TimestampBehavior::class,
@@ -95,7 +90,7 @@ class User extends \yii\db\ActiveRecord
     /**
      * @return string[]
      */
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
             'id' => 'ID',
@@ -116,20 +111,18 @@ class User extends \yii\db\ActiveRecord
 
     /**
      * Gets query for [[Posts]].
-     *
      * @return \yii\db\ActiveQuery
      */
-    public function getPosts()
+    public function getPosts(): ActiveQuery
     {
         return $this->hasMany(Post::className(), ['user_id' => 'id']);
     }
 
     /**
      * Gets query for [[Raffles]].
-     *
      * @return \yii\db\ActiveQuery
      */
-    public function getRaffles()
+    public function getRaffles(): ActiveQuery
     {
         return $this->hasMany(Raffle::className(), ['user_id' => 'id']);
     }
@@ -174,7 +167,7 @@ class User extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getUserOtherInfos()
+    public function getUserOtherInfos(): ActiveQuery
     {
         return $this->hasMany(UserOtherInfo::className(), ['user_id' => 'id']);
     }
@@ -184,9 +177,9 @@ class User extends \yii\db\ActiveRecord
      * @param $code string
      * @return array|\yii\db\ActiveRecord|null
      */
-    public static function findByCode($code)
+    public static function findByCode(string $code)
     {
-        return self::find()->where(['code' => $code])->one();
+        return self::findOne(['code' => $code]);
     }
 
     /**
@@ -194,8 +187,9 @@ class User extends \yii\db\ActiveRecord
      * @param $username string
      * @return array|\yii\db\ActiveRecord|null
      */
-    public static function findByUsername($username){
-        return self::find()->where(['username' => $username])->one();
+    public static function findByUsername(string $username)
+    {
+        return self::findOne(['username' => $username]);
     }
 
     /**
@@ -203,9 +197,9 @@ class User extends \yii\db\ActiveRecord
      * @param $email string
      * @return array|\yii\db\ActiveRecord|null
      */
-    public static function findByEmail($email)
+    public static function findByEmail(string $email)
     {
-        return self::find()->where(['email' => $email])->one();
+        return self::findOne(['email' => $email]);
     }
 
     /**
@@ -215,7 +209,6 @@ class User extends \yii\db\ActiveRecord
     {
         return Yii::$app->user->identity;
     }
-
 
     /**
      * Метод определяет если аватарка у пользователя
@@ -294,21 +287,15 @@ class User extends \yii\db\ActiveRecord
      * @param string $query
      * @return array|\yii\db\ActiveRecord[]
      */
-    public static function searchUsers($query)
+    public static function searchUsers(string $query): array
     {
-        $placeholders = [
-            'query' => '%'.$query.'%',
-            'role_id' => User::ROLE_USER_ID
-        ];
-        $sql = "SELECT user.username,
-            user.code 
-         FROM user
-         WHERE (user.name LIKE :query)
-         OR (user.surname LIKE :query)
-         OR (user.username LIKE :query)
-         AND (user.role_id = :role_id)
-         ORDER BY user.id DESC
-         LIMIT 30";
-        return Yii::$app->db->createCommand($sql, $placeholders)->queryAll();
+        return self::find()
+            ->andWhere(['=', 'role_id', self::ROLE_USER_ID])
+            ->andWhere(['like', 'name', $query])
+            ->orWhere(['like', 'surname', $query])
+            ->orWhere(['like', 'username', $query])
+            ->orderBy('id DESC')
+            ->limit(30)
+            ->all();
     }
 }

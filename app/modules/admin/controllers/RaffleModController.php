@@ -8,7 +8,7 @@
 
 namespace app\modules\admin\controllers;
 
-use app\models\db\Raffle;
+use app\models\base\Raffle;
 use Yii;
 use yii\filters\AccessControl;
 use yii\helpers\Url;

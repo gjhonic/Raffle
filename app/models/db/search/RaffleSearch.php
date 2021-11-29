@@ -8,7 +8,7 @@
  */
 namespace app\models\db\search;
 
-use app\models\db\Raffle;
+use app\models\base\Raffle;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 

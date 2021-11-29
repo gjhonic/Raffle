@@ -9,7 +9,7 @@ namespace app\models\db\forms;
 
 use yii\base\Model;
 use Yii;
-use app\models\db\Raffle;
+use app\models\base\Raffle;
 
 class RaffleForm extends Model
 {
