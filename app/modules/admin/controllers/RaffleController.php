@@ -12,9 +12,9 @@ use Yii;
 use yii\web\Controller;
 use yii\filters\AccessControl;
 use yii\helpers\Url;
-use app\models\db\Raffle;
-use app\models\db\User;
-use app\models\db\search\RaffleSearch;
+use app\models\base\Raffle;
+use app\models\base\User;
+use app\models\base\search\RaffleSearch;
 use yii\web\Response;
 
 class RaffleController extends Controller

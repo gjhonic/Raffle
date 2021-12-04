@@ -1,9 +1,9 @@
 <?php
 
-namespace app\models\db;
+namespace app\models\base;
 
 use Yii;
-use app\models\db\User;
+use yii\db\ActiveQuery;
 
 /**
  * This is the model class for table "user_role".
@@ -16,18 +16,12 @@ use app\models\db\User;
  */
 class UserRole extends \yii\db\ActiveRecord
 {
-    /**
-     * {@inheritdoc}
-     */
-    public static function tableName()
+    public static function tableName(): string
     {
         return 'user_role';
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function rules()
+    public function rules(): array
     {
         return [
             [['title'], 'required'],
@@ -37,10 +31,7 @@ class UserRole extends \yii\db\ActiveRecord
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
             'id' => 'ID',
@@ -51,10 +42,9 @@ class UserRole extends \yii\db\ActiveRecord
 
     /**
      * Gets query for [[Users]].
-     *
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
-    public function getUsers()
+    public function getUsers(): ActiveQuery
     {
         return $this->hasMany(User::className(), ['role_id' => 'id']);
     }

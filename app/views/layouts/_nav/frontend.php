@@ -1,6 +1,6 @@
 <?php
 use yii\helpers\Url;
-use app\models\db\User;
+use app\models\base\User;
 
 if(Yii::$app->user->isGuest){
     return [

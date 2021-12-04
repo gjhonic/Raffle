@@ -1,7 +1,7 @@
 <?php
 
 use yii\db\Migration;
-use app\models\db\UserAtribute;
+use app\models\base\UserAtribute;
 
 /**
  * Class m210422_052139_user_attribute

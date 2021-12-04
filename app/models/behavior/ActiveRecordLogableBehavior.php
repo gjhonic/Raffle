@@ -6,7 +6,7 @@ use yii\db\ActiveRecord;
 use yii;
 use app\models\behavior\ActiveRecordCreateLog;
 use app\models\behavior\ActiveRecordChangeLog;
-use app\models\db\User;
+use app\models\base\User;
 
 class ActiveRecordLogableBehavior extends \yii\base\Behavior
 {

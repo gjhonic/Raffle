@@ -8,9 +8,9 @@ use yii\helpers\Url;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
-use app\models\db\User;
-use app\models\db\forms\SettingForm;
-use app\models\db\forms\SettingPasswordForm;
+use app\models\base\User;
+use app\models\base\forms\SettingForm;
+use app\models\base\forms\SettingPasswordForm;
 
 class SettingsController extends Controller
 {

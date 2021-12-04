@@ -1,6 +1,6 @@
 <?php
 
-use app\models\db\Support;
+use app\models\base\Support;
 use app\modules\admin\widgets\SuportStatusWidget;
 use yii\helpers\Html;
 use yii\helpers\Url;
@@ -54,7 +54,7 @@ $this->params['breadcrumbs'][] = $this->title;
         </p>
 
         <p class="lead">
-            <?=Html::a('Автор: '.$model->getUser()->username, Url::to('/admin/user/view').'?id='.$model->user_id, ['class' => 'btn btn-outline-secondary'])?>
+            <?=Html::a('Автор: '.$model->user->username, Url::to('/admin/user/view').'?id='.$model->user_id, ['class' => 'btn btn-outline-secondary'])?>
 
         </p>
         <hr class="my-4">

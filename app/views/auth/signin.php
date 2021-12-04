@@ -2,12 +2,12 @@
 
 /* @var $this yii\web\View */
 /* @var $form yii\bootstrap\ActiveForm */
-/* @var $model app\models\LoginForm */
+/* @var $model \app\models\auth\forms\SigninForm */
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
-$this->title = 'Вход';
+$this->title = Yii::t('app', 'Sign in');
 ?>
 <section id="banner">
     <div class="content">
@@ -31,7 +31,7 @@ $this->title = 'Вход';
         'template' => "<div class=\"col-lg-offset-1 col-lg-3\">{input} {label}</div>\n<div class=\"col-lg-8\">{error}</div>",
     ]) ?>
 
-    <?= Html::submitButton('Войти', ['class' => 'button fit']) ?>
+    <?= Html::submitButton(Yii::t('app', 'Sign in'), ['class' => 'button fit']) ?>
 
     <?php ActiveForm::end(); ?>
     </div>

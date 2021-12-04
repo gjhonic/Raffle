@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models\db;
+namespace app\models\base;
 
 use yii\db\ActiveQuery;
 
@@ -15,17 +15,11 @@ use yii\db\ActiveQuery;
  */
 class RaffleTag extends \yii\db\ActiveRecord
 {
-    /**
-     * @return string
-     */
     public static function tableName(): string
     {
         return 'raffle_tag';
     }
 
-    /**
-     * @return array
-     */
     public function rules(): array
     {
         return [
@@ -35,9 +29,6 @@ class RaffleTag extends \yii\db\ActiveRecord
         ];
     }
 
-    /**
-     * @return string[]
-     */
     public function attributeLabels(): array
     {
         return [
@@ -48,31 +39,29 @@ class RaffleTag extends \yii\db\ActiveRecord
 
     /**
      * Gets query for [[Raffle]].
-     *
      * @return ActiveQuery
      */
-    public function getRaffle()
+    public function getRaffle(): ActiveQuery
     {
         return $this->hasOne(Raffle::className(), ['id' => 'raffle_id']);
     }
 
     /**
      * Gets query for [[Tag]].
-     *
      * @return ActiveQuery
      */
-    public function getTag()
+    public function getTag(): ActiveQuery
     {
         return $this->hasOne(Tag::className(), ['id' => 'tag_id']);
     }
 
     /**
      * Метод связывает конкурс и тег
-     * @param integer $raffle_id
-     * @param integer $tag_id
+     * @param int $raffle_id
+     * @param int $tag_id
      * @return bool
      */
-    public static function add($raffle_id, $tag_id)
+    public static function add(int $raffle_id, int $tag_id): bool
     {
         $raffle_tag = new self();
         $raffle_tag->raffle_id = $raffle_id;

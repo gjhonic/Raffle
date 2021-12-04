@@ -10,7 +10,7 @@ namespace app\models\auth\forms;
 use Yii;
 use yii\base\Model;
 use app\models\auth\UserIdentity;
-use app\models\db\User;
+use app\models\base\User;
 
 
 class SignupForm extends Model

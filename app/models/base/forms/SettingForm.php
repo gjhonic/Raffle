@@ -5,12 +5,12 @@
  * @copyright Copyright (c) 2021 Eugene Andreev
  * @author Eugene Andreev <gjhonic@gmail.com>
  */
-namespace app\models\db\forms;
+namespace app\models\base\forms;
 
 use yii\base\Model;
 use Yii;
-use app\models\db\Raffle;
-use app\models\db\User;
+use app\models\base\Raffle;
+use app\models\base\User;
 
 class SettingForm extends Model
 {

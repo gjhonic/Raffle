@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models\db;
+namespace app\models\base;
 
 use yii\db\ActiveQuery;
 
@@ -14,17 +14,11 @@ use yii\db\ActiveQuery;
  */
 class RaffleStatus extends \yii\db\ActiveRecord
 {
-    /**
-     * @return string
-     */
     public static function tableName(): string
     {
         return 'raffle_status';
     }
 
-    /**
-     * @return array
-     */
     public function rules(): array
     {
         return [
@@ -34,9 +28,6 @@ class RaffleStatus extends \yii\db\ActiveRecord
         ];
     }
 
-    /**
-     * @return string[]
-     */
     public function attributeLabels(): array
     {
         return [
@@ -47,10 +38,9 @@ class RaffleStatus extends \yii\db\ActiveRecord
 
     /**
      * Gets query for [[Raffles]].
-     *
      * @return ActiveQuery
      */
-    public function getRaffles()
+    public function getRaffles(): ActiveQuery
     {
         return $this->hasMany(Raffle::className(), ['status_id' => 'id']);
     }

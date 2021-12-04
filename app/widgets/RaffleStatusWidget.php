@@ -2,7 +2,7 @@
 
 namespace app\widgets;
 
-use app\models\db\RaffleStatus;
+use app\models\base\RaffleStatus;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 
