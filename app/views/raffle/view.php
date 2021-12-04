@@ -23,8 +23,10 @@ $this->title = $raffle->title
     <header class="main">
         <h1>
             <?= Html::encode($this->title) ?>
-            <?php if (Yii::$app->user->identity->getId() == $raffle->user_id) { ?>
-                <?= RaffleStatusWidget::getIcon($raffle->status_id) ?>
+            <?php if(!Yii::$app->user->isGuest) { ?>
+                <?php if (Yii::$app->user->identity->getId() == $raffle->user_id) { ?>
+                    <?= RaffleStatusWidget::getIcon($raffle->status_id) ?>
+                <?php } ?>
             <?php } ?>
         </h1>
     </header>
@@ -63,83 +65,84 @@ $this->title = $raffle->title
     <div style="overflow-x: auto; display:flex;">
         <?= Html::a(Yii::t("app", "Author") . ':' . $raffle->user->username, Url::to('/profile') . '/' . $raffle->user->code, ['class' => 'button', 'style' => 'margin-right: 10px']) ?>
 
-        <?php if ($raffle->user_id == Yii::$app->user->identity->getId()) { ?>
-            <?= Html::a('Редактировать', Url::to('/raffle/update/') . $raffle->code, ['class' => 'button', 'style' => 'margin-right: 10px']) ?>
-            <span class="button" id="button-show-note" onclick="showNote()"><?= Yii::t('app', 'Show note') ?></span>
-            <span class="button" id="button-hide-note" onclick="hideNote()"><?= Yii::t('app', 'Hide note') ?></span>
+        <?php if(!Yii::$app->user->isGuest) { ?>
+            <?php if ($raffle->user_id == Yii::$app->user->identity->getId()) { ?>
+                <?= Html::a('Редактировать', Url::to('/raffle/update/') . $raffle->code, ['class' => 'button', 'style' => 'margin-right: 10px']) ?>
+                <span class="button" id="button-show-note" onclick="showNote()"><?= Yii::t('app', 'Show note') ?></span>
+                <span class="button" id="button-hide-note" onclick="hideNote()"><?= Yii::t('app', 'Hide note') ?></span>
+            <?php } ?>
         <?php } ?>
     </div>
     <p>
 
+    <?php if(!Yii::$app->user->isGuest) { ?>
         <?php if ($raffle->user_id == Yii::$app->user->identity->getId()) { ?>
-        <?php
-        //TODO Ajax переписать на fetch и вынести в отдельный файл
-        ?>
-    <div id="div-input-note">
-        <h3><label for="input-note">
-                Заметка к конкурсу
-                <span id="load-save-note" style="color: grey"></span>
-                <span id="error-save-note" style="color: red"></span>
-            </label>
-        </h3>
-        <textarea name="" id="input-note" cols="30" rows="10"><?= $raffle->note ?></textarea><br>
-        <span class="button fit" onclick="saveRaffleNote()">Сохранить</span><br>
-        <span>Эту заметку видит только автор конкурса</span>
 
-    </div>
+            <div id="div-input-note">
+                <h3><label for="input-note">
+                        Заметка к конкурсу
+                        <span id="load-save-note" style="color: grey"></span>
+                        <span id="error-save-note" style="color: red"></span>
+                    </label>
+                </h3>
+                <textarea name="" id="input-note" cols="30" rows="10"><?= $raffle->note ?></textarea><br>
+                <span class="button fit" onclick="saveRaffleNote()">Сохранить</span><br>
+                <span>Эту заметку видит только автор конкурса</span>
+            </div>
 
-    <script>
-        function showNote() {
-            $("#div-input-note").show();
-            $("#button-show-note").hide();
-            $("#button-hide-note").show();
-        }
-
-        function hideNote() {
-            $("#div-input-note").hide();
-            $("#button-show-note").show();
-            $("#button-hide-note").hide();
-        }
-
-        function saveRaffleNote() {
-            let note = $("#input-note").val();
-            let csrfToken = $('meta[name="csrf-token"]').attr("content");
-            $.ajax({
-                url: '/raffle/save-note',
-                type: 'POST',
-                dataType: 'json',
-                data: {raffle_code: '<?=$raffle->code?>', note: note, _csrf: csrfToken},
-                success: function (res) {
-                    let timerId = setInterval(() => addPointForLoading(), 100);
-                    setTimeout(() => {
-                        clearInterval(timerId);
-                        clearLoading();
-                    }, 400);
-                },
-                error: function () {
-                    let timerId = setInterval(() => addPointForLoading(), 100);
-                    setTimeout(() => {
-                        clearInterval(timerId);
-                        errorSaveNote();
-                    }, 400);
+            <script>
+                function showNote() {
+                    $("#div-input-note").show();
+                    $("#button-show-note").hide();
+                    $("#button-hide-note").show();
                 }
-            });
-        }
 
-        function addPointForLoading() {
-            $("#load-save-note").html($("#load-save-note").html() + ' .');
-        }
+                function hideNote() {
+                    $("#div-input-note").hide();
+                    $("#button-show-note").show();
+                    $("#button-hide-note").hide();
+                }
 
-        function clearLoading() {
-            $("#load-save-note").html('');
-        }
+                function saveRaffleNote() {
+                    let note = $("#input-note").val();
+                    let csrfToken = $('meta[name="csrf-token"]').attr("content");
+                    $.ajax({
+                        url: '/raffle/save-note',
+                        type: 'POST',
+                        dataType: 'json',
+                        data: {raffle_code: '<?=$raffle->code?>', note: note, _csrf: csrfToken},
+                        success: function (res) {
+                            let timerId = setInterval(() => addPointForLoading(), 100);
+                            setTimeout(() => {
+                                clearInterval(timerId);
+                                clearLoading();
+                            }, 400);
+                        },
+                        error: function () {
+                            let timerId = setInterval(() => addPointForLoading(), 100);
+                            setTimeout(() => {
+                                clearInterval(timerId);
+                                errorSaveNote();
+                            }, 400);
+                        }
+                    });
+                }
 
-        function errorSaveNote() {
-            $("#error-save-note").html('Ошибка сохранения');
-        }
+                function addPointForLoading() {
+                    $("#load-save-note").html($("#load-save-note").html() + ' .');
+                }
 
-        hideNote();
-    </script>
+                function clearLoading() {
+                    $("#load-save-note").html('');
+                }
+
+                function errorSaveNote() {
+                    $("#error-save-note").html('Ошибка сохранения');
+                }
+
+                hideNote();
+            </script>
+        <?php } ?>
     <?php } ?>
     <br>
 </section>

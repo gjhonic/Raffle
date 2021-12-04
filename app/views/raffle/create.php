@@ -4,20 +4,23 @@ use yii\helpers\Html;
 
 /* @var $model object */
 
-$this->title = 'Добавление конкурса';
+$this->title = Yii::t('app', 'Creation of a raffle');
 ?>
-    <header id="header">
-        <h2><a href="index.html" class="logo"><?= Html::encode($this->title) ?></a></h2>
-        <ul class="icons">
 
-        </ul>
-    </header>
+<header id="header">
+    <h2>
+        <a href="" class="logo">
+            <?= Html::encode($this->title) ?>
+        </a>
+    </h2>
 
-    <section id="banner">
-        <div class="content">
-            <?= $this->render('create_form', [
-                'model' => $model,
-                'but_title' => 'Добавить',
-            ]) ?>
-        </div>
-    </section>
+</header>
+
+<section id="banner">
+    <div class="content">
+        <?= $this->render('create_form', [
+            'model' => $model,
+            'but_title' => Yii::t('app', 'Create'),
+        ]) ?>
+    </div>
+</section>
