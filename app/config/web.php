@@ -29,6 +29,9 @@ $config = [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
+        'assetManager' => [
+            'basePath' => '@webroot/runtime/assets',
+        ],
         'user' => [
             'identityClass' => 'app\models\auth\UserIdentity',
             'enableAutoLogin' => true,
