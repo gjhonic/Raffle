@@ -2,7 +2,7 @@
 
 namespace app\controllers;
 
-use app\models\db\forms\SupportForm;
+use app\models\base\forms\SupportForm;
 use app\models\base\Raffle;
 use app\models\base\Tag;
 use app\services\user\StatusService;
@@ -11,7 +11,7 @@ use yii\helpers\Url;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\Response;
-use app\models\db\User;
+use app\models\base\User;
 
 class SiteController extends Controller
 {

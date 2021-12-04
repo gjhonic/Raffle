@@ -50,9 +50,9 @@ $this->title = $raffle->title
     <div class="box-tags">
         <h4><?= Yii::t("app", "Tags") ?>: </h4>
         <div style="overflow-x: auto; display:flex;">
-            <?php foreach ($Tags as $tag) { ?>
-                <a class="button small" href="<?= Url::to('/raffle-by-tag/') . $tag['tag_title'] ?>"
-                   style="margin-right: 10px;"><?= $tag['tag_title'] ?></a>
+            <?php foreach ($raffle->tags as $tag) { ?>
+                <a class="button small" href="<?= Url::to('/raffle-by-tag/') . $tag->title ?>"
+                   style="margin-right: 10px;"><?= $tag->title ?></a>
             <?php } ?>
         </div>
     </div>

@@ -9,6 +9,7 @@
 namespace app\controllers;
 
 use app\models\base\Raffle;
+use app\models\base\Tag;
 use app\services\user\StatusService;
 use Yii;
 use yii\data\ActiveDataProvider;
@@ -17,8 +18,8 @@ use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\VerbFilter;
-use app\models\db\User;
-use app\models\db\forms\RaffleForm;
+use app\models\base\User;
+use app\models\base\forms\RaffleForm;
 
 class RaffleController extends Controller
 {
@@ -101,11 +102,14 @@ class RaffleController extends Controller
 
     /**
      * Список конкурсов.
-     * @param string $tag
-     * @return string
+     * @param string|null $tag
+     * @return string|Response
      */
-    public function actionRaffleByTag($tag = null): string
+    public function actionRaffleByTag(string $tag = null)
     {
+        if($tag == null){
+            return $this->redirect('/index');
+        }
         $Raffles = Raffle::getRafflesByTag($tag);
         return $this->render('raffles-by-tag', [
             'Raffles' => $Raffles,

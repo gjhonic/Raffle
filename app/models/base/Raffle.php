@@ -261,7 +261,7 @@ class Raffle extends \yii\db\ActiveRecord
      * @return array|\yii\db\DataReader
      * @throws \yii\db\Exception
      */
-    public static function getRafflesByTag($tag)
+    public static function getRafflesByTag(string $tag)
     {
         $placeholders = [
             'tag' => $tag

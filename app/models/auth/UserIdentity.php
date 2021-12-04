@@ -41,7 +41,7 @@ class UserIdentity extends User implements IdentityInterface
      * @param string $username
      * @return UserIdentity|array|\yii\db\ActiveRecord|null
      */
-    public static function findByUsername($username)
+    public static function findByUsername(string $username): ?UserIdentity
     {
         return static::findOne(['username' => $username]);
     }

@@ -23,9 +23,8 @@ class RaffleForm extends Model
     public $code_old;
     public $tags;
 
-    /**
-     * @return array
-     */
+    private $raffle;
+
     public function rules(): array
     {
         return [
@@ -41,10 +40,8 @@ class RaffleForm extends Model
         ];
     }
 
-    /**
-     * @return string[]
-     */
-    public function attributeLabels()
+
+    public function attributeLabels(): array
     {
         return [
             'title' => 'Название',
@@ -74,7 +71,7 @@ class RaffleForm extends Model
      * Метод сохранения конкурса в БД.
      * @return bool
      */
-    public function saveRaffle()
+    public function saveRaffle(): bool
     {
         if($this->validate()){
             $raffle = new Raffle();
@@ -99,7 +96,7 @@ class RaffleForm extends Model
      * @param Raffle $raffle
      * @return bool
      */
-    public function updateRaffle(Raffle $raffle)
+    public function updateRaffle(Raffle $raffle): bool
     {
         if($this->validate()){
             $raffle->title = ($this->title != '') ? $this->title : $raffle->title;
@@ -122,6 +119,7 @@ class RaffleForm extends Model
      */
     public function setFromRaffle(Raffle $raffle)
     {
+        $this->raffle = $raffle;
         $this->raffle_id = $raffle->id;
         $this->title = $raffle->title;
         $this->setTags();
@@ -131,19 +129,19 @@ class RaffleForm extends Model
         $this->description = $raffle->description;
         $this->date_begin = $raffle->date_begin;
         $this->date_end = $raffle->date_end;
-
     }
 
     /**
      * Метод формирует строку тегов
      * @throws \yii\db\Exception
+     * @throws \yii\base\InvalidConfigException
      */
-    public function setTags()
+    public function setTags(): void
     {
-        $Tags = Raffle::getTags($this->raffle_id);
+        $Tags = $this->raffle->tags;
         $this->tags = '';
         foreach ($Tags as $tag){
-            $this->tags .= '#'.$tag['tag_title'].' ';
+            $this->tags .= '#'.$tag->title.' ';
         }
         $this->tags = trim($this->tags);
     }
