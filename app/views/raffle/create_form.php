@@ -5,7 +5,7 @@ use yii\widgets\ActiveForm;
 use mihaildev\ckeditor\CKEditor;
 
 /* @var $model object */
-/* @var $but_title string */
+/* @var $butTitle string */
 ?>
 
 <?php $form = ActiveForm::begin(); ?>
@@ -28,11 +28,11 @@ use mihaildev\ckeditor\CKEditor;
     </p>
 
     <p>
-        <h5>Код</h5>
+        <h5><?=Yii::t('app', 'Code')?></h5>
         <div class="row">
             <div class="col-6 col-12-small">
                 <p>
-                    <input type="text" id="input-code" placeholder="Код" name="RaffleForm[code]" maxlength='25'>
+                    <input type="text" id="input-code" placeholder="<?=Yii::t('app', 'Code')?>" name="RaffleForm[code]" maxlength='25'>
                 </p>
             </div>
             <div class="col-6 col-12-small">
@@ -40,7 +40,7 @@ use mihaildev\ckeditor\CKEditor;
                     <span class="button primary fit" onclick="codeGenerate()">Сгенерировать код</span>
                 </p>
             </div>
-            <span>Отображается в адресной строке, оставьте пустым и произойдет автоматическая генерация</span>
+            <span><?=Yii::t('app', 'It is displayed in the address bar, leave it blank and it will be automatically generated')?></span>
         </div>
     </p>
 
@@ -55,10 +55,10 @@ use mihaildev\ckeditor\CKEditor;
         </div>
         <div class="col-6 col-12-small">
             <p>
-            <div class="form-group">
-                <label for="date_begin" class="control-label">Дата окончания конкурса</label>
-                <input type="date" class="form-control" id="date_begin" placeholder="" name="RaffleForm[date_end]" value="" min="2021-01-01" max="2050-12-31">
-            </div>
+                <div class="form-group">
+                    <label for="date_begin" class="control-label">Дата окончания конкурса</label>
+                    <input type="date" class="form-control" id="date_begin" placeholder="" name="RaffleForm[date_end]" value="" min="2021-01-01" max="2050-12-31">
+                </div>
             </p>
         </div>
     </div>
@@ -83,10 +83,9 @@ use mihaildev\ckeditor\CKEditor;
         </div>
     </p>
 
-
     <p>
         <br>
-        <?= Html::submitButton($but_title, ['class' => 'button large fit']) ?>
+        <?= Html::submitButton($butTitle, ['class' => 'button large fit']) ?>
     </p>
 
 <?php ActiveForm::end(); ?>
