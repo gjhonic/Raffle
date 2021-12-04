@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models\db;
+namespace app\models\base;
 
 use Yii;
 
@@ -14,23 +14,17 @@ use Yii;
  *
  * @property UserOtherInfo[] $userOtherInfos
  */
-class UserAtribute extends \yii\db\ActiveRecord
+class UserAttribute extends \yii\db\ActiveRecord
 {
     const TYPE_COMMON = 'common';
     const TYPE_SOCIAL_LINK = 'social link';
 
-    /**
-     * @return string
-     */
-    public static function tableName()
+    public static function tableName(): string
     {
         return 'user_attribute';
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function rules()
+    public function rules(): array
     {
         return [
             [['title', 'type'], 'required'],
@@ -42,14 +36,11 @@ class UserAtribute extends \yii\db\ActiveRecord
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
             'id' => 'ID',
-            'title' => 'Title',
+            'title' => Yii::t('app', 'Title'),
         ];
     }
 }

@@ -1,7 +1,7 @@
 <?php
 
 use yii\db\Migration;
-use app\models\db\RaffleStatus;
+use app\models\base\RaffleStatus;
 
 /**
  * Class m210422_052229_raffle_status

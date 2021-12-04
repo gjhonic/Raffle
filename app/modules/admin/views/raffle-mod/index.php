@@ -7,7 +7,7 @@ use yii\widgets\Pjax;
 use app\modules\admin\widgets\RaffleStatusWidget;
 
 /* @var $dataProvider \yii\db\ActiveRecord */
-/* @var $searchModel \app\models\db\search\UserSearch */
+/* @var $searchModel \app\models\base\search\UserSearch */
 /* @var $Statuses array */
 
 $this->title = 'Модерация конкурсов';

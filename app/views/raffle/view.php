@@ -4,7 +4,7 @@ use yii\helpers\Url;
 use yii\helpers\Html;
 use app\widgets\RaffleStatusWidget;
 
-/* @var $raffle \app\models\db\Raffle */
+/* @var $raffle \app\models\base\Raffle */
 /* @var $Tags \app\models\base\Tag */
 
 $this->title = $raffle->title

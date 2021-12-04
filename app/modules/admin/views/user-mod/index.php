@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\helpers\Url;
 use yii\widgets\Pjax;
-use app\models\db\User;
+use app\models\base\User;
 use app\modules\admin\widgets\UserStatusWidget;
 
 /* @var $dataProvider \yii\db\ActiveRecord */
-/* @var $searchModel \app\models\db\search\UserSearch */
+/* @var $searchModel \app\models\base\search\UserSearch */
 /* @var $Statuses array */
 
 $this->title = 'Модерация пользователей';

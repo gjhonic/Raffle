@@ -1,9 +1,9 @@
 <?php
 
 /* @var $user object */
-/* @var $RafflesApproved \app\models\db\Raffle */
-/* @var $RafflesChecked \app\models\db\Raffle */
-/* @var $RafflesNotApproved \app\models\db\Raffle */
+/* @var $RafflesApproved \app\models\base\Raffle */
+/* @var $RafflesChecked \app\models\base\Raffle */
+/* @var $RafflesNotApproved \app\models\base\Raffle */
 
 $this->title = $user->username;
 

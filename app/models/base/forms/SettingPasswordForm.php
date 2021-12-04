@@ -5,11 +5,11 @@
  * @copyright Copyright (c) 2021 Eugene Andreev
  * @author Eugene Andreev <gjhonic@gmail.com>
  */
-namespace app\models\db\forms;
+namespace app\models\base\forms;
 
 use yii\base\Model;
 use Yii;
-use app\models\db\User;
+use app\models\base\User;
 
 class SettingPasswordForm extends Model
 {

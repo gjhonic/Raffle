@@ -11,8 +11,8 @@ namespace app\modules\admin\controllers;
 use yii\web\Controller;
 use yii\filters\AccessControl;
 use yii\helpers\Url;
-use app\models\db\Support;
-use app\models\db\User;
+use app\models\base\Support;
+use app\models\base\User;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
 

@@ -13,7 +13,7 @@ use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\VerbFilter;
-use app\models\db\User;
+use app\models\base\User;
 
 class UserController extends Controller
 {

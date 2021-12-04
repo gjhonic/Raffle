@@ -11,7 +11,7 @@ namespace app\modules\admin\controllers;
 use yii\web\Controller;
 use yii\filters\AccessControl;
 use yii\helpers\Url;
-use app\models\db\User;
+use app\models\base\User;
 
 /**
  * Default controller for the `admin` module

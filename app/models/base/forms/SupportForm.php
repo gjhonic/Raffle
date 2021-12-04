@@ -5,11 +5,11 @@
  * @copyright Copyright (c) 2021 Eugene Andreev
  * @author Eugene Andreev <gjhonic@gmail.com>
  */
-namespace app\models\db\forms;
+namespace app\models\base\forms;
 
 use yii\base\Model;
 use Yii;
-use app\models\db\Support;
+use app\models\base\Support;
 
 class SupportForm extends Model
 {

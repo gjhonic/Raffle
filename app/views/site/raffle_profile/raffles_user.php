@@ -2,8 +2,8 @@
 
 use yii\helpers\Url;
 
-/* @var $RafflesApproved \app\models\db\Raffle */
-/* @var $user \app\models\db\User */
+/* @var $RafflesApproved \app\models\base\Raffle */
+/* @var $user \app\models\base\User */
 
 ?>
 <div>

@@ -1,7 +1,7 @@
 <?php
 namespace app\services\user;
 
-use app\models\db\User;
+use app\models\base\User;
 
 class StatusService
 {

@@ -1,7 +1,7 @@
 <?php
 
 use yii\db\Migration;
-use app\models\db\User;
+use app\models\base\User;
 
 /**
  * Class m210422_124804_rbac_data

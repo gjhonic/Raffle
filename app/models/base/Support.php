@@ -1,10 +1,11 @@
 <?php
 
-namespace app\models\db;
+namespace app\models\base;
 
+use Yii;
+use yii\db\ActiveQuery;
 use Yii\db\ActiveRecord;
 use yii\behaviors\TimestampBehavior;
-use app\models\db\User;
 
 /**
  * This is the model class for table "support".
@@ -14,6 +15,8 @@ use app\models\db\User;
  * @property int $user_id
  * @property int $status
  * @property int|null $created_at
+ *
+ * @property User $user
  */
 class Support extends \yii\db\ActiveRecord
 {
@@ -22,17 +25,11 @@ class Support extends \yii\db\ActiveRecord
     const STATUS_VIEWED = 1;
     const STATUS_IMPORTANT = 2;
 
-    /**
-     * @return string
-     */
     public static function tableName(): string
     {
         return 'support';
     }
 
-    /**
-     * @return array
-     */
     public function rules(): array
     {
         return [
@@ -45,7 +42,7 @@ class Support extends \yii\db\ActiveRecord
         ];
     }
 
-    public function behaviors()
+    public function behaviors(): array
     {
         return [
             [
@@ -58,15 +55,12 @@ class Support extends \yii\db\ActiveRecord
         ];
     }
 
-    /**
-     * @return string[]
-     */
     public function attributeLabels(): array
     {
         return [
             'id' => 'ID',
-            'title' => 'Тема',
-            'description' => 'Описание',
+            'title' => Yii::t('app', 'Title'),
+            'description' => Yii::t('app', 'Description'),
             'user_id' => 'Пользователь',
             'status' => 'Статус',
             'created_at' => 'Дата создания',
@@ -75,28 +69,30 @@ class Support extends \yii\db\ActiveRecord
 
     /**
      * Метод возвращает пользователя обращения
-     * @return \app\models\db\User
+     * @return ActiveQuery
      */
-    public function getUser()
+    public function getUser(): ActiveQuery
     {
-        return User::findOne($this->user_id);
+        return $this->hasOne(User::className(), ['id' => 'user_id']);
     }
 
     /**
      * Метод установливает статус просмотрено на обращении
+     * @return bool
      */
-    public function setViewed(): void
+    public function setViewed(): bool
     {
         $this->status = self::STATUS_VIEWED;
-        $this->update();
+        return $this->update();
     }
 
     /**
      * Метод установливает статус важно на обращении
+     * @return bool
      */
-    public function setTag(): void
+    public function setTag(): bool
     {
         $this->status = self::STATUS_IMPORTANT;
-        $this->update();
+        return $this->update();
     }
 }

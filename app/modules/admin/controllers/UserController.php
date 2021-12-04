@@ -8,15 +8,15 @@
 
 namespace app\modules\admin\controllers;
 
-use app\models\db\UserRole;
+use app\models\base\UserRole;
 use app\modules\admin\models\forms\ModeratorForm;
 use Yii;
 use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\filters\AccessControl;
 use yii\helpers\Url;
-use app\models\db\User;
-use app\models\db\search\UserSearch;
+use app\models\base\User;
+use app\models\base\search\UserSearch;
 use yii\web\Response;
 
 class UserController extends Controller

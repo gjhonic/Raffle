@@ -10,7 +10,7 @@ namespace app\models\auth;
 
 use Yii;
 use yii\web\IdentityInterface;
-use app\models\db\User;
+use app\models\base\User;
 
 class UserIdentity extends User implements IdentityInterface
 {

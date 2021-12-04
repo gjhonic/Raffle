@@ -2,9 +2,6 @@
 
 namespace app\models\base;
 
-use app\models\db\RaffleStatus;
-use app\models\db\RaffleTag;
-use app\models\db\User;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveQuery;
@@ -88,9 +85,9 @@ class Raffle extends \yii\db\ActiveRecord
             'user_id' => Yii::t('app', 'User'),
             'video_link' => 'Видео ресурс',
             'image_src' => 'Изображение',
-            'date_begin' => 'Старт конкурса',
+            'date_begin' => Yii::t('app', 'Start of the raffle'),
             'date_end' => 'Конец конкурса',
-            'status_id' => 'Статус',
+            'status_id' => Yii::t('app', 'Status'),
             'code' => 'Код',
             'created_at' => 'Создан',
             'updated_at' => 'Изменен',

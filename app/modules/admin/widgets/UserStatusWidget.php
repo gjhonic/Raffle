@@ -2,7 +2,7 @@
 
 namespace app\modules\admin\widgets;
 
-use app\models\db\UserStatus;
+use app\models\base\UserStatus;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 

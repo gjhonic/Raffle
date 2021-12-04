@@ -1,8 +1,7 @@
 <?php
 
-namespace app\models\db;
+namespace app\models\base;
 
-use app\models\base\Raffle;
 use app\models\behavior\ActiveRecordLogableBehavior;
 use Yii;
 use yii\behaviors\TimestampBehavior;
@@ -94,10 +93,10 @@ class User extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Имя',
-            'surname' => 'Фамилия',
-            'username' => 'Логин',
-            'email' => 'Email',
+            'name' => Yii::t('app', 'Name'),
+            'surname' => Yii::t('app', 'Surname'),
+            'username' => Yii::t('app', 'Username'),
+            'email' => Yii::t('app', 'Email'),
             'password' => 'Пароль',
             'role_id' => 'Роль',
             'status_id' => 'Статус',
@@ -163,8 +162,19 @@ class User extends \yii\db\ActiveRecord
     }
 
     /**
+     * Метод определяет является $subscriber_id в подписчиком this user
+     * @param int $subscriber_id
+     * @return bool
+     */
+    public function checkSubscription(int $subscriber_id): bool
+    {
+        return Subscriptions::find()
+            ->where(['user_id' => $this->id, 'subscriber_id' => $subscriber_id])
+            ->exists();
+    }
+
+    /**
      * Gets query for [[UserOtherInfos]].
-     *
      * @return \yii\db\ActiveQuery
      */
     public function getUserOtherInfos(): ActiveQuery
@@ -174,30 +184,30 @@ class User extends \yii\db\ActiveRecord
 
     /**
      * Метод находит пользователя по коду.
-     * @param $code string
-     * @return array|\yii\db\ActiveRecord|null
+     * @param string $code
+     * @return ?User
      */
-    public static function findByCode(string $code)
+    public static function findByCode(string $code): ?User
     {
         return self::findOne(['code' => $code]);
     }
 
     /**
      * Метод находит пользователя по логину.
-     * @param $username string
-     * @return array|\yii\db\ActiveRecord|null
+     * @param string $username
+     * @return ?User
      */
-    public static function findByUsername(string $username)
+    public static function findByUsername(string $username): ?User
     {
         return self::findOne(['username' => $username]);
     }
 
     /**
      * Метод находит пользователя по почте.
-     * @param $email string
-     * @return array|\yii\db\ActiveRecord|null
+     * @param string $email
+     * @return ?User
      */
-    public static function findByEmail(string $email)
+    public static function findByEmail(string $email): ?User
     {
         return self::findOne(['email' => $email]);
     }

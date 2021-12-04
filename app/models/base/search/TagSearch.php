@@ -6,7 +6,7 @@
  * @author Eugene Andreev <gjhonic@gmail.com>
  *
  */
-namespace app\models\db\search;
+namespace app\models\base\search;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
