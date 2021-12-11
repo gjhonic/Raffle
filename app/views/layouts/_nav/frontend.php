@@ -1,8 +1,9 @@
 <?php
+
 use yii\helpers\Url;
 use app\models\base\User;
 
-if(Yii::$app->user->isGuest){
+if (Yii::$app->user->isGuest) {
     return [
         'main' => [
             [
@@ -31,8 +32,8 @@ if(Yii::$app->user->isGuest){
             ],
         ],
     ];
-}else{
-    if(Yii::$app->user->identity->role_id == User::ROLE_USER_ID){
+} else {
+    if (Yii::$app->user->identity->role_id == User::ROLE_USER_ID) {
         return [
             'main' => [
                 [
@@ -73,7 +74,7 @@ if(Yii::$app->user->isGuest){
                 ],
             ],
         ];
-    }else{
+    } else {
         return [
             'main' => [
                 [

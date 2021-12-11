@@ -3,7 +3,7 @@
 use app\assets\FrontendAsset;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use mihaildev\ckeditor\CKEditor;
+use app\widgets\CustomCKEditor;
 
 /* @var $model object */
 /* @var $butTitle string */
@@ -22,7 +22,7 @@ $this->registerJsFile('/media/general/js/generate_code.js', ['depends' => [Front
     </p>
 
     <p>
-        <?= $form->field($model, 'description')->widget(CKEditor::className(),[
+        <?= $form->field($model, 'description')->widget(CustomCKEditor::className(),[
             'editorOptions' => [
                 'preset' => 'full',
                 'inline' => false,
@@ -111,4 +111,27 @@ $this->registerJsFile('/media/general/js/generate_code.js', ['depends' => [Front
             $('#input-tag').val('');
         }
     }
+
+    CKEDITOR.editorConfig = function( config ) {
+        config.toolbarGroups = [
+            { name: 'document', groups: [ 'mode', 'document', 'doctools' ] },
+            { name: 'clipboard', groups: [ 'clipboard', 'undo' ] },
+            { name: 'editing', groups: [ 'find', 'selection', 'spellchecker', 'editing' ] },
+            { name: 'forms', groups: [ 'forms' ] },
+            '/',
+            { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
+            { name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi', 'paragraph' ] },
+            { name: 'links', groups: [ 'links' ] },
+            { name: 'insert', groups: [ 'insert' ] },
+            '/',
+            { name: 'styles', groups: [ 'styles' ] },
+            { name: 'colors', groups: [ 'colors' ] },
+            { name: 'tools', groups: [ 'tools' ] },
+            { name: 'others', groups: [ 'others' ] },
+            { name: 'about', groups: [ 'about' ] }
+        ];
+
+        config.removeButtons = 'Link,Unlink,Anchor,Image,Table,HorizontalRule,SpecialChar,PageBreak,Iframe,Language,BidiLtr,CreateDiv,Form,Checkbox,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField,Templates,Save,Source,NewPage,ExportPdf,Preview,Print';
+    };
+
 </script>

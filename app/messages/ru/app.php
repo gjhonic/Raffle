@@ -22,6 +22,18 @@ return [
     "Show" => "Смотреть",
     "Status" => "Статус",
     "Code" => "Код",
+    "Followers" => "Подписчиков",
+    "Subscriptions" => "Подписок",
+    "By date" => "По дате",
+    "Alphabetically" => "По алфавиту",
+    "New first" => "Сначала новые",
+    "Old first" => "Сначала старые",
+    "Ignore" => "Не учитывать",
+    "Abc" => "Абв",
+    "Zyx" => "Яюэ",
+    "Group" => "Группировать",
+    "By author" => "По автору",
+    "Do not group" => "Не группировать",
 
     //Меню
     "Menu" => "Меню",
@@ -82,6 +94,7 @@ return [
     "You are looking for" => "Вы ищите",
     "Contact support" => "Написать в поддержку",
     "Generate code" => "Сгенерировать код",
+    "Subscribe to" => "Подписаться",
 
     //Языки
     "English" => "Английский",

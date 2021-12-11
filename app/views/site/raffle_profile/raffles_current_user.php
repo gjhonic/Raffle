@@ -34,7 +34,7 @@ use yii\helpers\Url;
             <div class="posts">
                 <?php foreach ($RafflesApproved as $raffle){ ?>
                     <article>
-                        <div class="image fit"><img src="/public/media/src/raffle/pic11.jpg" alt=""></div>
+                        <div class="image fit"><img src="/media/src/raffle/pic11.jpg" alt=""></div>
                         <h3><?=$raffle->title?></h3>
                         <p><?=$raffle->short_description?></p>
                         <ul class="actions">

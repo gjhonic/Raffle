@@ -1,10 +1,10 @@
 <?php
 
-/* @var $this \yii\web\View */
-/* @var $content string */
-
 use yii\helpers\Html;
 use app\assets\DefaultAsset;
+
+/* @var $this \yii\web\View */
+/* @var $content string */
 
 DefaultAsset::register($this);
 ?>
@@ -23,7 +23,6 @@ DefaultAsset::register($this);
 <?php $this->beginBody() ?>
 
 <div class="wrap">
-
     <div class="container">
         <?= $content ?>
     </div>

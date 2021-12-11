@@ -10,6 +10,6 @@ $langRuActive = ($lang === "ru") ? 'button primary' : "button";
 ?>
 
 <div class="change-lang">
-    <a href="/en/<?=$currentUrl?>" class="<?=$langEnActive?>" title="<?=Yii::t('app', 'English')?>">en</a>
-    <a href="/ru/<?=$currentUrl?>" class="<?=$langRuActive?>" title="<?=Yii::t('app', 'Russian')?>">ru</a>
+    <a href="/en/<?= $currentUrl ?>" class="<?= $langEnActive ?>" title="<?= Yii::t('app', 'English') ?>">en</a>
+    <a href="/ru/<?= $currentUrl ?>" class="<?= $langRuActive ?>" title="<?= Yii::t('app', 'Russian') ?>">ru</a>
 </div>
