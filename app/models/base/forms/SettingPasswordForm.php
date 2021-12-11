@@ -104,9 +104,9 @@ class SettingPasswordForm extends Model
     public function attributeLabels(): array
     {
         return [
-            'password_old' => 'Текущий пароль',
-            'password_new' => 'Новый пароль',
-            'password_new_confirm' => 'Подтвердите пароль',
+            'password_old' => Yii::t('app', 'Current Password'),
+            'password_new' => Yii::t('app', 'New password'),
+            'password_new_confirm' => Yii::t('app', 'Confirm the password'),
         ];
     }
 
