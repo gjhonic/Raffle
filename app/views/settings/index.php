@@ -39,7 +39,7 @@ $this->title = Yii::t('app', 'Settings');
             <?php if($user->existAva()){ ?>
                 <img src="images/pic10.jpg" alt="" />
             <?php }else{ ?>
-                <a href="" title="Изменить"><img src="/app/media/avatars/default_ava.png" alt="" /></a>
+                <a href="" title="Изменить"><img src="/public/media/avatars/default_ava.png" alt="" /></a>
             <?php } ?>
         </span>
 </section>

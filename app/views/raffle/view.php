@@ -30,7 +30,7 @@ $this->title = $raffle->title
             <?php } ?>
         </h1>
     </header>
-    <span class="image main"><img src="/app/media/src/raffle/pic11.jpg" alt=""></span>
+    <span class="image main"><img src="/media/src/raffle/pic11.jpg" alt=""></span>
     <time class="published">
         <?php
         if ($raffle->date_begin !== null) {

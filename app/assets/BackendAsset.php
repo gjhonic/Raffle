@@ -13,7 +13,7 @@ use yii\web\AssetBundle;
  */
 class BackendAsset extends AssetBundle
 {
-    public $sourcePath = '@app/media/backend';
+    public $sourcePath = '@webroot/media/backend';
     public $css = [
         'css/bootstrap.min.css',
         'css/dashboard.css',

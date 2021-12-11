@@ -42,7 +42,7 @@ $this->title = $user->username;
         <?php if ($user->existAva()) { ?>
             <img src="images/pic10.jpg" alt=""/>
         <?php } else { ?>
-            <img src="/app/media/src/raffle/pic11.jpg" alt="">
+            <img src="/public/media/src/raffle/pic11.jpg" alt="">
         <?php } ?>
     </span>
     <h3>

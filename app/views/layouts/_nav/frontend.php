@@ -12,6 +12,12 @@ if(Yii::$app->user->isGuest){
                 'action' => 'index'
             ],
             [
+                'label' => Yii::t('app', 'Tags'),
+                'href' => Url::to('/tag/index'),
+                'controller' => 'tag',
+                'action' => 'index'
+            ],
+            [
                 'label' => Yii::t('app', 'Sign in'),
                 'href' => Url::to('/signin'),
                 'controller' => 'auth',
@@ -39,6 +45,12 @@ if(Yii::$app->user->isGuest){
                     'label' => Yii::t('app', 'Raffles'),
                     'href' => Url::to('/raffle/index'),
                     'controller' => 'raffle',
+                    'action' => 'index'
+                ],
+                [
+                    'label' => Yii::t('app', 'Tags'),
+                    'href' => Url::to('/tag/index'),
+                    'controller' => 'tag',
                     'action' => 'index'
                 ],
                 [
@@ -80,6 +92,12 @@ if(Yii::$app->user->isGuest){
                     'label' => Yii::t('app', 'Raffles'),
                     'href' => Url::to('/raffle/index'),
                     'controller' => 'raffle',
+                    'action' => 'index'
+                ],
+                [
+                    'label' => Yii::t('app', 'Tags'),
+                    'href' => Url::to('/tag/index'),
+                    'controller' => 'tag',
                     'action' => 'index'
                 ],
                 [

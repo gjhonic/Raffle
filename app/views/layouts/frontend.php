@@ -9,7 +9,7 @@ use app\assets\FrontendAsset;
 $nav = array_merge(require(__DIR__ . '/_nav/frontend.php'));
 if (!Yii::$app->user->isGuest) {
     echo "<input type='hidden' value='" . Yii::$app->user->identity->getCode() . "' id='hidden-input-user-code'>";
-    $this->registerJsFile('/app/media/general/js/access_user.js', ['depends' => [FrontendAsset::className()], 'position' => \yii\web\View::POS_END]);
+    $this->registerJsFile('/media/general/js/access_user.js', ['depends' => [FrontendAsset::className()], 'position' => \yii\web\View::POS_END]);
 }
 
 FrontendAsset::register($this);
@@ -21,7 +21,7 @@ FrontendAsset::register($this);
     <meta charset="<?= Yii::$app->charset ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="/app/media/frontend/js/jquery.min.js"></script>
+    <script src="/media/frontend/js/jquery.min.js"></script>
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>

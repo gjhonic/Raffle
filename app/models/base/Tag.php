@@ -49,6 +49,12 @@ class Tag extends \yii\db\ActiveRecord
         return parent::beforeSave($insert);
     }
 
+    public static function getPopularTags(): array
+    {
+        return self::find()
+            ->all();
+    }
+
     /**
      * Метод находит теги по совпадению с запросом.
      * @param string $query
