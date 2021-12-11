@@ -10,7 +10,7 @@ nbproject
 .settings
 
 #assets
-assets/*
+public/assets/*
 
 # windows thumbnail cache
 Thumbs.db
