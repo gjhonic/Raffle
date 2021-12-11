@@ -59,6 +59,9 @@ return [
     "Published" => "Опубликованные",
     "Moderation" => "На модерации",
     "Forbidden" => "Запрещенные",
+    "approved" => 'Опубликованные',
+    "on check" => 'На проверке',
+    "not approved" => 'Запрещенные',
 
     //Конкус
     "Archive of raffles" => "Архив конкурсов",
@@ -95,6 +98,7 @@ return [
     "Contact support" => "Написать в поддержку",
     "Generate code" => "Сгенерировать код",
     "Subscribe to" => "Подписаться",
+    "Editing a raffles" => "Редактирование конкурса ",
 
     //Языки
     "English" => "Английский",

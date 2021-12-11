@@ -1,14 +1,18 @@
 <?php
 
-use yii\helpers\Html;
 use yii\helpers\Url;
 
 /* @var $model object */
 
-$this->title = 'Редактирование конкурса '.$model->title;
+$this->title = Yii::t('app', 'Editing a raffles') . ' ' . $model->title;
 ?>
 <header id="header">
-    <h2>Редактирование конкурса <a href="<?=Url::to('/show/').$model->code?>" class="logo"><i><?=$model->title?></i></a></h2>
+    <h2>
+        <?= Yii::t('app', 'Editing a raffles') ?>
+        <a href="<?= Url::to('/show/') . $model->code ?>" class="logo">
+            <i><?= $model->title ?></i>
+        </a>
+    </h2>
 </header>
 
 <section id="banner">

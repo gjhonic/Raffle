@@ -1,10 +1,10 @@
 <?php
 
-/* @var $tag array */
-/* @var $Raffles array */
-
 use yii\helpers\Html;
 use yii\helpers\Url;
+
+/* @var $tag array */
+/* @var $Raffles array */
 
 $this->title = Yii::t('app', 'Raffles with the tag') . ': ' . $tag;
 ?>
@@ -36,7 +36,8 @@ $this->title = Yii::t('app', 'Raffles with the tag') . ': ' . $tag;
                             </time>
                         </div>
                         <div class="meta">
-                            <?=Yii::t('app', 'Author')?>: <a href="<?= Url::to('/profile/') . $raffle['user_code'] ?>" class="author">
+                            <?= Yii::t('app', 'Author') ?>:
+                            <a href="<?= Url::to('/profile/') . $raffle['user_code'] ?>" class="author">
                                 <?= $raffle['username'] ?>
                             </a>
                         </div>
@@ -47,7 +48,7 @@ $this->title = Yii::t('app', 'Raffles with the tag') . ': ' . $tag;
                         <ul class="actions">
                             <li>
                                 <a href="<?= Url::to('/show/') . $raffle['raffle_code'] ?>" class="button large">
-                                    <?=Yii::t('app', 'More details')?>...
+                                    <?= Yii::t('app', 'More details') ?>...
                                 </a>
                             </li>
                         </ul>
