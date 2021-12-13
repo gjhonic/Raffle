@@ -25,7 +25,7 @@ return [
 
     //URLs на внутренний ajax
     'ajax/<controller:\w+>/<action:\w+>' => 'ajax/<controller>/<action>',
-
+    
     //URLs на SiteController
     'profile/<code>' => 'site/profile',
     'show/<code>' => 'raffle/view',

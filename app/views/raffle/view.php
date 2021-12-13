@@ -103,20 +103,44 @@ $this->title = $raffle['raffle_title'];
                 function saveRaffleNote(){
                     let note = $("#input-note").val();
                     let csrfToken = $('meta[name="csrf-token"]').attr("content");
-                    $.ajax({
-                        url: '/ajax/raffle/save-note',
-                        type: 'POST',
-                        dataType: 'json',
-                        data: {raffle_code: '<?=$raffle['raffle_code']?>', note: note, _csrf: csrfToken},
-                        success: function(res){
+                    
+                    let body = {
+                        raffle_code: "<?=$raffle['raffle_code']?>",
+                        note: note,
+                        _csrf: csrfToken
+                    }
+
+                    let response = fetch('/ajax/raffle/save-note', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: body
+                    }).then(response => {
+                        (res) => {
                             let timerId = setInterval(() => addPointForLoading(), 100);
                             setTimeout(() => {clearInterval(timerId); clearLoading();}, 400);
-                        },
-                        error: function(){
+                    }}).catch(err => {
+                        () => {
+                            // console.log(err)
                             let timerId = setInterval(() => addPointForLoading(), 100);
                             setTimeout(() => {clearInterval(timerId); errorSaveNote();}, 400);
-                        }
-                    });
+                    }})
+                    
+                    // $.ajax({
+                    //     url: '/ajax/raffle/save-note',
+                    //     type: 'POST',
+                    //     dataType: 'json',
+                    //     data: {raffle_code: '<?=$raffle['raffle_code']?>', note: note, _csrf: csrfToken},
+                    //     success: function(res){
+                    //         let timerId = setInterval(() => addPointForLoading(), 100);
+                    //         setTimeout(() => {clearInterval(timerId); clearLoading();}, 400);
+                    //     },
+                    //     error: function(){
+                    //         let timerId = setInterval(() => addPointForLoading(), 100);
+                    //         setTimeout(() => {clearInterval(timerId); errorSaveNote();}, 400);
+                    //     }
+                    // });
                 }
 
                 function addPointForLoading(){

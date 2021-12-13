@@ -9,7 +9,6 @@ namespace app\controllers\ajax;
 
 use app\models\db\Raffle;
 use Yii;
-use app\services\user\StatusService;
 use yii\helpers\Url;
 use yii\filters\AccessControl;
 use yii\web\Controller;
