@@ -73,9 +73,8 @@ $this->title = Yii::t("app", "Search by request") . ": " . $query;
             <div class="posts">
                 <?php foreach ($Users as $user){ ?>
                     <article>
-                        <a href="#" class="image"><img src="images/pic01.jpg" alt="" /></a>
                         <div class="image fit"><img src="/app/media/src/raffle/pic11.jpg" alt=""></div>
-                        <h3><a href="/profile/<?=$user['code']?>"><?=$user['username']?></a></h3>
+                        <h3><a href="/profile/<?=$user->code?>"><?=$user->username?></a></h3>
                     </article>
                 <?php } ?>
             </div>

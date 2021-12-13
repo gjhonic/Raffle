@@ -1,8 +1,9 @@
 <?php
 
-namespace app\models\db;
+namespace app\models\base;
 
 use Yii;
+use yii\db\ActiveQuery;
 
 /**
  * This is the model class for table "user_other_info".
@@ -16,18 +17,12 @@ use Yii;
  */
 class UserOtherInfo extends \yii\db\ActiveRecord
 {
-    /**
-     * {@inheritdoc}
-     */
-    public static function tableName()
+    public static function tableName(): string
     {
         return 'user_other_info';
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function rules()
+    public function rules(): array
     {
         return [
             [['user_id', 'atr_id'], 'required'],
@@ -52,20 +47,18 @@ class UserOtherInfo extends \yii\db\ActiveRecord
 
     /**
      * Gets query for [[Atr]].
-     *
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
-    public function getAtr()
+    public function getAtr(): ActiveQuery
     {
         return $this->hasOne(UserAttribute::className(), ['id' => 'atr_id']);
     }
 
     /**
      * Gets query for [[User]].
-     *
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
-    public function getUser()
+    public function getUser(): ActiveQuery
     {
         return $this->hasOne(User::className(), ['id' => 'user_id']);
     }

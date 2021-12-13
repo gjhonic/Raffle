@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models\db;
+namespace app\models\base;
 
 use app\models\behavior\ActiveRecordLogableBehavior;
 use Yii;
@@ -11,7 +11,6 @@ use Yii;
  * @property int $id
  * @property string $title
  *
- * @property RaffleTag[] $raffleTags
  */
 class Tag extends \yii\db\ActiveRecord
 {
@@ -44,10 +43,6 @@ class Tag extends \yii\db\ActiveRecord
         ];
     }
 
-    /**
-     * @param bool $insert
-     * @return bool
-     */
     public function beforeSave($insert)
     {
         $this->title = mb_strtolower($this->title);

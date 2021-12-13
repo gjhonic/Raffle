@@ -1,7 +1,7 @@
 <?php
 
 use yii\db\Migration;
-use app\models\db\UserRole;
+use app\models\base\UserRole;
 
 /**
  * Class m210422_052056_user_role

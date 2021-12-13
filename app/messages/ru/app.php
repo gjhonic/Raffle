@@ -18,6 +18,8 @@ return [
     "All" => "Все",
     "Apply" => "Применить",
     "Title" => "Название",
+    "Show" => "Смотреть",
+    "Status" => "Статус",
 
     //Меню
     "Menu" => "Меню",
@@ -47,10 +49,24 @@ return [
     "Archive of raffles" => "Архив конкурсов",
     "No raffles" => "Конкурсов нет",
     "Raffles not found" => "Конкурсы не найдены",
+    "Show note" => "Показать заметку",
+    "Hide note" => "Скрыть заметку",
+    "Description" => "Описание",
+    "Raffles from" => "Конкурсы от",
+    "Start of the raffle" => "Начало конкурса",
+    "Raffles with the tag" => "Конкурсы с тегом",
+    "Creation of a raffle" => "Создание конкурса",
 
     //Пользователи
     "Author" => "Автор",
     "Users not found" => "Пользователи не найдены",
+    "Username" => "Имя пользователя",
+    "Password" => "Пароль",
+    "Email" => "Почта",
+    "Confirm the password" => "Подтвердите пароль",
+    "Remember me" => "Запомни меня",
+    "Name" => "Имя",
+    "Surname" => "Фамилия",
 
     //Теги
     "Tags not found" => "Теги не найдены",

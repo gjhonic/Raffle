@@ -7,7 +7,7 @@
  */
 namespace app\modules\admin\models\forms;
 
-use app\models\db\User;
+use app\models\base\User;
 use Yii;
 use yii\base\Model;
 

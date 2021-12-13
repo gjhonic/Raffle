@@ -1,17 +1,19 @@
 <?php
 /**
- * SupportSearch
- * Модель поиска обращений
+ * RaffleSearch
+ * Модель поиска конкурсов
  * @copyright Copyright (c) 2021 Eugene Andreev
  * @author Eugene Andreev <gjhonic@gmail.com>
+ *
  */
-namespace app\models\db\search;
+namespace app\models\base\search;
 
-use app\models\db\Support;
+use app\models\base\Raffle;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
-class SupportSearch extends Support
+
+class RaffleSearch extends Raffle
 {
     /**
      * @return array
@@ -19,8 +21,8 @@ class SupportSearch extends Support
     public function rules(): array
     {
         return [
-            [['title'], 'string', 'max' => 100],
-            [['status'], 'integer'],
+            [['title'], 'string', 'max' => 255],
+            ['status_id', 'integer']
         ];
     }
 
@@ -41,7 +43,7 @@ class SupportSearch extends Support
      */
     public function search($params)
     {
-        $query = Support::find();
+        $query = Raffle::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -54,7 +56,7 @@ class SupportSearch extends Support
         }
 
         $query->andFilterWhere(['like', 'title', $this->title]);
-        $query->andFilterWhere(['=', 'status', $this->status]);
+        $query->andFilterWhere(['=', 'status_id', $this->status_id]);
 
         return $dataProvider;
     }

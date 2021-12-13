@@ -5,9 +5,11 @@
  * @copyright Copyright (c) 2021 Eugene Andreev
  * @author Eugene Andreev <gjhonic@gmail.com>
  */
+
 namespace app\controllers;
 
-use app\models\db\Raffle;
+use app\models\base\Raffle;
+use app\models\base\Tag;
 use app\services\user\StatusService;
 use Yii;
 use yii\data\ActiveDataProvider;
@@ -16,12 +18,12 @@ use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\VerbFilter;
-use app\models\db\User;
-use app\models\db\forms\RaffleForm;
+use app\models\base\User;
+use app\models\base\forms\RaffleForm;
 
 class RaffleController extends Controller
 {
-    public function behaviors()
+    public function behaviors(): array
     {
         return [
             'verbs' => [
@@ -32,7 +34,7 @@ class RaffleController extends Controller
             ],
             'access' => [
                 'class' => AccessControl::className(),
-                'denyCallback' => function ($rule, $action) {
+                'denyCallback' => function () {
                     $this->redirect(Url::to('/signin'));
                 },
                 'rules' => [
@@ -61,8 +63,8 @@ class RaffleController extends Controller
 
     public function beforeAction($action)
     {
-        if(!Yii::$app->user->isGuest){
-            if(StatusService::checkStatusBanUser(Yii::$app->user->identity)){
+        if (!Yii::$app->user->isGuest) {
+            if (StatusService::checkStatusBanUser(Yii::$app->user->identity)) {
                 $this->redirect('/banned');
             }
         }
@@ -71,41 +73,45 @@ class RaffleController extends Controller
     }
 
     /**
-     * Список конкурсов
+     * Список конкурсов.
      * @return string
      */
-    public function actionIndex()
+    public function actionIndex(): string
     {
         $filter = [];
         $page = 0;
-        if(Yii::$app->request->get('filter_date') != ''){
+        if (Yii::$app->request->get('filter_date') != '') {
             $filter['filter-date'] = Yii::$app->request->get('filter_date');
         }
-        if(Yii::$app->request->get('filter_abc') != ''){
+        if (Yii::$app->request->get('filter_abc') != '') {
             $filter['filter-abc'] = Yii::$app->request->get('filter_abc');
         }
-        if(Yii::$app->request->get('filter_group') != ''){
+        if (Yii::$app->request->get('filter_group') != '') {
             $filter['filter-group'] = Yii::$app->request->get('filter_group');
         }
-        if(Yii::$app->request->get('page') != ''){
+        if (Yii::$app->request->get('page') != '') {
             $page = Yii::$app->request->get('page');
         }
 
 
         $Raffles = Raffle::getPopularRaffles($filter, $page);
-        return $this->render('index',[
+        return $this->render('index', [
             'Raffles' => $Raffles,
         ]);
     }
 
     /**
-     * Список конкурсов
-     * @return string
+     * Список конкурсов.
+     * @param string|null $tag
+     * @return string|Response
      */
-    public function actionRaffleByTag($tag = null)
+    public function actionRaffleByTag(string $tag = null)
     {
+        if($tag == null){
+            return $this->redirect('/index');
+        }
         $Raffles = Raffle::getRafflesByTag($tag);
-        return $this->render('raffles-by-tag',[
+        return $this->render('raffles-by-tag', [
             'Raffles' => $Raffles,
             'tag' => $tag
         ]);
@@ -113,17 +119,17 @@ class RaffleController extends Controller
 
     /**
      * Список конкурсов пользователя
-     * @return string
+     * @return string|Response
      */
     public function actionList($code = null)
     {
-        if(($user = User::findByCode($code)) === null){
+        if (($user = User::findByCode($code)) === null) {
             return $this->redirect('/index');
         }
 
-        if($user->id === Yii::$app->user->identity->getId() || (in_array(Yii::$app->user->identity->role_id, [User::ROLE_ADMIN_ID, User::ROLE_MODERATOR_ID]))){
+        if ($user->id === Yii::$app->user->identity->getId() || (in_array(Yii::$app->user->identity->role_id, [User::ROLE_ADMIN_ID, User::ROLE_MODERATOR_ID]))) {
             $query = Raffle::find()->where(['user_id' => $user->id]);
-        }else{
+        } else {
             $query = Raffle::find()->where(['user_id' => $user->id, 'status_id' => Raffle::STATUS_APPROVED_ID]);
         }
 
@@ -147,17 +153,19 @@ class RaffleController extends Controller
      */
     public function actionView($code = null)
     {
-        if(($raffle = Raffle::getRaffleByCode($code)) == null){
+        $raffle = $this->findModel($code);
+
+        if ($raffle == null) {
             return $this->redirect(['index']);
-        }elseif(!(($raffle['raffle_status_id'] == Raffle::STATUS_APPROVED_ID) || (Yii::$app->user->identity->getId() == $raffle['user_id']))){
+        } elseif (!(($raffle->status_id == Raffle::STATUS_APPROVED_ID) || (Yii::$app->user->identity->getId() == $raffle->user_id))) {
             return $this->redirect(['index']);
         }
 
-        $Tags = Raffle::getTags($raffle['raffle_id']);
+        $Tags = $raffle->tags;
 
         return $this->render('view', [
             'raffle' => $raffle,
-            'Tags' => $Tags
+            'Tags' => $Tags,
         ]);
     }
 
@@ -171,7 +179,7 @@ class RaffleController extends Controller
         $model->user_id = Yii::$app->user->identity->id;
 
         if ($model->load(Yii::$app->request->post()) && $model->saveRaffle()) {
-            return $this->redirect(['/show/'.$model->code]);
+            return $this->redirect(['/show/' . $model->code]);
         }
 
         return $this->render('create', [
@@ -186,8 +194,8 @@ class RaffleController extends Controller
      */
     public function actionUpdate($code)
     {
-        if(($code_old = Yii::$app->request->post('code_old')) == ''){
-            if(($raffle = Raffle::findByCode($code)) == null){
+        if (($code_old = Yii::$app->request->post('code_old')) == '') {
+            if (($raffle = Raffle::findByCode($code)) == null) {
                 return $this->redirect(['index']);
             }
             $model = new RaffleForm();
@@ -201,12 +209,12 @@ class RaffleController extends Controller
         $model = new RaffleForm();
         $model->code_old = $code_old;
 
-        if(($raffle = Raffle::findByCode($code_old)) == null){
+        if (($raffle = Raffle::findByCode($code_old)) == null) {
             return $this->redirect(['index']);
         }
 
         if ($model->load(Yii::$app->request->post()) && $model->updateRaffle($raffle)) {
-            return $this->redirect(['/show/'.$model->code]);
+            return $this->redirect(['/show/' . $model->code]);
         }
 
         return $this->render('update', [
@@ -214,4 +222,77 @@ class RaffleController extends Controller
         ]);
     }
     
+    /**
+     * Метод сохраняет заметку к конкурсу (AJAX)
+     * @return false|Response
+     * @throws \Throwable
+     * @throws \yii\db\StaleObjectException
+     */
+    public function actionSaveNote(): Response
+    {
+        if (!\Yii::$app->request->isAjax) {
+            return false;
+        }
+        $note = Yii::$app->request->post('note');
+        $raffle_code = Yii::$app->request->post('raffle_code');
+
+        if (($raffle = Raffle::findByCode($raffle_code)) == null) {
+            return false;
+        }
+        if (!$raffle->isAuthor()) {
+            return false;
+        }
+
+        if (trim($note) != '') {
+            $raffle->note = trim($note);
+            $result = $raffle->update();
+            return $this->asJson([$result]);
+        } else {
+            return $this->asJson([false]);
+        }
+    }
+
+    /**
+     * Возвращает список конкурсов по json
+     * @return Response|false
+     * @throws \yii\db\Exception
+     */
+    public function actionGetRafflesJson(): Response
+    {
+        if (!Yii::$app->request->isAjax) {
+            return false;
+        }
+        $filter = [];
+        $page = 0;
+        if (Yii::$app->request->get('filter_date') != '') {
+            $filter['filter-date'] = Yii::$app->request->get('filter_date');
+        }
+        if (Yii::$app->request->get('filter_abc') != '') {
+            $filter['filter-abc'] = Yii::$app->request->get('filter_abc');
+        }
+        if (Yii::$app->request->get('filter_group') != '') {
+            $filter['filter-group'] = Yii::$app->request->get('filter_group');
+        }
+        if (Yii::$app->request->get('page') != '') {
+            $page = Yii::$app->request->get('page');
+        }
+        if (($raffles = Raffle::getPopularRaffles($filter, $page)) != null) {
+            return $this->asJson(['data' => $raffles]);
+        } else {
+            return $this->asJson(['data' => false]);
+        }
+    }
+
+    /**
+     * @param string $code
+     * @return Raffle|null
+     */
+    private function findModel(string $code): ?Raffle
+    {
+        if (($model = Raffle::findByCode($code)) !== null) {
+            return $model;
+        } else {
+            return null;
+        }
+    }
 }

@@ -11,8 +11,8 @@ namespace app\modules\admin\controllers;
 use Yii;
 use yii\filters\AccessControl;
 use yii\helpers\Url;
-use app\models\db\User;
-use app\models\db\search\SupportSearch;
+use app\models\base\User;
+use app\models\base\search\SupportSearch;
 use yii\web\Response;
 
 class SupportModController extends SupportController

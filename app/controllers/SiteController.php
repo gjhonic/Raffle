@@ -2,25 +2,25 @@
 
 namespace app\controllers;
 
-use app\models\db\forms\SupportForm;
-use app\models\db\Raffle;
-use app\models\db\Tag;
+use app\models\base\forms\SupportForm;
+use app\models\base\Raffle;
+use app\models\base\Tag;
 use app\services\user\StatusService;
 use Yii;
 use yii\helpers\Url;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\Response;
-use app\models\db\User;
+use app\models\base\User;
 
 class SiteController extends Controller
 {
-    public function behaviors()
+    public function behaviors(): array
     {
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'denyCallback' => function ($rule, $action) {
+                'denyCallback' => function () {
                     $this->redirect(Url::to('/signin'));
                 },
                 'rules' => [
@@ -45,10 +45,9 @@ class SiteController extends Controller
     {
         if(!Yii::$app->user->isGuest && $action->id != 'banned'){
             if(StatusService::checkStatusBanUser(Yii::$app->user->identity)){
-                $this->redirect('/banned');
+                return $this->redirect('/banned');
             }
         }
-
         return parent::beforeAction($action);
     }
 
@@ -56,7 +55,7 @@ class SiteController extends Controller
      * Главная страница.
      * @return string
      */
-    public function actionIndex()
+    public function actionIndex(): string
     {
         return $this->render('index');
     }
@@ -94,7 +93,7 @@ class SiteController extends Controller
     }
 
     /**
-     * Страница формы поддержки
+     * Страница формы поддержки.
      * @return string|Response
      */
     public function actionSupport()
@@ -109,13 +108,13 @@ class SiteController extends Controller
     }
 
     /**
-     * Страница найденного контента
+     * Страница найденного контента.
      * @return string|Response
      */
-    public function actionSearch($q)
+    public function actionSearch(string $q)
     {
         if (($q = trim($q)) === '') {
-            $this->redirect(Yii::$app->request->referrer);
+            return $this->redirect(Yii::$app->request->referrer);
         }
 
         $Raffles = Raffle::searchRaffles($q);
@@ -131,7 +130,7 @@ class SiteController extends Controller
     }
 
     /**
-     * Страница заблокированного пользователя
+     * Страница заблокированного пользователя.
      * @return string|Response
      */
     public function actionBanned()

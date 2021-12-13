@@ -3,7 +3,7 @@
 namespace app\modules\api\models;
 
 use Yii;
-use app\models\db\Raffle;
+use app\models\base\Raffle;
 use yii\db\ActiveRecord;
 
 /**

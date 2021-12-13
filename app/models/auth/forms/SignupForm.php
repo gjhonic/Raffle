@@ -9,8 +9,7 @@ namespace app\models\auth\forms;
 
 use Yii;
 use yii\base\Model;
-use app\models\auth\UserIdentity;
-use app\models\db\User;
+use app\models\base\User;
 
 
 class SignupForm extends Model
@@ -25,11 +24,7 @@ class SignupForm extends Model
 
     public $user;
 
-    /**
-     * rules - метод возвращает правила валидации.
-     * @return array - правила валидации.
-     */
-    public function rules()
+    public function rules(): array
     {
         return [
             [['name', 'surname', 'username', 'password', 'password_confirm', 'email'], 'required'],
@@ -101,7 +96,7 @@ class SignupForm extends Model
      * Метод "регает" юзера в бд.
      * @return bool.
      */
-    public function signup()
+    public function signup(): bool
     {
         if($this->validate()){
 
@@ -126,18 +121,15 @@ class SignupForm extends Model
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
-            'name' => 'Имя',
-            'surname' => 'Фамилия',
-            'username' => 'Логин',
-            'email' => 'Почта',
-            'password' => 'Пароль',
-            'password_confirm' => 'Подтвердите пароль',
+            'name' => Yii::t('app', 'Name'),
+            'surname' => Yii::t('app', 'Surname'),
+            'username' => Yii::t('app', 'Username'),
+            'email' => Yii::t('app', 'Email'),
+            'password' => Yii::t('app', 'Password'),
+            'password_confirm' => Yii::t('app', 'Confirm the password'),
         ];
     }
 

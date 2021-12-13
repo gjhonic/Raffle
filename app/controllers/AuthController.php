@@ -17,7 +17,7 @@ use yii\web\Response;
 use app\components\mail\SendCodeMail;
 use app\models\auth\forms\SigninForm;
 use app\models\auth\forms\SignupForm;
-use app\models\db\User;
+use app\models\base\User;
 
 class AuthController extends Controller
 {

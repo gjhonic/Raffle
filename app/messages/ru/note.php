@@ -12,4 +12,5 @@ return [
 
     //Поиск комментарий
     "I will search for matches of contest media, users and tags" => "Я буду искать совпадения средки конкурсов, пользователей и тегов",
+    "It is displayed in the address bar, leave it blank and it will be automatically generated" => "Отображается в адресной строке, оставьте пустым и произойдет автоматическая генерация",
 ];

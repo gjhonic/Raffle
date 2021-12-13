@@ -13,7 +13,7 @@ use app\modules\api\modules\shut\models\RaffleShutApi;
 use yii\web\Controller;
 use yii\filters\AccessControl;
 use yii\helpers\Url;
-use app\models\db\User;
+use app\models\base\User;
 use yii\web\Response;
 
 /**

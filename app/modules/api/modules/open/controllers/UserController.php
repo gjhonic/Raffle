@@ -9,7 +9,7 @@
 namespace app\modules\api\modules\open\controllers;
 
 use Yii;
-use app\models\db\User;
+use app\models\base\User;
 use yii\web\Controller;
 use yii\filters\AccessControl;
 use yii\helpers\Url;

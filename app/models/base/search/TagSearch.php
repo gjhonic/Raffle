@@ -6,43 +6,33 @@
  * @author Eugene Andreev <gjhonic@gmail.com>
  *
  */
-namespace app\models\db\search;
+namespace app\models\base\search;
 
-use Yii;
-use yii\base\BaseObject;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\db\Tag;
+use app\models\base\Tag;
 
 
 class TagSearch extends Tag
 {
-    /**
-     * @inheritdoc
-     */
-    public function rules()
+    public function rules(): array
     {
         return [
             [['title'], 'string', 'max' => 255],
         ];
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function scenarios()
+    public function scenarios(): array
     {
         return Model::scenarios();
     }
 
     /**
      * Creates data provider instance with search query applied
-     *
      * @param array $params
-     *
      * @return ActiveDataProvider
      */
-    public function search($params)
+    public function search(array $params): ActiveDataProvider
     {
         $query = Tag::find();
 

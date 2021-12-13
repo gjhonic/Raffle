@@ -1,11 +1,11 @@
 <?php
 
-/* @var $model \app\models\db\User */
+/* @var $model \app\models\base\User */
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 use yii\helpers\Url;
-use app\models\db\User;
+use app\models\base\User;
 
 
 $this->title = $model->surname." ".$model->name." (".$model->username.")";

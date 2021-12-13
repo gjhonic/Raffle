@@ -1,7 +1,7 @@
 <?php
 /* @var $dataProvider */
 /* @var $searchModel */
-/* @var $Roles \app\models\db\UserRole*/
+/* @var $Roles \app\models\base\UserRole*/
 
 use yii\helpers\Html;
 use yii\grid\GridView;

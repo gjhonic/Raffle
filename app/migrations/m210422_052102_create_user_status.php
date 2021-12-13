@@ -1,7 +1,7 @@
 <?php
 
 use yii\db\Migration;
-use app\models\db\UserStatus;
+use app\models\base\UserStatus;
 
 /**
  * Class m210422_052102_user_status

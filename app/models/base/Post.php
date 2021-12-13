@@ -2,7 +2,9 @@
 
 namespace app\models\db;
 
+use app\models\base\User;
 use Yii;
+use yii\db\ActiveQuery;
 
 /**
  * This is the model class for table "post".
@@ -15,18 +17,12 @@ use Yii;
  */
 class Post extends \yii\db\ActiveRecord
 {
-    /**
-     * @return string
-     */
-    public static function tableName()
+    public static function tableName(): string
     {
         return 'post';
     }
 
-    /**
-     * @return array
-     */
-    public function rules()
+    public function rules(): array
     {
         return [
             [['description', 'user_id'], 'required'],
@@ -36,24 +32,20 @@ class Post extends \yii\db\ActiveRecord
         ];
     }
 
-    /**
-     * @return string[]
-     */
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
             'id' => 'ID',
-            'description' => 'Description',
+            'description' => Yii::t('app', 'Description'),
             'user_id' => 'User ID',
         ];
     }
 
     /**
      * Gets query for [[User]].
-     *
      * @return \yii\db\ActiveQuery
      */
-    public function getUser()
+    public function getUser(): ActiveQuery
     {
         return $this->hasOne(User::className(), ['id' => 'user_id']);
     }

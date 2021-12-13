@@ -11,8 +11,8 @@ namespace app\modules\admin\controllers;
 use Yii;
 use yii\filters\AccessControl;
 use yii\helpers\Url;
-use app\models\db\User;
-use app\models\db\search\UserSearch;
+use app\models\base\User;
+use app\models\base\search\UserSearch;
 use yii\web\Response;
 
 class UserModController extends UserController

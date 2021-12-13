@@ -5,7 +5,7 @@ namespace app\modules\api\modules\open\models;
 use Yii;
 use app\modules\api\models\UserApi;
 use yii\db\ActiveRecord;
-use app\models\db\User;
+use app\models\base\User;
 
 class UserOpenApi extends UserApi
 {
