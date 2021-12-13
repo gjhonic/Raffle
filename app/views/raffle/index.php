@@ -202,29 +202,6 @@ $this->title = Yii::t('app', 'Raffles');
                     let timerId = setInterval(() => addPointForLoading(), 200);
                     setTimeout(() => {clearInterval(timerId); errorLoadRaffles(); }, 700);
             }})
-        
-
-        // $.ajax({
-        //     url: '/ajax/raffle/get-raffles-json',
-        //     type: 'GET',
-        //     dataType: 'json',
-        //     data: {filter_date: filter_date, filter_abc: filter_abc, filter_group: filter_group, page: page, _csrf: csrfToken},
-        //     success: function(res){
-        //         $('#load-head').html('Загрузка');
-        //         let timerId = setInterval(() => addPointForLoading(), 200);
-        //         if(res['data'] == false){
-        //             setTimeout(() => {clearInterval(timerId); clearLoading(); endRaffles(); }, 700);
-        //             page++;
-        //         }else{
-        //             setTimeout(() => {clearInterval(timerId); clearLoading(); setRaffleFromLoad(res['data']); }, 700);
-        //         }
-        //     },
-        //     error: function(){
-        //         $('#load-head').html('Загрузка');
-        //         let timerId = setInterval(() => addPointForLoading(), 200);
-        //         setTimeout(() => {clearInterval(timerId); errorLoadRaffles(); }, 700);
-        //     }
-        // });
     }
 
     function setRaffleFromLoad(raffles){
