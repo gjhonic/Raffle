@@ -31,8 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 [
                     'attribute' => 'user_id',
                     'value' => function ($data) {
-                        $user = $data->getUser();
-                        return "<a href='".URL::to('/admin/user/view')."?id=".$user->id."'>".$user->username."</a>";
+                        return "<a href='".URL::to('/admin/user/view')."?id=".$data->user->id."'>".$data->user->username."</a>";
                     },
                     'format' => 'raw',
                 ],

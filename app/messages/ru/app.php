@@ -11,6 +11,7 @@
 return [
     //Стандартные слова
     "Add" => "Добавить",
+    "Save" => "Сохранить",
     "Update" => "Обновить",
     "More details" => "Подробнее",
     "Search" => "Поиск",
@@ -20,6 +21,21 @@ return [
     "Title" => "Название",
     "Show" => "Смотреть",
     "Status" => "Статус",
+    "Code" => "Код",
+    "Followers" => "Подписчиков",
+    "Subscriptions" => "Подписок",
+    "By date" => "По дате",
+    "Alphabetically" => "По алфавиту",
+    "New first" => "Сначала новые",
+    "Old first" => "Сначала старые",
+    "Ignore" => "Не учитывать",
+    "Abc" => "Абв",
+    "Zyx" => "Яюэ",
+    "Group" => "Группировать",
+    "By author" => "По автору",
+    "Do not group" => "Не группировать",
+    "Created at" => "Добавлен",
+    "Updated at" => "Изменен",
 
     //Меню
     "Menu" => "Меню",
@@ -31,6 +47,7 @@ return [
     "Admin panel" => "Админка",
     "Sign in" => "Войти",
     "Sign up" => "Зарегистрироваться",
+    "Public API" => "Публичное API",
 
     //Сущности проекта
     "Raffles" => "Конкурсы",
@@ -44,20 +61,24 @@ return [
     "Published" => "Опубликованные",
     "Moderation" => "На модерации",
     "Forbidden" => "Запрещенные",
+    "approved" => 'Опубликованные',
+    "on check" => 'На проверке',
+    "not approved" => 'Запрещенные',
 
-    //Конкусы
+    //Конкус
     "Archive of raffles" => "Архив конкурсов",
     "No raffles" => "Конкурсов нет",
     "Raffles not found" => "Конкурсы не найдены",
     "Show note" => "Показать заметку",
     "Hide note" => "Скрыть заметку",
     "Description" => "Описание",
+    "Short description" => 'Короткое описание',
     "Raffles from" => "Конкурсы от",
     "Start of the raffle" => "Начало конкурса",
     "Raffles with the tag" => "Конкурсы с тегом",
     "Creation of a raffle" => "Создание конкурса",
 
-    //Пользователи
+    //Пользователь, Профиль
     "Author" => "Автор",
     "Users not found" => "Пользователи не найдены",
     "Username" => "Имя пользователя",
@@ -67,12 +88,20 @@ return [
     "Remember me" => "Запомни меня",
     "Name" => "Имя",
     "Surname" => "Фамилия",
+    "Basic settings" => "Основные настройки",
+    "Password setting" => "Настройка пароля",
+    "Current Password" => "Текущий пароль",
+    "New password" => "Новый пароль",
 
-    //Теги
+    //Тег
     "Tags not found" => "Теги не найдены",
 
-    //Действия
+    //Действие
     "You are looking for" => "Вы ищите",
+    "Contact support" => "Написать в поддержку",
+    "Generate code" => "Сгенерировать код",
+    "Subscribe to" => "Подписаться",
+    "Editing a raffles" => "Редактирование конкурса ",
 
     //Языки
     "English" => "Английский",

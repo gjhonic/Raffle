@@ -1,9 +1,11 @@
 <?php
 
+use app\models\base\Raffle;
+
 /* @var $user object */
-/* @var $RafflesApproved \app\models\base\Raffle */
-/* @var $RafflesChecked \app\models\base\Raffle */
-/* @var $RafflesNotApproved \app\models\base\Raffle */
+/* @var $RafflesApproved Raffle */
+/* @var $RafflesChecked Raffle */
+/* @var $RafflesNotApproved Raffle */
 
 $this->title = $user->username;
 
@@ -32,8 +34,12 @@ $this->title = $user->username;
 
             <?php if ($user->id != Yii::$app->user->getId()) { ?>
                 <?php if (!$user->mySubsription()) { ?>
-                    <span class="button extra-small" id="button-subscribe">Подписаться <span
-                                class="icon solid fa-check"></span></span>
+                    <span class="button extra-small" id="button-subscribe">
+                        <?=Yii::t('app', 'Subscribe to')?>
+                        <span
+                                class="icon solid fa-check">
+                        </span>
+                    </span>
                 <?php } ?>
             <?php } ?>
         </h2>
@@ -42,7 +48,7 @@ $this->title = $user->username;
         <?php if ($user->existAva()) { ?>
             <img src="images/pic10.jpg" alt=""/>
         <?php } else { ?>
-            <img src="/app/media/src/raffle/pic11.jpg" alt="">
+            <img src="/media/src/raffle/pic11.jpg" alt="">
         <?php } ?>
     </span>
     <h3>
@@ -53,8 +59,7 @@ $this->title = $user->username;
         <?php } ?>
     </h3>
     <div>
-        <a href="" class="button small">Подписчиков: <span id="count-subscribers"></span></a>
-        <a href="" class="button small">Подписок: <span id="count-subscriptions"></span></a>
+        <a href="" class="button small"><?=Yii::t('app', 'Followers')?>: <span id="count-subscribers"></span></a>
     </div>
     <br>
 </section>

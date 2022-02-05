@@ -13,7 +13,8 @@ use yii\web\AssetBundle;
  */
 class FrontendAsset extends AssetBundle
 {
-    public $sourcePath = '@app/media/frontend';
+    public $sourcePath = '@webroot/media/frontend';
+
     public $css = [
         'css/main.css',
     ];

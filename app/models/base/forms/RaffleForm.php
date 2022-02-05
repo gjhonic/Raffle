@@ -7,6 +7,7 @@
  */
 namespace app\models\base\forms;
 
+use Yii;
 use yii\base\Model;
 use app\models\base\Raffle;
 
@@ -44,11 +45,11 @@ class RaffleForm extends Model
     public function attributeLabels(): array
     {
         return [
-            'title' => 'Название',
+            'title' => Yii::t('app', 'Title'),
             'short_description' => 'Короткое описание',
-            'description' => 'Описание',
-            'user_id' => 'Пользователь',
-            'code' => 'Код',
+            'description' => Yii::t('app', 'Description'),
+            'user_id' => Yii::t('app', 'User'),
+            'code' => Yii::t('app', 'Code'),
             'date_begin' => 'Дата начала конкурса',
             'date_end' => 'Дата окончания конкурса',
         ];

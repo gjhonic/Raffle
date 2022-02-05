@@ -27,7 +27,7 @@ class Support extends \yii\db\ActiveRecord
 
     public static function tableName(): string
     {
-        return 'support';
+        return '{{%support}}';
     }
 
     public function rules(): array
@@ -61,9 +61,9 @@ class Support extends \yii\db\ActiveRecord
             'id' => 'ID',
             'title' => Yii::t('app', 'Title'),
             'description' => Yii::t('app', 'Description'),
-            'user_id' => 'Пользователь',
-            'status' => 'Статус',
-            'created_at' => 'Дата создания',
+            'user_id' => Yii::t('app', 'User'),
+            'status' => Yii::t('app', 'Status'),
+            'created_at' => Yii::t('app', 'Created at'),
         ];
     }
 

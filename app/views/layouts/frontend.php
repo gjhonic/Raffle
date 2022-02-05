@@ -1,15 +1,16 @@
 <?php
 
-/* @var $this \yii\web\View */
-/* @var $content string */
-
 use yii\helpers\Html;
 use app\assets\FrontendAsset;
 
+/* @var $this \yii\web\View */
+/* @var $content string */
+
 $nav = array_merge(require(__DIR__ . '/_nav/frontend.php'));
+
 if (!Yii::$app->user->isGuest) {
     echo "<input type='hidden' value='" . Yii::$app->user->identity->getCode() . "' id='hidden-input-user-code'>";
-    $this->registerJsFile('/app/media/general/js/access_user.js', ['depends' => [FrontendAsset::className()], 'position' => \yii\web\View::POS_END]);
+    $this->registerJsFile('/media/general/js/access_user.js', ['depends' => [FrontendAsset::className()], 'position' => \yii\web\View::POS_END]);
 }
 
 FrontendAsset::register($this);
@@ -21,7 +22,7 @@ FrontendAsset::register($this);
     <meta charset="<?= Yii::$app->charset ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="/app/media/frontend/js/jquery.min.js"></script>
+    <script src="/media/frontend/js/jquery.min.js"></script>
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
@@ -59,8 +60,8 @@ FrontendAsset::register($this);
                         $isActive = (Yii::$app->controller->id == $elem['controller']) && (Yii::$app->controller->action->id == $elem['action']) ? 'nav-active' : '';
                         ?>
                         <li>
-                            <a class="nav-link" id="<?= $isActive ?>"
-                               href="<?= $elem['href'] ?>"><?= $elem['label'] ?></a>
+                            <a class="nav-link" id="<?= $isActive ?>" href="<?= $elem['href'] ?>"><?= $elem['label'] ?>
+                            </a>
                         </li>
                     <?php } ?>
                 </ul>
@@ -69,8 +70,8 @@ FrontendAsset::register($this);
             <!-- Footer -->
             <footer id="footer">
                 <?= $this->renderFile("@app/views/layouts/components/change-lang.php") ?>
-
-                <p class="copyright">&copy; gjhonic</p>
+                <br>
+                <?= $this->renderFile("@app/views/layouts/components/copyright.php") ?>
             </footer>
 
         </div>

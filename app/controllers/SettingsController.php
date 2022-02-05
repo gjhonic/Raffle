@@ -56,11 +56,9 @@ class SettingsController extends Controller
      * Страница отображения настроек
      * @return string
      */
-    public function actionIndex()
+    public function actionIndex(): string
     {
-        return $this->render('index', [
-            'user' => User::currentUser(),
-        ]);
+        return $this->render('index');
     }
 
     /**
@@ -71,8 +69,7 @@ class SettingsController extends Controller
     {
         $model = new SettingForm();
         $model->saveSettings();
-        return $this->render('account', [
-            'user' => User::currentUser(),
+        return $this->render('basic-settings', [
             'model' => $model,
         ]);
     }
@@ -89,7 +86,6 @@ class SettingsController extends Controller
             return $this->redirect(['index']);
         }
         return $this->render('password', [
-            'user' => User::currentUser(),
             'model' => $model,
         ]);
     }

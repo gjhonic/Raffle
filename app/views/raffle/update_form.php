@@ -1,10 +1,13 @@
 <?php
 
+use app\assets\FrontendAsset;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use mihaildev\ckeditor\CKEditor;
 
 /* @var $model object */
+
+$this->registerJsFile('/media/general/js/generate_code.js', ['depends' => [FrontendAsset::className()], 'position' => \yii\web\View::POS_END]);
 ?>
 
 <?php $form = ActiveForm::begin(); ?>
@@ -38,7 +41,7 @@ use mihaildev\ckeditor\CKEditor;
             </div>
             <div class="col-6 col-12-small">
                 <p>
-                    <span class="button primary fit" onclick="codeGenerate()">Сгенерировать код</span>
+                    <span class="button primary fit" onclick="setCodeGenerate('input-code')">Сгенерировать код</span>
                 </p>
             </div>
             <span>Отображается в адресной строке, оставьте пустым и произойдет автоматическая генерация</span>
@@ -93,16 +96,6 @@ use mihaildev\ckeditor\CKEditor;
 <?php ActiveForm::end(); ?>
 
 <script>
-    function codeGenerate(){
-        let result           = '';
-        let characters       = 'abcdefghijklmnopqrstuvwxyz0123456789';
-        let charactersLength = characters.length;
-        for ( let i = 0; i < 25; i++ ) {
-            result += characters.charAt(Math.floor(Math.random() * charactersLength));
-        }
-        $('#input-code').val(result);
-    }
-
     function addTag(){
         let tags = $('#textarea-tags').val();
         let tag = $('#input-tag').val();

@@ -17,7 +17,7 @@ class RaffleTag extends \yii\db\ActiveRecord
 {
     public static function tableName(): string
     {
-        return 'raffle_tag';
+        return '{{%raffle_tag}}';
     }
 
     public function rules(): array

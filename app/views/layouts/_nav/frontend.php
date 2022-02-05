@@ -1,14 +1,21 @@
 <?php
+
 use yii\helpers\Url;
 use app\models\base\User;
 
-if(Yii::$app->user->isGuest){
+if (Yii::$app->user->isGuest) {
     return [
         'main' => [
             [
                 'label' => Yii::t('app', 'Raffles'),
                 'href' => Url::to('/raffle/index'),
                 'controller' => 'raffle',
+                'action' => 'index'
+            ],
+            [
+                'label' => Yii::t('app', 'Tags'),
+                'href' => Url::to('/tag/index'),
+                'controller' => 'tag',
                 'action' => 'index'
             ],
             [
@@ -25,8 +32,8 @@ if(Yii::$app->user->isGuest){
             ],
         ],
     ];
-}else{
-    if(Yii::$app->user->identity->role_id == User::ROLE_USER_ID){
+} else {
+    if (Yii::$app->user->identity->role_id == User::ROLE_USER_ID) {
         return [
             'main' => [
                 [
@@ -39,6 +46,12 @@ if(Yii::$app->user->isGuest){
                     'label' => Yii::t('app', 'Raffles'),
                     'href' => Url::to('/raffle/index'),
                     'controller' => 'raffle',
+                    'action' => 'index'
+                ],
+                [
+                    'label' => Yii::t('app', 'Tags'),
+                    'href' => Url::to('/tag/index'),
+                    'controller' => 'tag',
                     'action' => 'index'
                 ],
                 [
@@ -61,7 +74,7 @@ if(Yii::$app->user->isGuest){
                 ],
             ],
         ];
-    }else{
+    } else {
         return [
             'main' => [
                 [
@@ -80,6 +93,12 @@ if(Yii::$app->user->isGuest){
                     'label' => Yii::t('app', 'Raffles'),
                     'href' => Url::to('/raffle/index'),
                     'controller' => 'raffle',
+                    'action' => 'index'
+                ],
+                [
+                    'label' => Yii::t('app', 'Tags'),
+                    'href' => Url::to('/tag/index'),
+                    'controller' => 'tag',
                     'action' => 'index'
                 ],
                 [

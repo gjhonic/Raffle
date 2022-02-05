@@ -1,11 +1,14 @@
 <?php
 
+use app\assets\FrontendAsset;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use mihaildev\ckeditor\CKEditor;
+use app\widgets\CustomCKEditor;
 
 /* @var $model object */
 /* @var $butTitle string */
+
+$this->registerJsFile('/media/general/js/generate_code.js', ['depends' => [FrontendAsset::className()], 'position' => \yii\web\View::POS_END]);
 ?>
 
 <?php $form = ActiveForm::begin(); ?>
@@ -19,7 +22,7 @@ use mihaildev\ckeditor\CKEditor;
     </p>
 
     <p>
-        <?= $form->field($model, 'description')->widget(CKEditor::className(),[
+        <?= $form->field($model, 'description')->widget(CustomCKEditor::className(),[
             'editorOptions' => [
                 'preset' => 'full',
                 'inline' => false,
@@ -37,7 +40,7 @@ use mihaildev\ckeditor\CKEditor;
             </div>
             <div class="col-6 col-12-small">
                 <p>
-                    <span class="button primary fit" onclick="codeGenerate()">Сгенерировать код</span>
+                    <span class="button primary fit" onclick="setCodeGenerate('input-code')">Сгенерировать код</span>
                 </p>
             </div>
             <span><?=Yii::t('app', 'It is displayed in the address bar, leave it blank and it will be automatically generated')?></span>
@@ -91,16 +94,6 @@ use mihaildev\ckeditor\CKEditor;
 <?php ActiveForm::end(); ?>
 
 <script>
-    function codeGenerate(){
-        let result           = '';
-        let characters       = 'abcdefghijklmnopqrstuvwxyz0123456789';
-        let charactersLength = characters.length;
-        for ( let i = 0; i < 25; i++ ) {
-            result += characters.charAt(Math.floor(Math.random() * charactersLength));
-        }
-        $('#input-code').val(result);
-    }
-
     function addTag(){
         let tags = $('#textarea-tags').val();
         let tag = $('#input-tag').val();
@@ -118,4 +111,27 @@ use mihaildev\ckeditor\CKEditor;
             $('#input-tag').val('');
         }
     }
+
+    CKEDITOR.editorConfig = function( config ) {
+        config.toolbarGroups = [
+            { name: 'document', groups: [ 'mode', 'document', 'doctools' ] },
+            { name: 'clipboard', groups: [ 'clipboard', 'undo' ] },
+            { name: 'editing', groups: [ 'find', 'selection', 'spellchecker', 'editing' ] },
+            { name: 'forms', groups: [ 'forms' ] },
+            '/',
+            { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
+            { name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi', 'paragraph' ] },
+            { name: 'links', groups: [ 'links' ] },
+            { name: 'insert', groups: [ 'insert' ] },
+            '/',
+            { name: 'styles', groups: [ 'styles' ] },
+            { name: 'colors', groups: [ 'colors' ] },
+            { name: 'tools', groups: [ 'tools' ] },
+            { name: 'others', groups: [ 'others' ] },
+            { name: 'about', groups: [ 'about' ] }
+        ];
+
+        config.removeButtons = 'Link,Unlink,Anchor,Image,Table,HorizontalRule,SpecialChar,PageBreak,Iframe,Language,BidiLtr,CreateDiv,Form,Checkbox,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField,Templates,Save,Source,NewPage,ExportPdf,Preview,Print';
+    };
+
 </script>

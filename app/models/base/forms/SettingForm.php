@@ -9,7 +9,6 @@ namespace app\models\base\forms;
 
 use yii\base\Model;
 use Yii;
-use app\models\base\Raffle;
 use app\models\base\User;
 
 class SettingForm extends Model
@@ -101,10 +100,11 @@ class SettingForm extends Model
     public function attributeLabels(): array
     {
         return [
-            'name' => 'Имя',
-            'surname' => 'Фамилия',
-            'about' => 'Обо мне',
-            'code' => 'Код',
+            'name' => Yii::t('app', 'Name'),
+            'surname' => Yii::t('app', 'Surname'),
+            'username' => Yii::t('app', 'Username'),
+            'about' => Yii::t('app', 'About'),
+            'code' => Yii::t('app', 'Code'),
         ];
     }
 

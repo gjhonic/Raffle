@@ -2,61 +2,55 @@
 
 namespace app\widgets;
 
-use app\models\base\RaffleStatus;
-use yii\helpers\ArrayHelper;
-use yii\helpers\Html;
+use app\models\base\Raffle;
+use Yii;
 
 class RaffleStatusWidget
 {
+    private static function dataStatus(): array
+    {
+        return [
+            1 => [
+                'icon' => 'fa-check',
+                'color' => 'green',
+                'title' => Raffle::STATUS_APPROVED,
+            ],
+            2 => [
+                'icon' => 'fa-question',
+                'color' => 'orange',
+                'title' => Raffle::STATUS_ON_CHECK,
+            ],
+            3 => [
+                'icon' => 'fa-ban',
+                'color' => 'red',
+                'title' => Raffle::STATUS_NOT_APPROVED,
+            ],
+        ];
+    }
+
     /**
      * Метод возвращает иконки стотуса конкуса
-     * @param $status_id
+     * @param int $status_id
      * @return string
      */
-    public static function getIcon($status_id): string
+    public static function getIcon(int $status_id): string
     {
-        $class = "";
-        $title = "";
-        switch ($status_id) {
-            case 3:
-                $class = 'fa-ban';
-                $title = "Запрещено!";
-                break;
-            case 2:
-                $class = 'fa-question';
-                $title = "На проверке!";
-                break;
-            case 1:
-                $class = 'fa-check';
-                $title = "Опубликованно!";
-                break;
-        }
-        return '<a class="icon solid '.$class.'" title="'.$title.'" style="color: #f56a6a"></a>';
+        $class = self::dataStatus()[$status_id]['icon'];
+        $title = self::dataStatus()[$status_id]['title'];
+
+        return '<a class="icon solid ' . $class . '" title="' . Yii::t('app', $title) . '" style="color: #f56a6a"></a>';
     }
 
     /**
      * Метод возвразает цветной текстовый статус конкуса
-     * @param $status_id
+     * @param int $status_id
      * @return string
      */
-    public static function getLabel($status_id): string
+    public static function getLabel(int $status_id): string
     {
-        $color = "";
-        $title = "";
-        switch ($status_id) {
-            case 3:
-                $color = 'red';
-                $title = "Запрещено!";
-                break;
-            case 2:
-                $color = 'orange';
-                $title = "На проверке!";
-                break;
-            case 1:
-                $color = 'green';
-                $title = "Опубликованно!";
-                break;
-        }
-        return "<span style='color:".$color."'>$title</span>";
+        $color = self::dataStatus()[$status_id]['color'];
+        $title = self::dataStatus()[$status_id]['title'];
+
+        return "<span style='color:" . $color . "'>" . Yii::t('app', $title) . "</span>";
     }
 }
