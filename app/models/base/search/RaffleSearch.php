@@ -12,9 +12,14 @@ use app\models\base\Raffle;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
-
+/**
+ * @property int $tag_id
+ */
 class RaffleSearch extends Raffle
 {
+
+    public $tag_id;
+
     /**
      * @return array
      */
@@ -22,7 +27,8 @@ class RaffleSearch extends Raffle
     {
         return [
             [['title'], 'string', 'max' => 255],
-            ['status_id', 'integer']
+            ['status_id', 'integer'],
+            [['tag_id'], 'safe'],
         ];
     }
 
@@ -51,12 +57,18 @@ class RaffleSearch extends Raffle
 
         $dataProvider->sort->defaultOrder = ['id' => SORT_DESC];
 
-        if (!($this->load($params) && $this->validate())) {
+        if (!($this->load($params) && $this->validate()) && empty($this->tag_id)) {
             return $dataProvider;
         }
 
+        $query->joinWith('raffleTags');
+
         $query->andFilterWhere(['like', 'title', $this->title]);
         $query->andFilterWhere(['=', 'status_id', $this->status_id]);
+
+        if(!empty($this->tag_id)){
+            $query->andFilterWhere(['=', 'raffle_tag.tag_id', $this->tag_id]);
+        }
 
         return $dataProvider;
     }
