@@ -34,6 +34,8 @@ return [
     "Group" => "Группировать",
     "By author" => "По автору",
     "Do not group" => "Не группировать",
+    "Created at" => "Добавлен",
+    "Updated at" => "Изменен",
 
     //Меню
     "Menu" => "Меню",
@@ -70,6 +72,7 @@ return [
     "Show note" => "Показать заметку",
     "Hide note" => "Скрыть заметку",
     "Description" => "Описание",
+    "Short description" => 'Короткое описание',
     "Raffles from" => "Конкурсы от",
     "Start of the raffle" => "Начало конкурса",
     "Raffles with the tag" => "Конкурсы с тегом",

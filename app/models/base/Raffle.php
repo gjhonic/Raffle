@@ -80,7 +80,7 @@ class Raffle extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'title' => Yii::t('app', 'Title'),
-            'short_description' => 'Короткое описание',
+            'short_description' => Yii::t('app', 'Short description'),
             'description' => Yii::t('app', 'Description'),
             'user_id' => Yii::t('app', 'User'),
             'video_link' => 'Видео ресурс',
@@ -88,9 +88,9 @@ class Raffle extends \yii\db\ActiveRecord
             'date_begin' => Yii::t('app', 'Start of the raffle'),
             'date_end' => 'Конец конкурса',
             'status_id' => Yii::t('app', 'Status'),
-            'code' => 'Код',
-            'created_at' => 'Создан',
-            'updated_at' => 'Изменен',
+            'code' => Yii::t('app', 'Code'),
+            'created_at' => Yii::t('app', 'Created at'),
+            'updated_at' => Yii::t('app', 'Updated at'),
         ];
     }
 

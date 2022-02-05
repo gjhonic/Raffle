@@ -9,11 +9,14 @@ use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 
 /**
- * This is the model class for table "tag".
+ * This is the model class for table "subscription".
  *
  * @property int $id
- * @property string $title
+ * @property int $subscription
+ * @property int $user_id
  *
+ * @property User $user
+ * @property User $subscriber
  */
 class Subscriptions extends \yii\db\ActiveRecord
 {
@@ -41,7 +44,7 @@ class Subscriptions extends \yii\db\ActiveRecord
         return [
             [['subscriber_id', 'user_id'], 'required'],
             [['subscriber_id', 'user_id'], 'integer'],
-            ['title', 'unique'],
+            [['created_at'], 'safe'],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
             [['subscriber_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['subscriber_id' => 'id']],
         ];
@@ -71,5 +74,20 @@ class Subscriptions extends \yii\db\ActiveRecord
     public function getSubscriber(): ActiveQuery
     {
         return $this->hasOne(User::className(), ['id' => 'subscriber_id']);
+    }
+
+    /**
+     * @param int $user_id
+     * @param int $subscriber_id
+     * @return bool
+     */
+    public static function subscriptionCheck(int $user_id, int $subscriber_id): bool
+    {
+        return self::find()
+            ->where([
+                'user_id' => $user_id,
+                'subscriber_id' => $subscriber_id,
+            ])
+            ->exists();
     }
 }

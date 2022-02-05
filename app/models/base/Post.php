@@ -1,8 +1,7 @@
 <?php
 
-namespace app\models\db;
+namespace app\models\base;
 
-use app\models\base\User;
 use Yii;
 use yii\db\ActiveQuery;
 

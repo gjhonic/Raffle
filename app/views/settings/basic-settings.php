@@ -5,7 +5,6 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\Url;
 
-/* @var $user object */
 /* @var $model object */
 
 $this->title = Yii::t('app', 'Basic settings');

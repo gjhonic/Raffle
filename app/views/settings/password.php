@@ -4,7 +4,6 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\Url;
 
-/* @var $user object */
 /* @var $model object */
 
 $this->title = Yii::t('app', 'Password setting');
@@ -74,12 +73,9 @@ $this->title = Yii::t('app', 'Password setting');
         let input = $("#" + Idfield);
         let type = input.attr('type');
 
-        console.log(type);
-
         if (type == 'password') {
             input.attr('type', 'text')
             $("#" + button).attr('class', 'button primary');
-
         } else {
             input.attr('type', 'password')
             $("#" + button).attr('class', 'button');

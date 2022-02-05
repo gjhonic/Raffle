@@ -45,7 +45,7 @@ class Tag extends \yii\db\ActiveRecord
 
     public function beforeSave($insert)
     {
-        $this->title = mb_strtolower($this->title);
+        $this->title = mb_strtolower(trim($this->title));
         return parent::beforeSave($insert);
     }
 

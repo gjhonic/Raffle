@@ -2,6 +2,7 @@
 
 namespace app\models\base;
 
+use Yii;
 use yii\db\ActiveQuery;
 
 /**
@@ -16,7 +17,7 @@ class RaffleStatus extends \yii\db\ActiveRecord
 {
     public static function tableName(): string
     {
-        return 'raffle_status';
+        return '{{%raffle_status}}';
     }
 
     public function rules(): array
@@ -32,7 +33,7 @@ class RaffleStatus extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'title' => 'Title',
+            'title' => Yii::t('app', 'Title'),
         ];
     }
 

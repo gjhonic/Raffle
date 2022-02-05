@@ -58,7 +58,7 @@ class User extends \yii\db\ActiveRecord
 
     public static function tableName(): string
     {
-        return 'user';
+        return '{{%user}}';
     }
 
     public function rules(): array
@@ -97,14 +97,14 @@ class User extends \yii\db\ActiveRecord
             'surname' => Yii::t('app', 'Surname'),
             'username' => Yii::t('app', 'Username'),
             'email' => Yii::t('app', 'Email'),
-            'password' => 'Пароль',
-            'role_id' => 'Роль',
-            'status_id' => 'Статус',
-            'code' => 'Код',
+            'password' => Yii::t('app', 'Password'),
+            'role_id' => Yii::t('app', 'Role'),
+            'status_id' => Yii::t('app', 'Status'),
+            'code' => Yii::t('app', 'Code'),
             'auth_key' => 'Auth Key',
             'access_token' => 'Access Token',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'created_at' => Yii::t('app', 'Created at'),
+            'updated_at' => Yii::t('app', 'Updated at')
         ];
     }
 
@@ -145,20 +145,10 @@ class User extends \yii\db\ActiveRecord
     /**
      * Метод определяет является пользователь в подписчиках Self User
      * @return bool
-     * @throws \yii\db\Exception
      */
-    public function mySubsription()
+    public function mySubsription(): bool
     {
-        $placeholders = [
-            'user_id' => $this->id,
-            'subscriber_id' => Yii::$app->user->getId()
-        ];
-        $sql = "SELECT COUNT(subscriptions.subscriber_id) AS count
-         FROM subscriptions
-         WHERE subscriptions.user_id = :user_id
-         AND subscriptions.subscriber_id = :subscriber_id";
-        $res = Yii::$app->db->createCommand($sql, $placeholders)->queryOne();
-        return ($res == 1);
+        return Subscriptions::subscriptionCheck($this->id, Yii::$app->user->getId());
     }
 
     /**

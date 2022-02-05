@@ -70,7 +70,6 @@ class SettingsController extends Controller
         $model = new SettingForm();
         $model->saveSettings();
         return $this->render('basic-settings', [
-            'user' => User::currentUser(),
             'model' => $model,
         ]);
     }
@@ -87,7 +86,6 @@ class SettingsController extends Controller
             return $this->redirect(['index']);
         }
         return $this->render('password', [
-            'user' => User::currentUser(),
             'model' => $model,
         ]);
     }
