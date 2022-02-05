@@ -8,6 +8,7 @@
 
 namespace app\modules\admin\controllers;
 
+use app\models\base\search\RaffleSearch;
 use Yii;
 use yii\web\Controller;
 use yii\filters\AccessControl;
@@ -61,8 +62,17 @@ class TagController extends Controller
      */
     public function actionView(int $id): string
     {
+        $searchModelRaffles = new RaffleSearch();
+        $searchModelRaffles->tag_id = $id;
+        /*Yii::$app->request->queryParams['RaffleSearch']['tag_id'] = $id;
+        print_r(Yii::$app->request->queryParams);
+        die;*/
+        $dataProviderRaffles = $searchModelRaffles->search(Yii::$app->request->queryParams);
+
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'dataProviderRaffles' => $dataProviderRaffles,
+            'searchModelRaffles' => $searchModelRaffles,
         ]);
     }
 

@@ -4,7 +4,6 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\helpers\Url;
 use yii\widgets\Pjax;
-use app\models\base\User;
 use app\modules\admin\widgets\RaffleStatusWidget;
 
 /* @var $dataProvider \yii\db\ActiveRecord */
@@ -37,8 +36,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 [
                     'attribute' => 'user_id',
                     'value' => function ($data) {
-                        $user = $data->getUser();
-                        return "<a href='".Url::to('/admin/user/view')."?id=".$user->id."'>".$user->username."</a>";
+                        $user = $data->user;
+                        if ($user) {
+                            return "<a href='" . Url::to('/admin/user/view') . "?id=" . $user->id . "'>" . $user->username . "</a>";
+                        }
                     },
                     'format' => 'raw',
                 ],
