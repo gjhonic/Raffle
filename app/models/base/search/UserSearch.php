@@ -19,7 +19,7 @@ class UserSearch extends User
     /**
      * @inheritdoc
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             [['username'], 'string', 'max' => 255],

@@ -42,6 +42,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?=Html::a('Одобрить', Url::to('/admin/raffle-mod/unban').'?id='.$model->id, ['class' => 'btn btn-outline-success'])?>
             <?php } ?>
         </p>
+
+        <p>
+            <?php foreach ($model->tags as $tag) { ?>
+
+            <?php } ?>
+        </p>
+
         <hr class="my-4">
         <p><?=$model->description?></p>
     </div>

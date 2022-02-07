@@ -41,7 +41,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <br>
 
-    <h3>Конкурсы с тегом <?= Html::encode($this->title) ?></h3>
+    <h3>Конкурсы с тегом <?= $this->title ?></h3>
 
     <?php Pjax::begin(); ?>
     <?= GridView::widget([

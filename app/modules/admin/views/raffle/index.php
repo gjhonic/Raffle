@@ -38,7 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'value' => function ($data) {
                         $user = $data->user;
                         if ($user) {
-                            return "<a href='" . Url::to('/admin/user/view') . "?id=" . $user->id . "'>" . $user->username . "</a>";
+                            return "<a href='" . Url::to(['/admin/user/view', 'id' => $user->id]) . "'>" . $user->username . "</a>";
                         }
                     },
                     'format' => 'raw',
