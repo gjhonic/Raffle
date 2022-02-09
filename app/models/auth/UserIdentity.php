@@ -8,10 +8,19 @@
 
 namespace app\models\auth;
 
+use app\models\base\UserRole;
 use Yii;
 use yii\web\IdentityInterface;
 use app\models\base\User;
 
+/**
+ * Class UserIdentity
+ * @package app\models\auth
+ *
+ * FROM USER
+ * @property UserRole $role
+ * @property int $role_id
+ */
 class UserIdentity extends User implements IdentityInterface
 {
 
@@ -41,7 +50,7 @@ class UserIdentity extends User implements IdentityInterface
      * @param string $username
      * @return UserIdentity|array|\yii\db\ActiveRecord|null
      */
-    public static function findByUsername(string $username): ?UserIdentity
+    public static function findByUsername(string $username): ?User
     {
         return static::findOne(['username' => $username]);
     }

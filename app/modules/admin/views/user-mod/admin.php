@@ -10,7 +10,7 @@ use app\modules\admin\widgets\UserStatusWidget;
 /* @var $searchModel \app\models\base\search\UserSearch */
 /* @var $Statuses array */
 
-$this->title = 'Модерация пользователей';
+$this->title = 'Модерация пользователей (админ)';
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>

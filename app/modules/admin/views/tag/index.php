@@ -5,7 +5,6 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
-use yii\widgets\Pjax;
 
 $this->title = 'Теги';
 $this->params['breadcrumbs'][] = $this->title;
@@ -19,32 +18,30 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
 
     <div style="overflow-x: auto;">
-        <?php Pjax::begin(); ?>
 
-            <?= GridView::widget([
-                'dataProvider' => $dataProvider,
-                'filterModel'  => $searchModel,
-                'columns' => [
-                    ['class' => 'yii\grid\SerialColumn'],
+        <?= GridView::widget([
+            'dataProvider' => $dataProvider,
+            'filterModel' => $searchModel,
+            'columns' => [
+                ['class' => 'yii\grid\SerialColumn'],
 
-                    'title',
-                    [
-                        'class' => 'yii\grid\ActionColumn',
-                        'template' => "{view} {update}",
-                        'buttons' => [
-                            'view' => function ($url, $model, $key) {
-                                return Html::a('Смотреть', $url, ['class' => 'btn btn-outline-success btn-block']);
-                            },
+                'title',
+                [
+                    'class' => 'yii\grid\ActionColumn',
+                    'template' => "{view} {update}",
+                    'buttons' => [
+                        'view' => function ($url, $model, $key) {
+                            return Html::a('Смотреть', $url, ['class' => 'btn btn-outline-success btn-block']);
+                        },
 
-                            'update' => function ($url, $model, $key) {
-                                return Html::a('Изменить', $url, ['class' => 'btn btn-outline-primary btn-block']);
-                            },
+                        'update' => function ($url, $model, $key) {
+                            return Html::a('Изменить', $url, ['class' => 'btn btn-outline-primary btn-block']);
+                        },
 
-                        ],
                     ],
                 ],
-            ]); ?>
+            ],
+        ]); ?>
 
-        <?php Pjax::end(); ?>
     </div>
 </div>

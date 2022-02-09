@@ -11,6 +11,7 @@ use yii\behaviors\TimestampBehavior;
  * This is the model class for table "support".
  *
  * @property int $id
+ * @property string $title
  * @property string $description
  * @property int $user_id
  * @property int $status
