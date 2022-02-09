@@ -1,5 +1,6 @@
 <?php
 
+use app\models\base\Raffle;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\helpers\Url;
@@ -23,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?php Pjax::begin(); ?>
         <?= GridView::widget([
             'dataProvider' => $dataProvider,
-            'filterModel'  => $searchModel,
+            'filterModel' => $searchModel,
             'columns' => [
                 ['class' => 'yii\grid\SerialColumn'],
 
@@ -31,7 +32,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 [
                     'attribute' => 'user_id',
                     'value' => function ($data) {
-                        return "<a href='".URL::to('/admin/user/view')."?id=".$data->user->id."'>".$data->user->username."</a>";
+                        $user = $data->user;
+                        if ($user) {
+                            return "<a href='" . URL::to(['/admin/user/view', 'id' => $user->id]) . "'>" . $user->username . "</a>";
+                        }
+
                     },
                     'format' => 'raw',
                 ],
@@ -47,8 +52,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     'class' => 'yii\grid\ActionColumn',
                     'template' => "{view}",
                     'buttons' => [
-                        'view' => function ($url,$data) {
-                            return "<div class='d-grid gap-2'>".Html::a('Смотреть', Url::to('/admin/raffle/view').'?id='.$data->id, ['class' => 'btn btn-outline-primary'])."</div>";
+                        'view' => function ($url, $data) {
+                            return "<div class='d-grid gap-2'>" . Html::a('Смотреть', Url::to(['/admin/raffle/view', 'id' => $data->id]), ['class' => 'btn btn-outline-primary']) . "</div>";
                         },
                     ],
                 ],
@@ -56,26 +61,25 @@ $this->params['breadcrumbs'][] = $this->title;
                     'class' => 'yii\grid\ActionColumn',
                     'template' => "{update}",
                     'buttons' => [
-                        'update' => function ($url,$data) {
-                            if($data->status_id == 1){
-                                return "<div class='d-grid gap-2'>".Html::a('Запретить', Url::to('/admin/raffle-mod/ban')."?id=".$data->id, ['class' => 'btn btn-outline-danger btn-block', 'data' => [
-                                        'confirm' => 'Вы действительнос хотите запретить конкурс '.$data->title.'?',
+                        'update' => function ($url, $data) {
+                            if ($data->status_id == Raffle::STATUS_APPROVED_ID) {
+                                return "<div class='d-grid gap-2'>" . Html::a('Запретить', Url::to(['/admin/raffle-mod/ban', 'id' => $data->id]), ['class' => 'btn btn-outline-danger btn-block', 'data' => [
+                                        'confirm' => 'Вы действительнос хотите запретить конкурс ' . $data->title . '?',
                                         'method' => 'post',
-                                    ]])."</div>";
-                            }elseif($data->status_id == 2){
-                                return "<div class='d-grid gap-2'>".Html::a('Одобрить', Url::to('/admin/raffle-mod/unban')."?id=".$data->id, ['class' => 'btn btn-outline-success btn-block', 'data' => [
-                                        'confirm' => 'Вы действительнос хотите одобрить конкурс '.$data->title.'?',
+                                    ]]) . "</div>";
+                            } elseif ($data->status_id == Raffle::STATUS_ON_CHECK_ID) {
+                                return "<div class='d-grid gap-2'>" . Html::a('Одобрить', Url::to(['/admin/raffle-mod/unban', 'id' => $data->id]), ['class' => 'btn btn-outline-success btn-block', 'data' => [
+                                        'confirm' => 'Вы действительнос хотите одобрить конкурс ' . $data->title . '?',
                                         'method' => 'post',
-                                    ]]).Html::a('Запретить', Url::to('/admin/raffle-mod/ban')."?id=".$data->id, ['class' => 'btn btn-outline-danger btn-block', 'data' => [
-                                        'confirm' => 'Вы действительнос хотите запретить конкурс '.$data->title.'?',
+                                    ]]) . Html::a('Запретить', Url::to(['/admin/raffle-mod/ban', 'id' => $data->id]), ['class' => 'btn btn-outline-danger btn-block', 'data' => [
+                                        'confirm' => 'Вы действительнос хотите запретить конкурс ' . $data->title . '?',
                                         'method' => 'post',
-                                    ]])."</div>";
-                            }
-                            elseif($data->status_id == 3){
-                                return "<div class='d-grid gap-2'>".Html::a('Одобрить', Url::to('/admin/raffle-mod/unban')."?id=".$data->id, ['class' => 'btn btn-outline-success btn-block', 'data' => [
-                                        'confirm' => 'Вы действительнос хотите одобрить конкурс '.$data->title.'?',
+                                    ]]) . "</div>";
+                            } elseif ($data->status_id == Raffle::STATUS_NOT_APPROVED_ID) {
+                                return "<div class='d-grid gap-2'>" . Html::a('Одобрить', Url::to(['/admin/raffle-mod/unban', 'id' => $data->id]), ['class' => 'btn btn-outline-success btn-block', 'data' => [
+                                        'confirm' => 'Вы действительнос хотите одобрить конкурс ' . $data->title . '?',
                                         'method' => 'post',
-                                    ]])."</div>";
+                                    ]]) . "</div>";
                             }
                         },
                     ],

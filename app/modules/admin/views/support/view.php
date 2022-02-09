@@ -5,7 +5,7 @@ use app\modules\admin\widgets\SuportStatusWidget;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
-/* @var $model object */
+/* @var $model Support */
 
 $this->title = "Обращение №: ".$model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Обращения', 'url' => Url::to('/admin/support-mod/index')];
@@ -54,7 +54,7 @@ $this->params['breadcrumbs'][] = $this->title;
         </p>
 
         <p class="lead">
-            <?=Html::a('Автор: '.$model->user->username, Url::to('/admin/user/view').'?id='.$model->user_id, ['class' => 'btn btn-outline-secondary'])?>
+            <?=Html::a('Автор: '.$model->user->username, Url::to(['/admin/user/view', 'id' => $model->user_id]), ['class' => 'btn btn-outline-secondary'])?>
 
         </p>
         <hr class="my-4">

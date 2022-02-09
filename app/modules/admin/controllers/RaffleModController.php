@@ -66,7 +66,7 @@ class RaffleModController extends RaffleController
             $raffle->status_id = Raffle::STATUS_NOT_APPROVED_ID;
             $raffle->update();
         }
-        return $this->redirect(Url::to('/admin/raffle-mod/index'));
+        return $this->redirect($this->request->referrer);
     }
 
     /**
@@ -83,6 +83,6 @@ class RaffleModController extends RaffleController
             $raffle->status_id = Raffle::STATUS_APPROVED_ID;
             $raffle->update();
         }
-        return $this->redirect(Url::to('/admin/raffle-mod/index'));
+        return $this->redirect($this->request->referrer);
     }
 }

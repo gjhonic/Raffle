@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?php Pjax::begin(); ?>
         <?= GridView::widget([
             'dataProvider' => $dataProvider,
-            'filterModel'  => $searchModel,
+            'filterModel' => $searchModel,
             'columns' => [
                 ['class' => 'yii\grid\SerialColumn'],
 
@@ -30,8 +30,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 [
                     'attribute' => 'user_id',
                     'value' => function ($data) {
-                        $user = $data->getUser();
-                        return "<a href='".URL::to('/admin/user/view')."?id=".$user->id."'>".$user->username."</a>";
+                        $user = $data->user;
+                        if ($user) {
+                            return "<a href='" . URL::to(['/admin/user/view', 'id' => $user->id]) . "'>" . $user->username . "</a>";
+                        }
+
                     },
                     'format' => 'raw',
                 ],
@@ -47,8 +50,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     'class' => 'yii\grid\ActionColumn',
                     'template' => "{view}",
                     'buttons' => [
-                        'view' => function ($url,$data) {
-                            return "<div class='d-grid gap-2'>".Html::a('Смотреть', Url::to('/admin/support/view').'?id='.$data->id, ['class' => 'btn btn-outline-primary'])."</div>";
+                        'view' => function ($url, $data) {
+                            return "<div class='d-grid gap-2'>" . Html::a('Смотреть', Url::to(['/admin/support/view', 'id' => $data->id]), ['class' => 'btn btn-outline-primary']) . "</div>";
                         },
                     ],
                 ],

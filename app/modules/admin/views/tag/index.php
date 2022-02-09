@@ -1,7 +1,6 @@
 <?php
 
 /* @var $dataProvider */
-
 /* @var $searchModel */
 
 use yii\helpers\Html;
