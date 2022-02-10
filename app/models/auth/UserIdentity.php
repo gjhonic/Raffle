@@ -20,6 +20,8 @@ use app\models\base\User;
  * FROM USER
  * @property UserRole $role
  * @property int $role_id
+ * @property string $code
+ * @property string $username
  */
 class UserIdentity extends User implements IdentityInterface
 {

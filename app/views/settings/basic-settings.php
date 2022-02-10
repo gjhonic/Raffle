@@ -48,6 +48,9 @@ $this->registerJsFile('/media/general/js/generate_code.js', ['depends' => [Front
             <div class="row">
                 <div class="col-6">
                     <?= Html::input('text', 'SettingForm[code]', $model->code, ['id' => 'field-user-code', 'class' => 'form-control']) ?>
+                    <?php if(isset($model['_errors']['code'][0])) { ?>
+                        <p class="help-block"> <?=$model['_errors']['code'][0]?> </p>
+                    <?php } ?>
                 </div>
                 <div class="col-6">
                     <span class="button primary fit" onclick="setCodeGenerate('field-user-code')"><?=Yii::t('app', 'Generate code')?></span>

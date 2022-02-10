@@ -19,7 +19,7 @@ class UserOtherInfo extends \yii\db\ActiveRecord
 {
     public static function tableName(): string
     {
-        return 'user_other_info';
+        return '{{%user_other_info}}';
     }
 
     public function rules(): array
@@ -28,7 +28,6 @@ class UserOtherInfo extends \yii\db\ActiveRecord
             [['user_id', 'atr_id'], 'required'],
             [['user_id', 'atr_id'], 'integer'],
             [['value'], 'string'],
-            [['atr_id'], 'exist', 'skipOnError' => true, 'targetClass' => UserAttribute::className(), 'targetAttribute' => ['atr_id' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
         ];
     }

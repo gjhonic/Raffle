@@ -87,8 +87,9 @@ $config = [
                     'basePath' => '@app/messages',
                     'sourceLanguage' => 'en-US',
                     'fileMap' => [
-                        'app'       => 'app.php',
-                        'app/note'  => 'note.php',
+                        'app'        => 'app.php',
+                        'app/note'   => 'note.php',
+                        'app/error'  => 'error.php',
                     ],
                 ],
             ],

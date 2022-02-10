@@ -229,12 +229,47 @@ class User extends \yii\db\ActiveRecord
     }
 
     /**
-     * Метод возвращает информацию о себе
+     * Метод возвращает UserOtherInfo по атрибуту about
+     * @return UserOtherInfo|null
+     */
+    public function getAbout(): ?UserOtherInfo
+    {
+        return UserOtherInfo::findOne([
+            'user_id' => $this->id,
+            'atr_id' => UserAttribute::ATTRIBUTE_ABOUT,
+        ]);
+    }
+
+    /**
      * @return string|null
      */
-    public function getAboutMessage()
+    public function getAboutInfo(): ?string
     {
-        return null;
+        $aboutInfo = $this->getAbout();
+        if ($aboutInfo) {
+            return $aboutInfo->value;
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * @param string $about
+     * @return bool
+     */
+    public function setAbout(string $about): bool
+    {
+        $userOtherInfo = $this->getAbout();
+        if ($userOtherInfo) {
+            $userOtherInfo->value = $about;
+            return $userOtherInfo->save(false);
+        } else {
+            $userOtherInfo = new UserOtherInfo();
+            $userOtherInfo->user_id = $this->id;
+            $userOtherInfo->atr_id = UserAttribute::ATTRIBUTE_ABOUT;
+            $userOtherInfo->value = $about;
+            return $userOtherInfo->save();
+        }
     }
 
     /**
