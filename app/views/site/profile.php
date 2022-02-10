@@ -52,7 +52,10 @@ $this->title = $user->username;
         <?php } ?>
     </span>
     <h3>
-        <?php if (($about_message = $user->getAboutMessage()) !== null) { ?>
+        <?php
+            $about_message = $user->getAboutInfo();
+        ?>
+        <?php if ($about_message) { ?>
             <?= $about_message ?>
         <?php } else { ?>
             Я просто веселый человег!)

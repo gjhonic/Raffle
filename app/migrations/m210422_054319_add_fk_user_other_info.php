@@ -20,15 +20,6 @@ class m210422_054319_add_fk_user_other_info extends Migration
             'id',
             'RESTRICT'
         );
-
-        $this->addForeignKey(
-            'fk-user_other_info-atr_id',
-            'user_other_info',
-            'atr_id',
-            'user_attribute',
-            'id',
-            'RESTRICT'
-        );
     }
 
     /**
@@ -38,11 +29,6 @@ class m210422_054319_add_fk_user_other_info extends Migration
     {
         $this->dropForeignKey(
             'fk-user_other_info-user_id',
-            'user_other_info'
-        );
-
-        $this->dropForeignKey(
-            'fk-user_other_info-atr_id',
             'user_other_info'
         );
     }

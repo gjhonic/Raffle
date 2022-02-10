@@ -2286,3 +2286,9 @@ button,
 #nav-active{
   color: #f56a6a !important;
 }
+
+
+.help-block{
+  font-style: italic;
+  color: red;
+}
