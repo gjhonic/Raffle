@@ -16,4 +16,7 @@ return [
     "Code field is empty" => "Поле код пусто",
     "This username is already taken" => "Данное имя пользователя уже занято",
     "This code is already taken" => "Данный код уже занят",
+
+    //Ошибки API
+    "Raffle code parameter not specified" => "Не указан параметр код конкурса",
 ];

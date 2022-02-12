@@ -6,10 +6,11 @@
  * @author Eugene Andreev <gjhonic@gmail.com>
  *
  */
+
 namespace app\modules\api\modules\open\controllers;
 
+use app\modules\api\models\ErrorApi;
 use Yii;
-use yii\web\Controller;
 use yii\filters\AccessControl;
 use yii\helpers\Url;
 use app\models\base\User;
@@ -19,9 +20,10 @@ use yii\web\Response;
 /**
  * Controller for the `api/open` module
  */
-class RaffleController extends Controller
+class RaffleController extends BaseController
 {
-    public function behaviors(){
+    public function behaviors()
+    {
         return [
             'access' => [
                 'class' => AccessControl::className(),
@@ -47,7 +49,14 @@ class RaffleController extends Controller
      */
     public function actionView(): Response
     {
-        return $this->asJson(RaffleOpenApi::findByCodeApi(Yii::$app->request->get('code')));
+        if (!empty(Yii::$app->request->get('code'))) {
+            return $this->asJson(RaffleOpenApi::findByCode(Yii::$app->request->get('code')));
+        } else {
+            return $this->asJson([
+                'error' => ErrorApi::getDescriptionError(ErrorApi::ERROR_EMPTY_CODE_RAFFLE)
+            ]);
+        }
+
     }
 
     /**

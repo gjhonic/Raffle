@@ -35,11 +35,22 @@ class RaffleApi extends Raffle
      */
     public static function findByCodeApi(string $code, array $fields)
     {
-        return self::find()
+        return parent::find()
             ->select($fields)
             ->joinWith('user')
             ->where(['raffle.code' => $code])
+            ->asArray()
             ->one();
+
+        $sql = self::find()
+            ->select($fields)
+            ->joinWith('user')
+            ->where(['raffle.code' => $code]);
+            //->asArray()
+            //->one();
+
+        return [$sql->createCommand()->getRawSql()];
+
     }
 
     /**

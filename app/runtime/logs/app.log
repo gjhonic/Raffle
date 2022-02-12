@@ -1,0 +1,145 @@
+2022-02-12 15:09:56 [-][-][-][error][yii\base\ErrorException:32] yii\base\ErrorException: Module 'openssl' already loaded in Unknown:0
+Stack trace:
+#0 [internal function]: yii\base\ErrorHandler->handleFatalError()
+#1 {main}
+2022-02-12 15:09:54 [-][-][-][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'PHP_COMMAND' => 'php.exe'
+    'PROMPT' => '$P$G'
+    'YII_PATH' => 'D:\\Projects\\raffle.local\\'
+    '__INTELLIJ_COMMAND_HISTFILE__' => 'C:\\Users\\gjhon\\AppData\\Local\\JetBrains\\PhpStorm2021.1\\terminal\\history\\raffle.local-history'
+    'PROCESSOR_IDENTIFIER' => 'Intel64 Family 6 Model 142 Stepping 9, GenuineIntel'
+    'CommonProgramFiles' => 'C:\\Program Files\\Common Files'
+    'APPDATA' => 'C:\\Users\\gjhon\\AppData\\Roaming'
+    'FPS_BROWSER_USER_PROFILE_STRING' => 'Default'
+    'LOCALAPPDATA' => 'C:\\Users\\gjhon\\AppData\\Local'
+    'ProgramData' => 'C:\\ProgramData'
+    'COMPUTERNAME' => 'DESKTOP-9A4937I'
+    'CommonProgramFiles(x86)' => 'C:\\Program Files (x86)\\Common Files'
+    'SystemDrive' => 'C:'
+    'USERDOMAIN' => 'DESKTOP-9A4937I'
+    'OneDriveConsumer' => 'C:\\Users\\gjhon\\OneDrive'
+    'OneDrive' => 'C:\\Users\\gjhon\\OneDrive'
+    'TMP' => 'C:\\Users\\gjhon\\AppData\\Local\\Temp'
+    'SystemRoot' => 'C:\\Windows'
+    'HOMEPATH' => '\\Users\\gjhon'
+    'TEMP' => 'C:\\Users\\gjhon\\AppData\\Local\\Temp'
+    'TERMINAL_EMULATOR' => 'JetBrains-JediTerm'
+    'LOGONSERVER' => '\\\\DESKTOP-9A4937I'
+    'SESSIONNAME' => 'Console'
+    'ProgramFiles' => 'C:\\Program Files'
+    'HOMEDRIVE' => 'C:'
+    'DriverData' => 'C:\\Windows\\System32\\Drivers\\DriverData'
+    'windir' => 'C:\\Windows'
+    'USERDOMAIN_ROAMINGPROFILE' => 'DESKTOP-9A4937I'
+    'PUBLIC' => 'C:\\Users\\Public'
+    'Path' => 'C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Windows\\System32\\OpenSSH\\;D:\\Apps\\Git\\cmd;C:\\xampp\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Users\\gjhon\\AppData\\Local\\Microsoft\\WindowsApps;D:\\Apps\\Microsoft VS Code\\bin;C:\\Users\\gjhon\\AppData\\Roaming\\Composer\\vendor\\bin;C:\\OpenServer\\modules\\php\\PHP_7.4;'
+    'PROCESSOR_LEVEL' => '6'
+    'FPS_BROWSER_APP_PROFILE_STRING' => 'Internet Explorer'
+    'ComSpec' => 'C:\\Windows\\system32\\cmd.exe'
+    'NUMBER_OF_PROCESSORS' => '4'
+    'IDEA_INITIAL_DIRECTORY' => 'D:\\Apps\\PhpStorm 2021.1.2\\bin'
+    'PROCESSOR_ARCHITECTURE' => 'AMD64'
+    'PROCESSOR_REVISION' => '8e09'
+    'OS' => 'Windows_NT'
+    'USERPROFILE' => 'C:\\Users\\gjhon'
+    'ALLUSERSPROFILE' => 'C:\\ProgramData'
+    'USERNAME' => 'gjhon'
+    'ProgramW6432' => 'C:\\Program Files'
+    'CommonProgramW6432' => 'C:\\Program Files\\Common Files'
+    'TERM_SESSION_ID' => '861f1a13-d394-49aa-9204-e3a47835de91'
+    'ProgramFiles(x86)' => 'C:\\Program Files (x86)'
+    'PSModulePath' => 'C:\\Program Files\\WindowsPowerShell\\Modules;C:\\Windows\\system32\\WindowsPowerShell\\v1.0\\Modules'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'PHP_SELF' => 'D:\\Projects\\raffle.local\\yii'
+    'SCRIPT_NAME' => 'D:\\Projects\\raffle.local\\yii'
+    'SCRIPT_FILENAME' => 'D:\\Projects\\raffle.local\\yii'
+    'PATH_TRANSLATED' => 'D:\\Projects\\raffle.local\\yii'
+    'DOCUMENT_ROOT' => ''
+    'REQUEST_TIME_FLOAT' => 1644667794.1582
+    'REQUEST_TIME' => 1644667794
+    'argv' => [
+        0 => 'D:\\Projects\\raffle.local\\yii'
+        1 => 'migrate'
+        2 => '--migrationPath=@yii/rbac/migrations'
+    ]
+    'argc' => 3
+]
+2022-02-12 15:10:08 [-][-][-][error][yii\base\ErrorException:32] yii\base\ErrorException: Module 'openssl' already loaded in Unknown:0
+Stack trace:
+#0 [internal function]: yii\base\ErrorHandler->handleFatalError()
+#1 {main}
+2022-02-12 15:10:04 [-][-][-][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'PROMPT' => '$P$G'
+    '__INTELLIJ_COMMAND_HISTFILE__' => 'C:\\Users\\gjhon\\AppData\\Local\\JetBrains\\PhpStorm2021.1\\terminal\\history\\raffle.local-history'
+    'PROCESSOR_IDENTIFIER' => 'Intel64 Family 6 Model 142 Stepping 9, GenuineIntel'
+    'CommonProgramFiles' => 'C:\\Program Files\\Common Files'
+    'APPDATA' => 'C:\\Users\\gjhon\\AppData\\Roaming'
+    'FPS_BROWSER_USER_PROFILE_STRING' => 'Default'
+    'LOCALAPPDATA' => 'C:\\Users\\gjhon\\AppData\\Local'
+    'ProgramData' => 'C:\\ProgramData'
+    'COMPUTERNAME' => 'DESKTOP-9A4937I'
+    'CommonProgramFiles(x86)' => 'C:\\Program Files (x86)\\Common Files'
+    'SystemDrive' => 'C:'
+    'USERDOMAIN' => 'DESKTOP-9A4937I'
+    'OneDriveConsumer' => 'C:\\Users\\gjhon\\OneDrive'
+    'OneDrive' => 'C:\\Users\\gjhon\\OneDrive'
+    'TMP' => 'C:\\Users\\gjhon\\AppData\\Local\\Temp'
+    'SystemRoot' => 'C:\\Windows'
+    'HOMEPATH' => '\\Users\\gjhon'
+    'TEMP' => 'C:\\Users\\gjhon\\AppData\\Local\\Temp'
+    'TERMINAL_EMULATOR' => 'JetBrains-JediTerm'
+    'LOGONSERVER' => '\\\\DESKTOP-9A4937I'
+    'SESSIONNAME' => 'Console'
+    'ProgramFiles' => 'C:\\Program Files'
+    'HOMEDRIVE' => 'C:'
+    'DriverData' => 'C:\\Windows\\System32\\Drivers\\DriverData'
+    'windir' => 'C:\\Windows'
+    'USERDOMAIN_ROAMINGPROFILE' => 'DESKTOP-9A4937I'
+    'PUBLIC' => 'C:\\Users\\Public'
+    'Path' => 'C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Windows\\System32\\OpenSSH\\;D:\\Apps\\Git\\cmd;C:\\xampp\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Users\\gjhon\\AppData\\Local\\Microsoft\\WindowsApps;D:\\Apps\\Microsoft VS Code\\bin;C:\\Users\\gjhon\\AppData\\Roaming\\Composer\\vendor\\bin;C:\\OpenServer\\modules\\php\\PHP_7.4;'
+    'PROCESSOR_LEVEL' => '6'
+    'FPS_BROWSER_APP_PROFILE_STRING' => 'Internet Explorer'
+    'ComSpec' => 'C:\\Windows\\system32\\cmd.exe'
+    'NUMBER_OF_PROCESSORS' => '4'
+    'IDEA_INITIAL_DIRECTORY' => 'D:\\Apps\\PhpStorm 2021.1.2\\bin'
+    'PROCESSOR_ARCHITECTURE' => 'AMD64'
+    'PROCESSOR_REVISION' => '8e09'
+    'OS' => 'Windows_NT'
+    'USERPROFILE' => 'C:\\Users\\gjhon'
+    'ALLUSERSPROFILE' => 'C:\\ProgramData'
+    'USERNAME' => 'gjhon'
+    'ProgramW6432' => 'C:\\Program Files'
+    'CommonProgramW6432' => 'C:\\Program Files\\Common Files'
+    'TERM_SESSION_ID' => '861f1a13-d394-49aa-9204-e3a47835de91'
+    'ProgramFiles(x86)' => 'C:\\Program Files (x86)'
+    'PSModulePath' => 'C:\\Program Files\\WindowsPowerShell\\Modules;C:\\Windows\\system32\\WindowsPowerShell\\v1.0\\Modules'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'PHP_SELF' => 'yii'
+    'SCRIPT_NAME' => 'yii'
+    'SCRIPT_FILENAME' => 'yii'
+    'PATH_TRANSLATED' => 'yii'
+    'DOCUMENT_ROOT' => ''
+    'REQUEST_TIME_FLOAT' => 1644667804.8322
+    'REQUEST_TIME' => 1644667804
+    'argv' => [
+        0 => 'yii'
+        1 => 'migrate'
+    ]
+    'argc' => 2
+]
