@@ -34,6 +34,7 @@ return [
     "Group" => "Группировать",
     "By author" => "По автору",
     "Do not group" => "Не группировать",
+    "Create" => "Добавить",
     "Created at" => "Добавлен",
     "Updated at" => "Изменен",
 

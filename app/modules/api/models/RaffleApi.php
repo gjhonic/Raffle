@@ -23,51 +23,42 @@ use yii\db\ActiveRecord;
  * @property string $code
  * @property string $created_at
  * @property string $updated_at
- *
- * @property RaffleStatus $status
- * @property User $user
- * @property RaffleTag[] $raffleTags
  */
-class RaffleApi extends \yii\db\ActiveRecord
+class RaffleApi extends Raffle
 {
     /**
      * Метод возвращает конкурс по коду
-     * @param string $code - уникальный код конкурса
-     * @param string $field - возвращаемые поля
+     * @param string $code уникальный код конкурса
+     * @param array $fields возвращаемые поля
      * @return array|ActiveRecord|null
      * @throws \yii\db\Exception
      */
-    public static function findByCode($code, $field){
-        $placeholders = [
-            'raffle_code' => $code,
-            'raffle_status_approved' => Raffle::STATUS_APPROVED_ID
-        ];
-        $sql = "SELECT ".$field."
-         FROM raffle
-         LEFT JOIN user ON user.id = raffle.user_id
-         WHERE raffle.code = :raffle_code
-         AND raffle.status_id = :raffle_status_approved";
-        return Yii::$app->db->createCommand($sql, $placeholders)->queryOne();
+    public static function findByCodeApi(string $code, array $fields)
+    {
+        return self::find()
+            ->select($fields)
+            ->joinWith('user')
+            ->where(['raffle.code' => $code])
+            ->one();
     }
 
     /**
      * Метод теги конкурса
      * @param string $code - уникальный код конкурса
-     * @param string $field - возвращаемые поля
-     * @return array|ActiveRecord|null
-     * @throws \yii\db\Exception
+     * @return array
      */
-    public static function getTagsRaffle($code){
-        $placeholders = [
-            'raffle_code' => $code,
-            'raffle_status_approved' => Raffle::STATUS_APPROVED_ID
-        ];
-        $sql = "SELECT tag.title
-         FROM raffle
-         LEFT JOIN raffle_tag ON raffle_tag.raffle_id = raffle.id
-         LEFT JOIN tag ON tag.id = raffle_tag.tag_id
-         WHERE raffle.code = :raffle_code
-         AND raffle.status_id = :raffle_status_approved";
-        return Yii::$app->db->createCommand($sql, $placeholders)->queryAll();
+    public static function getTagsRaffle(string $code): array
+    {
+        $raffle = Raffle::findByCode($code);
+        $tagsArray = [];
+        if ($raffle) {
+            $Tags = $raffle->tags;
+            $tag_item = [];
+            foreach ($Tags as $tag) {
+                $tag_item['title'] = $tag->title;
+                $tagsArray[] = $tag_item;
+            }
+        }
+        return $tagsArray;
     }
 }

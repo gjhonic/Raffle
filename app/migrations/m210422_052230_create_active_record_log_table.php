@@ -5,7 +5,7 @@ use yii\db\Migration;
 /**
  * Handles the creation of table `{{%active_record_create_log}}` and `{{%active_record_change_log}}`.
  */
-class m211121_100539_create_active_record_log_table extends Migration
+class m210422_052230_create_active_record_log_table extends Migration
 {
     /**
      * {@inheritdoc}

@@ -36,19 +36,24 @@ class RaffleOpenApi extends RaffleApi
      * @return array|ActiveRecord|null
      * @throws \yii\db\Exception
      */
-    public static function findByCode($code, $field = false){
-        return parent::findByCode($code, self::accessFieldRaffle());
+    public static function findByCodeApi(string $code, array $field = []){
+        return parent::findByCodeApi($code, self::accessFieldRaffle());
     }
 
-    public static function accessFieldRaffle()
+    /**
+     * @return string[]
+     */
+    public static function accessFieldRaffle(): array
     {
-        return "raffle.code AS code,
-            raffle.title AS title,
-            raffle.short_description AS short_description,
-            raffle.description AS description,
-            raffle.created_at AS created_at,
-            raffle.date_begin AS date_begin,
-            raffle.date_end AS date_end,
-            user.code AS user_code";
+        return [
+            'raffle.code AS code',
+            'raffle.title',
+            'raffle.short_description',
+            'raffle.description',
+            'raffle.created_at',
+            'raffle.date_begin',
+            'raffle.date_end',
+            'user.username',
+        ];
     }
 }

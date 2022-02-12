@@ -43,7 +43,7 @@ $this->registerJsFile('/media/general/js/generate_code.js', ['depends' => [Front
                     <span class="button primary fit" onclick="setCodeGenerate('input-code')">Сгенерировать код</span>
                 </p>
             </div>
-            <span><?=Yii::t('app', 'It is displayed in the address bar, leave it blank and it will be automatically generated')?></span>
+            <span><?=Yii::t('app/note', 'It is displayed in the address bar, leave it blank and it will be automatically generated')?></span>
         </div>
     </p>
 

@@ -47,7 +47,7 @@ class RaffleController extends Controller
      */
     public function actionView(): Response
     {
-        return $this->asJson([RaffleOpenApi::findByCode(Yii::$app->request->get('code'))]);
+        return $this->asJson(RaffleOpenApi::findByCodeApi(Yii::$app->request->get('code')));
     }
 
     /**
@@ -58,6 +58,6 @@ class RaffleController extends Controller
      */
     public function actionTags(): Response
     {
-        return $this->asJson([RaffleOpenApi::getTagsRaffle(Yii::$app->request->get('code'))]);
+        return $this->asJson(RaffleOpenApi::getTagsRaffle(Yii::$app->request->get('code')));
     }
 }
