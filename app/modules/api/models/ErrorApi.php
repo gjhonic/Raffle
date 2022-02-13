@@ -9,6 +9,7 @@ use Yii;
 class ErrorApi
 {
     const ERROR_EMPTY_CODE_RAFFLE = 1;
+    const ERROR_RAFFLE_NOT_FOUND = 2;
 
     /**
      * Описание ошибок
@@ -18,6 +19,7 @@ class ErrorApi
     {
         return [
             self::ERROR_EMPTY_CODE_RAFFLE => Yii::t('app/error', 'Raffle code parameter not specified'),
+            self::ERROR_RAFFLE_NOT_FOUND => Yii::t('app/error', 'Raffle not found'),
         ];
     }
 

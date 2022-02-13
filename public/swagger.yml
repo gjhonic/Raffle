@@ -23,6 +23,12 @@ paths:
           description: Код конкурса
           schema:
             type: string
+        - name: lang
+          in: query
+          required: false
+          description: en/ru
+          schema:
+            type: string
 
       responses:
         200:
@@ -186,6 +192,9 @@ components:
         date_end:
           type: string
           description: Дата окончания конкурса
+        user_code:
+          type: string
+          description: User code author
     User:
       properties:
         code:

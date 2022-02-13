@@ -44,22 +44,22 @@ class BaseController extends Controller
     {
         Yii::$app->language = 'en';
 
-        if (!empty(Yii::$app->request->get('lang'))) {
-            if(in_array(Yii::$app->request->get('lang'), Lang::getlanguages())){
-                $this->changeLang();
-            }
-        }
+        $this->checkLangParam();
 
         return parent::beforeAction($action);
     }
 
     private function checkLangParam()
     {
-
+        if (!empty(Yii::$app->request->get('lang'))) {
+            if(in_array(Yii::$app->request->get('lang'), Lang::getlanguages())){
+                $this->changeLang(Yii::$app->request->get('lang'));
+            }
+        }
     }
 
-    private function changeLang()
+    private function changeLang(string $lang)
     {
-
+        Yii::$app->language = $lang;
     }
 }

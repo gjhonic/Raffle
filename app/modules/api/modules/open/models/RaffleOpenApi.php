@@ -51,4 +51,24 @@ class RaffleOpenApi extends Raffle
         }
         return $raffleArray;
     }
+
+    /**
+     * Метод теги конкурса
+     * @param string $code - уникальный код конкурса
+     * @return array
+     */
+    public static function getTagsRaffle(string $code): array
+    {
+        $raffle = Raffle::findByCode($code);
+        $tagsArray = [];
+        if ($raffle) {
+            $Tags = $raffle->tags;
+            $tag_item = [];
+            foreach ($Tags as $tag) {
+                $tag_item['title'] = $tag->title;
+                $tagsArray[] = $tag_item;
+            }
+        }
+        return $tagsArray;
+    }
 }

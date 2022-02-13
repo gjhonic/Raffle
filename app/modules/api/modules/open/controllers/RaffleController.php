@@ -50,13 +50,19 @@ class RaffleController extends BaseController
     public function actionView(): Response
     {
         if (!empty(Yii::$app->request->get('code'))) {
-            return $this->asJson(RaffleOpenApi::findByCode(Yii::$app->request->get('code')));
+            $raffle = RaffleOpenApi::findByCode(Yii::$app->request->get('code'));
+            if ($raffle) {
+                return $this->asJson($raffle);
+            } else {
+                return $this->asJson([
+                    'error' => ErrorApi::getDescriptionError(ErrorApi::ERROR_RAFFLE_NOT_FOUND)
+                ]);
+            }
         } else {
             return $this->asJson([
                 'error' => ErrorApi::getDescriptionError(ErrorApi::ERROR_EMPTY_CODE_RAFFLE)
             ]);
         }
-
     }
 
     /**
@@ -67,6 +73,20 @@ class RaffleController extends BaseController
      */
     public function actionTags(): Response
     {
+        if (!empty(Yii::$app->request->get('code'))) {
+            $raffle = RaffleOpenApi::findByCode(Yii::$app->request->get('code'));
+            if ($raffle) {
+                return $this->asJson($raffle);
+            } else {
+                return $this->asJson([
+                    'error' => ErrorApi::getDescriptionError(ErrorApi::ERROR_RAFFLE_NOT_FOUND)
+                ]);
+            }
+        } else {
+            return $this->asJson([
+                'error' => ErrorApi::getDescriptionError(ErrorApi::ERROR_EMPTY_CODE_RAFFLE)
+            ]);
+        }
         return $this->asJson(RaffleOpenApi::getTagsRaffle(Yii::$app->request->get('code')));
     }
 }
