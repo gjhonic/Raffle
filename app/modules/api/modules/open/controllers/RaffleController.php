@@ -9,6 +9,7 @@
 
 namespace app\modules\api\modules\open\controllers;
 
+use app\models\base\Raffle;
 use app\modules\api\models\ErrorApi;
 use Yii;
 use yii\filters\AccessControl;
@@ -43,9 +44,7 @@ class RaffleController extends BaseController
 
     /**
      * Возвращает конкурс по коду
-     * @param string $code
      * @return Response
-     * @throws \yii\db\Exception
      */
     public function actionView(): Response
     {
@@ -67,16 +66,22 @@ class RaffleController extends BaseController
 
     /**
      * Возвращает теги конкурса
-     * @param string $code
      * @return Response
-     * @throws \yii\db\Exception
      */
     public function actionTags(): Response
     {
         if (!empty(Yii::$app->request->get('code'))) {
-            $raffle = RaffleOpenApi::findByCode(Yii::$app->request->get('code'));
+            $raffle = Raffle::findByCode(Yii::$app->request->get('code'));
             if ($raffle) {
-                return $this->asJson($raffle);
+                $tagsArray = [];
+                $Tags = $raffle->tags;
+                $tag_item = [];
+                foreach ($Tags as $tag) {
+                    $tag_item['title'] = $tag->title;
+                    $tagsArray[] = $tag_item;
+                }
+
+                return $this->asJson($tagsArray);
             } else {
                 return $this->asJson([
                     'error' => ErrorApi::getDescriptionError(ErrorApi::ERROR_RAFFLE_NOT_FOUND)
@@ -87,6 +92,5 @@ class RaffleController extends BaseController
                 'error' => ErrorApi::getDescriptionError(ErrorApi::ERROR_EMPTY_CODE_RAFFLE)
             ]);
         }
-        return $this->asJson(RaffleOpenApi::getTagsRaffle(Yii::$app->request->get('code')));
     }
 }

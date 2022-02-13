@@ -31,7 +31,6 @@ class RaffleOpenApi extends Raffle
      * Метод возвращает конкурс по коду
      * @param string $code
      * @return array
-     * @throws \yii\db\Exception
      */
     public static function findByCode(string $code): array
     {
@@ -43,32 +42,11 @@ class RaffleOpenApi extends Raffle
                 'title' => $raffle->title,
                 'short_description' => $raffle->short_description,
                 'description' => $raffle->description,
-                'created_at' => date('Y-m-d', $raffle->created_at),
                 'date_begin' => $raffle->date_begin,
                 'date_end' => $raffle->date_end,
                 'user_code' => $raffle->user->code
             ];
         }
         return $raffleArray;
-    }
-
-    /**
-     * Метод теги конкурса
-     * @param string $code - уникальный код конкурса
-     * @return array
-     */
-    public static function getTagsRaffle(string $code): array
-    {
-        $raffle = Raffle::findByCode($code);
-        $tagsArray = [];
-        if ($raffle) {
-            $Tags = $raffle->tags;
-            $tag_item = [];
-            foreach ($Tags as $tag) {
-                $tag_item['title'] = $tag->title;
-                $tagsArray[] = $tag_item;
-            }
-        }
-        return $tagsArray;
     }
 }

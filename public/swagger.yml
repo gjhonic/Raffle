@@ -26,7 +26,7 @@ paths:
         - name: lang
           in: query
           required: false
-          description: en/ru
+          description: Error Language (en/ru)
           schema:
             type: string
 
@@ -50,6 +50,12 @@ paths:
           in: query
           required: true
           description: Код конкурса
+          schema:
+            type: string
+        - name: lang
+          in: query
+          required: false
+          description: Error Language (en/ru)
           schema:
             type: string
 
@@ -183,9 +189,6 @@ components:
         description:
           type: string
           description: Полное описание конкурса
-        created_at:
-          type: string
-          description: Дата создание конкурса
         date_begin:
           type: string
           description: Дата начала конкурса

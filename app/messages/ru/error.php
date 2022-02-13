@@ -20,4 +20,6 @@ return [
     //Ошибки API
     "Raffle code parameter not specified" => "Не указан параметр код конкурса",
     "Raffle not found" => "Конкурс не найден",
+    "User code parameter not specified" => "Не указан параметр код пользователя",
+    "User not found" => "Пользователь не найден",
 ];
