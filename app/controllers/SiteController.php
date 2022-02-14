@@ -62,10 +62,10 @@ class SiteController extends Controller
 
     /**
      * Профиль пользователя.
-     * @param string
+     * @param string $code
      * @return Response|string
      */
-    public function actionProfile($code = null)
+    public function actionProfile(?string $code = null)
     {
         $user = ($code != null) ? User::findByCode($code) : User::currentUser();
 
