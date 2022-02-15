@@ -109,9 +109,6 @@ class User extends \yii\db\ActiveRecord
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public static function find(): UserQuery
     {
         return new UserQuery(get_called_class());

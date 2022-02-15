@@ -31,7 +31,7 @@ class UserController extends BaseController
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['view', 'countsubscribers', 'countsubscriptions', 'subscribe'],
+                        'actions' => ['view', 'raffles', 'countsubscribers', 'countsubscriptions', 'subscribe'],
                         'roles' => [User::ROLE_GUEST, User::ROLE_AUTHORIZED],
                     ],
                 ],
@@ -48,7 +48,30 @@ class UserController extends BaseController
         if (!empty(Yii::$app->request->get('code'))) {
             $user = UserOpenApi::findByCodeApi(Yii::$app->request->get('code'));
             if ($user) {
-                return $this->asJson($user);
+                return $this->asJson($user->getUserInArrayApi());
+            } else {
+                return $this->asJson([
+                    'error' => ErrorApi::getDescriptionError(ErrorApi::ERROR_USER_NOT_FOUND)
+                ]);
+            }
+        } else {
+            return $this->asJson([
+                'error' => ErrorApi::getDescriptionError(ErrorApi::ERROR_EMPTY_CODE_USER)
+            ]);
+        }
+    }
+
+    /**
+     * Возвращает коды конкурсов пользователя по коду пользователя
+     * @return Response
+     */
+    public function actionRaffles(): Response
+    {
+        if (!empty(Yii::$app->request->get('code'))) {
+            $user = UserOpenApi::findByCodeApi(Yii::$app->request->get('code'));
+            if ($user) {
+                $raffles = $user->getCodesRafflesApi();
+                return $this->asJson($raffles);
             } else {
                 return $this->asJson([
                     'error' => ErrorApi::getDescriptionError(ErrorApi::ERROR_USER_NOT_FOUND)

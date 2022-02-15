@@ -34,7 +34,11 @@ class RaffleOpenApi extends Raffle
      */
     public static function findByCode(string $code): array
     {
-        $raffle = parent::findByCode($code);
+        $raffle = Raffle::find()
+            ->andWhere(['code' => $code])
+            ->getApprovedRaffle()
+            ->one();
+
         $raffleArray = [];
         if ($raffle) {
             $raffleArray = [

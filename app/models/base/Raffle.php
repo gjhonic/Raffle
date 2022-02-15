@@ -2,6 +2,7 @@
 
 namespace app\models\base;
 
+use app\models\base\queries\RaffleQuery;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveQuery;
@@ -92,6 +93,11 @@ class Raffle extends \yii\db\ActiveRecord
             'created_at' => Yii::t('app', 'Created at'),
             'updated_at' => Yii::t('app', 'Updated at'),
         ];
+    }
+
+    public static function find(): RaffleQuery
+    {
+        return new RaffleQuery(get_called_class());
     }
 
     public function afterSave($insert, $changedAttributes)

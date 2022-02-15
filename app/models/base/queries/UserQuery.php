@@ -2,6 +2,7 @@
 namespace app\models\base\queries;
 
 use app\models\base\User;
+use app\services\user\StatusService;
 use yii\db\ActiveQuery;
 
 /**
@@ -14,7 +15,7 @@ class UserQuery extends ActiveQuery
      */
     public function getUserByUserRole(): self
     {
-        return $this->andWhere(['role_id' => User::ROLE_USER_ID]);
+        return $this->andWhere(['user.role_id' => User::ROLE_USER_ID]);
     }
 
     /**
@@ -22,6 +23,6 @@ class UserQuery extends ActiveQuery
      */
     public function getActiveUser(): self
     {
-        return $this->andWhere(['!=', 'status_id', User::STATUS_BAN_ID]);
+        return $this->andWhere(['not in', 'user.status_id', StatusService::statusBanned()]);
     }
 }

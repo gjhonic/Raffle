@@ -14,7 +14,6 @@ use Yii;
 use yii\web\Controller;
 use yii\filters\AccessControl;
 use yii\helpers\Url;
-use app\models\base\User;
 
 /**
  * BaseController for the `api/open` module
@@ -32,8 +31,8 @@ class BaseController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['view', 'tags'],
-                        'roles' => [User::ROLE_GUEST, User::ROLE_AUTHORIZED],
+                        'actions' => [],
+                        'roles' => [],
                     ],
                 ],
             ],
@@ -43,9 +42,7 @@ class BaseController extends Controller
     public function beforeAction($action)
     {
         Yii::$app->language = 'en';
-
         $this->checkLangParam();
-
         return parent::beforeAction($action);
     }
 

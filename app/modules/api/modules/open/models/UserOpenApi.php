@@ -2,6 +2,7 @@
 
 namespace app\modules\api\modules\open\models;
 
+use app\models\base\Raffle;
 use Yii;
 use yii\db\ActiveRecord;
 use app\models\base\User;
@@ -9,27 +10,51 @@ use app\models\base\User;
 class UserOpenApi extends User
 {
     /**
-     * Метод возвращает конкурс по коду
+     * Метод находит пользователя по его коду
      * @param string $code
-     * @throws \yii\db\Exception
      */
-    public static function findByCodeApi(string $code): array
+    public static function findByCodeApi(string $code)
     {
-        $user = User::find()
+        return self::find()
             ->andWhere(['code' => $code])
             ->getUserByUserRole()
             ->getActiveUser()
             ->one();
+    }
 
-        $userArray = [];
-        if ($user) {
-            $userArray = [
-                'code' => $user->code,
-                'username' => $user->username,
-                'name' => $user->name,
-                'surname' => $user->surname,
+    /**
+     * Метод пакует обьект пользователя в массив с нужным полями
+     * @return array
+     */
+    public function getUserInArrayApi(): array
+    {
+        return [
+            'code' => $this->code,
+            'username' => $this->username,
+            'name' => $this->name,
+            'surname' => $this->surname,
+        ];
+    }
+
+    /**
+     * Метод возвращает коды конрусов пользователя
+     * @return array
+     */
+    public function getCodesRafflesApi(): array
+    {
+        $raffles = Raffle::find()
+            ->joinWith('user')
+            ->getApprovedRaffle()
+            ->andWhere(['user.code' => $this->code])
+            ->all();
+
+        $rafflesCode = [];
+
+        foreach ($raffles as $raffle){
+            $rafflesCode[] = [
+                'code' => $raffle->code,
             ];
         }
-        return $userArray;
+        return $rafflesCode;
     }
 }
