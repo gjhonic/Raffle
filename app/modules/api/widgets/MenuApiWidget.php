@@ -15,8 +15,8 @@ class MenuApiWidget extends Widget
     {
         return [
             [
-                'label' => 'Log use API',
-                'href' => Url::to('/api/use'),
+                'label' => 'Main Api',
+                'href' => Url::to('/api/main/index'),
                 'controller' => 'site'
             ],
             [
