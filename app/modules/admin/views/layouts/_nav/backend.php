@@ -31,6 +31,11 @@ return [
             'href' => Url::to('/admin/tag/'),
             'controller' => 'tag'
         ],
+        [
+            'label' => 'IP адреса',
+            'href' => Url::to('/admin/address/'),
+            'controller' => 'address'
+        ],
     ],
     'moderations' => [
         [

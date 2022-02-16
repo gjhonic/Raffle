@@ -39,6 +39,12 @@ $this->params['breadcrumbs'][] = $this->title;
                     }
                 ],
                 [
+                    'label' => 'Заметка',
+                    'value' => function ($model) {
+                        return $model->address->note;
+                    }
+                ],
+                [
                     'label' => 'Время использования',
                     'value' => function ($model) {
                         return date('Y-m-d H:i:s', $model->created_at);

@@ -54,7 +54,7 @@ class ActionApi extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'address_id' => Yii::t('app', 'Ip address'),
+            'address_id' => Yii::t('app', 'IP address'),
             'method' => Yii::t('app', 'Method'),
             'version' => Yii::t('app', 'Version'),
             'created_at' => Yii::t('app', 'Created at'),

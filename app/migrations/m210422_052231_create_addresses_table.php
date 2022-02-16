@@ -15,8 +15,11 @@ class m210422_052231_create_addresses_table extends Migration
         $this->createTable('{{%addresses}}', [
             'id' => $this->primaryKey(),
             'ip' => $this->string()->unique()->notNull(),
+            'status_id' => $this->integer()->notNull(),
+            'note' => $this->string()->null(),
             'description' => $this->string()->null(),
             'created_at' => $this->integer(),
+            'updated_at' => $this->integer(),
         ]);
 
         $this->createIndex(
