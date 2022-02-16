@@ -3,6 +3,7 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
+use app\modules\api\widgets\MenuApiWidget;
 use app\widgets\Alert;
 use yii\helpers\Html;
 use yii\helpers\Url;
@@ -75,17 +76,8 @@ BackendAsset::register($this);
                         </li>
                     <?php } ?>
 
-                    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                        <span><i class="fa fa-bars"></i> Прочее </span>
 
-                    </h6>
-                    <?php foreach ($nav['other'] as $elem){
-                        ?>
-                        <li class="nav-item">
-                            <a class="nav-link" href="<?=$elem['href']?>"><?=$elem['label']?>
-                            </a>
-                        </li>
-                    <?php } ?>
+                    <?=MenuApiWidget::widget();?>
 
                 </ul>
             </div>

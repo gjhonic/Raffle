@@ -16,7 +16,7 @@ use yii\db\ActiveRecord;
  * @property int $created_at
  *
  */
-class Addresses extends \yii\db\ActiveRecord
+class Address extends \yii\db\ActiveRecord
 {
     public static function tableName(): string
     {
