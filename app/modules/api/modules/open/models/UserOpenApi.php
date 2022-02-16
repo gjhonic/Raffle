@@ -2,33 +2,59 @@
 
 namespace app\modules\api\modules\open\models;
 
+use app\models\base\Raffle;
 use Yii;
-use app\modules\api\models\UserApi;
 use yii\db\ActiveRecord;
 use app\models\base\User;
 
-class UserOpenApi extends UserApi
+class UserOpenApi extends User
 {
     /**
-     * Метод возвращает конкурс по коду
+     * Метод находит пользователя по его коду
      * @param string $code
-     * @return array|ActiveRecord|null
-     * @throws \yii\db\Exception
      */
-    public static function findByCode($code, $field = false, $addCond = ""){
-        return parent::findByCode($code, self::accessField(), self::addCond());
+    public static function findByCodeApi(string $code)
+    {
+        return self::find()
+            ->andWhere(['code' => $code])
+            ->getUserByUserRole()
+            ->getActiveUser()
+            ->one();
     }
 
-    public static function accessField()
+    /**
+     * Метод пакует обьект пользователя в массив с нужным полями
+     * @return array
+     */
+    public function getUserInArrayApi(): array
     {
-        return "user.code AS code,
-            user.name AS name,
-            user.surname AS surname,
-            user.username AS username";
+        return [
+            'code' => $this->code,
+            'username' => $this->username,
+            'name' => $this->name,
+            'surname' => $this->surname,
+        ];
     }
 
-    public static function addCond()
+    /**
+     * Метод возвращает коды конрусов пользователя
+     * @return array
+     */
+    public function getCodesRafflesApi(): array
     {
-        return "AND user.status_id <> ".User::STATUS_BAN_ID;
+        $raffles = Raffle::find()
+            ->joinWith('user')
+            ->getApprovedRaffle()
+            ->andWhere(['user.code' => $this->code])
+            ->all();
+
+        $rafflesCode = [];
+
+        foreach ($raffles as $raffle){
+            $rafflesCode[] = [
+                'code' => $raffle->code,
+            ];
+        }
+        return $rafflesCode;
     }
 }

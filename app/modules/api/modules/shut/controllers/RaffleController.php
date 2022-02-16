@@ -8,9 +8,9 @@
  */
 namespace app\modules\api\modules\shut\controllers;
 
+use app\modules\api\models\ErrorApi;
 use Yii;
 use app\modules\api\modules\shut\models\RaffleShutApi;
-use yii\web\Controller;
 use yii\filters\AccessControl;
 use yii\helpers\Url;
 use app\models\base\User;
@@ -19,7 +19,7 @@ use yii\web\Response;
 /**
  * Default controller for the `api/shut` module
  */
-class RaffleController extends Controller
+class RaffleController extends BaseController
 {
     public function behaviors(){
         return [
@@ -47,6 +47,19 @@ class RaffleController extends Controller
      */
     public function actionView(): Response
     {
-        return $this->asJson([RaffleShutApi::findByCode(Yii::$app->request->get('code'))]);
+        if (!empty(Yii::$app->request->get('code'))) {
+            $raffle = RaffleShutApi::findByCode(Yii::$app->request->get('code'));
+            if ($raffle) {
+                return $this->asJson($raffle);
+            } else {
+                return $this->asJson([
+                    'error' => ErrorApi::getDescriptionError(ErrorApi::ERROR_RAFFLE_NOT_FOUND)
+                ]);
+            }
+        } else {
+            return $this->asJson([
+                'error' => ErrorApi::getDescriptionError(ErrorApi::ERROR_EMPTY_CODE_RAFFLE)
+            ]);
+        }
     }
 }

@@ -109,7 +109,7 @@ class SignupForm extends Model
             $user->role_id = User::ROLE_USER_ID;
             $user->status_id = User::STATUS_ACTIVE_ID;
             $user->code = $this->username;
-            $user->email_confirm = 0;
+            $user->email_confirm = 1;
 
             if ($user->save()){
                 Yii::$app->authManager->assign(Yii::$app->authManager->getRole(User::ROLE_USER), $user->id);

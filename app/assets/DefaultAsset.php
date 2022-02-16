@@ -17,7 +17,7 @@ use yii\web\AssetBundle;
  */
 class DefaultAsset extends AssetBundle
 {
-    public $sourcePath = '@app/media/default';
+    public $sourcePath = '@webroot/media/default';
     public $css = [
         'css/site.css',
     ];

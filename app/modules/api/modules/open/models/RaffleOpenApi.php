@@ -2,8 +2,8 @@
 
 namespace app\modules\api\modules\open\models;
 
+use app\models\base\Raffle;
 use Yii;
-use app\modules\api\models\RaffleApi;
 use yii\db\ActiveRecord;
 
 /**
@@ -24,31 +24,33 @@ use yii\db\ActiveRecord;
  * @property string $created_at
  * @property string $updated_at
  *
- * @property RaffleStatus $status
- * @property User $user
- * @property RaffleTag[] $raffleTags
  */
-class RaffleOpenApi extends RaffleApi
+class RaffleOpenApi extends Raffle
 {
     /**
      * Метод возвращает конкурс по коду
      * @param string $code
-     * @return array|ActiveRecord|null
-     * @throws \yii\db\Exception
+     * @return array
      */
-    public static function findByCode($code, $field = false){
-        return parent::findByCode($code, self::accessFieldRaffle());
-    }
-
-    public static function accessFieldRaffle()
+    public static function findByCode(string $code): array
     {
-        return "raffle.code AS code,
-            raffle.title AS title,
-            raffle.short_description AS short_description,
-            raffle.description AS description,
-            raffle.created_at AS created_at,
-            raffle.date_begin AS date_begin,
-            raffle.date_end AS date_end,
-            user.code AS user_code";
+        $raffle = Raffle::find()
+            ->andWhere(['code' => $code])
+            ->getApprovedRaffle()
+            ->one();
+
+        $raffleArray = [];
+        if ($raffle) {
+            $raffleArray = [
+                'code' => $raffle->code,
+                'title' => $raffle->title,
+                'short_description' => $raffle->short_description,
+                'description' => $raffle->description,
+                'date_begin' => $raffle->date_begin,
+                'date_end' => $raffle->date_end,
+                'user_code' => $raffle->user->code
+            ];
+        }
+        return $raffleArray;
     }
 }

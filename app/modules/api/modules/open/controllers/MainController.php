@@ -14,7 +14,7 @@ use yii\helpers\Url;
 use app\models\base\User;
 
 /**
- * Default controller for the `api/open` module
+ * Main controller for the `api/open` module
  */
 class MainController extends Controller
 {

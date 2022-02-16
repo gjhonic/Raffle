@@ -119,9 +119,10 @@ class RaffleController extends Controller
 
     /**
      * Список конкурсов пользователя
+     * @param string $code
      * @return string|Response
      */
-    public function actionList($code = null)
+    public function actionList(string $code = null)
     {
         if (($user = User::findByCode($code)) === null) {
             return $this->redirect('/index');
@@ -148,10 +149,10 @@ class RaffleController extends Controller
 
     /**
      * Просмотр конкурса
-     * @param $code string
+     * @param string $code
      * @return string|Response
      */
-    public function actionView($code = null)
+    public function actionView(string $code)
     {
         $raffle = $this->findModel($code);
 
@@ -189,10 +190,10 @@ class RaffleController extends Controller
 
     /**
      * Страница редактирование конкурса
-     * @param $code string
+     * @param string $code
      * @return string|Response
      */
-    public function actionUpdate($code)
+    public function actionUpdate(string $code)
     {
         if (($code_old = Yii::$app->request->post('code_old')) == '') {
             if (($raffle = Raffle::findByCode($code)) == null) {

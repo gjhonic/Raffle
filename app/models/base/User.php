@@ -3,6 +3,7 @@
 namespace app\models\base;
 
 use app\models\behavior\ActiveRecordLogableBehavior;
+use app\models\base\queries\UserQuery;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveQuery;
@@ -106,6 +107,11 @@ class User extends \yii\db\ActiveRecord
             'created_at' => Yii::t('app', 'Created at'),
             'updated_at' => Yii::t('app', 'Updated at')
         ];
+    }
+
+    public static function find(): UserQuery
+    {
+        return new UserQuery(get_called_class());
     }
 
     /**

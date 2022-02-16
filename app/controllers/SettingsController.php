@@ -65,7 +65,7 @@ class SettingsController extends Controller
      * Страница отображения настроек account
      * @return string
      */
-    public function actionAccount()
+    public function actionAccount(): string
     {
         $model = new SettingForm();
         $model->saveSettings();

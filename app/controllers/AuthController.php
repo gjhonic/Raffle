@@ -94,7 +94,7 @@ class AuthController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->signup()) {
             $session = Yii::$app->session;
             $session['user_registr'] = $model->user->id;
-            self::sendMessageConfirmMail($model->email);
+            //self::sendMessageConfirmMail($model->email);
             return $this->redirect('confirm-email');
         }
 

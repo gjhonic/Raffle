@@ -48,17 +48,5 @@ return [
             'href' => Url::to('/admin/support-mod/'),
             'controller' => 'support-mod'
         ],
-    ],
-    'other' => [
-        [
-            'label' => 'Private API',
-            'href' => Url::to('/api/shut'),
-            'controller' => 'site'
-        ],
-        [
-            'label' => 'Public API',
-            'href' => Url::to('/api'),
-            'controller' => 'site'
-        ]
     ]
 ];

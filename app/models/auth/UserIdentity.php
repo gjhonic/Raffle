@@ -19,6 +19,7 @@ use app\models\base\User;
  *
  * FROM USER
  * @property UserRole $role
+ * @property int $id
  * @property int $role_id
  * @property string $code
  * @property string $username

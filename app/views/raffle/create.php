@@ -20,7 +20,7 @@ $this->title = Yii::t('app', 'Creation of a raffle');
     <div class="content">
         <?= $this->render('create_form', [
             'model' => $model,
-            'but_title' => Yii::t('app', 'Create'),
+            'butTitle' => Yii::t('app', 'Create'),
         ]) ?>
     </div>
 </section>

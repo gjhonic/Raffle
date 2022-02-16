@@ -5,9 +5,16 @@ use app\models\base\User;
 
 class StatusService
 {
-    const STATUSES_BANNED = [
-        User::STATUS_BAN_ID
-    ];
+    /**
+     * Возвращает массив статусов баннов
+     * @return array
+     */
+    public static function statusBanned(): array
+    {
+        return [
+            User::STATUS_BAN_ID,
+        ];
+    }
 
     /**
      * @param User $user
@@ -15,6 +22,6 @@ class StatusService
      */
     public static function checkStatusBanUser(User $user): bool
     {
-        return in_array($user->status_id, self::STATUSES_BANNED);
+        return in_array($user->status_id, self::statusBanned());
     }
 }

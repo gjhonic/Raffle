@@ -8,9 +8,9 @@
  */
 namespace app\modules\api\modules\open\controllers;
 
+use app\modules\api\models\ErrorApi;
 use Yii;
 use app\models\base\User;
-use yii\web\Controller;
 use yii\filters\AccessControl;
 use yii\helpers\Url;
 use app\modules\api\modules\open\models\UserOpenApi;
@@ -19,7 +19,7 @@ use yii\web\Response;
 /**
  * Controller for the `api/open` module
  */
-class UserController extends Controller
+class UserController extends BaseController
 {
     public function behaviors(){
         return [
@@ -31,7 +31,7 @@ class UserController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['view', 'countsubscribers', 'countsubscriptions', 'subscribe'],
+                        'actions' => ['get', 'raffles', 'countsubscribers', 'countsubscriptions', 'subscribe'],
                         'roles' => [User::ROLE_GUEST, User::ROLE_AUTHORIZED],
                     ],
                 ],
@@ -39,28 +39,54 @@ class UserController extends Controller
         ];
     }
 
-    public function beforeAction($action)
+    /**
+     * Возвращает пользователя по коду
+     * @return Response
+     */
+    public function actionGet(): Response
     {
-        Yii::$app->controller->enableCsrfValidation = false;
-        return parent::beforeAction($action);
+        if (!empty(Yii::$app->request->get('code'))) {
+            $user = UserOpenApi::findByCodeApi(Yii::$app->request->get('code'));
+            if ($user) {
+                return $this->asJson($user->getUserInArrayApi());
+            } else {
+                return $this->asJson([
+                    'error' => ErrorApi::getDescriptionError(ErrorApi::ERROR_USER_NOT_FOUND)
+                ]);
+            }
+        } else {
+            return $this->asJson([
+                'error' => ErrorApi::getDescriptionError(ErrorApi::ERROR_EMPTY_CODE_USER)
+            ]);
+        }
     }
 
     /**
-     * Возвращает пользователя по коду
-     * @param string $code
+     * Возвращает коды конкурсов пользователя по коду пользователя
      * @return Response
-     * @throws \yii\db\Exception
      */
-    public function actionView()
+    public function actionRaffles(): Response
     {
-        return $this->asJson([UserOpenApi::findByCode(Yii::$app->request->get('code'))]);
+        if (!empty(Yii::$app->request->get('code'))) {
+            $user = UserOpenApi::findByCodeApi(Yii::$app->request->get('code'));
+            if ($user) {
+                $raffles = $user->getCodesRafflesApi();
+                return $this->asJson($raffles);
+            } else {
+                return $this->asJson([
+                    'error' => ErrorApi::getDescriptionError(ErrorApi::ERROR_USER_NOT_FOUND)
+                ]);
+            }
+        } else {
+            return $this->asJson([
+                'error' => ErrorApi::getDescriptionError(ErrorApi::ERROR_EMPTY_CODE_USER)
+            ]);
+        }
     }
 
     /**
      * Возвращает количество подписчиков
-     * @param string $code
      * @return Response
-     * @throws \yii\db\Exception
      */
     public function actionCountsubscribers(): Response
     {

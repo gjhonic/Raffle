@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   title: Raffle.ru
-  description: "Публичное API"
+  description: "Public API"
   version: 1.0
 
 servers:
@@ -10,17 +10,23 @@ servers:
 
 ################################################################################
 paths:
-  /raffle/view:
+  /raffle/get:
     get:
-      summary: Получить конкурс
-      description: Возвращает конкурс по уникальному коду
+      summary: Get Raffle
+      description: Returns the raffle by code
       tags:
         - Raffle
       parameters:
         - name: code
           in: query
           required: true
-          description: Код конкурса
+          description: Code raffle
+          schema:
+            type: string
+        - name: lang
+          in: query
+          required: false
+          description: Error Language (en/ru)
           schema:
             type: string
 
@@ -35,15 +41,21 @@ paths:
                   $ref: '#/components/schemas/Raffle'
   /raffle/tags:
     get:
-      summary: Получить тэги конкурса
-      description: Вернет теги, которые закреплены к конкурсу по уникальному коду
+      summary: Get contest raffle
+      description: Returns tags that are assigned to the raffle by a raffle code
       tags:
         - Raffle
       parameters:
         - name: code
           in: query
           required: true
-          description: Код конкурса
+          description: Code raffle
+          schema:
+            type: string
+        - name: lang
+          in: query
+          required: false
+          description: Error Language (en/ru)
           schema:
             type: string
 
@@ -56,17 +68,23 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Tag'
-  /user/view:
+  /user/get:
     get:
-      summary: Получить пользователя
-      description: Возвращает пользователя по уникальному коду
+      summary: Get user
+      description:  Returns a user by user code
       tags:
         - User
       parameters:
         - name: code
           in: query
           required: true
-          description: Код пользователя
+          description: Code user
+          schema:
+            type: string
+        - name: lang
+          in: query
+          required: false
+          description: Error Language (en/ru)
           schema:
             type: string
 
@@ -79,6 +97,36 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/User'
+
+  /user/raffles:
+    get:
+      summary: Get Raffles
+      description: Returns user raffles codes by user code
+      tags:
+        - User
+      parameters:
+        - name: code
+          in: query
+          required: true
+          description: Code user
+          schema:
+            type: string
+        - name: lang
+          in: query
+          required: false
+          description: Error Language (en/ru)
+          schema:
+            type: string
+
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserRaffle'
 
   /user/countsubscribers:
     get:
@@ -159,7 +207,7 @@ paths:
                 type: array
                 items:
                   type: boolean
-                  description: Результат запроса
+                  description: Result query
 ################################################################################
 components:
   schemas:
@@ -167,41 +215,46 @@ components:
       properties:
         code:
           type: string
-          description: Уникальный код конкурса
+          description: Code raffle
         title:
           type: string
-          description: Заголовок конкурса
+          description: Title raffle
         short_description:
           type: string
-          description: Короткое описание конкурса
+          description: Short description raffle
         description:
           type: string
-          description: Полное описание конкурса
-        created_at:
-          type: string
-          description: Дата создание конкурса
+          description: Description raffle
         date_begin:
           type: string
-          description: Дата начала конкурса
+          description: Date begin raffle
         date_end:
           type: string
-          description: Дата окончания конкурса
+          description: Data end raffle
+        user_code:
+          type: string
+          description: User code author
     User:
       properties:
         code:
           type: string
-          description: Уникальный код пользователя
+          description: User code
         username:
           type: string
-          description: Логин пользователя
+          description: Username user
         name:
           type: string
-          description: Имя пользователя
+          description: Name user
         surname:
           type: string
-          description: Фамилия пользователя
+          description: Surname user
+    UserRaffle:
+      properties:
+        code:
+          type: string
+          description: Raffle code
     Tag:
       properties:
         title:
           type: string
-          description: Название тега
+          description: Title tag

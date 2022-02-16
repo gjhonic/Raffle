@@ -2,8 +2,8 @@
 
 namespace app\modules\api\modules\shut\models;
 
+use app\models\base\Raffle;
 use Yii;
-use app\modules\api\models\RaffleApi;
 use yii\db\ActiveRecord;
 
 /**
@@ -28,7 +28,7 @@ use yii\db\ActiveRecord;
  * @property User $user
  * @property RaffleTag[] $raffleTags
  */
-class RaffleShutApi extends RaffleApi
+class RaffleShutApi extends Raffle
 {
     /**
      * Метод возвращает конкурс по коду
@@ -37,7 +37,22 @@ class RaffleShutApi extends RaffleApi
      * @throws \yii\db\Exception
      */
     public static function findByCode($code, $field = false){
-        return parent::findByCode($code, self::accessFieldRaffle());
+        $raffle = parent::findByCode($code);
+        $raffleArray = [];
+        if ($raffle) {
+            $raffleArray = [
+                'id' => $raffle->id,
+                'code' => $raffle->code,
+                'title' => $raffle->title,
+                'short_description' => $raffle->short_description,
+                'description' => $raffle->description,
+                'created_at' => date('Y-m-d', $raffle->created_at),
+                'date_begin' => $raffle->date_begin,
+                'date_end' => $raffle->date_end,
+                'user_code' => $raffle->user->code
+            ];
+        }
+        return $raffleArray;
     }
 
     public static function accessFieldRaffle()
