@@ -17,6 +17,8 @@ use yii\db\ActiveRecord;
  * @property string $version
  * @property int $created_at
  *
+ * @property Address $address
+ *
  */
 class ActionApi extends \yii\db\ActiveRecord
 {
@@ -62,7 +64,7 @@ class ActionApi extends \yii\db\ActiveRecord
     /**
      * @return ActiveQuery
      */
-    public function getUser(): ActiveQuery
+    public function getAddress(): ActiveQuery
     {
         return $this->hasOne(Address::className(), ['id' => 'address_id']);
     }

@@ -30,6 +30,16 @@ class MethodsApi
     }
 
     /**
+     * Массив версий апи мап версия
+     * @return array
+     */
+    public static function getVersionMap(): array
+    {
+        $versions = self::getVersion();
+        return array_combine($versions, $versions);
+    }
+
+    /**
      * Массив методов апи
      * @return array
      */
@@ -41,5 +51,15 @@ class MethodsApi
             self::METHOD_OPEN_USER_GET,
             self::METHOD_OPEN_USER_RAFFLES,
         ];
+    }
+
+    /**
+     * Массив методов апи мап версия
+     * @return array
+     */
+    public static function getMethodsMap(): array
+    {
+        $methods = self::getMethods();
+        return array_combine($methods, $methods);
     }
 }

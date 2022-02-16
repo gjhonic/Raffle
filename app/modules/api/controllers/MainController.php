@@ -6,11 +6,10 @@
  * @author Eugene Andreev <gjhonic@gmail.com>
  *
  */
+namespace app\modules\api\controllers;
 
-namespace app\modules\api\modules\controllers;
-
-use app\models\system\Lang;
-use app\modules\api\services\ActionApiService;
+use app\models\base\User;
+use app\modules\api\models\search\ActionApiSearch;
 use Yii;
 use yii\web\Controller;
 use yii\filters\AccessControl;
@@ -32,11 +31,29 @@ class MainController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => [],
-                        'roles' => [],
+                        'actions' => ['index', 'log'],
+                        'roles' => [User::ROLE_ADMIN, User::ROLE_MODERATOR],
                     ],
                 ],
             ],
         ];
+    }
+
+    public $layout = 'main.php';
+
+    public function actionIndex()
+    {
+        return $this->render('index');
+    }
+
+    public function actionLog()
+    {
+        $searchModel = new ActionApiSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->get());
+
+        return $this->render('log', [
+            'dataProvider' => $dataProvider,
+            'searchModel' => $searchModel
+        ]);
     }
 }

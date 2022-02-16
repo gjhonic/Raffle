@@ -18,9 +18,11 @@ return [
     'admin/<action:\w+>' => 'admin/main/<action>',
 
     //URLs на Api module
-    'api' => 'api/open/main/index',
+    'api' => 'api/open/main/index', //Дока открытого апи
+    'api/shut' => 'api/shut/main/index', //Дока закрытого апи
     'api/shut/<action:\w+>' => 'api/shut/main/<action>', // На закрытый api - для системы, бота
     'api/shut/<controller:\w+>/<action:\w+>' => 'api/shut/<controller>/<action>',
+    'api/main/<action:\w+>' => 'api/main/<action>', //
     'api/<controller:\w+>/<action:\w+>' => 'api/open/<controller>/<action>', // На публичный api
 
     //URLs на внутренний ajax
