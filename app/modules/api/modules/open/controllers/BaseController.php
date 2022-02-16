@@ -10,6 +10,7 @@
 namespace app\modules\api\modules\open\controllers;
 
 use app\models\system\Lang;
+use app\modules\api\services\ActionApiService;
 use Yii;
 use yii\web\Controller;
 use yii\filters\AccessControl;
@@ -41,21 +42,37 @@ class BaseController extends Controller
 
     public function beforeAction($action)
     {
-        Yii::$app->language = 'en';
         $this->checkLangParam();
+
+        $method = $action->controller->id. '/' .$action->id;
+        $module = $action->controller->module->id;
+        $userIp = Yii::$app->request->userIP;
+
+        ActionApiService::addLogUseApi($userIp, $method, $module);
         return parent::beforeAction($action);
     }
 
-    private function checkLangParam()
+    /**
+     * Метод проверяет установлен ли параметр lang
+     * @return void
+     */
+    private function checkLangParam(): void
     {
         if (!empty(Yii::$app->request->get('lang'))) {
             if(in_array(Yii::$app->request->get('lang'), Lang::getlanguages())){
-                $this->changeLang(Yii::$app->request->get('lang'));
+                $this->setLang(Yii::$app->request->get('lang'));
             }
+        } else {
+            $this->setLang(Lang::LANG_EN);
         }
     }
 
-    private function changeLang(string $lang)
+    /**
+     * Метод изменяет язык приложения
+     * @param string $lang
+     * @return void
+     */
+    private function setLang(string $lang): void
     {
         Yii::$app->language = $lang;
     }

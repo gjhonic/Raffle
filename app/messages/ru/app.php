@@ -38,6 +38,7 @@ return [
     "Created at" => "Добавлен",
     "Updated at" => "Изменен",
     "Method" => "Метод",
+    "Version" => "Версия",
 
     //Меню
     "Menu" => "Меню",

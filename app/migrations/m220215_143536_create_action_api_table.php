@@ -14,9 +14,9 @@ class m220215_143536_create_action_api_table extends Migration
     {
         $this->createTable('{{%action_api}}', [
             'id' => $this->primaryKey(),
-            'addresses_id' => $this->integer()->notNull(),
+            'address_id' => $this->integer()->notNull(),
             'method' => $this->string(50)->notNull(),
-            'version' => $this->string(1)->notNull(),
+            'version' => $this->string(10)->notNull(),
             'created_at' => $this->integer(),
         ]);
 
@@ -27,9 +27,9 @@ class m220215_143536_create_action_api_table extends Migration
         );
 
         $this->addForeignKey(
-            'fk-addresses_id-action_api',
+            'fk-address_id-action_api',
             'action_api',
-            'addresses_id',
+            'address_id',
             'addresses',
             'id',
             'RESTRICT'
@@ -47,7 +47,7 @@ class m220215_143536_create_action_api_table extends Migration
         );
 
         $this->dropForeignKey(
-            'fk-addresses_id-action_api',
+            'fk-address_id-action_api',
             'action_api'
         );
 

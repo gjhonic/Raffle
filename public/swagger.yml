@@ -10,7 +10,7 @@ servers:
 
 ################################################################################
 paths:
-  /raffle/view:
+  /raffle/get:
     get:
       summary: Get Raffle
       description: Returns the raffle by code
@@ -68,7 +68,7 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Tag'
-  /user/view:
+  /user/get:
     get:
       summary: Get user
       description:  Returns a user by user code

@@ -55,4 +55,16 @@ class Address extends \yii\db\ActiveRecord
             'created_at' => Yii::t('app', 'Created at'),
         ];
     }
+
+
+    public static function getAddress(string $ipAddress): Address
+    {
+        $address = self::findOne(['ip' => $ipAddress]);
+        if (!$address) {
+            $address = new Address();
+            $address->ip = $ipAddress;
+            $address->save();
+        }
+        return $address;
+    }
 }

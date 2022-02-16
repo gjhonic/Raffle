@@ -31,7 +31,7 @@ class UserController extends BaseController
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['view', 'raffles', 'countsubscribers', 'countsubscriptions', 'subscribe'],
+                        'actions' => ['get', 'raffles', 'countsubscribers', 'countsubscriptions', 'subscribe'],
                         'roles' => [User::ROLE_GUEST, User::ROLE_AUTHORIZED],
                     ],
                 ],
@@ -43,7 +43,7 @@ class UserController extends BaseController
      * Возвращает пользователя по коду
      * @return Response
      */
-    public function actionView(): Response
+    public function actionGet(): Response
     {
         if (!empty(Yii::$app->request->get('code'))) {
             $user = UserOpenApi::findByCodeApi(Yii::$app->request->get('code'));

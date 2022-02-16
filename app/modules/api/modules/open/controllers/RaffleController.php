@@ -34,7 +34,7 @@ class RaffleController extends BaseController
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['view', 'tags'],
+                        'actions' => ['get', 'tags'],
                         'roles' => [User::ROLE_GUEST, User::ROLE_AUTHORIZED],
                     ],
                 ],
@@ -46,7 +46,7 @@ class RaffleController extends BaseController
      * Возвращает конкурс по коду
      * @return Response
      */
-    public function actionView(): Response
+    public function actionGet(): Response
     {
         if (!empty(Yii::$app->request->get('code'))) {
             $raffle = RaffleOpenApi::findByCode(Yii::$app->request->get('code'));

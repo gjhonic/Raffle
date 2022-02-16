@@ -14,6 +14,7 @@ use yii\db\ActiveRecord;
  * @property int $id
  * @property int $address_id
  * @property string $method
+ * @property string $version
  * @property int $created_at
  *
  */
@@ -28,7 +29,7 @@ class ActionApi extends \yii\db\ActiveRecord
     {
         return [
             [['address_id', 'method'], 'required'],
-            [['method'], 'string'],
+            [['method', 'version'], 'string'],
             [['created_at', 'address_id'], 'integer'],
             [['address_id'], 'exist', 'skipOnError' => true, 'targetClass' => Address::className(), 'targetAttribute' => ['address_id' => 'id']],
         ];
@@ -53,6 +54,7 @@ class ActionApi extends \yii\db\ActiveRecord
             'id' => 'ID',
             'address_id' => Yii::t('app', 'Ip address'),
             'method' => Yii::t('app', 'Method'),
+            'version' => Yii::t('app', 'Version'),
             'created_at' => Yii::t('app', 'Created at'),
         ];
     }
