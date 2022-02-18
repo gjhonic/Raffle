@@ -40,6 +40,7 @@ return [
     "Method" => "Метод",
     "Version" => "Версия",
     "Views" => "Просмотров",
+    "Popular" => "Популярные",
 
     //Меню
     "Menu" => "Меню",
@@ -81,6 +82,7 @@ return [
     "Start of the raffle" => "Начало конкурса",
     "Raffles with the tag" => "Конкурсы с тегом",
     "Creation of a raffle" => "Создание конкурса",
+    "Popular raffles" => "Популярные конкурсы",
 
     //Пользователь, Профиль
     "Author" => "Автор",

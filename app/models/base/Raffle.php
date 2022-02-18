@@ -177,13 +177,12 @@ class Raffle extends \yii\db\ActiveRecord
 
     /**
      * Метод возвращает список популярных конкурсов
-     * @param array $filter
-     * @param integer $page
      * @return array
      */
-    public static function getPopularRaffles(array $filter = [], $page = 0)
+    public static function getPopularRaffles(): array
     {
         return Raffle::find()
+            ->getApprovedRaffle()
             ->orderBy('id DESC')
             ->limit(30)
             ->all();
