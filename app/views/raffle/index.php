@@ -13,14 +13,17 @@ $this->title = Yii::t('app', 'Raffles');
 
 <header id="header">
     <a href="#" class="logo"><?= Yii::t('app', 'Raffles') ?> / <?= Yii::t('app', 'All') ?></a>
-
-    <?= $this->renderFile("@app/views/components/filter/filter-icons.php") ?>
+    <ul class="icons">
+        <li>
+            <a class="icon solid fa-filter" title="<?= Yii::t('app', 'Filter') ?>" style="cursor: pointer">
+                <span class="label"><?= Yii::t('app', 'Filter') ?></span>
+            </a>
+        </li>
+    </ul>
 </header>
 
 <section id="banner">
     <div class="content">
-
-        <?= $this->renderFile("@app/views/components/filter/filter-inputs.php") ?>
 
         <h1><?= Html::encode($this->title) ?></h1>
 
@@ -31,24 +34,24 @@ $this->title = Yii::t('app', 'Raffles');
                         <header>
                             <div class="title">
                                 <h2>
-                                    <a href="<?= Url::to('/show/') . $raffle['raffle_code'] ?>"><?= $raffle['raffle_title'] ?></a>
+                                    <a href="<?= Url::to('/show/') . $raffle->code ?>"><?= $raffle->title ?></a>
                                 </h2>
                             </div>
 
                             <div class="meta">
-                                <time class="published"><?= date('d.n.Y', $raffle['raffle_created_at']) ?></time>
+                                <time class="published"><?= $raffle->date_begin ?></time>
                             </div>
                         </header>
 
-                        <p><?= $raffle['raffle_short_description'] ?></p>
+                        <p><?= $raffle->short_description ?></p>
                         <footer>
                             <ul class="actions">
                                 <li>
-                                    <a href="<?= Url::to('/show/') . $raffle['raffle_code'] ?>"
+                                    <a href="<?= Url::to('/show/') . $raffle->code ?>"
                                        class="button"><?= Yii::t('app', 'More details') ?>...</a>
                                 </li>
                                 <li>
-                                    <?= Html::a('Автор: ' . $raffle['username'], Url::to('/profile') . '/' . $raffle['user_code'], ['class' => 'button',]) ?>
+                                    <?= Html::a('Автор: ' . $raffle->user->username, Url::to('/profile') . '/' . $raffle->code, ['class' => 'button',]) ?>
                                 </li>
                             </ul>
                         </footer>
@@ -62,44 +65,6 @@ $this->title = Yii::t('app', 'Raffles');
 </section>
 
 <script>
-    //TODO сделать плавно
-    let search_pos = 0;
-    let filter_pos = 0;
-
-    function showFilterInput() {
-        if (filter_pos) {
-            showHideInput();
-            filter_pos = 0;
-            search_pos = 0;
-        } else {
-            $("#box-filter").show();
-            $("#box-search").hide();
-            filter_pos = 1;
-            search_pos = 0;
-        }
-    }
-
-    function showSearchInput() {
-        if (search_pos) {
-            showHideInput();
-            search_pos = 0;
-            filter_pos = 0;
-        } else {
-            $("#box-filter").hide();
-            $("#box-search").show();
-            search_pos = 1;
-            filter_pos = 0;
-        }
-    }
-
-    function showHideInput() {
-        $("#box-filter").hide();
-        $("#box-search").hide();
-    }
-
-    showHideInput();
-
-
     let page = 1;
 
     function loadRaffle() {

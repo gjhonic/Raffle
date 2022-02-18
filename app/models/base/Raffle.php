@@ -179,23 +179,39 @@ class Raffle extends \yii\db\ActiveRecord
      * Метод возвращает список популярных конкурсов
      * @param array $filter
      * @param integer $page
+     * @return array
+     */
+    public static function getPopularRaffles(array $filter = [], $page = 0)
+    {
+        return Raffle::find()
+            ->orderBy('id DESC')
+            ->limit(30)
+            ->all();
+    }
+
+    /**
+     * Метод возвращает список популярных конкурсов
+     * @param array $filter
+     * @param integer $page
      * @return array|\yii\db\DataReader
      * @throws \yii\db\Exception
      */
-    public static function getPopularRaffles($filter = [], $page = 0)
+    public static function getPopularRafflesOld(array $filter = [], $page = 0)
     {
         $placeholders = [
             'status_id' => self::STATUS_APPROVED_ID
         ];
-        $sql = "SELECT raffle.title AS raffle_title,
+        $sql = 'SELECT 
+             raffle.title AS raffle_title,
              raffle.short_description AS raffle_short_description,
              raffle.created_at AS raffle_created_at,
              raffle.code AS raffle_code,
-             user.username AS username,
-             user.code AS user_code
+             druser.id,
+             druser.username AS username,
+             druser.code AS user_code
              FROM raffle
-             LEFT JOIN user ON raffle.user_id = user.id
-             WHERE raffle.status_id = :status_id";
+             LEFT OUTER JOIN user AS druser ON druser.id = raffle.user_id
+             WHERE raffle.status_id = :status_id';
 
         $was_order = 0;
 
@@ -399,5 +415,14 @@ class Raffle extends \yii\db\ActiveRecord
          ORDER BY raffle.id DESC
          LIMIT 30";
         return Yii::$app->db->createCommand($sql, $placeholders)->queryAll();
+    }
+
+    /**
+     * Метод возвращает количество просмотров конкурса
+     * @return int
+     */
+    public function getCountViews(): int
+    {
+        return RaffleView::find()->andWhere(['raffle_id' => $this->id])->count();
     }
 }
