@@ -49,17 +49,31 @@ $this->title = $raffle->title
         ?>
     </time>
 
+    <div class="box-views">
+        <i></i>
+        <h5><?= Yii::t("app", "Views") ?>:
+            <?=$raffle->getCountViews()?>
+        </h5>
+    </div>
+
     <div class="box-tags">
-        <h4><?= Yii::t("app", "Tags") ?>: </h4>
         <div style="overflow-x: auto; display:flex;">
             <?php foreach ($raffle->tags as $tag) { ?>
-                <a class="button small" href="<?= Url::to('/raffle-by-tag/') . $tag->title ?>"
-                   style="margin-right: 10px;"><?= $tag->title ?></a>
+                <a class="button small" href="<?= Url::to('/raffle-by-tag/') . $tag->title ?>" style="margin-right: 10px;">
+                    <?= $tag->title ?>
+                </a>
             <?php } ?>
         </div>
     </div>
+    <br>
 
-    <p><?= $raffle->description ?></p>
+    <div class="content">
+        <div class="box">
+            <article class="post">
+                <p><?= $raffle->description ?></p>
+            </article>
+        </div>
+    </div>
 
     <p>
     <div style="overflow-x: auto; display:flex;">

@@ -10,6 +10,7 @@ namespace app\controllers;
 
 use app\models\base\Raffle;
 use app\models\base\Tag;
+use app\services\raffle\ViewsService;
 use app\services\user\StatusService;
 use Yii;
 use yii\data\ActiveDataProvider;
@@ -163,6 +164,8 @@ class RaffleController extends Controller
         }
 
         $Tags = $raffle->tags;
+
+        ViewsService::setView(Yii::$app->request->userIP, $raffle->id);
 
         return $this->render('view', [
             'raffle' => $raffle,

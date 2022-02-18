@@ -2,12 +2,10 @@
 
 namespace app\models\base;
 
-use app\models\base\queries\RaffleQuery;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
-use yii\db\Query;
 
 /**
  * This is the model class for table "raffle_view".
