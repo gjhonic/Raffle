@@ -225,7 +225,7 @@ class RaffleController extends Controller
             'model' => $model,
         ]);
     }
-
+    
     /**
      * Метод сохраняет заметку к конкурсу (AJAX)
      * @return false|Response

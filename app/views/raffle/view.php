@@ -120,26 +120,29 @@ $this->title = $raffle->title
                 function saveRaffleNote() {
                     let note = $("#input-note").val();
                     let csrfToken = $('meta[name="csrf-token"]').attr("content");
-                    $.ajax({
-                        url: '/raffle/save-note',
-                        type: 'POST',
-                        dataType: 'json',
-                        data: {raffle_code: '<?=$raffle->code?>', note: note, _csrf: csrfToken},
-                        success: function (res) {
-                            let timerId = setInterval(() => addPointForLoading(), 100);
-                            setTimeout(() => {
-                                clearInterval(timerId);
-                                clearLoading();
-                            }, 400);
+                    
+                    let body = {
+                        raffle_code: "<?=$raffle['raffle_code']?>",
+                        note: note,
+                        _csrf: csrfToken
+                    }
+
+                    let response = fetch('/ajax/raffle/save-note', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
                         },
-                        error: function () {
+                        body: body
+                    }).then(response => {
+                        (res) => {
                             let timerId = setInterval(() => addPointForLoading(), 100);
-                            setTimeout(() => {
-                                clearInterval(timerId);
-                                errorSaveNote();
-                            }, 400);
-                        }
-                    });
+                            setTimeout(() => {clearInterval(timerId); clearLoading();}, 400);
+                    }}).catch(err => {
+                        () => {
+                            let timerId = setInterval(() => addPointForLoading(), 100);
+                            setTimeout(() => {clearInterval(timerId); errorSaveNote();}, 400);
+                    }})
+                    
                 }
 
                 function addPointForLoading() {

@@ -111,10 +111,45 @@ $this->title = Yii::t('app', 'Raffles');
                 }, 700);
             }
         });
+
+        let body = {
+            _csrf: csrfToken,
+            filter_date: filter_date,
+            filter_abc: filter_abc,
+            filter_group: filter_group,
+            page: page
+        }
+
+        let response = fetch('/ajax/raffle/get-raffles-json', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(body)
+        })
+            .then(response => {
+                (res) => {
+                    $('#load-head').html('Загрузка');
+                    let timerId = setInterval(() => addPointForLoading(), 200);
+                    if(res['data'] == false){
+                        setTimeout(() => {clearInterval(timerId); clearLoading(); endRaffles(); }, 700);
+                        page++;
+                    }else{
+                        setTimeout(() => {clearInterval(timerId); clearLoading(); setRaffleFromLoad(res['data']); }, 700);
+                    }
+            }})
+            .catch(err => {
+                () => {
+                    $('#load-head').html('Загрузка');
+                    let timerId = setInterval(() => addPointForLoading(), 200);
+                    setTimeout(() => {clearInterval(timerId); errorLoadRaffles(); }, 700);
+            }})
     }
 
     function setRaffleFromLoad(raffles) {
         for (let i = 0; i < 10; i++) {
+    function setRaffleFromLoad(raffles){
+        for(let i = 0; i < 10; i++){
             let raffle_title = raffles[i].raffle_title;
             let raffle_code = raffles[i].raffle_code;
             let raffle_short_description = raffles[i].raffle_short_description;
