@@ -49,17 +49,31 @@ $this->title = $raffle->title
         ?>
     </time>
 
+    <div class="box-views">
+        <i></i>
+        <h5><?= Yii::t("app", "Views") ?>:
+            <?=$raffle->getCountViews()?>
+        </h5>
+    </div>
+
     <div class="box-tags">
-        <h4><?= Yii::t("app", "Tags") ?>: </h4>
         <div style="overflow-x: auto; display:flex;">
             <?php foreach ($raffle->tags as $tag) { ?>
-                <a class="button small" href="<?= Url::to('/raffle-by-tag/') . $tag->title ?>"
-                   style="margin-right: 10px;"><?= $tag->title ?></a>
+                <a class="button small" href="<?= Url::to('/raffle-by-tag/') . $tag->title ?>" style="margin-right: 10px;">
+                    <?= $tag->title ?>
+                </a>
             <?php } ?>
         </div>
     </div>
+    <br>
 
-    <p><?= $raffle->description ?></p>
+    <div class="content">
+        <div class="box">
+            <article class="post">
+                <p><?= $raffle->description ?></p>
+            </article>
+        </div>
+    </div>
 
     <p>
     <div style="overflow-x: auto; display:flex;">
@@ -106,26 +120,29 @@ $this->title = $raffle->title
                 function saveRaffleNote() {
                     let note = $("#input-note").val();
                     let csrfToken = $('meta[name="csrf-token"]').attr("content");
-                    $.ajax({
-                        url: '/raffle/save-note',
-                        type: 'POST',
-                        dataType: 'json',
-                        data: {raffle_code: '<?=$raffle->code?>', note: note, _csrf: csrfToken},
-                        success: function (res) {
-                            let timerId = setInterval(() => addPointForLoading(), 100);
-                            setTimeout(() => {
-                                clearInterval(timerId);
-                                clearLoading();
-                            }, 400);
+                    
+                    let body = {
+                        raffle_code: "<?=$raffle['raffle_code']?>",
+                        note: note,
+                        _csrf: csrfToken
+                    }
+
+                    let response = fetch('/ajax/raffle/save-note', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
                         },
-                        error: function () {
+                        body: body
+                    }).then(response => {
+                        (res) => {
                             let timerId = setInterval(() => addPointForLoading(), 100);
-                            setTimeout(() => {
-                                clearInterval(timerId);
-                                errorSaveNote();
-                            }, 400);
-                        }
-                    });
+                            setTimeout(() => {clearInterval(timerId); clearLoading();}, 400);
+                    }}).catch(err => {
+                        () => {
+                            let timerId = setInterval(() => addPointForLoading(), 100);
+                            setTimeout(() => {clearInterval(timerId); errorSaveNote();}, 400);
+                    }})
+                    
                 }
 
                 function addPointForLoading() {

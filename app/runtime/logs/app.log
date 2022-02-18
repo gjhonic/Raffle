@@ -143,3 +143,129 @@ $_SERVER = [
     ]
     'argc' => 2
 ]
+2022-02-18 12:01:06 [-][-][-][error][yii\db\Exception] PDOException: SQLSTATE[08006] [7] FATAL:  database "raffle" does not exist in D:\Projects\LocalServer\raffle.local\vendor\yiisoft\yii2\db\Connection.php:723
+Stack trace:
+#0 D:\Projects\LocalServer\raffle.local\vendor\yiisoft\yii2\db\Connection.php(723): PDO->__construct()
+#1 D:\Projects\LocalServer\raffle.local\vendor\yiisoft\yii2\db\Connection.php(638): yii\db\Connection->createPdoInstance()
+#2 D:\Projects\LocalServer\raffle.local\vendor\yiisoft\yii2\db\Connection.php(1063): yii\db\Connection->open()
+#3 D:\Projects\LocalServer\raffle.local\vendor\yiisoft\yii2\db\Connection.php(1050): yii\db\Connection->getMasterPdo()
+#4 D:\Projects\LocalServer\raffle.local\vendor\yiisoft\yii2\db\Schema.php(463): yii\db\Connection->getSlavePdo()
+#5 D:\Projects\LocalServer\raffle.local\vendor\yiisoft\yii2\db\Connection.php(942): yii\db\Schema->quoteValue()
+#6 D:\Projects\LocalServer\raffle.local\vendor\yiisoft\yii2\db\pgsql\Schema.php(464): yii\db\Connection->quoteValue()
+#7 D:\Projects\LocalServer\raffle.local\vendor\yiisoft\yii2\db\pgsql\Schema.php(192): yii\db\pgsql\Schema->findColumns()
+#8 D:\Projects\LocalServer\raffle.local\vendor\yiisoft\yii2\db\Schema.php(758): yii\db\pgsql\Schema->loadTableSchema()
+#9 D:\Projects\LocalServer\raffle.local\vendor\yiisoft\yii2\db\Schema.php(194): yii\db\Schema->getTableMetadata()
+#10 D:\Projects\LocalServer\raffle.local\vendor\yiisoft\yii2\console\controllers\MigrateController.php(211): yii\db\Schema->getTableSchema()
+#11 D:\Projects\LocalServer\raffle.local\vendor\yiisoft\yii2\console\controllers\BaseMigrateController.php(908): yii\console\controllers\MigrateController->getMigrationHistory()
+#12 D:\Projects\LocalServer\raffle.local\vendor\yiisoft\yii2\console\controllers\BaseMigrateController.php(183): yii\console\controllers\BaseMigrateController->getNewMigrations()
+#13 [internal function]: yii\console\controllers\BaseMigrateController->actionUp()
+#14 D:\Projects\LocalServer\raffle.local\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array()
+#15 D:\Projects\LocalServer\raffle.local\vendor\yiisoft\yii2\base\Controller.php(181): yii\base\InlineAction->runWithParams()
+#16 D:\Projects\LocalServer\raffle.local\vendor\yiisoft\yii2\console\Controller.php(184): yii\base\Controller->runAction()
+#17 D:\Projects\LocalServer\raffle.local\vendor\yiisoft\yii2\base\Module.php(534): yii\console\Controller->runAction()
+#18 D:\Projects\LocalServer\raffle.local\vendor\yiisoft\yii2\console\Application.php(181): yii\base\Module->runAction()
+#19 D:\Projects\LocalServer\raffle.local\vendor\yiisoft\yii2\console\Application.php(148): yii\console\Application->runAction()
+#20 D:\Projects\LocalServer\raffle.local\vendor\yiisoft\yii2\base\Application.php(392): yii\console\Application->handleRequest()
+#21 D:\Projects\LocalServer\raffle.local\yii(20): yii\base\Application->run()
+#22 {main}
+
+Next yii\db\Exception: SQLSTATE[08006] [7] FATAL:  database "raffle" does not exist in D:\Projects\LocalServer\raffle.local\vendor\yiisoft\yii2\db\Connection.php:649
+Stack trace:
+#0 D:\Projects\LocalServer\raffle.local\vendor\yiisoft\yii2\db\Connection.php(1063): yii\db\Connection->open()
+#1 D:\Projects\LocalServer\raffle.local\vendor\yiisoft\yii2\db\Connection.php(1050): yii\db\Connection->getMasterPdo()
+#2 D:\Projects\LocalServer\raffle.local\vendor\yiisoft\yii2\db\Schema.php(463): yii\db\Connection->getSlavePdo()
+#3 D:\Projects\LocalServer\raffle.local\vendor\yiisoft\yii2\db\Connection.php(942): yii\db\Schema->quoteValue()
+#4 D:\Projects\LocalServer\raffle.local\vendor\yiisoft\yii2\db\pgsql\Schema.php(464): yii\db\Connection->quoteValue()
+#5 D:\Projects\LocalServer\raffle.local\vendor\yiisoft\yii2\db\pgsql\Schema.php(192): yii\db\pgsql\Schema->findColumns()
+#6 D:\Projects\LocalServer\raffle.local\vendor\yiisoft\yii2\db\Schema.php(758): yii\db\pgsql\Schema->loadTableSchema()
+#7 D:\Projects\LocalServer\raffle.local\vendor\yiisoft\yii2\db\Schema.php(194): yii\db\Schema->getTableMetadata()
+#8 D:\Projects\LocalServer\raffle.local\vendor\yiisoft\yii2\console\controllers\MigrateController.php(211): yii\db\Schema->getTableSchema()
+#9 D:\Projects\LocalServer\raffle.local\vendor\yiisoft\yii2\console\controllers\BaseMigrateController.php(908): yii\console\controllers\MigrateController->getMigrationHistory()
+#10 D:\Projects\LocalServer\raffle.local\vendor\yiisoft\yii2\console\controllers\BaseMigrateController.php(183): yii\console\controllers\BaseMigrateController->getNewMigrations()
+#11 [internal function]: yii\console\controllers\BaseMigrateController->actionUp()
+#12 D:\Projects\LocalServer\raffle.local\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array()
+#13 D:\Projects\LocalServer\raffle.local\vendor\yiisoft\yii2\base\Controller.php(181): yii\base\InlineAction->runWithParams()
+#14 D:\Projects\LocalServer\raffle.local\vendor\yiisoft\yii2\console\Controller.php(184): yii\base\Controller->runAction()
+#15 D:\Projects\LocalServer\raffle.local\vendor\yiisoft\yii2\base\Module.php(534): yii\console\Controller->runAction()
+#16 D:\Projects\LocalServer\raffle.local\vendor\yiisoft\yii2\console\Application.php(181): yii\base\Module->runAction()
+#17 D:\Projects\LocalServer\raffle.local\vendor\yiisoft\yii2\console\Application.php(148): yii\console\Application->runAction()
+#18 D:\Projects\LocalServer\raffle.local\vendor\yiisoft\yii2\base\Application.php(392): yii\console\Application->handleRequest()
+#19 D:\Projects\LocalServer\raffle.local\yii(20): yii\base\Application->run()
+#20 {main}
+Additional Information:
+Array
+(
+    [0] => 08006
+    [1] => 7
+    [2] => FATAL:  database "raffle" does not exist
+)
+
+2022-02-18 12:01:06 [-][-][-][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'PROMPT' => '$P$G'
+    '__INTELLIJ_COMMAND_HISTFILE__' => 'C:\\Users\\gjhon\\AppData\\Local\\JetBrains\\PhpStorm2021.1\\terminal\\history\\raffle.local-history'
+    'PROCESSOR_IDENTIFIER' => 'AMD64 Family 23 Model 8 Stepping 2, AuthenticAMD'
+    'CommonProgramFiles' => 'C:\\Program Files\\Common Files'
+    'APPDATA' => 'C:\\Users\\gjhon\\AppData\\Roaming'
+    'FPS_BROWSER_USER_PROFILE_STRING' => 'Default'
+    'LOCALAPPDATA' => 'C:\\Users\\gjhon\\AppData\\Local'
+    'ProgramData' => 'C:\\ProgramData'
+    'COMPUTERNAME' => 'GJHONIC-PC'
+    'CommonProgramFiles(x86)' => 'C:\\Program Files (x86)\\Common Files'
+    'SystemDrive' => 'C:'
+    'USERDOMAIN' => 'GJHONIC-PC'
+    'OneDriveConsumer' => 'C:\\Users\\gjhon\\OneDrive'
+    'OneDrive' => 'C:\\Users\\gjhon\\OneDrive'
+    'TMP' => 'C:\\Users\\gjhon\\AppData\\Local\\Temp'
+    'SystemRoot' => 'C:\\Windows'
+    'HOMEPATH' => '\\Users\\gjhon'
+    'TEMP' => 'C:\\Users\\gjhon\\AppData\\Local\\Temp'
+    'TERMINAL_EMULATOR' => 'JetBrains-JediTerm'
+    'PhpStorm' => 'D:\\Apps\\PhpStorm 2020.3.3\\bin;'
+    'LOGONSERVER' => '\\\\GJHONIC-PC'
+    'SESSIONNAME' => 'Console'
+    'ProgramFiles' => 'C:\\Program Files'
+    'HOMEDRIVE' => 'C:'
+    'DriverData' => 'C:\\Windows\\System32\\Drivers\\DriverData'
+    'windir' => 'C:\\Windows'
+    'USERDOMAIN_ROAMINGPROFILE' => 'GJHONIC-PC'
+    'PUBLIC' => 'C:\\Users\\Public'
+    'Path' => 'C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Windows\\System32\\OpenSSH\\;D:\\Apps\\Git\\cmd;D:\\Apps\\Nodejs\\;C:\\xampp\\php;C:\\ProgramData\\ComposerSetup\\bin;D:\\Apps\\putty_kg\\;C:\\Program Files\\Symfony;C:\\Program Files\\Docker\\Docker\\resources\\bin;C:\\ProgramData\\DockerDesktop\\version-bin;C:\\Users\\gjhon\\AppData\\Local\\Microsoft\\WindowsApps;D:\\Apps\\qemu;D:\\Apps\\Microsoft VS Code\\bin;C:\\Users\\gjhon\\AppData\\Roaming\\npm;C:\\Users\\gjhon\\AppData\\Roaming\\Composer\\vendor\\bin;C:\\mongodb\\bin;D:\\Apps\\PhpStorm 2020.3.3\\bin;C:\\OpenServer\\modules\\php\\PHP_7.4;'
+    'PROCESSOR_LEVEL' => '23'
+    'FPS_BROWSER_APP_PROFILE_STRING' => 'Internet Explorer'
+    'ComSpec' => 'C:\\Windows\\system32\\cmd.exe'
+    'NUMBER_OF_PROCESSORS' => '12'
+    'IDEA_INITIAL_DIRECTORY' => 'D:\\Apps\\PhpStorm 2021.1.2\\bin'
+    'PROCESSOR_ARCHITECTURE' => 'AMD64'
+    'PROCESSOR_REVISION' => '0802'
+    'OS' => 'Windows_NT'
+    'USERPROFILE' => 'C:\\Users\\gjhon'
+    'ALLUSERSPROFILE' => 'C:\\ProgramData'
+    'USERNAME' => 'gjhon'
+    'ProgramW6432' => 'C:\\Program Files'
+    'CommonProgramW6432' => 'C:\\Program Files\\Common Files'
+    'TERM_SESSION_ID' => 'e3b16a9a-1b98-4a49-a1ca-0c5b38655b38'
+    'ProgramFiles(x86)' => 'C:\\Program Files (x86)'
+    'PSModulePath' => 'C:\\Program Files\\WindowsPowerShell\\Modules;C:\\Windows\\system32\\WindowsPowerShell\\v1.0\\Modules'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'PHP_SELF' => 'yii'
+    'SCRIPT_NAME' => 'yii'
+    'SCRIPT_FILENAME' => 'yii'
+    'PATH_TRANSLATED' => 'yii'
+    'DOCUMENT_ROOT' => ''
+    'REQUEST_TIME_FLOAT' => 1645174866.1621
+    'REQUEST_TIME' => 1645174866
+    'argv' => [
+        0 => 'yii'
+        1 => 'migrate'
+        2 => '--migrationPath=@yii/rbac/migrations'
+    ]
+    'argc' => 3
+]

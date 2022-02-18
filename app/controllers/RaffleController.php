@@ -10,6 +10,7 @@ namespace app\controllers;
 
 use app\models\base\Raffle;
 use app\models\base\Tag;
+use app\services\raffle\ViewsService;
 use app\services\user\StatusService;
 use Yii;
 use yii\data\ActiveDataProvider;
@@ -40,18 +41,12 @@ class RaffleController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['index', 'view', 'list', 'raffle-by-tag'],
+                        'actions' => ['index', 'view', 'list', 'raffle-by-tag', 'filter'],
                         'roles' => [User::ROLE_USER, User::ROLE_MODERATOR, User::ROLE_ADMIN, User::ROLE_GUEST],
                     ],
                     [
                         'allow' => true,
                         'actions' => ['create', 'update', 'delete'],
-                        'roles' => [User::ROLE_USER, User::ROLE_MODERATOR, User::ROLE_ADMIN],
-                    ],
-                    //AJAX
-                    [
-                        'allow' => true,
-                        'actions' => ['save-note', 'get-raffles-json'],
                         'roles' => [User::ROLE_USER, User::ROLE_MODERATOR, User::ROLE_ADMIN],
                     ]
                 ],
@@ -73,30 +68,24 @@ class RaffleController extends Controller
     }
 
     /**
-     * Список конкурсов.
+     * Список конкурсов предложка.
      * @return string
      */
     public function actionIndex(): string
     {
-        $filter = [];
-        $page = 0;
-        if (Yii::$app->request->get('filter_date') != '') {
-            $filter['filter-date'] = Yii::$app->request->get('filter_date');
-        }
-        if (Yii::$app->request->get('filter_abc') != '') {
-            $filter['filter-abc'] = Yii::$app->request->get('filter_abc');
-        }
-        if (Yii::$app->request->get('filter_group') != '') {
-            $filter['filter-group'] = Yii::$app->request->get('filter_group');
-        }
-        if (Yii::$app->request->get('page') != '') {
-            $page = Yii::$app->request->get('page');
-        }
-
-
-        $Raffles = Raffle::getPopularRaffles($filter, $page);
+        $Raffles = Raffle::getPopularRaffles();
         return $this->render('index', [
             'Raffles' => $Raffles,
+        ]);
+    }
+
+    /**
+     * Список конкурсов c сортировкой.
+     * @return string
+     */
+    public function actionFilter(): string
+    {
+        return $this->render('filter', [
         ]);
     }
 
@@ -164,6 +153,8 @@ class RaffleController extends Controller
 
         $Tags = $raffle->tags;
 
+        ViewsService::setView(Yii::$app->request->userIP, $raffle->id);
+
         return $this->render('view', [
             'raffle' => $raffle,
             'Tags' => $Tags,
@@ -222,7 +213,7 @@ class RaffleController extends Controller
             'model' => $model,
         ]);
     }
-
+    
     /**
      * Метод сохраняет заметку к конкурсу (AJAX)
      * @return false|Response
@@ -250,37 +241,6 @@ class RaffleController extends Controller
             return $this->asJson([$result]);
         } else {
             return $this->asJson([false]);
-        }
-    }
-
-    /**
-     * Возвращает список конкурсов по json
-     * @return Response|false
-     * @throws \yii\db\Exception
-     */
-    public function actionGetRafflesJson(): Response
-    {
-        if (!Yii::$app->request->isAjax) {
-            return false;
-        }
-        $filter = [];
-        $page = 0;
-        if (Yii::$app->request->get('filter_date') != '') {
-            $filter['filter-date'] = Yii::$app->request->get('filter_date');
-        }
-        if (Yii::$app->request->get('filter_abc') != '') {
-            $filter['filter-abc'] = Yii::$app->request->get('filter_abc');
-        }
-        if (Yii::$app->request->get('filter_group') != '') {
-            $filter['filter-group'] = Yii::$app->request->get('filter_group');
-        }
-        if (Yii::$app->request->get('page') != '') {
-            $page = Yii::$app->request->get('page');
-        }
-        if (($raffles = Raffle::getPopularRaffles($filter, $page)) != null) {
-            return $this->asJson(['data' => $raffles]);
-        } else {
-            return $this->asJson(['data' => false]);
         }
     }
 
