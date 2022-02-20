@@ -31,17 +31,17 @@ $this->params['breadcrumbs'][] = $this->title;
         </p>
 
         <p class="lead">
-            <?= Html::a('Автор: ' . $model->user->username, Url::to('/admin/user/view') . '?id=' . $model->user_id, ['class' => 'btn btn-outline-secondary']) ?>
+            <?= Html::a('Автор: ' . $model->user->username, Url::to(['/admin/user/view', 'id' => $model->user_id]), ['class' => 'btn btn-outline-secondary']) ?>
         </p>
 
         <p>
             <?php if ($model->status_id == Raffle::STATUS_APPROVED_ID) { ?>
                 <?= Html::a('Запретить', Url::to(['/admin/raffle-mod/ban', 'id' => $model->id]), ['class' => 'btn btn-outline-danger']) ?>
             <?php } elseif ($model->status_id == Raffle::STATUS_ON_CHECK_ID) { ?>
-                <?= Html::a('Одобрить', Url::to(['/admin/raffle-mod/unban', 'id' => $model->id]) . '?id=' . $model->id, ['class' => 'btn btn-outline-success']) ?>
-                <?= Html::a('Запретить', Url::to('/admin/raffle-mod/ban') . '?id=' . $model->id, ['class' => 'btn btn-outline-danger']) ?>
+                <?= Html::a('Одобрить', Url::to(['/admin/raffle-mod/unban', 'id' => $model->id]), ['class' => 'btn btn-outline-success']) ?>
+                <?= Html::a('Запретить', Url::to(['/admin/raffle-mod/ban', 'id' => $model->id]), ['class' => 'btn btn-outline-danger']) ?>
             <?php } elseif ($model->status_id == Raffle::STATUS_NOT_APPROVED_ID) { ?>
-                <?= Html::a('Одобрить', Url::to('/admin/raffle-mod/unban') . '?id=' . $model->id, ['class' => 'btn btn-outline-success']) ?>
+                <?= Html::a('Одобрить', Url::to(['/admin/raffle-mod/unban', 'id' => $model->id]), ['class' => 'btn btn-outline-success']) ?>
             <?php } ?>
         </p>
 

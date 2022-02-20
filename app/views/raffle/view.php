@@ -122,7 +122,7 @@ $this->title = $raffle->title
                     let csrfToken = $('meta[name="csrf-token"]').attr("content");
                     
                     let body = {
-                        raffle_code: "<?=$raffle['raffle_code']?>",
+                        raffle_code: "<?=$raffle->code?>",
                         note: note,
                         _csrf: csrfToken
                     }
