@@ -36,6 +36,11 @@ return [
             'href' => Url::to('/admin/address/'),
             'controller' => 'address'
         ],
+        [
+            'label' => 'Action cron',
+            'href' => Url::to('/admin/action-cron/'),
+            'controller' => 'action-cron'
+        ],
     ],
     'moderations' => [
         [
