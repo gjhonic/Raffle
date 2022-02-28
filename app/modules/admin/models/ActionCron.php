@@ -10,9 +10,9 @@ use yii\db\ActiveRecord;
  * This is the model class for table "action_cron".
  *
  * @property int $id
- * @property int $address_id
- * @property string $method
- * @property string $version
+ * @property string $controller
+ * @property string $action
+ * @property int $result
  * @property int $created_at
  *
  */
