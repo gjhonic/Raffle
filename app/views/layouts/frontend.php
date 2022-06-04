@@ -22,6 +22,7 @@ FrontendAsset::register($this);
     <meta charset="<?= Yii::$app->charset ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="/media/r.png" type="image/x-icon" />
     <script src="/media/frontend/js/jquery.min.js"></script>
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
@@ -45,7 +46,9 @@ FrontendAsset::register($this);
 
             <!-- Title -->
             <section id="search" class="alt">
-                <h2><a href="<?= Yii::$app->homeUrl ?>"><?= Yii::$app->name; ?>.ru</a></h2>
+                <h2>
+                    <img src="/media/r.png" alt="" style="width: 20px; height: 25px;">
+                    <a href="<?= Yii::$app->homeUrl ?>"><?= Yii::$app->name; ?>.ru</a></h2>
 
                 <?= $this->renderFile("@app/views/layouts/components/search.php") ?>
             </section>
